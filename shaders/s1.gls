@@ -1,0 +1,23 @@
+in vec3 in_position;
+in vec3 in_normal;
+in vec4 in_ambient;									
+in vec4 in_diffuse;									
+in vec4 in_specular;	
+						
+in float in_shininess;
+
+				
+varying vec3 N;
+varying vec4 V; 
+
+void main(void)
+{
+	vec4 position = vec4(in_position.x,in_position.y,in_position.z,1.0);
+
+	V = gl_ModelViewMatrix * position;
+
+	N = normalize(gl_NormalMatrix * in_normal);
+	gl_Position = gl_ModelViewProjectionMatrix * position;
+}
+
+

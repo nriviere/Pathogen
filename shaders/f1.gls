@@ -1,0 +1,28 @@
+				
+varying vec3 N;
+varying vec4 V; 
+
+const unsigned int MAX_LIGHT_COUNT = 100u;
+
+uniform vec4 lights_positions[MAX_LIGHT_COUNT];
+uniform vec4 lights_ambient[MAX_LIGHT_COUNT];
+uniform vec4 lights_diffuse[MAX_LIGHT_COUNT];
+uniform vec4 lights_specular[MAX_LIGHT_COUNT];
+uniform unsigned int lights_count;
+
+void main(void)
+{
+	vec3 L = vec3(10,10,10) - V;
+	vec3 R = 2 * dot(N,L) * N - L;
+	L = normalize(L);
+	R = normalize(R);
+	vec3 E = normalize(-V);
+
+	vec4 ambient = gl_FrontMaterial.ambient ;
+	vec4 diffuse = max(0.0,dot(L,N)) * ( gl_FrontMaterial.diffuse );
+	vec4 specular = pow(max(0.0,dot(R,E)),0.3*gl_FrontMaterial.shininess) * gl_FrontMaterial.specular;
+	specular = clamp(specular,0.0,1.0);
+	gl_FragColor = ambient+diffuse+specular;
+}
+
+
