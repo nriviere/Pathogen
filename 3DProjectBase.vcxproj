@@ -60,7 +60,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D\ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>gl;ShadersApi;Q:\DOCUMENTS\Workspace\Pathogen\ShadersApi;M:\Pathogen-master\Pathogen-master\gl;M:\Pathogen-master\Pathogen-master;M:\Pathogen-master\Pathogen-master\ShadersApi;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D\ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -87,15 +87,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Model3D.cpp" />
-    <ClCompile Include="My3DEngine.cpp" />
-    <ClCompile Include="MyLight.cpp" />
-    <ClCompile Include="MyMaterial.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="HeroPhysicalComponent.cpp" />
+    <ClCompile Include="InGameState.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="RenderableComponent.cpp" />
+    <ClCompile Include="MyEngine.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
-    <ClCompile Include="OBJReader.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PhysicalComponent.cpp" />
+    <ClCompile Include="PhysicalEngine.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ShadersApi\GLShader.cpp" />
+    <ClCompile Include="ShadersApi\Shader.cpp" />
     <ClCompile Include="ShadersApi\Program.cpp" />
     <ClCompile Include="ShadersApi\ShadersInc.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -104,20 +112,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="gl\GLExt.h" />
+    <ClInclude Include="gl\wglext.h" />
+    <ClInclude Include="Force.h" />
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="HeroPhysicalComponent.h" />
+    <ClInclude Include="InGameState.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Matrx44.h" />
-    <ClInclude Include="Model3D.h" />
-    <ClInclude Include="GLExt.h" />
-    <ClInclude Include="MyLight.h" />
-    <ClInclude Include="MyMaterial.h" />
+    <ClInclude Include="RenderableComponent.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="PhysicalComponent.h" />
+    <ClInclude Include="PhysicalEngine.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ShadersApi\GLShader.h" />
+    <ClInclude Include="ShadersApi\Shader.h" />
     <ClInclude Include="ShadersApi\Program.h" />
     <ClInclude Include="ShadersApi\ShaderException.h" />
     <ClInclude Include="ShadersApi\ShadersInc.h" />
-    <ClInclude Include="My3DEngine.h" />
+    <ClInclude Include="MyEngine.h" />
     <ClInclude Include="OBJLoader.h" />
-    <ClInclude Include="OBJReader.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TGALoader.h" />
@@ -134,6 +152,8 @@
   <ItemGroup>
     <None Include="shaders\f1.gls" />
     <None Include="shaders\s1.gls" />
+    <None Include="shaders\tp1f.gls" />
+    <None Include="shaders\tp1v.gls" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

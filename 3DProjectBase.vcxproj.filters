@@ -13,117 +13,216 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="ShadersApi">
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{a76ee3be-5cb8-41d3-a59a-e9011d86e521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{5c412aa7-8e62-403e-a496-73f8288b2bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{e4f2e96b-7f2c-430c-b82b-f5cd64e5ca57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\shaders">
+      <UniqueIdentifier>{eee33e17-bf58-474e-99f4-963424b2bc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\ShadersApi">
       <UniqueIdentifier>{06348e9b-2925-4493-ade6-99f5aa91526c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="shaders">
-      <UniqueIdentifier>{eee33e17-bf58-474e-99f4-963424b2bc71}</UniqueIdentifier>
+    <Filter Include="Header Files\Renderer\VboApi">
+      <UniqueIdentifier>{6f638e70-9594-4157-9616-e3914e1ff72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Misc">
+      <UniqueIdentifier>{1a121afe-844e-489b-90cb-02f2ec66e1bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{663c85f0-b905-44aa-ae89-2edd5de4335f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\VboApi">
+      <UniqueIdentifier>{c42037f3-f48a-449e-9804-1963486aefb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\ShadersApi">
+      <UniqueIdentifier>{f3ca965f-1c42-4c8a-abae-a9e2c740547f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{5052e1e4-674d-451a-b4f6-eb97b32d38d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameState">
+      <UniqueIdentifier>{6ad66f67-5f9c-4b31-8213-bd700b9924ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameState">
+      <UniqueIdentifier>{f23ab17d-6afe-43d4-b7ff-db016764fa8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PhysicalEngine">
+      <UniqueIdentifier>{65c8499e-48f0-4443-a347-bdbd8d4af8d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PhysicalEngine">
+      <UniqueIdentifier>{d07c135b-4345-4c22-9102-c55442253148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{0b3b77b8-bf0d-43cb-af3b-801385af6510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{26dd9b0f-ef6c-4c12-a546-d963b7e3af22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ShadersApi\ShadersInc.cpp">
+      <Filter>Header Files\Renderer\ShadersApi</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="OBJLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OBJReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="TGALoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="My3DEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadersApi\GLShader.cpp">
-      <Filter>ShadersApi</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadersApi\ShadersInc.cpp">
-      <Filter>ShadersApi</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadersApi\Program.cpp">
-      <Filter>ShadersApi</Filter>
-    </ClCompile>
-    <ClCompile Include="VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyMaterial.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model3D.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadersApi\Program.cpp">
+      <Filter>Source Files\Renderer\ShadersApi</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadersApi\Shader.cpp">
+      <Filter>Source Files\Renderer\ShadersApi</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>Source Files\Renderer\VboApi</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="MyEngine.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameState.cpp">
+      <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalEngine.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableComponent.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyLight.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="HeroPhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GLExt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OBJLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OBJReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TGALoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="My3DEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ShadersApi\Program.h">
-      <Filter>ShadersApi</Filter>
+      <Filter>Header Files\Renderer\ShadersApi</Filter>
     </ClInclude>
     <ClInclude Include="ShadersApi\ShadersInc.h">
-      <Filter>ShadersApi</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadersApi\GLShader.h">
-      <Filter>ShadersApi</Filter>
+      <Filter>Header Files\Renderer\ShadersApi</Filter>
     </ClInclude>
     <ClInclude Include="ShadersApi\ShaderException.h">
-      <Filter>ShadersApi</Filter>
-    </ClInclude>
-    <ClInclude Include="VBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyMaterial.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrx44.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vect4.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Renderer\ShadersApi</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrx44.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Vect4.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
+      <Filter>Header Files\Renderer\VboApi</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\wglext.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\GLExt.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="TGALoader.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJLoader.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadersApi\Shader.h">
+      <Filter>Header Files\Renderer\ShadersApi</Filter>
+    </ClInclude>
+    <ClInclude Include="MyEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameState.h">
+      <Filter>Header Files\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalEngine.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableComponent.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyLight.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HeroPhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Force.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,16 +234,22 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\s1.gls">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+    <None Include="shaders\f1.gls">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+    <None Include="shaders\tp1v.gls">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+    <None Include="shaders\tp1f.gls">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ResourceCompile Include="OBJReader.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="shaders\s1.gls">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\f1.gls">
-      <Filter>shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>

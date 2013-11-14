@@ -22,7 +22,7 @@ PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 PFNGLUNIFORM1FVPROC  glUniform1fv = NULL;
 PFNGLUNIFORM4FVPROC  glUniform4fv = NULL;
 PFNGLUNIFORM1UIPROC  glUniform1ui = NULL;
-
+PFNGLUNIFORM1FPROC  glUniform1f = NULL;
 
 void initApi() throw (ShaderException){
 	glCreateShader = (PFNGLCREATESHADERPROC)wglGetProcAddress("glCreateShader");
@@ -135,6 +135,10 @@ void initApi() throw (ShaderException){
 		throw new ShaderException("failed to retrieve glUniform1ui function pointer.");
 	}
 
-
+	glUniform1f = (PFNGLUNIFORM1FPROC)wglGetProcAddress("glUniform1f");
+	if (glUniform1f == NULL)
+	{
+		throw new ShaderException("failed to retrieve glUniform1f function pointer.");
+	}
 }
 

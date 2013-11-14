@@ -35,7 +35,7 @@ typedef enum
 //*********************************************************************************
 
 static const char *TokenizeFileLine(const char *sLine, TAG_NAME *pTag);
-static void ExtractParameters(TAG_NAME Tag, const char *pcArgs, void *pData);
+static void ExtractParameters(SCENE *pScene, TAG_NAME Tag, const char *pcArgs, void *pData);
 
 static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *pcMaterialLib, BOOL bParseOnly);
 
@@ -139,7 +139,7 @@ SCENE *ReadOBJFile(const char *sFileName, bool bGenerateMissingNormals)
 		case TAGNAME_MATLIB:
 			//--- Parse materials library
 
-			ExtractParameters(Tag, pcArgs, pcMaterialLib);
+			ExtractParameters(pS, Tag, pcArgs, pcMaterialLib);
 			ParseMaterialLibrary(pS, sFileName, pcMaterialLib, TRUE);
 			break;
 		}
@@ -240,25 +240,25 @@ SCENE *ReadOBJFile(const char *sFileName, bool bGenerateMissingNormals)
 		case TAGNAME_VERTEX:
 			//--- Retrieve vertex position
 
-			ExtractParameters(Tag, pcArgs, &pS->pVertices[pS->u32VerticesCount++]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pVertices[pS->u32VerticesCount++]);
 			break;
 
 		case TAGNAME_NORMAL:
 			//--- Retrieve vertex normal
 
-			ExtractParameters(Tag, pcArgs, &pS->pNormals[pS->u32NormalsCount++]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pNormals[pS->u32NormalsCount++]);
 			break;
 
 		case TAGNAME_TEXTURECOORDS:
 			//--- Retrieve UV coordinates
 
-			ExtractParameters(Tag, pcArgs, &pS->pUV[pS->u32UVCount++]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pUV[pS->u32UVCount++]);
 			break;
 
 		case TAGNAME_FACE3:
 			//--- Retrieve face description
 
-			ExtractParameters(Tag, pcArgs, &pS->pFaces[pS->u32FacesCount++]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pFaces[pS->u32FacesCount++]);
 			(pS->pObjects[pS->u32ObjectsCount].u32FacesCount)++;
 
 			assert(!pS->u32NormalsCount || pS->pFaces[pS->u32FacesCount-1].pu32Normals[0] < pS->u32NormalsCount);
@@ -273,7 +273,7 @@ SCENE *ReadOBJFile(const char *sFileName, bool bGenerateMissingNormals)
 		case TAGNAME_FACE4:
 			//--- Retrieve faces description
 
-			ExtractParameters(Tag, pcArgs, &pS->pFaces[pS->u32FacesCount]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pFaces[pS->u32FacesCount]);
 			pS->u32FacesCount += 2;
 			pS->pObjects[pS->u32ObjectsCount].u32FacesCount += 2;
 
@@ -303,7 +303,7 @@ SCENE *ReadOBJFile(const char *sFileName, bool bGenerateMissingNormals)
 
 			//--- Retrieve material parameters
 
-			ExtractParameters(Tag, pcArgs, pcMaterialName);
+			ExtractParameters(pS, Tag, pcArgs, pcMaterialName);
 
 			//--- Look for material
 
@@ -321,7 +321,7 @@ SCENE *ReadOBJFile(const char *sFileName, bool bGenerateMissingNormals)
 		case TAGNAME_MATLIB:
 			//--- Parse materials library
 
-			ExtractParameters(Tag, pcArgs, pcMaterialLib);
+			ExtractParameters(pS, Tag, pcArgs, pcMaterialLib);
 			ParseMaterialLibrary(pS, sFileName, pcMaterialLib, FALSE);
 			break;
 		}
@@ -495,7 +495,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 
 			if (!bParseOnly)
 			{
-				ExtractParameters(Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount].pcName);
+				ExtractParameters(pS, Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount].pcName);
 
 				pS->pMaterials[pS->u32MaterialsCount].pfAmbient[0] = pS->pMaterials[pS->u32MaterialsCount].pfAmbient[1] = pS->pMaterials[pS->u32MaterialsCount].pfAmbient[2] = pS->pMaterials[pS->u32MaterialsCount].pfAmbient[3] = 0;
 				pS->pMaterials[pS->u32MaterialsCount].pfDiffuse[0] = pS->pMaterials[pS->u32MaterialsCount].pfDiffuse[1] = pS->pMaterials[pS->u32MaterialsCount].pfDiffuse[2] = 0;
@@ -517,7 +517,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].pfDiffuse[3]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].pfDiffuse[3]);
 			break;
 
 		case TAGNAME_SHININESS:
@@ -526,7 +526,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].fShininess);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].fShininess);
 			if (pS->pMaterials[pS->u32MaterialsCount-1].fShininess < 1)
 				pS->pMaterials[pS->u32MaterialsCount-1].fShininess = 1;
 			else if (pS->pMaterials[pS->u32MaterialsCount-1].fShininess > 128)
@@ -539,7 +539,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].u32RenderFlags);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].u32RenderFlags);
 			break;
 
 		case TAGNAME_AMBIENT:
@@ -548,7 +548,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfAmbient);
+			ExtractParameters(pS, Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfAmbient);
 			break;
 
 		case TAGNAME_DIFFUSE:
@@ -557,7 +557,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfDiffuse);
+			ExtractParameters(pS, Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfDiffuse);
 			break;
 
 		case TAGNAME_SPECULAR:
@@ -566,7 +566,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfSpecular);
+			ExtractParameters(pS, Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfSpecular);
 			break;
 
 		case TAGNAME_EMISSION:
@@ -575,7 +575,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfEmission);
+			ExtractParameters(pS, Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pfEmission);
 			break;
 
 		case TAGNAME_TEXTURE:
@@ -584,7 +584,7 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 			if (bParseOnly)
 				break;
 
-			ExtractParameters(Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pcTextureFile);
+			ExtractParameters(pS, Tag, pcArgs, pS->pMaterials[pS->u32MaterialsCount-1].pcTextureFile);
 
 			//--- Extract base path
 
@@ -671,6 +671,11 @@ static const char *TokenizeFileLine(const char *sLine, TAG_NAME *pTag)
 				++s32Spaces;
 				while (*pcPtr2 && (*pcPtr2 != '\r') && (*pcPtr2 != '\n') && ((*pcPtr2 == ' ') || (*pcPtr2 == '\t')))
 					++pcPtr2;
+
+				//--- Check for trailing extra space
+
+				if ((*pcPtr2 == 0) || (*pcPtr2 == '\r') || (*pcPtr2 == '\n'))
+					--s32Spaces;
 			}
 			else
 				++pcPtr2;
@@ -689,7 +694,7 @@ static const char *TokenizeFileLine(const char *sLine, TAG_NAME *pTag)
 //*********************************************************************************
 // Parse file line and extract parameters
 //
-static void ExtractParameters(TAG_NAME Tag, const char *pcArgs, void *pData)
+static void ExtractParameters(SCENE *pScene, TAG_NAME Tag, const char *pcArgs, void *pData)
 {
 	FACE *pF;
 	unsigned int i, j;
@@ -742,8 +747,14 @@ static void ExtractParameters(TAG_NAME Tag, const char *pcArgs, void *pData)
 				else
 					pF->pu32UV[i] = pF->pu32Vertices[i];
 			}
-/*			else
-				pF->pu32UV[i] = pF->pu32Vertices[i];*/
+			else
+			{
+				//--- Use default vertex index, clamp to max count
+
+				pF->pu32UV[i] = pF->pu32Vertices[i];
+				if (pScene->u32UVCount && (pF->pu32UV[i] >= pScene->u32UVCount))
+					pF->pu32UV[i] = pScene->u32UVCount-1;
+			}
 
 			//--- Read optional normal index
 
@@ -758,8 +769,14 @@ static void ExtractParameters(TAG_NAME Tag, const char *pcArgs, void *pData)
 				else
 					pF->pu32Normals[i] = pF->pu32Vertices[i];
 			}
-/*			else
-				pF->pu32Normals[i] = pF->pu32Vertices[i];*/
+			else
+			{
+				//--- Use default vertex index, clamp to max count
+
+				pF->pu32Normals[i] = pF->pu32Vertices[i];
+				if (pScene->u32NormalsCount && (pF->pu32Normals[i] >= pScene->u32NormalsCount))
+					pF->pu32Normals[i] = pScene->u32NormalsCount-1;
+			}
 
 			while (*pcArgs && (*pcArgs != ' ') && (*pcArgs != '\t'))
 				++pcArgs;

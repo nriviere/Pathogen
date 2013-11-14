@@ -24,13 +24,13 @@ unsigned int Program::getID()
 	return ID;
 }
 
-GLShader **Program::getShaders(unsigned int *shader_count)
+Shader **Program::getShaders(unsigned int *shader_count)
 {
 	*shader_count = this->shader_count;
 	return shaders;
 }
 
-void Program::setShader(GLShader *shader, unsigned int position)
+void Program::setShader(Shader *shader, unsigned int position)
 {
 	if (shaders[position] != NULL)
 	{

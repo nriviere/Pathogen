@@ -1,9 +1,9 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by OBJReader.rc
+// Used by Main.rc
 //
-#define IDD_OBJREADER_DIALOG            102
-#define IDI_OBJREADER                   107
+#define IDD_Main_DIALOG            102
+#define IDI_Main                   107
 #define IDI_SMALL                       108
 #define IDR_MAINFRAME                   128
 #define IDC_STATIC                      -1

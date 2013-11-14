@@ -4,7 +4,8 @@
 #include "stdafx.h"
 #include <gl\GL.h>
 #include <gl\GLU.h>
-#include <gl\GLExt.h>
+#include <GLExt.h>
+#include <wglext.h>
 
 extern PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
 extern PFNGLBINDVERTEXARRAYPROC glBindVertexArray;

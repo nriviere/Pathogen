@@ -1,21 +1,53 @@
 #include "GameObject.h"
 #include <iostream>
-#include "Model3D.h"
+#include "RenderableComponent.h"
 
 GameObject::GameObject()
 {
-	model = NULL;
+	this->model = NULL;
+	this->physicalComponent = NULL;
 }
-GameObject::GameObject(Model3D *model)
+
+GameObject::GameObject(const GameObject &gameObject)
 {
-	this->model = model;
+	model = gameObject.model;
+	physicalComponent = gameObject.physicalComponent;
+}
+GameObject &GameObject::operator=(const GameObject &gameObject)
+{
+	model = gameObject.model;
+	physicalComponent = gameObject.physicalComponent;
+	return (*this);
 }
 
 GameObject::~GameObject()
 {
+
 }
 
-Model3D *GameObject::getModel()
+GameObject::GameObject(RenderableComponent *model, PhysicalComponent *physicalComponent)
+{
+	this->model = model;
+	this->physicalComponent = physicalComponent;
+}
+
+
+RenderableComponent *GameObject::getModel()
 {
 	return model;
+}
+
+PhysicalComponent *GameObject::getPhysicalComponent()
+{
+	return physicalComponent;
+}
+
+void GameObject::setPhysicalComponent(PhysicalComponent *physicalComponent)
+{
+	this->physicalComponent = physicalComponent;
+}
+
+void GameObject::setModel(RenderableComponent *model)
+{
+	this->model = model;
 }

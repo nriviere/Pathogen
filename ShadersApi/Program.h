@@ -1,7 +1,7 @@
 #pragma once
 #ifndef PROGRAM_H
 #define PROGRAM_H
-#include "GLShader.h"
+#include "Shader.h"
 #include <list>
 
 class Program
@@ -9,7 +9,7 @@ class Program
 private:
 	unsigned int ID;
 	unsigned int shader_count;
-	GLShader *shaders[2];
+	Shader *shaders[2];
 	bool in_use;
 public:
 
@@ -18,8 +18,8 @@ public:
 	Program();
 	~Program();
 	unsigned int getID();
-	GLShader **getShaders(unsigned int *shader_count);
-	void setShader(GLShader *shader, unsigned int position);
+	Shader **getShaders(unsigned int *shader_count);
+	void setShader(Shader *shader, unsigned int position);
 	void removeShader(unsigned int position);
 	void linkProgram();
 	void start();

@@ -28,6 +28,7 @@ extern PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
 extern PFNGLUNIFORM1FVPROC  glUniform1fv;
 extern PFNGLUNIFORM4FVPROC  glUniform4fv;
 extern PFNGLUNIFORM1UIPROC  glUniform1ui;
+extern PFNGLUNIFORM1FPROC  glUniform1f;
 
 void initApi() throw (ShaderException);
 

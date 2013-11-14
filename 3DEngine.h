@@ -29,6 +29,7 @@ public:
 	virtual void RButtonDown(POINT Pos) {}
 	virtual void RButtonUp(POINT Pos) {}
 	virtual void KeyDown(int s32VirtualKey) {}
+	virtual void KeyUp(int s32VirtualKey) {}
 
 protected:
 	//--- Constructor

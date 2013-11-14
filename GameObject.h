@@ -2,17 +2,27 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-class Model3D;
+#include <stdio.h>
+#include "PhysicalComponent.h"
+
+class RenderableComponent;
 
 class GameObject
 {
-private : 
-	Model3D *model;
+protected : 
+	RenderableComponent *model;
+	PhysicalComponent *physicalComponent;
 public:
 	GameObject();
-	GameObject(Model3D *model);
-	Model3D *getModel();
-	void setModel(Model3D *model);
+	GameObject(const GameObject &gameObject);
+	GameObject &operator=(const GameObject &gameObject);
 	~GameObject();
+
+	GameObject(RenderableComponent *model, PhysicalComponent *physicalComponent);
+	RenderableComponent *getModel();
+	PhysicalComponent *getPhysicalComponent();
+	void setModel(RenderableComponent *model);
+	void setPhysicalComponent(PhysicalComponent *physicalComponent);
+	
 };
 #endif
