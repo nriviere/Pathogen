@@ -12,7 +12,7 @@ PhysicalComponent::PhysicalComponent()
 	baseAcceleration = 1.1;
 	baseDeceleration = 0.97;
 	maxSpeed = 3;
-	radius = 16;
+	radius = 3.2; //faire une classe pour chaque type
 	position = Vect4(0,0,0,1);
 }
 
@@ -102,10 +102,12 @@ void PhysicalComponent::collision(PhysicalComponent *physicalComponent)
 	}else{
 		srand(time(NULL));
 		float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
-		speed = Vect4(x,y,z,1);
+		speed = Vect4(x,y,z,0);
 		speed.normalize();
 	}
-	
+	Vect4 v2 = speed;
+	v2.normalize();
+	position = physicalComponent->position + v2*(radius + physicalComponent->getRadius());
 	
 	
 }

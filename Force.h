@@ -18,6 +18,11 @@ public:
 		this->acceleration = acceleration;
 	}
 
+	Force(Vect4 v, float acceleration = 1) : Vect4(v)
+	{
+		this->acceleration = acceleration;
+	}
+
 	Force(const Force &v) : Vect4(v)
 	{
 		acceleration = v.acceleration;
@@ -38,6 +43,9 @@ public:
 		values[0] *= acceleration;
 		values[1] *= acceleration;
 		values[2] *= acceleration;
+		if (norme() <= 0.01){
+			values[0] = values[1] = values[2] = 0;
+		}
 	}
 
 

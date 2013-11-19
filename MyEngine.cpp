@@ -11,12 +11,15 @@
 #include "Renderer.h"
 #include "InGameState.h"
 #include "HeroPhysicalComponent.h"
+#include "SelfMovingPhysicalComponent.h"
+#include <time.h>
 
 const unsigned int MAX_LIGHT_COUNT = 100;
 
 
 MyEngine::MyEngine(void)
 {
+	srand(time(NULL));
 	renderer = new Renderer(this);
 	physicalEngine = new PhysicalEngine(this);
 	gameobject_count = 0;
@@ -53,7 +56,7 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	gameobject_count = 2;
+	gameobject_count = 50;
 
 	PhysicalComponent **physicalComponents = new PhysicalComponent*[gameobject_count];
 
@@ -61,21 +64,15 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 	
 	gameobjects = new GameObject*[gameobject_count];
 	physicalComponents[0] = new HeroPhysicalComponent(cursor);
-	physicalComponents[0]->setTransform(Matrx44(1, 0, 0, 0,
-												0, 1, 0, 0,
-												0, 0, 1, 0,
-												0, 10, 0, 1));
+	physicalComponents[0]->setPosition(Vect4(0, 0, 0, 1));
 	gameobjects[0] = hero = new Hero(&renderer->getModels()[0], physicalComponents[0]);
 
 	GameObject *cell;
 
 	for (int i = 1; i < gameobject_count; i++)
 	{
-		physicalComponents[i] = new PhysicalComponent();
-		physicalComponents[i]->setTransform(Matrx44(1,0,0,0,
-													0,1,0,0,
-													0,0,1,0,
-													0,0,0,1));
+		physicalComponents[i] = new SelfMovingPhysicalComponent();
+		physicalComponents[i]->setPosition(Vect4(100,0,0,1));
 		gameobjects[i] = cell = new GameObject(&renderer->getModels()[1], &(*physicalComponents[i]));
 	}
 

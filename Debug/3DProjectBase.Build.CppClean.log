@@ -1,6 +1,5 @@
 q:\documents\workspace\pathogen\debug\vc120.pdb
 q:\documents\workspace\pathogen\debug\vc120.idb
-q:\documents\workspace\pathogen\debug\gamestate.obj
 q:\documents\workspace\pathogen\debug\hero.obj
 q:\documents\workspace\pathogen\debug\herophysicalcomponent.obj
 q:\documents\workspace\pathogen\debug\ingamestate.obj
@@ -14,6 +13,7 @@ q:\documents\workspace\pathogen\debug\main.obj
 q:\documents\workspace\pathogen\debug\physicalcomponent.obj
 q:\documents\workspace\pathogen\debug\physicalengine.obj
 q:\documents\workspace\pathogen\debug\renderer.obj
+q:\documents\workspace\pathogen\debug\selfmovingphysicalcomponent.obj
 q:\documents\workspace\pathogen\debug\shader.obj
 q:\documents\workspace\pathogen\debug\program.obj
 q:\documents\workspace\pathogen\debug\shadersinc.obj
@@ -22,6 +22,7 @@ q:\documents\workspace\pathogen\debug\tgaloader.obj
 q:\documents\workspace\pathogen\debug\vbo.obj
 q:\documents\workspace\pathogen\debug\cursor.obj
 q:\documents\workspace\pathogen\debug\gameobject.obj
+q:\documents\workspace\pathogen\debug\gamestate.obj
 q:\documents\workspace\pathogen\debug\3dprojectbase.ilk
 q:\documents\workspace\pathogen\debug\3dprojectbase.exe
 q:\documents\workspace\pathogen\debug\3dprojectbase.pdb

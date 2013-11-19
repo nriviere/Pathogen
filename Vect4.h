@@ -67,13 +67,23 @@ public:
 
 	Vect4 operator+(const Vect4 & v) const
 	{
-		Vect4 add(values[0] + v[0], values[1] + v[1], values[2] + v[2], values[3]);
+		float w = 0;
+		if (v[3] == 1 || values[3] == 1) w = 1;
+		Vect4 add(values[0] + v[0], values[1] + v[1], values[2] + v[2], 1);
 		return add;
 	}
 
 	Vect4 operator-(const Vect4 & v) const
 	{
-		Vect4 add(values[0] - v[0], values[1] - v[1], values[2] - v[2], values[3]);
+		float w = 0;
+		if (v[3] == 1|| values[3] == 1) w = 1;
+		Vect4 add(values[0] - v[0], values[1] - v[1], values[2] - v[2], w);
+		return add;
+	}
+
+	Vect4 operator-() const
+	{
+		Vect4 add(-values[0] , -values[1] , -values[2], values[3]);
 		return add;
 	}
 
@@ -101,6 +111,15 @@ public:
 	void normalize(){
 		float n = norme();
 		values[0] /= n; values[1] /= n; values[2] /= n;
+	}
+
+	Vect4 reflect(const Vect4 &n){
+		float length = norme();
+		Vect4 v = (*this);
+		v.normalize();
+		v = n *(v*n)* -2 + v;
+		v = v * length;
+		return v;
 	}
 
 	void toFloatv(float *v)
