@@ -20,6 +20,9 @@ const unsigned int MAX_LIGHT_COUNT = 100;
 MyEngine::MyEngine(void)
 {
 	srand(time(NULL));
+	renderer = NULL; physicalEngine = NULL; gameStates = NULL; levels = NULL; currentLevel = NULL;
+	currentState = NULL; cursor = NULL;
+
 	renderer = new Renderer(this);
 	physicalEngine = new PhysicalEngine(this);
 	gameobject_count = 0;
@@ -29,6 +32,7 @@ MyEngine::MyEngine(void)
 	levelCount = 1;
 	levels = new Level*[levelCount];
 	levels[0] = currentLevel = new Level();
+	physicalEngine->setGrid(currentLevel);
 	cursor = new Cursor();
 }
 
@@ -56,7 +60,7 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	gameobject_count = 50;
+	gameobject_count = 100;
 
 	PhysicalComponent **physicalComponents = new PhysicalComponent*[gameobject_count];
 
@@ -71,8 +75,10 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 
 	for (int i = 1; i < gameobject_count; i++)
 	{
+		float x = currentLevel->getLimitsX()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsX()[1] - currentLevel->getLimitsX()[0]);
+		float y = currentLevel->getLimitsY()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsY()[1] - currentLevel->getLimitsY()[0]);
 		physicalComponents[i] = new SelfMovingPhysicalComponent();
-		physicalComponents[i]->setPosition(Vect4(100,0,0,1));
+		physicalComponents[i]->setPosition(Vect4(x,y,0,1));
 		gameobjects[i] = cell = new GameObject(&renderer->getModels()[1], &(*physicalComponents[i]));
 	}
 

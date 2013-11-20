@@ -299,7 +299,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glTranslatef(0, 0, -200);
 
 
-	//Rendu du niveau
+	//Rendu du niveau temporaire
 	glDisable(GL_LIGHTING);
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 	glBegin(GL_LINE_STRIP);

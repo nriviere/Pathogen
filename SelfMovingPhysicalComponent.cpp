@@ -31,6 +31,19 @@ void SelfMovingPhysicalComponent::setInnerForce(Force f)
 	innerForce = f;
 }
 
+void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent)
+{
+	Vect4 n = position - physicalComponent->getPosition();
+	n[3] = 0;
+	if (n.norme() == 0){
+		float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
+		n = Vect4(x, y, z, 0);
+	}
+	n.normalize();
+	innerForce = innerForce.reflect(n);
+	position = position + innerForce * (1. / innerForce.norme()) * (radius + physicalComponent->getRadius());
+}
+
 void SelfMovingPhysicalComponent::collision(Vect4 axis)
 {
 	Vect4 n;

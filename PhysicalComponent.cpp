@@ -1,8 +1,25 @@
 #include "PhysicalComponent.h"
 #include <time.h>
 
+unsigned int PhysicalComponent::MAX_COMPONENTS_COUNT = 1000;
+unsigned int PhysicalComponent::currentID = 0;
+
+unsigned int PhysicalComponent::getNewID()
+{
+	if (unusedIDs.size() == 0)
+	{
+		return currentID++;
+	}
+	else {
+		unsigned int id = unusedIDs.front();
+		unusedIDs.pop_front();
+		return id;
+	}
+}
+
 PhysicalComponent::PhysicalComponent()
 {
+	ID = getNewID();
 	transform = Matrx44(	Vect4(1,0,0,0),
 							Vect4(0,1,0,0),
 							Vect4(0,0,1,0),
@@ -18,6 +35,7 @@ PhysicalComponent::PhysicalComponent()
 
 PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
 {
+	ID = getNewID();
 	transform = physicalComponent.transform;
 	speed = physicalComponent.speed;
 	verticalSpeed = physicalComponent.verticalSpeed;
@@ -29,6 +47,7 @@ PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
 
 PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physicalComponent)
 {
+	ID = getNewID();
 	transform = physicalComponent.transform;
 	speed = physicalComponent.speed;
 	verticalSpeed = physicalComponent.verticalSpeed;
@@ -41,7 +60,12 @@ PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physica
 
 PhysicalComponent::~PhysicalComponent()
 {
+	unusedIDs.push_back(ID);
+}
 
+unsigned int PhysicalComponent::getID()
+{
+	return ID;
 }
 
 Matrx44 PhysicalComponent::getTransform()

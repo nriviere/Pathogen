@@ -49,19 +49,15 @@ public:
 
 	float operator[](int i) const
 	{
-		if (i > 3 || i < 0)
-		{
-			exit(-1);
-		}
 		return values[i];
 	}
 
 	float &operator[](int i)
 	{
-		if (i > 3 || i < 0)
+		/*if (i > 3 || i < 0)
 		{
 			exit(-1);
-		}
+		}*/
 		return values[i];
 	}
 

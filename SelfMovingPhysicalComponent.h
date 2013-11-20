@@ -19,6 +19,7 @@ public:
 	Force getInnerForce();
 	void setInnerForce(Force f);
 
+	void collision(PhysicalComponent *physicalComponent);
 	void collision(Vect4 axis);
 
 	void update();
