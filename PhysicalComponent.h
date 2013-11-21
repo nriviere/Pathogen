@@ -29,7 +29,7 @@ public:
 
 	Matrx44 getTransform();
 	Vect4 getSpeed();
-	Vect4 getPosition();
+	Vect4 &getPosition();
 	float getAcceleration();
 	float getRadius();
 	unsigned int getID();

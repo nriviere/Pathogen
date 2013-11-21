@@ -6,7 +6,7 @@ using namespace std;
 
 SelfMovingPhysicalComponent::SelfMovingPhysicalComponent() : PhysicalComponent()
 {
-	baseSpeed = 2;
+	baseSpeed = 1.5;
 	
 	float x = rand();
 	float y = rand(), z = 0;

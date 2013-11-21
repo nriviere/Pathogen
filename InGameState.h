@@ -1,12 +1,15 @@
 #pragma once
 #include "stdafx.h"
 #include "gamestate.h"
+
+
 class InGameState :
 	public GameState
 {
 private :
 	bool isZdown, isQdown, isSdown, isDdown;
 	POINT prevMousePos;
+
 public:
 	InGameState(MyEngine *engine = NULL);
 	~InGameState(void);

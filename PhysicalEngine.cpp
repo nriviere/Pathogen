@@ -9,7 +9,7 @@ PhysicalEngine::PhysicalEngine(MyEngine *engine)
 {
 	if (engine != NULL)
 	{
-		grid = new Grid(20, 10, engine->getCurrentLevel());
+		grid = new Grid(4, 4, engine->getCurrentLevel());
 	}
 	else
 	{
@@ -108,51 +108,58 @@ void PhysicalEngine::update(float fDT)
 		PhysicalComponent *p1, *p2;
 		
 		
-
+		list<PhysicalComponent*> *L = NULL;
+		list<PhysicalComponent*>::iterator end,begin;
+		list<PhysicalComponent*>::iterator ite;
+		Vect4 position;
+		Level *level = engine->getCurrentLevel();;
+		float limits[4] = { level->getLimitsX()[0], level->getLimitsX()[1], level->getLimitsY()[0], level->getLimitsY()[1] };
+		float radius, radiussqr;
 		for (int y = 0; y < grid->getNy(); y++)
 		{
 			for (int x = 0; x < grid->getNx(); x++)
 			{
-				list<PhysicalComponent*>::iterator end = grid->get(x, y)->end();
-				unsigned int gridcasesize = grid->get(x, y)->size();
-				for (list<PhysicalComponent*>::iterator ite = grid->get(x,y)->begin();
+				L = grid->get(x, y);
+				begin = L->begin();
+				end = L->end();
+				unsigned int gridcasesize = L->size();
+				for (ite = begin;
 					ite != end;)
 				{
 					p1 = (*ite);
-					Vect4 position = p1->getTransform().getPos();
-					float radius = p1->getRadius(), radiussqr = radius * radius;
-
-					Level *level = engine->getCurrentLevel();
+					Vect4 position = p1->getPosition();
+					radius = p1->getRadius();
+					radiussqr = radius * radius;
 					
 					//collision avec le décor
-					if (position[0] - radius <= level->getLimitsX()[0])
+					if (position[0] - radius <= limits[0])
 					{
-						p1->collision(Vect4(level->getLimitsX()[0], 0, 0, 1));
+						p1->collision(Vect4(limits[0], 0, 0, 1));
 					}
-					if (position[0] + radius >= level->getLimitsX()[1])
+					if (position[0] + radius >= limits[1])
 					{
-						p1->collision(Vect4(level->getLimitsX()[1], 0, 0, 1));
+						p1->collision(Vect4(limits[1], 0, 0, 1));
 					}
-					if (position[1] - radius <= level->getLimitsY()[0])
+					if (position[1] - radius <= limits[2])
 					{
-						p1->collision(Vect4(0, level->getLimitsY()[0], 0, 1));
+						p1->collision(Vect4(0, limits[2], 0, 1));
 					}
-					if (position[1] + radius >= level->getLimitsY()[1])
+					if (position[1] + radius >= limits[3])
 					{
-						p1->collision(Vect4(0, level->getLimitsY()[1], 0, 1));
+						p1->collision(Vect4(0, limits[3], 0, 1));
 					}
 					
 					//collision avec les membres de la meme case de la grille
 					id1 = p1->getID();
 					
-					for (list<PhysicalComponent*>::iterator ite2 = grid->get(x,y)->begin();
+					for (list<PhysicalComponent*>::iterator ite2 = begin;
 						ite2 != end;)
 					{
 						
 						p2 = (*ite2);
 						if (ite != ite2)
 						{
-							Vect4 aToB(p2->getPosition() - p1->getPosition());
+							Vect4 aToB(p2->getPosition() - position);
 							id2 = p2->getID();
 							if (!collisions[id1][id2] && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + radiussqr))
 							{
@@ -183,6 +190,7 @@ void PhysicalEngine::update(float fDT)
 	{
 		engine->getCursor()->getPhysicalComponent()->update();
 	}
+	/*
 	ctest = 0;
 	for (int n = 0; n < grid->getN(); n++)
 	{
@@ -193,15 +201,15 @@ void PhysicalEngine::update(float fDT)
 			++ite;
 		}
 	}
-
+	*/
 	//pthread_mutex_unlock(&UpdaterThread::test);
 
-	/*
+	
 	for (int i = 0; i < physicalComponentsCount; i++)
 	{
 		physicalComponents[i]->update();		
 	}
-	*/
+	
 	/*
 	if (physicalComponents != NULL){
 	for (int i = 0; i < physicalComponentsCount; i++)
@@ -274,4 +282,12 @@ void PhysicalEngine::update(float fDT)
 	*/
 	
 
+}
+
+bool **PhysicalEngine::getCollisions(){
+	return collisions;
+}
+MyEngine *PhysicalEngine::getEngine()
+{
+	return engine;
 }

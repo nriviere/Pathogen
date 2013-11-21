@@ -77,7 +77,7 @@ Vect4 PhysicalComponent::getSpeed()
 	return speed;
 }
 
-Vect4 PhysicalComponent::getPosition()
+Vect4 &PhysicalComponent::getPosition()
 {
 	return position;
 }

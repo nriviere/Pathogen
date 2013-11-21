@@ -25,9 +25,12 @@ q:\documents\workspace\pathogen\release\thread.obj
 q:\documents\workspace\pathogen\release\tgaloader.obj
 q:\documents\workspace\pathogen\release\stdafx.obj
 q:\documents\workspace\pathogen\release\shadersinc.obj
+q:\documents\workspace\pathogen\release\renderthread.obj
+q:\documents\workspace\pathogen\release\physicalthread.obj
 q:\documents\workspace\pathogen\release\pathogen.exe
 q:\documents\workspace\pathogen\release\pathogen.pdb
 q:\documents\workspace\pathogen\release\objreader.res
+q:\documents\workspace\pathogen\release\pathogen.instr.pdb
 q:\documents\workspace\pathogen\release\pathogen.tlog\cl.command.1.tlog
 q:\documents\workspace\pathogen\release\pathogen.tlog\cl.read.1.tlog
 q:\documents\workspace\pathogen\release\pathogen.tlog\cl.write.1.tlog

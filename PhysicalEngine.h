@@ -25,6 +25,9 @@ public:
 	PhysicalComponent ** getComponents();
 	unsigned int getPhysicalComponentsCount();
 
+	bool **getCollisions();
+	MyEngine *getEngine();
+
 	void update(float fDT);
 	
 	

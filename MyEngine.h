@@ -14,6 +14,8 @@ class MyEngine :
 	public C3DEngine
 {
 public:
+
+	static const unsigned int MAX_LIGHT_COUNT = 100;
 	MyEngine(void);
 	~MyEngine(void);
 	void Setup(HWND hWnd);

@@ -47,7 +47,15 @@ public:
 	int addLight(Light *light);
 	void removeLight(unsigned int id);
 	RenderableComponent *getModels();
-
+	Program* getCompute_illumination();
+	Light **getLights();
+	unsigned int getLights_count();
+	unsigned int getVertice_array_object();
+	unsigned int getCoord_buffer_object();
+	unsigned int getTexcoord_buffer_object();
+	unsigned int getNormals_buffer_object();
+	unsigned int getIndice_buffer_object();
+	unsigned int getIndex_count();
 };
 
 #endif

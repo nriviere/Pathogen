@@ -26,10 +26,11 @@ q:\documents\workspace\pathogen\debug\gamestate.obj
 q:\documents\workspace\pathogen\debug\grid.obj
 q:\documents\workspace\pathogen\debug\hero.obj
 q:\documents\workspace\pathogen\debug\herophysicalcomponent.obj
+q:\documents\workspace\pathogen\debug\physicalthread.obj
+q:\documents\workspace\pathogen\debug\renderthread.obj
 q:\documents\workspace\pathogen\debug\pathogen.exe
 q:\documents\workspace\pathogen\debug\pathogen.pdb
 q:\documents\workspace\pathogen\debug\objreader.res
-q:\documents\workspace\pathogen\debug\pathogen.instr.pdb
 q:\documents\workspace\pathogen\debug\pathogen.tlog\cl.command.1.tlog
 q:\documents\workspace\pathogen\debug\pathogen.tlog\cl.read.1.tlog
 q:\documents\workspace\pathogen\debug\pathogen.tlog\cl.write.1.tlog

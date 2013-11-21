@@ -8,6 +8,7 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 #include <gl\GLExt.h>
+#include "InGameState.h"
 
 
 
@@ -331,10 +332,10 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	GLuint lights_count_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_count");
 	//utiliser une list pour les lights sinon ca va planter...
 
-	float lights_position[100][4];
-	float lights_ambient[100][4];
-	float lights_diffuse[100][4];
-	float lights_specular[100][4];
+	float lights_position[MyEngine::MAX_LIGHT_COUNT][4];
+	float lights_ambient[MyEngine::MAX_LIGHT_COUNT][4];
+	float lights_diffuse[MyEngine::MAX_LIGHT_COUNT][4];
+	float lights_specular[MyEngine::MAX_LIGHT_COUNT][4];
 
 	int p = 0;
 	float mvf[16];
@@ -342,7 +343,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	Matrx44 mvm(mvf);
 	Matrx44 pos;
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < MyEngine::MAX_LIGHT_COUNT; i++)
 	{
 		if (lights[i] != NULL)
 		{
@@ -361,10 +362,10 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		}
 	}
 
-	glUniform4fv(lights_positions_uniloc, 100, lights_position[0]);
-	glUniform4fv(lights_ambient_uniloc, 100, lights_ambient[0]);
-	glUniform4fv(lights_diffuse_uniloc, 100, lights_diffuse[0]);
-	glUniform4fv(lights_specular_uniloc, 100, lights_specular[0]);
+	glUniform4fv(lights_positions_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_position[0]);
+	glUniform4fv(lights_ambient_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_ambient[0]);
+	glUniform4fv(lights_diffuse_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_diffuse[0]);
+	glUniform4fv(lights_specular_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_specular[0]);
 	glUniform1ui(lights_count_uniloc, lights_count);
 	glUniform1f(t_uniloc, (float)t);
 
@@ -415,6 +416,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		}
 		glPopMatrix();
 	}
+	compute_illumination->stop();
 }
 
 
@@ -453,4 +455,48 @@ void Renderer::removeLight(unsigned int id)
 RenderableComponent *Renderer::getModels()
 {
 	return models;
+}
+
+Program* Renderer::getCompute_illumination()
+{
+	return compute_illumination;
+}
+
+Light **Renderer::getLights()
+{
+	return lights;
+}
+
+unsigned int Renderer::getLights_count()
+{
+	return lights_count;
+}
+
+unsigned int Renderer::getVertice_array_object()
+{
+	return vertice_array_object;
+}
+
+unsigned int Renderer::getCoord_buffer_object(){
+	return coord_buffer_object;
+}
+
+unsigned int Renderer::getTexcoord_buffer_object()
+{
+	return texcoord_buffer_object;
+}
+
+unsigned int Renderer::getNormals_buffer_object()
+{
+	return normals_buffer_object;
+}
+
+unsigned int Renderer::getIndice_buffer_object()
+{
+	return indice_buffer_object;
+}
+
+unsigned int Renderer::getIndex_count()
+{
+	return index_count;
 }

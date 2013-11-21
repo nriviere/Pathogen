@@ -72,9 +72,8 @@ public:
 	Vect4 operator-(const Vect4 & v) const
 	{
 		float w = 0;
-		if (v[3] == 1|| values[3] == 1) w = 1;
-		Vect4 add(values[0] - v[0], values[1] - v[1], values[2] - v[2], w);
-		return add;
+		//if (v[3] == 1|| values[3] == 1) w = 1;
+		return Vect4(values[0] - v[0], values[1] - v[1], values[2] - v[2], v[3] * values[3]);
 	}
 
 	Vect4 operator-() const

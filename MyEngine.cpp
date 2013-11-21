@@ -14,7 +14,7 @@
 #include "SelfMovingPhysicalComponent.h"
 #include <time.h>
 
-const unsigned int MAX_LIGHT_COUNT = 100;
+
 int start = 0;
 unsigned int frames = 0;
 
@@ -62,7 +62,7 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	gameobject_count = 300;
+	gameobject_count = 200;
 
 	PhysicalComponent **physicalComponents = new PhysicalComponent*[gameobject_count];
 

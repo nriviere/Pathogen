@@ -2,18 +2,17 @@
 #include "MyEngine.h"
 #include <WinUser.h>
 
-
 InGameState::InGameState(MyEngine *engine) : GameState(engine)
 {
 	isZdown = isQdown = isSdown = isDdown = false;
 	prevMousePos.x = 0;
 	prevMousePos.y = 0;
 	ShowCursor(false);
+
 }
 
 InGameState::~InGameState(void)
 {
-
 }
 
 void InGameState::mouseMove(POINT pos)
@@ -97,14 +96,16 @@ void InGameState::setup()
 	test[1] = "3DS/models/cell.obj";
 	engine->load(test, 2);
 
-	Light * light = new Light(Matrx44(Vect4(0.2, 0.2, 0.2, 1),
-		Vect4(0.5, 0.5, 0.5, 1),
-		Vect4(0.8, 0.8, 0.8, 1),
-		Vect4(0, 0, 200, 1)));
+	Light * light = new Light(Matrx44(Vect4(0.3, 0.1, 0.1, 1),
+		Vect4(0.5, 0.3, 0.3, 1),
+		Vect4(0.8, 0.5, 0.5, 1),
+		Vect4(0, 0, 0, 1)));
 
 	int lightId = engine->getRenderer()->addLight(light);
 
 	engine->getErrLog()->open("log.txt", std::ios::trunc);
+
+
 }
 
 void InGameState::update(float fDT)

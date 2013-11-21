@@ -3,16 +3,24 @@ in vec3 in_normal;
 in vec2 in_texcoord;
 
 varying vec3 N;
+varying vec3 L;
 varying vec4 V; 
 varying vec2 UV;
+
+const unsigned int MAX_LIGHT_COUNT = 100u;
+
+uniform vec4 lights_position[MAX_LIGHT_COUNT];
+
+uniform unsigned int lights_count;
+
 
 uniform float t;
 
 void main(void)
 {
-	//vec4 position = vec4(in_position.x * (2+ cos(t))/2. ,in_position.y*(2+ cos(t))/2.,in_position.z *(2+ cos(t))/2.,1.0);
 	vec4 position = vec4(in_position.x  ,in_position.y,in_position.z,1.0);
 	V = gl_ModelViewMatrix * position ;
+	L = normalize(lights_position[0].xyz - V.xyz);
 	UV = in_texcoord;
 	N = normalize(gl_NormalMatrix * in_normal);
 	vec3 R = normalize(reflect(V,N));

@@ -93,7 +93,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 		C3DEngine::GetInstance()->Render(R.right, R.bottom);
 
 		//--- Scene update
-
+		
 		u32Time = timeGetTime();
 		fDT += (u32Time - u32PrevTime)/1000.f;
 		while (fDT >= REFERENCE_TIME)
