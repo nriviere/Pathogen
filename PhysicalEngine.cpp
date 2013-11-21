@@ -30,7 +30,7 @@ PhysicalEngine::~PhysicalEngine()
 	delete[]physicalComponents;
 	for (int i = 0; i < PhysicalComponent::MAX_COMPONENTS_COUNT; i++)
 	{
-		delete [] collisions[i];
+		delete[] collisions[i];
 	}
 	delete[] collisions;
 }
@@ -66,6 +66,7 @@ Grid *PhysicalEngine::getGrid(){
 
 void PhysicalEngine::update(float fDT)
 {
+	
 	//pthread_mutex_lock(&UpdaterThread::test);
 	if (grid != NULL)
 	{
@@ -81,35 +82,13 @@ void PhysicalEngine::update(float fDT)
 
 		}
 
-		/*ctest = 0;
-		for (int n = 0; n < grid->getN(); n++)
-		{
-			for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
-			{
-				ctest++;
-				++ite;
-			}
-		}*/
-
-		//pthread_mutex_unlock(&UpdaterThread::test);
 		grid->update();
-
-		/*ctest = 0;
-		for (int n = 0; n < grid->getN(); n++)
-		{
-			for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
-			{
-				ctest++;
-				++ite;
-			}
-		}*/
-
-		//pthread_mutex_lock(&UpdaterThread::test);
+	
 		PhysicalComponent *p1, *p2;
-		
-		
+
+
 		list<PhysicalComponent*> *L = NULL;
-		list<PhysicalComponent*>::iterator end,begin;
+		list<PhysicalComponent*>::iterator end, begin;
 		list<PhysicalComponent*>::iterator ite;
 		Vect4 position;
 		Level *level = engine->getCurrentLevel();;
@@ -130,7 +109,7 @@ void PhysicalEngine::update(float fDT)
 					Vect4 position = p1->getPosition();
 					radius = p1->getRadius();
 					radiussqr = radius * radius;
-					
+
 					//collision avec le décor
 					if (position[0] - radius <= limits[0])
 					{
@@ -148,14 +127,14 @@ void PhysicalEngine::update(float fDT)
 					{
 						p1->collision(Vect4(0, limits[3], 0, 1));
 					}
-					
+
 					//collision avec les membres de la meme case de la grille
 					id1 = p1->getID();
-					
+
 					for (list<PhysicalComponent*>::iterator ite2 = begin;
 						ite2 != end;)
 					{
-						
+
 						p2 = (*ite2);
 						if (ite != ite2)
 						{
@@ -173,7 +152,7 @@ void PhysicalEngine::update(float fDT)
 							}
 						}
 						++ite2;
-						
+
 					}
 					++ite;
 
@@ -194,93 +173,94 @@ void PhysicalEngine::update(float fDT)
 	ctest = 0;
 	for (int n = 0; n < grid->getN(); n++)
 	{
-		for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
-		{
-			ctest++;
-			(*ite)->update();
-			++ite;
-		}
+	for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
+	{
+	ctest++;
+	(*ite)->update();
+	++ite;
+	}
 	}
 	*/
 	//pthread_mutex_unlock(&UpdaterThread::test);
 
+
 	
-	for (int i = 0; i < physicalComponentsCount; i++)
-	{
-		physicalComponents[i]->update();		
-	}
-	
+
 	/*
 	if (physicalComponents != NULL){
+		for (int i = 0; i < physicalComponentsCount; i++)
+		{
+			Vect4 position = physicalComponents[i]->getTransform().getPos();
+			float radius = physicalComponents[i]->getRadius();
+			Level *level = engine->getCurrentLevel();
+
+			if (position[0] - radius <= level->getLimitsX()[0])
+			{
+				physicalComponents[i]->collision(Vect4(level->getLimitsX()[0], 0, 0, 1));
+			}
+			if (position[0] + radius >= level->getLimitsX()[1])
+			{
+				physicalComponents[i]->collision(Vect4(level->getLimitsX()[1], 0, 0, 1));
+			}
+			if (position[1] - radius <= level->getLimitsY()[0])
+			{
+				physicalComponents[i]->collision(Vect4(0, level->getLimitsY()[0], 0, 1));
+			}
+			if (position[1] + radius >= level->getLimitsY()[1])
+			{
+				physicalComponents[i]->collision(Vect4(0, level->getLimitsY()[1], 0, 1));
+			}
+
+			for (int j = 0; j < physicalComponentsCount; j++)
+			{
+
+				Vect4 aToB(physicalComponents[j]->getPosition() - physicalComponents[i]->getPosition());
+				if (i != j && aToB.norme() <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()))
+				{
+					physicalComponents[i]->collision(physicalComponents[j]);
+					//exit(0);
+
+				}
+				/*				Vect4 A = physicalComponents[j]->getPosition();
+				Vect4 B = physicalComponents[i]->getPosition();
+				Vect4 u = physicalComponents[i]->getSpeed();
+				Vect4 BA = A - B;
+				if (u.norme() != 0)
+				{
+					float d = ((B - A)^u).norme() / u.norme();
+					float uDotBA = u*BA;
+					if (i != j && d <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()) && uDotBA < u.norme())
+					{
+						physicalComponents[i]->collision(physicalComponents[j]);
+					}
+				}
+				A = physicalComponents[i]->getPosition();
+				B = physicalComponents[j]->getPosition();
+				u = physicalComponents[j]->getSpeed();
+				if (u.norme() != 0)
+				{
+					float d = ((B - A)^u).norme() / u.norme();
+					float uDotBA = u*BA;
+					if (i != j && d <= (physicalComponents[i]->getRadius() + physicalComponents[j]->getRadius()) && abs(uDotBA) < u.norme())
+					{
+						physicalComponents[i]->collision(physicalComponents[j]);
+					}
+				}
+
+				if (i != j && aToB.norme() <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()))
+				{
+					physicalComponents[i]->collision(physicalComponents[j]);
+				}
+
+
+			}
+		}
+
+	}*/
 	for (int i = 0; i < physicalComponentsCount; i++)
 	{
-	Vect4 position = physicalComponents[i]->getTransform().getPos();
-	float radius = physicalComponents[i]->getRadius();
-	Level *level = engine->getCurrentLevel();
-
-	if (position[0] - radius <= level->getLimitsX()[0])
-	{
-	physicalComponents[i]->collision(Vect4(level->getLimitsX()[0], 0, 0, 1));
+		physicalComponents[i]->update();
 	}
-	if (position[0] + radius >= level->getLimitsX()[1])
-	{
-	physicalComponents[i]->collision(Vect4(level->getLimitsX()[1], 0, 0, 1));
-	}
-	if (position[1] - radius <= level->getLimitsY()[0])
-	{
-	physicalComponents[i]->collision(Vect4(0, level->getLimitsY()[0], 0, 1));
-	}
-	if (position[1] + radius >= level->getLimitsY()[1])
-	{
-	physicalComponents[i]->collision(Vect4(0, level->getLimitsY()[1], 0, 1));
-	}
-
-	for (int j = 0; j < physicalComponentsCount; j++)
-	{
-
-	Vect4 aToB(physicalComponents[j]->getPosition() - physicalComponents[i]->getPosition());
-	/*if (i != j && aToB.norme() <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()))
-	{
-	//physicalComponents[i]->collision(physicalComponents[j]);
-	//exit(0);
-
-	}
-	Vect4 A = physicalComponents[j]->getPosition();
-	Vect4 B = physicalComponents[i]->getPosition();
-	Vect4 u = physicalComponents[i]->getSpeed();
-	Vect4 BA = A-B;
-	if (u.norme() != 0)
-	{
-	float d = ((B - A)^u).norme() / u.norme();
-	float uDotBA = u*BA;
-	if (i != j && d <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()) && uDotBA < u.norme())
-	{
-	physicalComponents[i]->collision(physicalComponents[j]);
-	}
-	}
-	A = physicalComponents[i]->getPosition();
-	B = physicalComponents[j]->getPosition();
-	u = physicalComponents[j]->getSpeed();
-	if (u.norme() != 0)
-	{
-	float d = ((B - A)^u).norme() / u.norme();
-	float uDotBA = u*BA;
-	if (i != j && d <= (physicalComponents[i]->getRadius() + physicalComponents[j]->getRadius()) && abs(uDotBA) < u.norme())
-	{
-	physicalComponents[i]->collision(physicalComponents[j]);
-	}
-	}*/
-	/*
-	if (i != j && aToB.norme() <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()))
-	{
-	physicalComponents[i]->collision(physicalComponents[j]);
-	}
-
-
-	}
-	}
-	*/
-	
 
 }
 

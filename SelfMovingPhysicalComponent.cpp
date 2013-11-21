@@ -40,8 +40,8 @@ void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent
 		n = Vect4(x, y, z, 0);
 	}
 	n.normalize();
-	innerForce = innerForce.reflect(n);
-	position = position + innerForce * (1. / innerForce.norme()) * (radius + physicalComponent->getRadius());
+	innerForce = innerForce.reflect(n) ;
+	position = position + innerForce;// *(1. / innerForce.norme()) * (radius + physicalComponent->getRadius());
 }
 
 void SelfMovingPhysicalComponent::collision(Vect4 axis)

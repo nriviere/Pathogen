@@ -62,7 +62,7 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	gameobject_count = 200;
+	gameobject_count = 600;
 
 	PhysicalComponent **physicalComponents = new PhysicalComponent*[gameobject_count];
 

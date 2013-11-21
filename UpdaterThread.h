@@ -142,6 +142,8 @@ public:
 	void lockWait();
 	void unlockWait();
 
+	void run();
+
 	std::list<PhysicalComponent*> *getReassignList();
 
 

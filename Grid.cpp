@@ -28,18 +28,18 @@ void Grid::init()
 		}
 	}
 
-	//pthread_mutex_lock(&UpdaterThread::mutex_init);
+	pthread_mutex_lock(&UpdaterThread::mutex_init);
 
 	for (int i = 0; i < updaterThreadCount; i++)
 	{
 	
 		updaterThreads[i] = new UpdaterThread(new UpdaterThreadParameters(updaterThreadCount, i, nX, nY, stepX, stepY, parametersComponents[i]));
-		//updaterThreads[i]->run();
+		updaterThreads[i]->run();
 	}
 
 	
-	//pthread_cond_wait(&UpdaterThread::init_cond, &UpdaterThread::mutex_init);
-	//pthread_mutex_unlock(&UpdaterThread::mutex_init);
+	pthread_cond_wait(&UpdaterThread::init_cond, &UpdaterThread::mutex_init);
+	pthread_mutex_unlock(&UpdaterThread::mutex_init);
 }
 
 Grid::Grid(Level *level)
@@ -78,6 +78,7 @@ Grid::Grid(const Grid &grid)
 		updaterThreads[i] = grid.updaterThreads[i];
 
 	}
+
 
 }
 Grid &Grid::operator=(const Grid &grid)
@@ -180,88 +181,27 @@ unsigned int ctest2 = 0;
 
 void Grid::update()
 {
-/*	ctest2 = 0;
-	for (int n = 0; n < getN(); n++)
-	{
-		for (std::list<PhysicalComponent *>::iterator ite = get(n)->begin(); ite != get(n)->end();)
-		{
-			ctest2++;
-			++ite;
-		}
-	}*/
 
-/*	pthread_mutex_lock(&UpdaterThread::mutex_finish);
-	
+	pthread_mutex_lock(&UpdaterThread::mutex_finish);
+
+
 	for (int i = 0; i < updaterThreadCount; i++)
 	{
 		updaterThreads[i]->lockWait();
 	}
+	
 	pthread_cond_broadcast(&UpdaterThread::start_update);
+	pthread_mutex_unlock(&UpdaterThread::mutex_start);
+	
 	for (int i = 0; i < updaterThreadCount; i++)
 	{
 		updaterThreads[i]->unlockWait();
 	}
+	
 	pthread_cond_wait(&UpdaterThread::finish_cond, &UpdaterThread::mutex_finish);
 	pthread_mutex_unlock(&UpdaterThread::mutex_finish);
-*/
-	for (int i = 0; i < updaterThreadCount; i++)
-	{
-		updaterThreads[i]->run();
-	}
+	
 
-	for (int i = 0; i < updaterThreadCount; i++)
-	{
-		updaterThreads[i]->join(NULL);
-	}
-
-	/*
-	std::list<PhysicalComponent*> toReassign;
-	unsigned int pos = 0;
-	float fx = 0, fy = 0, minX = 0, maxX = 0, minY = 0, maxY = 0;
-
-	for (unsigned int y = 0; y < nY; y++)
-	{
-	for (unsigned int x = 0; x < nX; x++)
-	{
-	pos = y*nX + x;
-	minX = x*stepX; maxX = (x + 1)*stepX; minY = y*stepY; maxY = (y + 1)*stepY;
-	end = components[pos]->end();
-	for (ite = components[pos]->begin();
-	ite != end;)
-	{
-	if ((*ite)->getPosition()[0] < minX || (*ite)->getPosition()[0] > maxX ||
-	(*ite)->getPosition()[1] < minY || (*ite)->getPosition()[1] > maxY)
-	{
-	toReassign.push_front((*ite));
-	ite = components[pos]->erase(ite);
-	}
-	else
-	{
-	++ite;
-	}
-	}
-	}
-	}
-	end = toReassign.end();
-	for (ite = toReassign.begin(); ite != end;)
-	{
-	set(*ite);
-	++ite;
-	}
-	*/
-
-	ctest2 = 0;
-	for (int n = 0; n < getN(); n++)
-	{
-		for (std::list<PhysicalComponent *>::iterator ite = get(n)->begin(); ite != get(n)->end();)
-		{
-			ctest2++;
-			++ite;
-		}
-	}
-	//pthread_mutex_lock(&UpdaterThread::test);
-
-	ctest2 = 0;
 	std::list<PhysicalComponent*> *reassignList = NULL;
 	for (unsigned int i = 0; i < updaterThreadCount; i++)
 	{
@@ -276,16 +216,45 @@ void Grid::update()
 		}
 		reassignList->clear();
 	}
-	ctest2 = 0;
-	for (int n = 0; n < getN(); n++)
+
+
+	
+	std::list<PhysicalComponent*> toReassign;
+	unsigned int pos = 0;
+	float fx = 0, fy = 0, minX = 0, maxX = 0, minY = 0, maxY = 0;
+
+	for (unsigned int y = 0; y < nY; y++)
 	{
-		for (std::list<PhysicalComponent *>::iterator ite = get(n)->begin(); ite != get(n)->end();)
+		for (unsigned int x = 0; x < nX; x++)
 		{
-			ctest2++;
-			++ite;
+			pos = y*nX + x;
+			minX = x*stepX; maxX = (x + 1)*stepX; minY = y*stepY; maxY = (y + 1)*stepY;
+			end = components[pos]->end();
+			for (ite = components[pos]->begin();
+				ite != end;)
+			{
+				if ((*ite)->getPosition()[0] < minX || (*ite)->getPosition()[0] > maxX ||
+					(*ite)->getPosition()[1] < minY || (*ite)->getPosition()[1] > maxY)
+				{
+					toReassign.push_front((*ite));
+					ite = components[pos]->erase(ite);
+				}
+				else
+				{
+					++ite;
+				}
+			}
 		}
 	}
-	//pthread_mutex_unlock(&UpdaterThread::test);
+	end = toReassign.end();
+	for (ite = toReassign.begin(); ite != end;)
+	{
+		set(*ite);
+		++ite;
+	}
+	
+
+
 }
 
 void Grid::setLimits(Level *level)

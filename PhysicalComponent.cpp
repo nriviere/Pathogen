@@ -132,8 +132,6 @@ void PhysicalComponent::collision(PhysicalComponent *physicalComponent)
 	Vect4 v2 = speed;
 	v2.normalize();
 	position = physicalComponent->position + v2*(radius + physicalComponent->getRadius());
-	
-	
 }
 
 void PhysicalComponent::update()
