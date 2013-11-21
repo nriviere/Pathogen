@@ -16,7 +16,6 @@ class MyEngine :
 public:
 	MyEngine(void);
 	~MyEngine(void);
-
 	void Setup(HWND hWnd);
 	void load(const char** fileNames, unsigned int count);
 	void Update(float fDT);
@@ -31,11 +30,14 @@ public:
 	Renderer *getRenderer();
 	GameObject **getGameObjects();
 	unsigned int getGameObjectCount();
+	unsigned int getMaxConcurrence();
 	PhysicalEngine *getPhysicalEngine();
 	Level *getCurrentLevel();
 	Hero *getHero();
 	Cursor *getCursor();
 	std::ofstream *getErrLog();
+
+	void setMaxConcurrence(unsigned int maxConcurrence);
 
 private:
 	GameState *currentState;
@@ -43,6 +45,8 @@ private:
 
 	Renderer *renderer;
 	PhysicalEngine *physicalEngine;
+
+	unsigned int maxConcurrence;
 
 
 	//a mettre dans le game engine ?

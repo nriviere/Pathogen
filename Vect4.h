@@ -104,6 +104,10 @@ public:
 		return sqrt(pow(values[0],2)+pow(values[1],2)+pow(values[2],2));
 	}
 
+	float normesqr(){
+		return pow(values[0], 2) + pow(values[1], 2) + pow(values[2], 2);
+	}
+
 	void normalize(){
 		float n = norme();
 		values[0] /= n; values[1] /= n; values[2] /= n;

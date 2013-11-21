@@ -64,6 +64,12 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{26dd9b0f-ef6c-4c12-a546-d963b7e3af22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PhysicalEngine\Grid">
+      <UniqueIdentifier>{54b09fa8-b329-4043-854e-170221e8de93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PhysicalEngine\Grid">
+      <UniqueIdentifier>{2f6bb3c1-e512-4779-be35-0307bfe2bd9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShadersApi\ShadersInc.cpp">
@@ -136,7 +142,13 @@
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\PhysicalEngine\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdaterThread.cpp">
+      <Filter>Source Files\PhysicalEngine\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,8 +245,14 @@
     <ClInclude Include="SelfMovingPhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="Grid.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\PhysicalEngine\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdaterThread.h">
+      <Filter>Header Files\PhysicalEngine\Grid</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,15 @@
 #include "PhysicalEngine.h"
 #include "MyEngine.h"
 #include "Level.h"
+#include "UpdaterThread.h"
 
+unsigned int ctest = 0;
 
 PhysicalEngine::PhysicalEngine(MyEngine *engine)
 {
 	if (engine != NULL)
 	{
-		grid = new Grid(6, 4, engine->getCurrentLevel());
+		grid = new Grid(20, 10, engine->getCurrentLevel());
 	}
 	else
 	{
@@ -43,15 +45,9 @@ void PhysicalEngine::setComponents(PhysicalComponent **physicalComponents, unsig
 	}
 }
 
-void PhysicalEngine::setGrid(Grid *grid)
-{
-	delete this->grid;
-	this->grid = grid;
-}
-
 void PhysicalEngine::setGrid(Level *level)
 {
-	this->grid = new Grid(level);
+	grid->setLimits(level);
 }
 
 PhysicalComponent **PhysicalEngine::getComponents()
@@ -70,7 +66,7 @@ Grid *PhysicalEngine::getGrid(){
 
 void PhysicalEngine::update(float fDT)
 {
-
+	//pthread_mutex_lock(&UpdaterThread::test);
 	if (grid != NULL)
 	{
 		unsigned int id1 = 0, id2 = 0;
@@ -84,22 +80,50 @@ void PhysicalEngine::update(float fDT)
 			}
 
 		}
+
+		/*ctest = 0;
+		for (int n = 0; n < grid->getN(); n++)
+		{
+			for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
+			{
+				ctest++;
+				++ite;
+			}
+		}*/
+
+		//pthread_mutex_unlock(&UpdaterThread::test);
 		grid->update();
+
+		/*ctest = 0;
+		for (int n = 0; n < grid->getN(); n++)
+		{
+			for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
+			{
+				ctest++;
+				++ite;
+			}
+		}*/
+
+		//pthread_mutex_lock(&UpdaterThread::test);
 		PhysicalComponent *p1, *p2;
 		
+		
+
 		for (int y = 0; y < grid->getNy(); y++)
 		{
 			for (int x = 0; x < grid->getNx(); x++)
 			{
 				list<PhysicalComponent*>::iterator end = grid->get(x, y)->end();
+				unsigned int gridcasesize = grid->get(x, y)->size();
 				for (list<PhysicalComponent*>::iterator ite = grid->get(x,y)->begin();
 					ite != end;)
 				{
 					p1 = (*ite);
 					Vect4 position = p1->getTransform().getPos();
-					float radius = p1->getRadius();
-					Level *level = engine->getCurrentLevel();
+					float radius = p1->getRadius(), radiussqr = radius * radius;
 
+					Level *level = engine->getCurrentLevel();
+					
 					//collision avec le décor
 					if (position[0] - radius <= level->getLimitsX()[0])
 					{
@@ -117,20 +141,20 @@ void PhysicalEngine::update(float fDT)
 					{
 						p1->collision(Vect4(0, level->getLimitsY()[1], 0, 1));
 					}
-
+					
 					//collision avec les membres de la meme case de la grille
 					id1 = p1->getID();
 					
 					for (list<PhysicalComponent*>::iterator ite2 = grid->get(x,y)->begin();
 						ite2 != end;)
 					{
-						unsigned int gridcasesize = grid->get(x, y)->size();
+						
 						p2 = (*ite2);
 						if (ite != ite2)
 						{
 							Vect4 aToB(p2->getPosition() - p1->getPosition());
 							id2 = p2->getID();
-							if (!collisions[id1][id2] && aToB.norme() <= (p2->getRadius() + p1->getRadius()))
+							if (!collisions[id1][id2] && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + radiussqr))
 							{
 								p1->collision(p2);
 								p2->collision(p1);
@@ -145,6 +169,7 @@ void PhysicalEngine::update(float fDT)
 						
 					}
 					++ite;
+
 				}
 			}
 		}
@@ -158,12 +183,25 @@ void PhysicalEngine::update(float fDT)
 	{
 		engine->getCursor()->getPhysicalComponent()->update();
 	}
-	
+	ctest = 0;
+	for (int n = 0; n < grid->getN(); n++)
+	{
+		for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
+		{
+			ctest++;
+			(*ite)->update();
+			++ite;
+		}
+	}
+
+	//pthread_mutex_unlock(&UpdaterThread::test);
+
+	/*
 	for (int i = 0; i < physicalComponentsCount; i++)
 	{
 		physicalComponents[i]->update();		
 	}
-
+	*/
 	/*
 	if (physicalComponents != NULL){
 	for (int i = 0; i < physicalComponentsCount; i++)

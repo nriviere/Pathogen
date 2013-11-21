@@ -19,7 +19,7 @@ InGameState::~InGameState(void)
 void InGameState::mouseMove(POINT pos)
 {
 	Vect4 cursorMove(pos.x,-pos.y, 0, 1);
-	engine->getCursor()->translate(cursorMove);
+	engine->getCursor()->translate(cursorMove*1.5);
 	prevMousePos = pos;
 }
 

@@ -14,6 +14,7 @@
     <ProjectGuid>{A7884EE7-A3AC-400D-AD12-682A16AECB0C}</ProjectGuid>
     <RootNamespace>My3DProjectBase</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <ProjectName>Pathogen</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -63,12 +64,16 @@
       <AdditionalIncludeDirectories>gl;ShadersApi;Q:\DOCUMENTS\Workspace\Pathogen\ShadersApi;M:\Pathogen-master\Pathogen-master\gl;M:\Pathogen-master\Pathogen-master;M:\Pathogen-master\Pathogen-master\ShadersApi;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D\ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <Profile>true</Profile>
+      <AdditionalLibraryDirectories>.;..;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <RegisterOutput>false</RegisterOutput>
     </Link>
+    <ProjectReference />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -77,9 +82,12 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..;.;./gl;./ShadersApi</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies);pthreadVCE2.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -111,6 +119,8 @@
     <ClCompile Include="ShadersApi\ShadersInc.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TGALoader.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="UpdaterThread.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +154,8 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TGALoader.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="UpdaterThread.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="Vect4.h" />
   </ItemGroup>

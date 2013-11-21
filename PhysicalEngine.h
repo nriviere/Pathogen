@@ -18,8 +18,8 @@ public:
 	~PhysicalEngine();
 
 	void setComponents(PhysicalComponent **physicalComponents,unsigned int componentCount);
-	void setGrid(Grid *grid);
 	void setGrid(Level *level);
+
 
 	Grid *getGrid();
 	PhysicalComponent ** getComponents();

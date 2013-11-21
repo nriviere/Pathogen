@@ -38,6 +38,7 @@ LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int width=0,height=0;
 
+
 void SetupOpenGL(void);
 void ShutdownOpenGL(void);
 
@@ -50,13 +51,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	DWORD u32Time, u32PrevTime;
 	RECT R;
 	float fDT;
-
-
+	
 	if (!C3DEngine::GetInstance())
 	{
 		MessageBox(NULL, "No 3D renderer defined", "3D error", MB_OK | MB_ICONSTOP);
 		return(0);
 	}
+
 
 	//--- Register custom window class
 

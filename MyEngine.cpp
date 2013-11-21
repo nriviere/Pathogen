@@ -15,7 +15,8 @@
 #include <time.h>
 
 const unsigned int MAX_LIGHT_COUNT = 100;
-
+int start = 0;
+unsigned int frames = 0;
 
 MyEngine::MyEngine(void)
 {
@@ -48,6 +49,7 @@ MyEngine::~MyEngine(void)
 		delete levels[i];
 	}
 	delete[] levels;
+	
 	errlog.close();
 }
 
@@ -60,7 +62,7 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	gameobject_count = 100;
+	gameobject_count = 300;
 
 	PhysicalComponent **physicalComponents = new PhysicalComponent*[gameobject_count];
 
@@ -85,11 +87,14 @@ void MyEngine::load(const char** fileNames, unsigned int count)
 	physicalEngine->setComponents(physicalComponents, gameobject_count);
 }
 
+
+
 void MyEngine::Setup(HWND hWnd)
 {
+	start = clock();
 	currentState->setup();
 	
-
+	
 	/*
 	for (int o = 0; o < scene->u32ObjectsCount; o++)
 	{
@@ -143,9 +148,11 @@ void MyEngine::Setup(HWND hWnd)
 
 }
 
+
 void MyEngine::Update(float fDT)
 {
 	currentState->update(fDT);
+	frames++;
 }
 
 void MyEngine::MouseWheel(float fIncrement)
@@ -163,6 +170,9 @@ void MyEngine::KeyDown(int s32VirtualKey)
 {
 	if (s32VirtualKey == VK_ESCAPE)
 	{
+		start = clock() - start;
+		float fps = 1.*frames / (start * 0.001);
+		errlog << fps << endl;
 		exit(0);
 	}
 	currentState->keyDown(s32VirtualKey);
@@ -272,6 +282,11 @@ unsigned int MyEngine::getGameObjectCount()
 	return gameobject_count;
 }
 
+unsigned int MyEngine::getMaxConcurrence()
+{
+	return maxConcurrence;
+}
+
 std::ofstream *MyEngine::getErrLog()
 {
 	return &errlog;
@@ -290,4 +305,9 @@ Cursor *MyEngine::getCursor()
 Level *MyEngine::getCurrentLevel()
 {
 	return currentLevel;
+}
+
+void MyEngine::setMaxConcurrence(unsigned int maxConcurrence)
+{
+	this->maxConcurrence = maxConcurrence;
 }

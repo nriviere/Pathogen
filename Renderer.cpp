@@ -33,6 +33,7 @@ Renderer::Renderer(MyEngine *engine)
 void Renderer::init(){
 	glPolygonMode(GL_FRONT_AND_BACK, GL_SMOOTH);
 	glEnable(GL_DEPTH_TEST);
+	
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_CULL_FACE);
 
