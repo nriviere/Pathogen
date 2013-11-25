@@ -2,6 +2,7 @@
 #include "MyEngine.h"
 #include "Level.h"
 #include "UpdaterThread.h"
+#include "Indexer.h"
 
 unsigned int ctest = 0;
 
@@ -9,7 +10,7 @@ PhysicalEngine::PhysicalEngine(MyEngine *engine)
 {
 	if (engine != NULL)
 	{
-		grid = new Grid(4, 4, engine->getCurrentLevel());
+		grid = new Grid(4, 4, engine->getGameEngine()->getCurrentLevel());
 	}
 	else
 	{
@@ -17,33 +18,27 @@ PhysicalEngine::PhysicalEngine(MyEngine *engine)
 	}
 
 	this->engine = engine;
-	physicalComponents = NULL;
-	collisions = new bool*[PhysicalComponent::MAX_COMPONENTS_COUNT];
-	for (int i = 0; i < PhysicalComponent::MAX_COMPONENTS_COUNT; i++)
+	physicalComponents = new PhysicalComponent*[GameEngine::MAX_GAME_OBJECT_COUNT];
+	collisions = new bool*[GameEngine::MAX_GAME_OBJECT_COUNT];
+	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT; i++)
 	{
-		collisions[i] = new bool[PhysicalComponent::MAX_COMPONENTS_COUNT];
+		collisions[i] = new bool[GameEngine::MAX_GAME_OBJECT_COUNT];
+		physicalComponents[i] = NULL;
 	}
+	physicalComponentsCount = 0;
+	indexer = new Indexer(GameEngine::MAX_GAME_OBJECT_COUNT);
 }
 
 PhysicalEngine::~PhysicalEngine()
 {
 	delete[]physicalComponents;
-	for (int i = 0; i < PhysicalComponent::MAX_COMPONENTS_COUNT; i++)
+	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT; i++)
 	{
 		delete[] collisions[i];
 	}
 	delete[] collisions;
 }
 
-void PhysicalEngine::setComponents(PhysicalComponent **physicalComponents, unsigned int componentCount)
-{
-	this->physicalComponents = physicalComponents;
-	this->physicalComponentsCount = componentCount;
-	for (int i = 0; i < componentCount; i++)
-	{
-		grid->set(this->physicalComponents[i]);
-	}
-}
 
 void PhysicalEngine::setGrid(Level *level)
 {
@@ -73,11 +68,17 @@ void PhysicalEngine::update(float fDT)
 		unsigned int id1 = 0, id2 = 0;
 		for (int i = 0; i < physicalComponentsCount; i++)
 		{
-			id1 = physicalComponents[i]->getID();
-			for (int j = 0; j < physicalComponentsCount; j++)
+			if (physicalComponents[i] != NULL)
 			{
-				id2 = physicalComponents[j]->getID();
-				collisions[id1][id2] = collisions[id2][id2] = false;
+				id1 = physicalComponents[i]->getID();
+				for (int j = 0; j < physicalComponentsCount; j++)
+				{
+					if (physicalComponents[j] != NULL)
+					{
+						id2 = physicalComponents[j]->getID();
+						collisions[id1][id2] = collisions[id2][id2] = false;
+					}
+				}
 			}
 
 		}
@@ -91,7 +92,7 @@ void PhysicalEngine::update(float fDT)
 		list<PhysicalComponent*>::iterator end, begin;
 		list<PhysicalComponent*>::iterator ite;
 		Vect4 position;
-		Level *level = engine->getCurrentLevel();;
+		Level *level = engine->getGameEngine()->getCurrentLevel();;
 		float limits[4] = { level->getLimitsX()[0], level->getLimitsX()[1], level->getLimitsY()[0], level->getLimitsY()[1] };
 		float radius, radiussqr;
 		for (int y = 0; y < grid->getNy(); y++)
@@ -105,57 +106,68 @@ void PhysicalEngine::update(float fDT)
 				for (ite = begin;
 					ite != end;)
 				{
-					p1 = (*ite);
-					Vect4 position = p1->getPosition();
-					radius = p1->getRadius();
-					radiussqr = radius * radius;
-
-					//collision avec le décor
-					if (position[0] - radius <= limits[0])
-					{
-						p1->collision(Vect4(limits[0], 0, 0, 1));
-					}
-					if (position[0] + radius >= limits[1])
-					{
-						p1->collision(Vect4(limits[1], 0, 0, 1));
-					}
-					if (position[1] - radius <= limits[2])
-					{
-						p1->collision(Vect4(0, limits[2], 0, 1));
-					}
-					if (position[1] + radius >= limits[3])
-					{
-						p1->collision(Vect4(0, limits[3], 0, 1));
-					}
-
-					//collision avec les membres de la meme case de la grille
-					id1 = p1->getID();
-
-					for (list<PhysicalComponent*>::iterator ite2 = begin;
-						ite2 != end;)
+					if (*ite != NULL)
 					{
 
-						p2 = (*ite2);
-						if (ite != ite2)
+						p1 = (*ite);
+						id1 = p1->getID();
+						Vect4 position = p1->getPosition();
+						radius = p1->getRadius();
+						radiussqr = radius * radius;
+
+						//collision avec le décor
+						if (position[0] - radius <= limits[0])
 						{
-							Vect4 aToB(p2->getPosition() - position);
-							id2 = p2->getID();
-							if (!collisions[id1][id2] && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + radiussqr))
-							{
-								p1->collision(p2);
-								p2->collision(p1);
-								collisions[id1][id2] = collisions[id2][id1] = true;
-							}
-							else
-							{
-								collisions[id1][id2] = collisions[id2][id1] = false;
-							}
+							p1->collision(Vect4(limits[0], 0, 0, 1));
 						}
-						++ite2;
+						if (position[0] + radius >= limits[1])
+						{
+							p1->collision(Vect4(limits[1], 0, 0, 1));
+						}
+						if (position[1] - radius <= limits[2])
+						{
+							p1->collision(Vect4(0, limits[2], 0, 1));
+						}
+						if (position[1] + radius >= limits[3])
+						{
+							p1->collision(Vect4(0, limits[3], 0, 1));
+						}
 
+						//collision avec les membres de la meme case de la grille
+
+
+						for (list<PhysicalComponent*>::iterator ite2 = begin;
+							ite2 != end;)
+						{
+
+							p2 = (*ite2);
+							if (p2 != NULL)
+							{
+								if (p2 != NULL)
+								{
+
+									if (ite != ite2)
+									{
+										Vect4 aToB(p2->getPosition() - position);
+										id2 = p2->getID();
+										if (p2 != NULL && !collisions[id1][id2] && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + radiussqr))
+										{
+											p1->collision(p2);
+											p2->collision(p1);
+											collisions[id1][id2] = collisions[id2][id1] = true;
+										}
+										else
+										{
+											collisions[id1][id2] = collisions[id2][id1] = false;
+										}
+									}
+								}
+							}
+							++ite2;
+
+						}
+						++ite;
 					}
-					++ite;
-
 				}
 			}
 		}
@@ -167,7 +179,7 @@ void PhysicalEngine::update(float fDT)
 
 	if (engine != NULL)
 	{
-		engine->getCursor()->getPhysicalComponent()->update();
+		engine->getGameEngine()->getCursor()->getPhysicalComponent()->update();
 	}
 	/*
 	ctest = 0;
@@ -257,11 +269,30 @@ void PhysicalEngine::update(float fDT)
 		}
 
 	}*/
-	for (int i = 0; i < physicalComponentsCount; i++)
+	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT; i++)
 	{
-		physicalComponents[i]->update();
+		if (physicalComponents[i] != NULL)
+		{
+			physicalComponents[i]->update();
+		}
 	}
 
+}
+
+void PhysicalEngine::addPhysicalComponent(PhysicalComponent *component)
+{
+	unsigned int index = indexer->getNextIndex();
+	if (index != UINT_MAX)
+	{
+		physicalComponents[index] = component;
+		component->setEngineIndex(index);
+		grid->set(component);
+		physicalComponentsCount++;
+	}
+	else
+	{
+		exit(-30);
+	}
 }
 
 bool **PhysicalEngine::getCollisions(){
@@ -270,4 +301,19 @@ bool **PhysicalEngine::getCollisions(){
 MyEngine *PhysicalEngine::getEngine()
 {
 	return engine;
+}
+
+void PhysicalEngine::remove(unsigned int index)
+{
+	if (index < GameEngine::MAX_GAME_OBJECT_COUNT && physicalComponents[index] != NULL)
+	{
+		PhysicalComponent *comp = physicalComponents[index];
+		grid->get(comp->getGridX(), comp->getGridY())->erase(comp->getGridPosition());
+		//(*comp->getGridPosition()) = NULL;
+		delete physicalComponents[index];
+		physicalComponents[index] = NULL;
+		
+		indexer->releaseIndex(index);
+		physicalComponentsCount--;
+	}
 }

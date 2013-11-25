@@ -102,7 +102,7 @@ void *UpdaterThread::fonction()
 				minX = x*stepX; maxX = (x + 1)*stepX; minY = y*stepY; maxY = (y + 1)*stepY;
 
 				for (std::list<PhysicalComponent*>::iterator ite = components[pos]->begin();
-					ite != components[pos]->end();)
+					ite != components[pos]->end() && components[pos]->size() != 0;)
 				{
 					comp = (*ite);
 					position = comp->getPosition();
@@ -112,10 +112,12 @@ void *UpdaterThread::fonction()
 						toReassign->push_back(*ite);
 						ite = components[pos]->erase(ite);
 					}
+
 					else
 					{
 						++ite;
 					}
+					
 				}
 				pos++;
 			}

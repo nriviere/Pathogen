@@ -17,7 +17,7 @@ unsigned int PhysicalComponent::getNewID()
 	}
 }
 
-PhysicalComponent::PhysicalComponent()
+PhysicalComponent::PhysicalComponent(GameObject *gameObject)
 {
 	ID = getNewID();
 	transform = Matrx44(	Vect4(1,0,0,0),
@@ -31,6 +31,7 @@ PhysicalComponent::PhysicalComponent()
 	maxSpeed = 3;
 	radius = 3.2; //faire une classe pour chaque type
 	position = Vect4(0,0,0,1);
+	this->gameObject = gameObject;
 }
 
 PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
@@ -43,18 +44,18 @@ PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
 	acceleration = physicalComponent.acceleration;
 	verticalAcceleration = physicalComponent.verticalAcceleration;
 	horizontalAcceleration = physicalComponent.verticalAcceleration;
+	position = physicalComponent.position;
+	radius = physicalComponent.radius;
+	engineIndex = UINT_MAX;
+	baseAcceleration = physicalComponent.baseAcceleration;
+	baseDeceleration = physicalComponent.baseDeceleration;
+	maxSpeed = physicalComponent.maxSpeed;
+	gameObject = physicalComponent.gameObject;
 }
 
 PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physicalComponent)
 {
-	ID = getNewID();
-	transform = physicalComponent.transform;
-	speed = physicalComponent.speed;
-	verticalSpeed = physicalComponent.verticalSpeed;
-	horizontalSpeed = physicalComponent.horizontalSpeed;
-	acceleration = physicalComponent.acceleration;
-	verticalAcceleration = physicalComponent.verticalAcceleration;
-	horizontalAcceleration = physicalComponent.verticalAcceleration;
+	PhysicalComponent::PhysicalComponent(physicalComponent);
 	return (*this);
 }
 
@@ -92,6 +93,26 @@ float PhysicalComponent::getRadius()
 	return radius;
 }
 
+unsigned int PhysicalComponent::getEngineIndex()
+{
+	return engineIndex;
+}
+
+std::list<PhysicalComponent*>::iterator PhysicalComponent::getGridPosition()
+{
+	return gridPosition;
+}
+
+unsigned int PhysicalComponent::getGridX()
+{
+	return gridX;
+}
+
+unsigned int PhysicalComponent::getGridY()
+{
+	return gridY;
+}
+
 void PhysicalComponent::setTransform(Matrx44 transform)
 {
 	this->transform = transform;
@@ -104,6 +125,7 @@ void PhysicalComponent::setSpeed(Vect4 speed)
 void PhysicalComponent::setPosition(Vect4 position)
 {
 	this->position = position;
+	this->transform.setPos(position);
 }
 
 void PhysicalComponent::setAcceleration(float acceleration)
@@ -111,6 +133,22 @@ void PhysicalComponent::setAcceleration(float acceleration)
 	this->acceleration = acceleration;
 }
 
+void PhysicalComponent::setGameObject(GameObject *object)
+{
+	this->gameObject = object;
+}
+
+void PhysicalComponent::setGridPosition(std::list<PhysicalComponent*>::iterator gridPosition, unsigned int x, unsigned int y)
+{
+	this->gridPosition = gridPosition;
+	gridX = x;
+	gridY = y;
+}
+
+void PhysicalComponent::setHeading(Vect4 v)
+{
+	this->speed = v;
+}
 
 void PhysicalComponent::collision(Vect4 axis)
 {
@@ -184,4 +222,14 @@ void  PhysicalComponent::stopMoveRight()
 void  PhysicalComponent::stopMoveLeft()
 {
 	horizontalAcceleration = baseDeceleration;
+}
+
+void PhysicalComponent::setEngineIndex(unsigned int index)
+{
+	engineIndex = index;
+}
+
+PhysicalComponent *PhysicalComponent::clone()
+{
+	return new PhysicalComponent(*this);
 }

@@ -46,29 +46,35 @@
     <Filter Include="Source Files\Misc">
       <UniqueIdentifier>{5052e1e4-674d-451a-b4f6-eb97b32d38d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameState">
-      <UniqueIdentifier>{6ad66f67-5f9c-4b31-8213-bd700b9924ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameState">
-      <UniqueIdentifier>{f23ab17d-6afe-43d4-b7ff-db016764fa8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\PhysicalEngine">
       <UniqueIdentifier>{65c8499e-48f0-4443-a347-bdbd8d4af8d3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\PhysicalEngine">
       <UniqueIdentifier>{d07c135b-4345-4c22-9102-c55442253148}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObjects">
-      <UniqueIdentifier>{0b3b77b8-bf0d-43cb-af3b-801385af6510}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{26dd9b0f-ef6c-4c12-a546-d963b7e3af22}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\PhysicalEngine\Grid">
       <UniqueIdentifier>{54b09fa8-b329-4043-854e-170221e8de93}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\PhysicalEngine\Grid">
       <UniqueIdentifier>{2f6bb3c1-e512-4779-be35-0307bfe2bd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine">
+      <UniqueIdentifier>{1c421459-77be-4311-ae0d-4c65f61e6e87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\GameObjects">
+      <UniqueIdentifier>{0b3b77b8-bf0d-43cb-af3b-801385af6510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\GameState">
+      <UniqueIdentifier>{6ad66f67-5f9c-4b31-8213-bd700b9924ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine">
+      <UniqueIdentifier>{4bbbde64-e9f7-4fbf-91ff-16acf4f394d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\GameObjects">
+      <UniqueIdentifier>{26dd9b0f-ef6c-4c12-a546-d963b7e3af22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\GameState">
+      <UniqueIdentifier>{f23ab17d-6afe-43d4-b7ff-db016764fa8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +109,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\GameState</Filter>
+      <Filter>Source Files\GameEngine\GameState</Filter>
     </ClCompile>
     <ClCompile Include="InGameState.cpp">
-      <Filter>Source Files\GameState</Filter>
+      <Filter>Source Files\GameEngine\GameState</Filter>
     </ClCompile>
     <ClCompile Include="PhysicalEngine.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
@@ -124,19 +130,16 @@
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="HeroPhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SelfMovingPhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
@@ -149,6 +152,36 @@
     </ClCompile>
     <ClCompile Include="Thread.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CellPhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="CellRenderableComponent.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicableGameObject.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectilePhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,10 +237,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files\GameState</Filter>
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
     <ClInclude Include="InGameState.h">
-      <Filter>Header Files\GameState</Filter>
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
     <ClInclude Include="PhysicalEngine.h">
       <Filter>Header Files\PhysicalEngine</Filter>
@@ -225,19 +258,16 @@
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="HeroPhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
     <ClInclude Include="Cursor.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Force.h">
       <Filter>Header Files\Utils</Filter>
@@ -253,6 +283,39 @@
     </ClInclude>
     <ClInclude Include="UpdaterThread.h">
       <Filter>Header Files\PhysicalEngine\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CellPhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="CellRenderableComponent.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplicableGameObject.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Indexer.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectilePhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

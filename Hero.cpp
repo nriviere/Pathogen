@@ -1,7 +1,9 @@
 #include "Hero.h"
+#include "Projectile.h"
+#include "ProjectilePhysicalComponent.h"
+#include "GameEngine.h"
 
-
-Hero::Hero()
+Hero::Hero(GameEngine *engine) : GameObject(engine)
 {
 
 }
@@ -17,7 +19,7 @@ Hero &Hero::operator=(const Hero &hero)
 	return (*this);
 }
 
-Hero::Hero(RenderableComponent *model, PhysicalComponent *physicalComponent) : GameObject(model, physicalComponent)
+Hero::Hero(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent) : GameObject(engine,model, physicalComponent)
 {
 
 }
@@ -45,6 +47,19 @@ void Hero::moveRight()
 void Hero::moveLeft()
 {
 	physicalComponent->moveLeft();
+}
+
+void Hero::shoot()
+{
+	Projectile *projectile = new Projectile(engine);
+	projectile->setHeading(getHeading());
+	engine->addObject(projectile);
+}
+
+Vect4 Hero::getHeading()
+{
+	Vect4 heading = engine->getCursor()->getPhysicalComponent()->getPosition() - physicalComponent->getPosition();
+	return heading;
 }
 
 void Hero::stopMoveUp()

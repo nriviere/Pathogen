@@ -111,3 +111,8 @@ void HeroPhysicalComponent::update()
 		verticalAcceleration = 0;
 	}
 }
+
+HeroPhysicalComponent *HeroPhysicalComponent::clone()
+{
+	return new HeroPhysicalComponent(*this);
+}

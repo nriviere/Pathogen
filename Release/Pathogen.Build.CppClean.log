@@ -25,6 +25,15 @@ q:\documents\workspace\pathogen\release\thread.obj
 q:\documents\workspace\pathogen\release\tgaloader.obj
 q:\documents\workspace\pathogen\release\stdafx.obj
 q:\documents\workspace\pathogen\release\shadersinc.obj
+q:\documents\workspace\pathogen\release\gameengine.obj
+q:\documents\workspace\pathogen\release\replicablegameobject.obj
+q:\documents\workspace\pathogen\release\cellrenderablecomponent.obj
+q:\documents\workspace\pathogen\release\cellphysicalcomponent.obj
+q:\documents\workspace\pathogen\release\cell.obj
+q:\documents\workspace\pathogen\release\timer.obj
+q:\documents\workspace\pathogen\release\projectilephysicalcomponent.obj
+q:\documents\workspace\pathogen\release\projectile.obj
+q:\documents\workspace\pathogen\release\enemy.obj
 q:\documents\workspace\pathogen\release\pathogen.exe
 q:\documents\workspace\pathogen\release\pathogen.pdb
 q:\documents\workspace\pathogen\release\objreader.res

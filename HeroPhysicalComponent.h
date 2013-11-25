@@ -19,5 +19,7 @@ public:
 	void align(Vect4 position);
 
 	void update();
+
+	HeroPhysicalComponent *clone();
 };
 

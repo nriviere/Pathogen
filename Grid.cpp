@@ -69,7 +69,7 @@ Grid::Grid(const Grid &grid)
 	stepY = dY / nY;
 	componentsCount = nY*nX;
 
-	memcpy(components, grid.components, componentsCount*sizeof(PhysicalComponent*));
+	memcpy(components, grid.components, componentsCount*sizeof(PhysicalComponent**));
 	updaterThreadCount = grid.updaterThreadCount;
 	updaterThreads = new UpdaterThread*[updaterThreadCount];
 
@@ -170,11 +170,17 @@ std::list<PhysicalComponent*> *Grid::get(unsigned int x, unsigned int y)
 void Grid::set(PhysicalComponent* component)
 {
 	unsigned int uix, uiy;
-	float fx = component->getPosition()[0], fy = component->getPosition()[1];
+	float fx =component->getPosition()[0], fy = component->getPosition()[1];
 	uix = max(0, min(floor((fx - limitsX[0]) / stepX), nX - 1));
 	uiy = max(0, min(floor((fy - limitsY[0]) / stepY), nY - 1));
+	
 
-	components[uiy * nX + uiy]->push_back(component);
+	
+	
+	components[uiy * nX + uix]->push_back(component);
+	std::list<PhysicalComponent*>::iterator gridPosition = get(uix, uiy)->end();
+	--gridPosition;
+	component->setGridPosition(gridPosition, uix, uiy);
 }
 
 unsigned int ctest2 = 0;
@@ -270,3 +276,4 @@ void Grid::setLimits(Level *level)
 		limitsX[1] = limitsY[1] = 100;
 	}
 }
+

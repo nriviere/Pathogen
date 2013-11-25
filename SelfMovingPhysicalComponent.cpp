@@ -4,7 +4,7 @@
 using namespace std;
 
 
-SelfMovingPhysicalComponent::SelfMovingPhysicalComponent() : PhysicalComponent()
+SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(GameObject *object) : PhysicalComponent(object)
 {
 	baseSpeed = 1.5;
 	
@@ -16,6 +16,12 @@ SelfMovingPhysicalComponent::SelfMovingPhysicalComponent() : PhysicalComponent()
 	innerForce = Force(speed,1);
 }
 
+SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(const SelfMovingPhysicalComponent& component) : PhysicalComponent(component)
+{
+	innerForce = component.innerForce;
+	baseSpeed = component.baseSpeed;
+	forces = component.forces;
+}
 
 SelfMovingPhysicalComponent::~SelfMovingPhysicalComponent()
 {
@@ -97,4 +103,16 @@ void SelfMovingPhysicalComponent::update()
 		0, 0, 1, 0,
 		position[0], position[1], position[2], 1);
 	transform = m;
+}
+
+SelfMovingPhysicalComponent *SelfMovingPhysicalComponent::clone()
+{
+	return new SelfMovingPhysicalComponent(*this);
+}
+
+void SelfMovingPhysicalComponent::setHeading(Vect4 v)
+{
+	v.normalize();
+	v = v*baseSpeed;
+	innerForce = Force(v, 1);
 }

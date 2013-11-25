@@ -97,7 +97,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="CellPhysicalComponent.cpp" />
+    <ClCompile Include="CellRenderableComponent.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -105,6 +110,8 @@
     <ClCompile Include="HeroPhysicalComponent.cpp" />
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ProjectilePhysicalComponent.cpp" />
     <ClCompile Include="RenderableComponent.cpp" />
     <ClCompile Include="MyEngine.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -114,6 +121,7 @@
     <ClCompile Include="PhysicalComponent.cpp" />
     <ClCompile Include="PhysicalEngine.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ReplicableGameObject.cpp" />
     <ClCompile Include="SelfMovingPhysicalComponent.cpp" />
     <ClCompile Include="ShadersApi\Shader.cpp" />
     <ClCompile Include="ShadersApi\Program.cpp" />
@@ -121,18 +129,28 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TGALoader.cpp" />
     <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UpdaterThread.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="CellPhysicalComponent.h" />
+    <ClInclude Include="CellRenderableComponent.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="gl\GLExt.h" />
     <ClInclude Include="gl\wglext.h" />
     <ClInclude Include="Force.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="Indexer.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ProjectilePhysicalComponent.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroPhysicalComponent.h" />
     <ClInclude Include="InGameState.h" />
@@ -144,6 +162,7 @@
     <ClInclude Include="PhysicalComponent.h" />
     <ClInclude Include="PhysicalEngine.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ReplicableGameObject.h" />
     <ClInclude Include="SelfMovingPhysicalComponent.h" />
     <ClInclude Include="ShadersApi\Shader.h" />
     <ClInclude Include="ShadersApi\Program.h" />

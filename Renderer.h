@@ -38,6 +38,10 @@ private :
 	std::list<unsigned int> next_light_indices;
 	MyEngine *engine;
 public:
+	static const unsigned int MAX_LIGHT_COUNT = 100;
+	static const unsigned int HERO_MODEL_INDEX = 0;
+	static const unsigned int CELL_MODEL_INDEX = 1;
+	static const unsigned int PROJECTILE_MODEL_INDEX = 2;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();
 

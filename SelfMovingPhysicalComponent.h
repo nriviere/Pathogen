@@ -1,6 +1,7 @@
 #pragma once
 #include "Force.h"
 #include "PhysicalComponent.h"
+#include "GameObject.h"
 #include <list>
 
 
@@ -8,20 +9,25 @@
 class SelfMovingPhysicalComponent :
 	public PhysicalComponent
 {
-private:
+protected:
 	Force innerForce;
 	std::list<Force> forces;
 	float baseSpeed;
 public:
-	SelfMovingPhysicalComponent();
+	SelfMovingPhysicalComponent(GameObject *object = NULL);
+	SelfMovingPhysicalComponent(const SelfMovingPhysicalComponent& component);
 	~SelfMovingPhysicalComponent();
 
 	Force getInnerForce();
 	void setInnerForce(Force f);
 
-	void collision(PhysicalComponent *physicalComponent);
-	void collision(Vect4 axis);
+	virtual void collision(PhysicalComponent *physicalComponent);
+	virtual void collision(Vect4 axis);
 
 	void update();
+
+	SelfMovingPhysicalComponent *clone();
+
+	void setHeading(Vect4 v);
 };
 

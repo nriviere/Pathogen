@@ -1,13 +1,17 @@
 #include "InGameState.h"
+#include "GameEngine.h"
 #include "MyEngine.h"
+#include "Renderer.h"
+#include "Light.h"
 #include <WinUser.h>
 
-InGameState::InGameState(MyEngine *engine) : GameState(engine)
+InGameState::InGameState(GameEngine *engine) : GameState(engine)
 {
 	isZdown = isQdown = isSdown = isDdown = false;
 	prevMousePos.x = 0;
 	prevMousePos.y = 0;
 	ShowCursor(false);
+	parentEngine = engine->getParentEngine();
 
 }
 
@@ -20,6 +24,11 @@ void InGameState::mouseMove(POINT pos)
 	Vect4 cursorMove(pos.x,-pos.y, 0, 1);
 	engine->getCursor()->translate(cursorMove*1.5);
 	prevMousePos = pos;
+}
+
+void InGameState::lButtonDown(POINT Pt)
+{
+	engine->getHero()->shoot();
 }
 
 void InGameState::keyUp(int s32VirtualKey)
@@ -89,32 +98,42 @@ void InGameState::keyDown(int s32VirtualKey)
 
 void InGameState::setup()
 {
-	engine->getRenderer()->init();
+	Renderer *renderer = parentEngine->getRenderer();
+	renderer->init();
 
-	const char *test[2];
+	const char *test[3];
 	test[0] = "3DS/models/hero.obj";
 	test[1] = "3DS/models/cell.obj";
-	engine->load(test, 2);
+	test[2] = "3DS/models/neutrophil.obj";
+	engine->load(test, 3);
 
 	Light * light = new Light(Matrx44(Vect4(0.3, 0.1, 0.1, 1),
 		Vect4(0.5, 0.3, 0.3, 1),
 		Vect4(0.8, 0.5, 0.5, 1),
 		Vect4(0, 0, 0, 1)));
 
-	int lightId = engine->getRenderer()->addLight(light);
+	int lightId = renderer->addLight(light);
 
-	engine->getErrLog()->open("log.txt", std::ios::trunc);
-
-
+	parentEngine->getErrLog()->open("log.txt", std::ios::trunc);
 }
 
 void InGameState::update(float fDT)
 {
-	engine->getPhysicalEngine()->update(fDT);
+	parentEngine->getPhysicalEngine()->update(fDT);
+	unsigned int gameObjectCount = engine->getGameObjectCount();
+	GameObject **gameObjects = engine->getGameObjects();
+	engine->remove();
+	for (int i = 0; i < gameObjectCount; i++)
+	{
+		if (gameObjects[i] != NULL)
+		{
+			gameObjects[i]->update();
+		}
+	}
+	
 }
 
-void InGameState::render(unsigned int u32Width, unsigned int u32Height)
+void InGameState::display(unsigned int u32Width, unsigned int u32Height)
 {
-
-	engine->getRenderer()->render(engine->getGameObjects(), engine->getGameObjectCount(), u32Width, u32Height, engine->getCurrentLevel());
+	parentEngine->getRenderer()->render(engine->getGameObjects(), engine->getGameObjectCount(), u32Width, u32Height, engine->getCurrentLevel());
 }

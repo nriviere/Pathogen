@@ -1,7 +1,9 @@
 #include "GameState.h"
+#include "GameEngine.h"
 #include <iostream>
 
-GameState::GameState(MyEngine *engine)
+
+GameState::GameState(GameEngine *engine)
 {
 	this->engine = engine;
 }

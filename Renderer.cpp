@@ -34,7 +34,7 @@ Renderer::Renderer(MyEngine *engine)
 void Renderer::init(){
 	glPolygonMode(GL_FRONT_AND_BACK, GL_SMOOTH);
 	glEnable(GL_DEPTH_TEST);
-	
+
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_CULL_FACE);
 
@@ -115,7 +115,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		//RECUPERATION DES COORDONNEES DES VERTICES
 		glBindBuffer(GL_ARRAY_BUFFER, coord_buffer_object);
 		glBufferSubData(GL_ARRAY_BUFFER, vertex_pos * 3 * sizeof(GL_FLOAT), objects[s]->u32VerticesCount * 3 * sizeof(GL_FLOAT), objects[s]->pVertices);
-		
+
 
 		//RECUPERATION DES COORDONNES DE NORMALES
 		glBindBuffer(GL_ARRAY_BUFFER, normals_buffer_object);
@@ -138,7 +138,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 			textures[o] = UINT_MAX;
 			//RECUPERATION DES INDICES
 			model_indices[index_counter] = NULL;
-			
+
 			if (objects[s]->pObjects[o].u32FirstFace <= objects[s]->u32FacesCount && objects[s]->pObjects[o].u32FacesCount > 0 && objects[s]->pObjects[o].u32FacesCount <= objects[s]->u32FacesCount)
 			{
 				unsigned int *indices = new unsigned int[objects[s]->pObjects[o].u32FacesCount * 3];
@@ -157,7 +157,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 				unsigned int start = (index_pos + index_offset) * 3 * sizeof(GL_UNSIGNED_INT), length = objects[s]->pObjects[o].u32FacesCount * 3 * sizeof(GL_UNSIGNED_INT);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indice_buffer_object);
 				glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, start, length, indices);
-				
+
 				delete[] indices;
 
 				if (objects[s]->pObjects[o].u32Material != UINT_MAX)
@@ -211,7 +211,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 			}
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-			
+
 			index_counter++;
 		}
 
@@ -312,8 +312,8 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[0], 0);
 	glEnd();
 
-	Vect4 cursorPosition = engine->getCursor()->getPhysicalComponent()->getPosition();
-	Vect4 heroPosition = engine->getHero()->getPhysicalComponent()->getPosition();
+	Vect4 cursorPosition = engine->getGameEngine()->getCursor()->getPhysicalComponent()->getPosition();
+	Vect4 heroPosition = engine->getGameEngine()->getHero()->getPhysicalComponent()->getPosition();
 	glBegin(GL_LINES);
 	glVertex3f(cursorPosition[0], cursorPosition[1], 0);
 	glVertex3f(heroPosition[0], heroPosition[1], 0);
@@ -332,10 +332,10 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	GLuint lights_count_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_count");
 	//utiliser une list pour les lights sinon ca va planter...
 
-	float lights_position[MyEngine::MAX_LIGHT_COUNT][4];
-	float lights_ambient[MyEngine::MAX_LIGHT_COUNT][4];
-	float lights_diffuse[MyEngine::MAX_LIGHT_COUNT][4];
-	float lights_specular[MyEngine::MAX_LIGHT_COUNT][4];
+	float lights_position[MAX_LIGHT_COUNT][4];
+	float lights_ambient[MAX_LIGHT_COUNT][4];
+	float lights_diffuse[MAX_LIGHT_COUNT][4];
+	float lights_specular[MAX_LIGHT_COUNT][4];
 
 	int p = 0;
 	float mvf[16];
@@ -343,7 +343,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	Matrx44 mvm(mvf);
 	Matrx44 pos;
 
-	for (int i = 0; i < MyEngine::MAX_LIGHT_COUNT; i++)
+	for (int i = 0; i < MAX_LIGHT_COUNT; i++)
 	{
 		if (lights[i] != NULL)
 		{
@@ -362,10 +362,10 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		}
 	}
 
-	glUniform4fv(lights_positions_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_position[0]);
-	glUniform4fv(lights_ambient_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_ambient[0]);
-	glUniform4fv(lights_diffuse_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_diffuse[0]);
-	glUniform4fv(lights_specular_uniloc, MyEngine::MAX_LIGHT_COUNT, lights_specular[0]);
+	glUniform4fv(lights_positions_uniloc, MAX_LIGHT_COUNT, lights_position[0]);
+	glUniform4fv(lights_ambient_uniloc, MAX_LIGHT_COUNT, lights_ambient[0]);
+	glUniform4fv(lights_diffuse_uniloc, MAX_LIGHT_COUNT, lights_diffuse[0]);
+	glUniform4fv(lights_specular_uniloc, MAX_LIGHT_COUNT, lights_specular[0]);
 	glUniform1ui(lights_count_uniloc, lights_count);
 	glUniform1f(t_uniloc, (float)t);
 
@@ -373,48 +373,53 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glBindBuffer(GL_ARRAY_BUFFER, coord_buffer_object);
 	glBindBuffer(GL_ARRAY_BUFFER, normals_buffer_object);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indice_buffer_object);
-	for (int o = 0; o < count; o++)
+	for (int o = 0; o < GameEngine::MAX_GAME_OBJECT_COUNT; o++)
 	{
-		RenderableComponent *model = gameobject[o]->getModel();
-		if (model != NULL){
-			PhysicalComponent *physicalComponent = gameobject[o]->getPhysicalComponent();
-			glPushMatrix();
-			float transform[16];
-			physicalComponent->getTransform().toGlMatrix(transform);
-			glMultMatrixf(transform);
+		if (gameobject[o] != NULL)
+		{
 
-			for (int i = 0; i < model->getIndexCount(); i++)
-			{
-				Material *material = model->getMaterials()[i];
-				if (material != NULL){
+			RenderableComponent *model = gameobject[o]->getModel();
+			if (model != NULL){
+				PhysicalComponent *physicalComponent = gameobject[o]->getPhysicalComponent();
+				glPushMatrix();
+				float transform[16];
+				physicalComponent->getTransform().toGlMatrix(transform);
+				glMultMatrixf(transform);
 
-					float ambient[4] = { material->getAmbient()[0], material->getAmbient()[1], material->getAmbient()[2], material->getAmbient()[3] };
-					float diffuse[4] = { material->getDiffuse()[0], material->getDiffuse()[1], material->getDiffuse()[2], material->getDiffuse()[3] };
-					float specular[4] = { material->getSpecular()[0], material->getSpecular()[1], material->getSpecular()[2], material->getSpecular()[3] };
-					float shininess = material->getShininess();
-					glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
-					glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-					glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-					glMaterialf(GL_FRONT, GL_SHININESS, shininess);
-				}
-
-				vbo_index *index = model->getIndices()[i];
-				unsigned int textureId = model->getTextures()[i];
-
-				if (textureId != UINT_MAX)
+				for (int i = 0; i < model->getIndexCount(); i++)
 				{
-					glBindTexture(GL_TEXTURE_2D, textureId);
-					glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
-				}
+					Material *material = model->getMaterials()[i];
+					if (material != NULL){
 
-				//glScalef(10,10,10);
-				if (index != NULL)
-				{
-					glDrawElements(GL_TRIANGLES, index->index_length * 3, GL_UNSIGNED_INT, (GLvoid *)(index->index_start * 3 * sizeof(GL_UNSIGNED_INT)));
+						float ambient[4] = { material->getAmbient()[0], material->getAmbient()[1], material->getAmbient()[2], material->getAmbient()[3] };
+						float diffuse[4] = { material->getDiffuse()[0], material->getDiffuse()[1], material->getDiffuse()[2], material->getDiffuse()[3] };
+						float specular[4] = { material->getSpecular()[0], material->getSpecular()[1], material->getSpecular()[2], material->getSpecular()[3] };
+						float shininess = material->getShininess();
+						glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+						glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+						glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+						glMaterialf(GL_FRONT, GL_SHININESS, shininess);
+					}
+
+					vbo_index *index = model->getIndices()[i];
+					unsigned int textureId = model->getTextures()[i];
+
+					if (textureId != UINT_MAX)
+					{
+						glBindTexture(GL_TEXTURE_2D, textureId);
+						glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
+					}
+
+					//glScalef(10,10,10);
+					if (index != NULL)
+					{
+						glDrawElements(GL_TRIANGLES, index->index_length * 3, GL_UNSIGNED_INT, (GLvoid *)(index->index_start * 3 * sizeof(GL_UNSIGNED_INT)));
+					}
 				}
+				glPopMatrix();
 			}
 		}
-		glPopMatrix();
+		
 	}
 	compute_illumination->stop();
 }
