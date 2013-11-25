@@ -107,9 +107,9 @@ void InGameState::setup()
 	test[2] = "3DS/models/neutrophil.obj";
 	engine->load(test, 3);
 
-	Light * light = new Light(Matrx44(Vect4(0.3, 0.1, 0.1, 1),
-		Vect4(0.5, 0.3, 0.3, 1),
-		Vect4(0.8, 0.5, 0.5, 1),
+	Light * light = new Light(Matrx44(Vect4(0.1, 0.1, 0.1, 1),
+		Vect4(0.5, 0.5, 0.5, 1),
+		Vect4(0.9, 0.9, 0.9, 1),
 		Vect4(0, 0, 0, 1)));
 
 	int lightId = renderer->addLight(light);

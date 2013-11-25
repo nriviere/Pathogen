@@ -106,9 +106,9 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		for (int i = 0; i < objects[s]->u32MaterialsCount; i++)
 		{
 			materials[material_pos++] = Material(
-				Vect4(objects[s]->pMaterials->pfAmbient),
-				Vect4(objects[s]->pMaterials->pfDiffuse),
-				Vect4(objects[s]->pMaterials->pfSpecular),
+				Vect4(objects[s]->pMaterials[i].pfAmbient),
+				Vect4(objects[s]->pMaterials[i].pfDiffuse),
+				Vect4(objects[s]->pMaterials[i].pfSpecular),
 				objects[s]->pMaterials->fShininess);
 		}
 
@@ -225,7 +225,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		models[model_pos].setIndices(model_indices, objects[s]->u32ObjectsCount);
 		models[model_pos].setMaterials(model_materials, objects[s]->u32MaterialsCount);
 		model_pos++;
-		material_offset = material_pos;
+		material_offset += objects[s]->u32MaterialsCount;
 
 	}
 	index_count = index_pos;
