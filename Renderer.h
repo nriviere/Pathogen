@@ -30,13 +30,22 @@ private :
 	unsigned int vertice_array_object, coord_buffer_object, texcoord_buffer_object, normals_buffer_object, indice_buffer_object, index_count;
 	unsigned int *textures;
 	std::list<Program*> programs;
-	Program* compute_illumination;
+	Program* compute_illumination, *renderTexture;
 	std::list<Shader*> shaders;
 	std::ofstream logs;
 	Light *lights[MAX_LIGHTS];
 	unsigned int lights_count;
 	std::list<unsigned int> next_light_indices;
 	MyEngine *engine;
+
+	unsigned int renderedTexture;
+	unsigned int depthrenderbuffer;
+	unsigned int frameBufferId;
+	unsigned int quad_vertexbuffer;
+	unsigned int quad_uvbuffer;
+	unsigned int quad_VertexArrayID;
+	unsigned int width, height;
+
 public:
 	static const unsigned int MAX_LIGHT_COUNT = 100;
 	static const unsigned int HERO_MODEL_INDEX = 0;

@@ -1,3 +1,4 @@
+#version 330 core
 in vec3 in_position;
 in vec3 in_normal;
 in vec2 in_texcoord;
@@ -5,8 +6,11 @@ in vec2 in_texcoord;
 varying vec3 N;
 varying vec3 L;
 varying vec4 V; 
-varying vec2 UV;
-varying vec4 C;
+//out vec2 UV;
+//inout vec4 C;
+
+uniform mat4 MV;
+uniform mat4 P;
 
 const unsigned int MAX_LIGHT_COUNT = 100u;
 
@@ -20,11 +24,11 @@ uniform float t;
 void main(void)
 {
 	vec4 position = vec4(in_position.x  ,in_position.y,in_position.z,1.0);
-	V = gl_ModelViewMatrix * position ;
+	mat3 NM = mat3(transpose(inverse(MV)));
+	V = MV * position ;
 	L = normalize(lights_position[0] - V).xyz;
-	UV = in_texcoord;
-	N = normalize(gl_NormalMatrix * in_normal);
-	gl_Position = gl_ModelViewProjectionMatrix * position;
+	N = normalize(NM * in_normal);
+	gl_Position =  P * MV *  position;
 }
 
 

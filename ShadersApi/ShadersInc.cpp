@@ -21,8 +21,26 @@ PFNGLUSEPROGRAMPROC glUseProgram = NULL;
 PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 PFNGLUNIFORM1FVPROC  glUniform1fv = NULL;
 PFNGLUNIFORM4FVPROC  glUniform4fv = NULL;
+PFNGLUNIFORMMATRIX4FVPROC  glUniformMatrix4fv = NULL;
+PFNGLUNIFORM4FPROC  glUniform4f = NULL;
 PFNGLUNIFORM1UIPROC  glUniform1ui = NULL;
 PFNGLUNIFORM1FPROC  glUniform1f = NULL;
+PFNGLUNIFORM1IPROC  glUniform1i = NULL;
+
+PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers = NULL;
+PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer = NULL;
+PFNGLGENRENDERBUFFERSPROC glGenRenderbuffers = NULL;
+PFNGLBINDRENDERBUFFERPROC glBindRenderbuffer = NULL;
+PFNGLRENDERBUFFERSTORAGEPROC glRenderbufferStorage = NULL;
+PFNGLFRAMEBUFFERRENDERBUFFERPROC glFramebufferRenderbuffer = NULL;
+PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture = NULL;
+PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D = NULL;
+PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatus = NULL;
+PFNGLDRAWBUFFERSPROC glDrawBuffers = NULL;
+PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers = NULL;
+PFNGLDELETERENDERBUFFERSPROC glDeleteRenderbuffers = NULL;
+
+PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
 
 void initApi() throw (ShaderException){
 	glCreateShader = (PFNGLCREATESHADERPROC)wglGetProcAddress("glCreateShader");
@@ -129,6 +147,13 @@ void initApi() throw (ShaderException){
 		throw new ShaderException("failed to retrieve glUniform4fv function pointer.");
 	}
 
+	glUniform4f = (PFNGLUNIFORM4FPROC)wglGetProcAddress("glUniform4f");
+	if (glUniform4f == NULL)
+	{
+		throw new ShaderException("failed to retrieve glUniform4f function pointer.");
+	}
+
+
 	glUniform1ui = (PFNGLUNIFORM1UIPROC)wglGetProcAddress("glUniform1ui");
 	if (glUniform1ui == NULL)
 	{
@@ -140,5 +165,97 @@ void initApi() throw (ShaderException){
 	{
 		throw new ShaderException("failed to retrieve glUniform1f function pointer.");
 	}
+
+	glUniform1i = (PFNGLUNIFORM1IPROC)wglGetProcAddress("glUniform1i");
+	if (glUniform1i == NULL)
+	{
+		throw new ShaderException("failed to retrieve glUniform1i function pointer.");
+	}
+
+	glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)wglGetProcAddress("glUniformMatrix4fv");
+	if (glUniformMatrix4fv == NULL)
+	{
+		throw new ShaderException("failed to retrieve glUniformMatrix4fv function pointer.");
+	}
+
+	glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC)wglGetProcAddress("glGenFramebuffers");
+	if (glGenFramebuffers == NULL)
+	{
+		throw new ShaderException("failed to retrieve glGenFramebuffers function pointer.");
+	}
+
+	glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC)wglGetProcAddress("glBindFramebuffer");
+	if (glBindFramebuffer == NULL)
+	{
+		throw new ShaderException("failed to retrieve glBindFramebuffer function pointer.");
+	}
+
+	glGenRenderbuffers = (PFNGLGENRENDERBUFFERSPROC)wglGetProcAddress("glGenRenderbuffers");
+	if (glGenRenderbuffers == NULL)
+	{
+		throw new ShaderException("failed to retrieve glGenRenderbuffers function pointer.");
+	}
+
+	glBindRenderbuffer = (PFNGLBINDRENDERBUFFERPROC)wglGetProcAddress("glBindRenderbuffer");
+	if (glBindRenderbuffer == NULL)
+	{
+		throw new ShaderException("failed to retrieve glBindRenderbuffer function pointer.");
+	}
+
+	glRenderbufferStorage = (PFNGLRENDERBUFFERSTORAGEPROC)wglGetProcAddress("glRenderbufferStorage");
+	if (glRenderbufferStorage == NULL)
+	{
+		throw new ShaderException("failed to retrieve glRenderbufferStorage function pointer.");
+	}
+
+	glFramebufferRenderbuffer = (PFNGLFRAMEBUFFERRENDERBUFFERPROC)wglGetProcAddress("glFramebufferRenderbuffer");
+	if (glFramebufferRenderbuffer == NULL)
+	{
+		throw new ShaderException("failed to retrieve glFramebufferRenderbuffer function pointer.");
+	}
+
+	glFramebufferTexture = (PFNGLFRAMEBUFFERTEXTUREPROC)wglGetProcAddress("glFramebufferTexture");
+	if (glFramebufferTexture == NULL)
+	{
+		throw new ShaderException("failed to retrieve glFramebufferTexture function pointer.");
+	}
+
+	glFramebufferTexture2D = (PFNGLFRAMEBUFFERTEXTURE2DPROC)wglGetProcAddress("glFramebufferTexture2D");
+	if (glFramebufferTexture2D == NULL)
+	{
+		throw new ShaderException("failed to retrieve glFramebufferTexture2D function pointer.");
+	}
+
+	glCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSPROC)wglGetProcAddress("glCheckFramebufferStatus");
+	if (glCheckFramebufferStatus == NULL)
+	{
+		throw new ShaderException("failed to retrieve glCheckFramebufferStatus function pointer.");
+	}
+
+	glDrawBuffers = (PFNGLDRAWBUFFERSPROC)wglGetProcAddress("glDrawBuffers");
+	if (glDrawBuffers == NULL)
+	{
+		throw new ShaderException("failed to retrieve glDrawBuffers function pointer.");
+	}
+
+	glDeleteFramebuffers = (PFNGLDELETEFRAMEBUFFERSPROC)wglGetProcAddress("glDeleteFramebuffers");
+	if (glDeleteFramebuffers == NULL)
+	{
+		throw new ShaderException("failed to retrieve glDeleteFramebuffers function pointer.");
+	}
+
+	glDeleteRenderbuffers = (PFNGLDELETERENDERBUFFERSPROC)wglGetProcAddress("glDeleteRenderbuffers");
+	if (glDeleteRenderbuffers == NULL)
+	{
+		throw new ShaderException("failed to retrieve glDeleteRenderbuffers function pointer.");
+	}
+
+	glActiveTexture = (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
+	if (glActiveTexture == NULL)
+	{
+		throw new ShaderException("failed to retrieve glActiveTexture function pointer.");
+	}
+
+
 }
 

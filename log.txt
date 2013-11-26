@@ -1,2 +1,2474 @@
 ***********************************************************************************************************************************
-62.471
+ pixels : 
+208 195 202 0 
+ pixels : FIN
+ pixels : 
+208 195 202 0 
+ pixels : FIN
+ pixels : 
+180 167 174 2 
+ pixels : FIN
+ pixels : 
+210 197 203 2 
+ pixels : FIN
+ pixels : 
+147 134 141 2 
+ pixels : FIN
+ pixels : 
+78 56 54 2 
+ pixels : FIN
+ pixels : 
+190 177 184 2 
+ pixels : FIN
+ pixels : 
+16 3 10 2 
+ pixels : FIN
+ pixels : 
+75 62 69 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+208 195 201 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+187 174 181 2 
+ pixels : FIN
+ pixels : 
+127 106 105 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+78 56 54 2 
+ pixels : FIN
+ pixels : 
+187 166 164 2 
+ pixels : FIN
+ pixels : 
+201 188 195 2 
+ pixels : FIN
+ pixels : 
+185 172 179 2 
+ pixels : FIN
+ pixels : 
+184 172 178 2 
+ pixels : FIN
+ pixels : 
+144 131 138 2 
+ pixels : FIN
+ pixels : 
+128 115 122 2 
+ pixels : FIN
+ pixels : 
+104 84 82 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+208 195 201 2 
+ pixels : FIN
+ pixels : 
+208 195 201 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+209 196 202 2 
+ pixels : FIN
+ pixels : 
+59 31 22 2 
+ pixels : FIN
+ pixels : 
+204 190 195 2 
+ pixels : FIN
+ pixels : 
+84 71 78 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+112 89 85 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+35 22 29 2 
+ pixels : FIN
+ pixels : 
+208 195 201 2 
+ pixels : FIN
+ pixels : 
+106 93 99 2 
+ pixels : FIN
+ pixels : 
+57 33 27 2 
+ pixels : FIN
+ pixels : 
+62 37 32 2 
+ pixels : FIN
+ pixels : 
+224 206 206 2 
+ pixels : FIN
+ pixels : 
+207 194 201 2 
+ pixels : FIN
+ pixels : 
+206 193 200 2 
+ pixels : FIN
+ pixels : 
+204 191 197 2 
+ pixels : FIN
+ pixels : 
+192 179 186 2 
+ pixels : FIN
+ pixels : 
+173 160 166 2 
+ pixels : FIN
+ pixels : 
+200 187 194 2 
+ pixels : FIN
+ pixels : 
+192 179 186 2 
+ pixels : FIN
+ pixels : 
+180 167 173 2 
+ pixels : FIN
+ pixels : 
+209 196 203 2 
+ pixels : FIN
+ pixels : 
+179 167 173 2 
+ pixels : FIN
+ pixels : 
+175 162 169 2 
+ pixels : FIN
+ pixels : 
+190 177 183 2 
+ pixels : FIN
+ pixels : 
+198 185 192 2 
+ pixels : FIN
+ pixels : 
+179 166 173 2 
+ pixels : FIN
+ pixels : 
+65 52 59 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+208 192 196 2 
+ pixels : FIN
+ pixels : 
+190 168 164 2 
+ pixels : FIN
+ pixels : 
+195 180 184 2 
+ pixels : FIN
+ pixels : 
+141 128 135 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+119 98 95 2 
+ pixels : FIN
+ pixels : 
+73 51 49 2 
+ pixels : FIN
+ pixels : 
+126 114 120 2 
+ pixels : FIN
+ pixels : 
+187 174 181 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+218 200 201 2 
+ pixels : FIN
+ pixels : 
+59 31 22 2 
+ pixels : FIN
+ pixels : 
+209 196 202 2 
+ pixels : FIN
+ pixels : 
+158 145 151 2 
+ pixels : FIN
+ pixels : 
+139 117 113 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+216 200 204 2 
+ pixels : FIN
+ pixels : 
+75 51 45 2 
+ pixels : FIN
+ pixels : 
+89 69 68 2 
+ pixels : FIN
+ pixels : 
+124 111 118 2 
+ pixels : FIN
+ pixels : 
+182 169 176 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+16 3 10 2 
+ pixels : FIN
+ pixels : 
+42 29 35 2 
+ pixels : FIN
+ pixels : 
+207 195 201 2 
+ pixels : FIN
+ pixels : 
+131 118 125 2 
+ pixels : FIN
+ pixels : 
+218 201 204 2 
+ pixels : FIN
+ pixels : 
+206 193 200 2 
+ pixels : FIN
+ pixels : 
+202 189 196 2 
+ pixels : FIN
+ pixels : 
+189 176 183 2 
+ pixels : FIN
+ pixels : 
+168 155 162 2 
+ pixels : FIN
+ pixels : 
+208 195 201 2 
+ pixels : FIN
+ pixels : 
+190 177 184 2 
+ pixels : FIN
+ pixels : 
+205 192 199 2 
+ pixels : FIN
+ pixels : 
+205 192 199 2 
+ pixels : FIN
+ pixels : 
+178 165 172 2 
+ pixels : FIN
+ pixels : 
+191 179 185 2 
+ pixels : FIN
+ pixels : 
+199 186 193 2 
+ pixels : FIN
+ pixels : 
+169 157 163 2 
+ pixels : FIN
+ pixels : 
+47 34 41 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+205 189 192 2 
+ pixels : FIN
+ pixels : 
+103 81 78 2 
+ pixels : FIN
+ pixels : 
+204 191 197 2 
+ pixels : FIN
+ pixels : 
+113 101 107 2 
+ pixels : FIN
+ pixels : 
+152 139 146 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+156 138 139 2 
+ pixels : FIN
+ pixels : 
+138 120 122 2 
+ pixels : FIN
+ pixels : 
+55 42 49 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+212 197 201 2 
+ pixels : FIN
+ pixels : 
+61 39 35 2 
+ pixels : FIN
+ pixels : 
+171 158 165 2 
+ pixels : FIN
+ pixels : 
+101 88 95 2 
+ pixels : FIN
+ pixels : 
+161 142 142 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+210 196 202 2 
+ pixels : FIN
+ pixels : 
+87 65 62 2 
+ pixels : FIN
+ pixels : 
+160 143 145 2 
+ pixels : FIN
+ pixels : 
+54 41 48 2 
+ pixels : FIN
+ pixels : 
+170 157 163 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+16 3 10 2 
+ pixels : FIN
+ pixels : 
+39 26 32 2 
+ pixels : FIN
+ pixels : 
+206 193 200 2 
+ pixels : FIN
+ pixels : 
+204 191 197 2 
+ pixels : FIN
+ pixels : 
+74 41 26 2 
+ pixels : FIN
+ pixels : 
+93 70 66 2 
+ pixels : FIN
+ pixels : 
+211 196 200 2 
+ pixels : FIN
+ pixels : 
+208 195 202 2 
+ pixels : FIN
+ pixels : 
+207 195 201 2 
+ pixels : FIN
+ pixels : 
+203 190 197 2 
+ pixels : FIN
+ pixels : 
+190 177 184 2 
+ pixels : FIN
+ pixels : 
+164 151 157 2 
+ pixels : FIN
+ pixels : 
+207 194 201 2 
+ pixels : FIN
+ pixels : 
+182 170 176 2 
+ pixels : FIN
+ pixels : 
+205 192 199 2 
+ pixels : FIN
+ pixels : 
+199 186 193 2 
+ pixels : FIN
+ pixels : 
+206 193 200 2 
+ pixels : FIN
+ pixels : 
+186 173 180 2 
+ pixels : FIN
+ pixels : 
+197 184 191 2 
+ pixels : FIN
+ pixels : 
+201 188 195 2 
+ pixels : FIN
+ pixels : 
+162 149 156 2 
+ pixels : FIN
+ pixels : 
+35 22 29 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+192 175 177 2 
+ pixels : FIN
+ pixels : 
+83 62 60 2 
+ pixels : FIN
+ pixels : 
+127 115 121 2 
+ pixels : FIN
+ pixels : 
+76 63 70 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 2 
+ pixels : FIN
+ pixels : 
+13 0 7 0 
+ pixels : FIN
+ pixels : 
+13 0 7 0 
+ pixels : FIN
+ pixels : 
+13 0 7 0 
+ pixels : FIN
+ pixels : 
+13 0 7 0 
+ pixels : FIN
+ pixels : 
+80 67 73 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+24 54 69 0 
+ pixels : FIN
+ pixels : 
+24 60 74 0 
+ pixels : FIN
+ pixels : 
+25 75 88 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+23 6 25 0 
+ pixels : FIN
+ pixels : 
+58 47 66 0 
+ pixels : FIN
+ pixels : 
+35 36 54 0 
+ pixels : FIN
+ pixels : 
+23 46 62 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+21 13 31 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+25 65 79 0 
+ pixels : FIN
+ pixels : 
+24 40 56 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+57 49 67 0 
+ pixels : FIN
+ pixels : 
+22 5 24 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+25 69 83 0 
+ pixels : FIN
+ pixels : 
+60 45 64 0 
+ pixels : FIN
+ pixels : 
+30 13 32 0 
+ pixels : FIN
+ pixels : 
+20 3 22 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+20 3 22 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+23 48 63 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+39 39 57 0 
+ pixels : FIN
+ pixels : 
+30 61 76 0 
+ pixels : FIN
+ pixels : 
+21 20 38 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+26 63 77 0 
+ pixels : FIN
+ pixels : 
+57 50 68 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+30 59 74 0 
+ pixels : FIN
+ pixels : 
+54 36 55 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+20 8 26 0 
+ pixels : FIN
+ pixels : 
+20 3 22 0 
+ pixels : FIN
+ pixels : 
+49 32 50 0 
+ pixels : FIN
+ pixels : 
+45 45 62 0 
+ pixels : FIN
+ pixels : 
+24 58 72 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+24 6 25 0 
+ pixels : FIN
+ pixels : 
+51 34 53 0 
+ pixels : FIN
+ pixels : 
+54 46 64 0 
+ pixels : FIN
+ pixels : 
+26 51 67 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+20 2 21 0 
+ pixels : FIN
+ pixels : 
+60 62 79 0 
+ pixels : FIN
+ pixels : 
+53 55 73 0 
+ pixels : FIN
+ pixels : 
+32 43 59 0 
+ pixels : FIN
+ pixels : 
+26 36 53 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+ pixels : 
+0 0 0 0 
+ pixels : FIN
+62.1882
