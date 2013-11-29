@@ -13,5 +13,7 @@ public:
 	~Cell();
 
 	void replicate();
+	void selfAdd();
+	void selfRemove();
 };
 

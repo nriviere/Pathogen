@@ -110,6 +110,7 @@
     <ClCompile Include="HeroPhysicalComponent.cpp" />
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LightingGameObject.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectilePhysicalComponent.cpp" />
     <ClCompile Include="RenderableComponent.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Force.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Indexer.h" />
+    <ClInclude Include="LightingGameObject.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectilePhysicalComponent.h" />
     <ClInclude Include="Timer.h" />
@@ -188,8 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\depthWritef.gls" />
-    <None Include="shaders\f1.gls" />
-    <None Include="shaders\s1.gls" />
     <None Include="shaders\tp1f.gls" />
     <None Include="shaders\tp1v.gls" />
   </ItemGroup>

@@ -183,6 +183,9 @@
     <ClCompile Include="ProjectilePhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
+    <ClCompile Include="LightingGameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -317,6 +320,9 @@
     <ClInclude Include="ProjectilePhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
+    <ClInclude Include="LightingGameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="OBJReader.ico">
@@ -327,13 +333,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\s1.gls">
-      <Filter>Header Files\Renderer\shaders</Filter>
-    </None>
     <None Include="shaders\tp1v.gls">
-      <Filter>Header Files\Renderer\shaders</Filter>
-    </None>
-    <None Include="shaders\f1.gls">
       <Filter>Header Files\Renderer\shaders</Filter>
     </None>
     <None Include="shaders\depthWritef.gls">

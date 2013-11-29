@@ -30,12 +30,14 @@ public:
 	void setModel(RenderableComponent *model);
 	void setPhysicalComponent(PhysicalComponent *physicalComponent);
 	virtual void update();
-	void destroy();
+	virtual void destroy();
 
 	void setGameEngineIndex(unsigned int index);
 	unsigned int getGameEngineIndex();
 
 	GameEngine *getGameEngine();
+	virtual void selfAdd();
+	virtual void selfRemove();
 	
 };
 #endif

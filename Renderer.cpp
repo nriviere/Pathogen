@@ -19,17 +19,14 @@ Renderer::Renderer(MyEngine *engine)
 {
 	models = NULL;
 	materials = NULL;
-	material_count = model_count = lights_count = 0;
-	next_light_indices.push_back(0);
+	material_count = model_count = currentLightCount = 0;
 	vertice_array_object = normals_buffer_object = coord_buffer_object = indice_buffer_object = index_count = 0;
 	logs.open("log.txt", ios::trunc);
-	for (int i = 0; i < MAX_LIGHTS; i++)
-	{
-		lights[i] = NULL;
-	}
 	this->engine = engine;
 	width = 1920;
 	height = 1080;
+	lightsChanged = true;
+	currentLightCount = 0;
 }
 
 void Renderer::init(){
@@ -42,12 +39,10 @@ void Renderer::init(){
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
-
 }
 
 void Renderer::load(SCENE **objects, unsigned int count)
 {
-
 	try{
 		init_vbo();
 	}
@@ -341,25 +336,42 @@ Renderer::~Renderer()
 
 void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int u32Width, unsigned u32Height, Level *level)
 {
+	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(70, 1.*u32Width / u32Height, 1, 1000);
 	//glOrtho(-1.*width/2., 1.*width/2., -1.*height/2.,1.*height/2., -400, 400);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glClearColor(0.5, 0.5, 0.5, 1);
+	glClearColor(0, 0, 0, 1);
+	glClearDepth(1);
 	glColor3f(1, 0, 0);
 
 	//Placer la camera// faire un objet caméra
 	glTranslatef(0, 0, -200);
-
+	float mvf[16]; 
+	glGetFloatv(GL_MODELVIEW_MATRIX, mvf); //Utiliser nos propres matrices
+	updateLightUniforms(Matrx44(mvf));
 
 	glEnable(GL_DEPTH_TEST);
-	compute_illumination->start();
 	glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[0]);
-	glClearDepth(1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//light test
+	glColor4f(0.4, 0.4, 0.4, 1);
+	glBegin(GL_QUADS);
+	glVertex3f(-200, -200, -50);
+	glVertex3f(200, -200, -50);
+	glVertex3f(200, 200, -50);
+	glVertex3f(-200, 200, -50);
+	glEnd();
+	//
+
+	compute_illumination->start();
+
 	
+	
+
 	render(compute_illumination);
 	compute_illumination->stop();
 	renderLevel(level);
@@ -367,7 +379,6 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	{
 		depthShader->start();
 		glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[i]);
-		glClearDepth(1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glBindTexture(GL_TEXTURE_2D, depthTextures[i-1]);
@@ -384,9 +395,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClearDepth(1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
@@ -417,14 +426,6 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		glVertex3f(-1,1,0);
 		glEnd();
 	}
-	
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -460,6 +461,7 @@ void Renderer::render(Program *program)
 	GLuint lights_ambient_uniloc = glGetUniformLocation(program->getID(), "lights_ambient");
 	GLuint lights_diffuse_uniloc = glGetUniformLocation(program->getID(), "lights_diffuse");
 	GLuint lights_specular_uniloc = glGetUniformLocation(program->getID(), "lights_specular");
+	GLuint lights_misc_uniloc = glGetUniformLocation(program->getID(), "lights_misc");
 	GLuint t_uniloc = glGetUniformLocation(program->getID(), "t");
 
 	GLuint material_ambient_uniloc = glGetUniformLocation(program->getID(), "material_ambient");
@@ -474,11 +476,6 @@ void Renderer::render(Program *program)
 
 	//utiliser une list pour les lights sinon ca va planter...
 
-	float lights_position[MAX_LIGHT_COUNT][4];
-	float lights_ambient[MAX_LIGHT_COUNT][4];
-	float lights_diffuse[MAX_LIGHT_COUNT][4];
-	float lights_specular[MAX_LIGHT_COUNT][4];
-
 	int p = 0;
 	float mvf[16], pf[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, mvf);
@@ -488,39 +485,18 @@ void Renderer::render(Program *program)
 
 	glUniformMatrix4fv(p_uniloc, 1, FALSE, pf);
 
-	for (int i = 0; i < MAX_LIGHT_COUNT; i++)
-	{
-		if (lights[i] != NULL)
-		{
-			pos.setPos(lights[i]->getPosition());
-			Vect4 position = (mvm*pos).getPos();
-			Vect4 ambient = lights[i]->getAmbient();
-			Vect4 diffuse = lights[i]->getDiffuse();
-			Vect4 specular = lights[i]->getSpecular();
-
-			position.toFloatv(lights_position[p]);
-			ambient.toFloatv(lights_ambient[p]);
-			diffuse.toFloatv(lights_diffuse[p]);
-			specular.toFloatv(lights_specular[p]);
-
-			p++;
-		}
-	}
-
-	glUniform4fv(lights_positions_uniloc, MAX_LIGHT_COUNT, lights_position[0]);
-	glUniform4fv(lights_ambient_uniloc, MAX_LIGHT_COUNT, lights_ambient[0]);
-	glUniform4fv(lights_diffuse_uniloc, MAX_LIGHT_COUNT, lights_diffuse[0]);
-	glUniform4fv(lights_specular_uniloc, MAX_LIGHT_COUNT, lights_specular[0]);
-	glUniform1ui(lights_count_uniloc, lights_count);
+	glUniform4fv(lights_positions_uniloc, MAX_LIGHT_COUNT, lightUniformPosition[0]);
+	glUniform4fv(lights_ambient_uniloc, MAX_LIGHT_COUNT, lightUniformAmbient[0]);
+	glUniform4fv(lights_diffuse_uniloc, MAX_LIGHT_COUNT, lightUniformDiffuse[0]);
+	glUniform4fv(lights_specular_uniloc, MAX_LIGHT_COUNT, lightUniformSpecular[0]);
+	glUniform4fv(lights_misc_uniloc, MAX_LIGHT_COUNT, lightUniformMisc[0]);
+	glUniform1ui(lights_count_uniloc, currentLightCount);
 
 	//Draw
 	glBindVertexArray(vertice_array_object);
 	glBindBuffer(GL_ARRAY_BUFFER, coord_buffer_object);
 	glBindBuffer(GL_ARRAY_BUFFER, normals_buffer_object);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indice_buffer_object);
-
-
-
 
 	for (int o = 0; o < GameEngine::MAX_GAME_OBJECT_COUNT; o++)
 	{
@@ -578,33 +554,59 @@ void Renderer::render(Program *program)
 
 int Renderer::addLight(Light *light)
 {
-	int id;
-	if (lights_count <= MAX_LIGHTS)
+	if (currentLightCount < MAX_LIGHT_COUNT)
 	{
-		id = lights_count;
-		if (!next_light_indices.empty())
-		{
-			id = next_light_indices.front();
-			next_light_indices.pop_front();
-		}
-		lights[id] = light;
-		lights_count++;
+		
+		lights.push_back(light);
+		list<Light*>::iterator id = lights.end();
+		id--;
+		light->setId(id);
+		currentLightCount++;
+		lightsChanged = true;
+		return 0;
 	}
 	else
 	{
-		id = -1;
+		return -1;
 	}
-	return id;
 }
 
-void Renderer::removeLight(unsigned int id)
+void Renderer::removeLight(Light *light)
 {
-	if (lights[id] != NULL)
+	//ce serait cool de pouvoir tester si cette light est bien dans la liste (faire nos propres iterator ? quand ?)
+	toRemove.push_back(light);
+	lightsChanged = true;
+}
+
+void Renderer::updateLightUniforms(Matrx44 modelView)
+{
+	while (toRemove.size() != 0)
 	{
-		delete lights[id];
-		lights[id] = NULL;
-		next_light_indices.push_back(id);
-		lights_count--;
+		lights.erase(toRemove.front()->getId());
+		toRemove.pop_front();
+		currentLightCount--;
+	}
+
+	list<Light*>::iterator l = lights.begin();
+	if (lights.size() != currentLightCount)
+	{
+		exit(-30);
+	}
+	for (int i = 0; i < currentLightCount; i++)
+	{
+		float v[4];
+		(*l)->getAmbient().toFloatv(v);
+		memcpy(lightUniformAmbient[i], v, 4 * sizeof(float));
+		(*l)->getDiffuse().toFloatv(v);
+		memcpy(lightUniformDiffuse[i], v, 4 * sizeof(float));
+		(*l)->getSpecular().toFloatv(v);
+		memcpy(lightUniformSpecular[i], v, 4 * sizeof(float));
+		(modelView *(*l)->getPosition()).toFloatv(v);
+		memcpy(lightUniformPosition[i], v, 4 * sizeof(float));
+		lightUniformMisc[i][0] = (*l)->getRange();
+		lightUniformMisc[i][1] = (*l)->getAttenuation();
+		lightUniformMisc[i][2] = lightUniformMisc[i][3] = 0;
+		++l;
 	}
 }
 
@@ -629,14 +631,14 @@ Program* Renderer::getCompute_illumination()
 	return compute_illumination;
 }
 
-Light **Renderer::getLights()
+list<Light*> Renderer::getLights()
 {
 	return lights;
 }
 
-unsigned int Renderer::getLights_count()
+unsigned int Renderer::getCurrentLightCount()
 {
-	return lights_count;
+	return currentLightCount;
 }
 
 unsigned int Renderer::getVertice_array_object()

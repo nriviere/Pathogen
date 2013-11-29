@@ -26,10 +26,7 @@ Cell &Cell::operator=(const Cell &cell)
 
 Cell::~Cell()
 {
-	if (gameEngineIndex != UINT_MAX)
-	{
-		GameEngine::CURRENT_CELL_COUNT--;
-	}
+
 }
 
 void Cell::replicate()
@@ -38,5 +35,17 @@ void Cell::replicate()
 	{
 		Cell *cell = new Cell(*this);
 		engine->addObject(cell);
+	}
+}
+
+void Cell::selfAdd()
+{
+	GameEngine::CURRENT_CELL_COUNT++;
+}
+void Cell::selfRemove()
+{
+	if (gameEngineIndex != UINT_MAX)
+	{
+		GameEngine::CURRENT_CELL_COUNT--;
 	}
 }

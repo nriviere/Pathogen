@@ -26,5 +26,8 @@ public:
 	void stopMoveRight();
 	void stopMoveLeft();
 
+	void selfAdd();
+	void selfRemove();
+
 };
 

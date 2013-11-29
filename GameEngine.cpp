@@ -5,7 +5,7 @@
 #include "Cell.h"
 #include "CellPhysicalComponent.h"
 
-unsigned int GameEngine::MAX_CELL_COUNT = 300;
+unsigned int GameEngine::MAX_CELL_COUNT = 200;
 unsigned int GameEngine::CURRENT_CELL_COUNT = 0;
 
 GameEngine::GameEngine(MyEngine *engine) : engine(engine)
@@ -19,6 +19,7 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	levels[0] = currentLevel = new Level();
 	cursor = new Cursor();
 	indexer = new Indexer(MAX_GAME_OBJECT_COUNT);
+	hero = NULL;
 }
 
 GameEngine::~GameEngine()
@@ -56,7 +57,7 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	unsigned int objectCount = 20;
+	unsigned int objectCount = 100;
 
 	Renderer *renderer = engine->getRenderer();
 	PhysicalEngine *physicalEngine = engine->getPhysicalEngine();
@@ -142,55 +143,37 @@ MyEngine *GameEngine::getParentEngine()
 	return engine;
 }
 
-void GameEngine::addObject(Cell *cell)
+void GameEngine::setHero(Hero *hero)
 {
-	unsigned int index = indexer->getNextIndex();
-	
-	if (index != UINT_MAX)
+	if (this->hero != NULL && hero->getGameEngineIndex() != this->hero->getGameEngineIndex())
 	{
-		cell->setGameEngineIndex(index);
-		gameObjects[index] = cell;
-		CURRENT_CELL_COUNT++;
-		gameObjectCount++;
-		engine->getPhysicalEngine()->addPhysicalComponent(cell->getPhysicalComponent());
+		unsigned int heroIndex = this->hero->getGameEngineIndex();
+		engine->getPhysicalEngine()->remove(heroIndex);
+		delete gameObjects[heroIndex];
+		gameObjects[heroIndex] = NULL;
+		indexer->releaseIndex(heroIndex);
+		gameObjectCount--;
 	}
-	else
-	{
-		exit(-30);
-	}
-
+	this->hero = hero;
 }
 
-void GameEngine::addObject(Hero *hero)
+void GameEngine::addObject(GameObject * object)
 {
 	unsigned int index = indexer->getNextIndex();
-	if (index != UINT_MAX)
-	{
-		hero->setGameEngineIndex(index);
-		gameObjects[index] = hero;
-		gameObjectCount++;
-		engine->getPhysicalEngine()->addPhysicalComponent(hero->getPhysicalComponent());
-	}
-	else
-	{
-		exit(-30);
-	}
-}
 
-void GameEngine::addObject(Projectile *projectile)
-{
-	unsigned int index = indexer->getNextIndex();
 	if (index != UINT_MAX)
 	{
-		projectile->setGameEngineIndex(index);
-		gameObjects[index] = projectile;
+		object->setGameEngineIndex(index);
+		gameObjects[index] = object;
 		gameObjectCount++;
-		engine->getPhysicalEngine()->addPhysicalComponent(projectile->getPhysicalComponent());
+		engine->getPhysicalEngine()->addPhysicalComponent(object->getPhysicalComponent());
+		object->selfAdd();
 	}
 	else
 	{
 		exit(-30);
 	}
+
 }
 
 void GameEngine::remove(unsigned int index)
@@ -198,6 +181,7 @@ void GameEngine::remove(unsigned int index)
 	if (index < MAX_GAME_OBJECT_COUNT && gameObjects[index] != NULL)
 	{
 		engine->getPhysicalEngine()->remove(gameObjects[index]->getPhysicalComponent()->getEngineIndex());
+		gameObjects[index]->selfRemove();
 		delete gameObjects[index];
 		gameObjects[index] = NULL;
 		indexer->releaseIndex(index);

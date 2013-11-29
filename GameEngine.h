@@ -51,14 +51,12 @@ public:
 	Cursor *getCursor();
 	MyEngine *getParentEngine();
 
-	void addObject(Cell *cell);
-	void addObject(Hero *hero);
-	void addObject(Projectile *projectile);
+	void setHero(Hero *hero);
+
+	void addObject(GameObject *object);
 	void setToRemove(GameObject *gameObject);
 	void setToRemove(unsigned int gameObjectIndex);
 	void remove(unsigned int index);
-	void remove(Cell *cell);
-	void remove(Hero *hero);
 	void remove();
 };
 

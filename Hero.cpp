@@ -78,3 +78,16 @@ void Hero::stopMoveLeft()
 {
 	physicalComponent->stopMoveLeft();
 }
+
+void Hero::selfAdd()
+{
+	this->engine->setHero(this);
+}
+void Hero::selfRemove()
+{
+	if (engine->getHero() == this)
+	{
+		this->engine->setHero(NULL);
+	}
+	
+}

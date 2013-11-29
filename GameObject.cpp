@@ -47,6 +47,18 @@ void GameObject::destroy()
 {
 	engine->setToRemove(gameEngineIndex);
 }
+
+
+void GameObject::selfRemove()
+{
+
+}
+
+void GameObject::selfAdd()
+{
+
+}
+
 RenderableComponent *GameObject::getModel()
 {
 	return model;

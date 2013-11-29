@@ -12,7 +12,6 @@ InGameState::InGameState(GameEngine *engine) : GameState(engine)
 	prevMousePos.y = 0;
 	ShowCursor(false);
 	parentEngine = engine->getParentEngine();
-
 }
 
 InGameState::~InGameState(void)
@@ -107,12 +106,13 @@ void InGameState::setup()
 	test[2] = "3DS/models/neutrophil.obj";
 	engine->load(test, 3);
 
-	Light * light = new Light(Matrx44(Vect4(0.1, 0.1, 0.1, 1),
-		Vect4(0.5, 0.5, 0.5, 1),
-		Vect4(0.9, 0.9, 0.9, 1),
-		Vect4(0, 0, -100, 1)));
+	/*Light * light = new Light(Matrx44(Vect4(0.1,0.1,0.1, 1.),
+		Vect4(0.5, 0.5,0.5, 1.),
+		Vect4(1, 1, 1, 1),
+		Vect4(0, 0, -100, 1)),
+		0,0);
 
-	int lightId = renderer->addLight(light);
+	int lightId = renderer->addLight(light);*/
 
 	parentEngine->getErrLog()->open("log.txt", std::ios::trunc);
 }
@@ -120,13 +120,15 @@ void InGameState::setup()
 void InGameState::update(float fDT)
 {
 	parentEngine->getPhysicalEngine()->update(fDT);
+	engine->remove();
 	unsigned int gameObjectCount = engine->getGameObjectCount();
 	GameObject **gameObjects = engine->getGameObjects();
-	engine->remove();
-	for (int i = 0; i < gameObjectCount; i++)
+	int count = 0;
+	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT || count < gameObjectCount; i++)
 	{
 		if (gameObjects[i] != NULL)
 		{
+			count++;
 			gameObjects[i]->update();
 		}
 	}
