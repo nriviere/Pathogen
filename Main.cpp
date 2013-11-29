@@ -88,7 +88,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 		}
 
 		//--- Scene refresh
-
+		
 		GetClientRect(g_hAppWnd, &R);
 		C3DEngine::GetInstance()->Render(R.right, R.bottom);
 

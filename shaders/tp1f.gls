@@ -5,8 +5,6 @@ varying vec4 V;
 varying vec3 L;
 //in vec2 UV;
 
-//uniform sampler2D envmap;
-
 const unsigned int MAX_LIGHT_COUNT = 100u;
 
 uniform vec4 lights_ambient[MAX_LIGHT_COUNT];
@@ -30,9 +28,10 @@ void main(void)
 	diffuse = clamp(diffuse,0.0,1.0);
 	vec4 specular = pow(max(0.0,dot(R,E)),0.3*material_shininess) * material_specular*lights_specular[0];
 	specular = clamp(specular,0.0,1.0);
-	//gl_FragColor = diffuse + ambient + specular;
-	//gl_FragColor = vec4(1.,1.,1.,1.);
+
+	float alpha = (material_diffuse.a + material_ambient.a + material_specular.a) / 3.;
 	color = vec4(diffuse + ambient + specular);
-	//color = vec4(0.5,0.5,0.5,1.);
+	color.a = alpha;
+
 }
 

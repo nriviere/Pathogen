@@ -21,6 +21,7 @@ PFNGLUSEPROGRAMPROC glUseProgram = NULL;
 PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 PFNGLUNIFORM1FVPROC  glUniform1fv = NULL;
 PFNGLUNIFORM4FVPROC  glUniform4fv = NULL;
+PFNGLUNIFORM1UIVPROC glUniform1uiv = NULL;
 PFNGLUNIFORMMATRIX4FVPROC  glUniformMatrix4fv = NULL;
 PFNGLUNIFORM4FPROC  glUniform4f = NULL;
 PFNGLUNIFORM1UIPROC  glUniform1ui = NULL;
@@ -170,6 +171,12 @@ void initApi() throw (ShaderException){
 	if (glUniform1i == NULL)
 	{
 		throw new ShaderException("failed to retrieve glUniform1i function pointer.");
+	}
+
+	glUniform1uiv = (PFNGLUNIFORM1UIVPROC)wglGetProcAddress("glUniform1uiv");
+	if (glUniform1uiv == NULL)
+	{
+		throw new ShaderException("failed to retrieve glUniform1uiv function pointer.");
 	}
 
 	glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)wglGetProcAddress("glUniformMatrix4fv");

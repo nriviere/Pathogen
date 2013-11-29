@@ -21,7 +21,6 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	indexer = new Indexer(MAX_GAME_OBJECT_COUNT);
 }
 
-
 GameEngine::~GameEngine()
 {
 	for (int i = 0; i < gameStateCount; i++)
@@ -57,7 +56,7 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	unsigned int objectCount = 200;
+	unsigned int objectCount = 20;
 
 	Renderer *renderer = engine->getRenderer();
 	PhysicalEngine *physicalEngine = engine->getPhysicalEngine();
@@ -80,7 +79,8 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 		physicalComponent = new CellPhysicalComponent();
 		physicalComponent->setPosition(Vect4(x, y, 0, 1));
 		RenderableComponent *component = &renderer->getModels()[1];
-		addObject(new Cell(this, &renderer->getModels()[1], physicalComponent));
+		Cell *cell = new Cell(this, &renderer->getModels()[1], physicalComponent);
+		addObject(cell);
 	}
 
 	physicalEngine->setGrid(currentLevel);

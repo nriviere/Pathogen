@@ -3,7 +3,6 @@
 #include "PhysicalComponent.h"
 #include "UpdaterThread.h"
 #include <list>
-#include <thread>
 
 class Grid
 {

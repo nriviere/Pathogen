@@ -1,0 +1,51 @@
+#version 330 core
+varying vec4 V; 
+varying vec3 L;
+varying vec3 N;
+
+//in vec2 UV;
+//uniform sampler2D envmap;
+
+const unsigned int MAX_LIGHT_COUNT = 100u;
+
+uniform vec4 lights_ambient[MAX_LIGHT_COUNT];
+uniform vec4 lights_diffuse[MAX_LIGHT_COUNT];
+uniform vec4 lights_specular[MAX_LIGHT_COUNT];
+
+uniform vec4 material_ambient;
+uniform vec4 material_diffuse;
+uniform vec4 material_specular;
+uniform float material_shininess;
+
+uniform float width;
+uniform float height;
+
+out vec4 color;
+uniform sampler2D depthTex;
+
+void main(){
+	vec3 E = normalize(-V).xyz;
+	vec3 R = normalize(-reflect(L.xyz,N));
+
+	vec4 ambient = material_ambient * lights_ambient[0];
+	vec4 diffuse = dot(L,N) * material_diffuse * lights_diffuse[0];
+	diffuse = clamp(diffuse,0.0,1.0);
+	vec4 specular = pow(max(0.0,dot(R,E)),0.3*material_shininess) * material_specular*lights_specular[0];
+	specular = clamp(specular,0.0,1.0);
+
+	//color = vec4(diffuse + ambient + specular);
+
+	float textureZ = texture(depthTex,vec2(clamp(gl_FragCoord.x / width,0.0,1.0),clamp(gl_FragCoord.y / height,0.0,1.0))).x;
+	//float alpha = float(material_diffuse.a + material_ambient.a + material_specular.a) / 3.;
+	
+	if(textureZ < gl_FragCoord.z) 
+	{
+		color = vec4(diffuse + ambient + specular);
+		float alpha = (material_diffuse.a + material_ambient.a + material_specular.a) / 3.;
+		color.a = alpha;
+	}else
+	{
+		discard;
+	}
+}
+	

@@ -11,7 +11,7 @@ GameObject::GameObject(GameEngine *engine)
 	gameEngineIndex = UINT_MAX;
 }
 
-GameObject::GameObject(const GameObject &gameObject) : GameObject()
+GameObject::GameObject(const GameObject &gameObject)
 {
 	model = gameObject.model;
 	physicalComponent = gameObject.physicalComponent->clone();
@@ -31,8 +31,9 @@ GameObject::~GameObject()
 
 }
 
-GameObject::GameObject(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent) : GameObject(engine)
+GameObject::GameObject(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent)
 {
+	this->engine = engine;
 	this->model = model;
 	this->physicalComponent = physicalComponent;
 }

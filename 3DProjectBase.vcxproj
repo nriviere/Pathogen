@@ -61,7 +61,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>gl;ShadersApi;Q:\DOCUMENTS\Workspace\Pathogen\ShadersApi;M:\Pathogen-master\Pathogen-master\gl;M:\Pathogen-master\Pathogen-master;M:\Pathogen-master\Pathogen-master\ShadersApi;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D;Q:\DOCUMENTS\uni\Montpellier\M2\moteurs\Rendu_3D\ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./shadersApi;./gl;.;gl;ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -187,6 +187,7 @@
     <ResourceCompile Include="OBJReader.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\depthWritef.gls" />
     <None Include="shaders\f1.gls" />
     <None Include="shaders\s1.gls" />
     <None Include="shaders\tp1f.gls" />

@@ -518,6 +518,8 @@ static void ParseMaterialLibrary(SCENE *pS, const char *sSceneFile, const char *
 				break;
 
 			ExtractParameters(pS, Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount-1].pfDiffuse[3]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount - 1].pfAmbient[3]);
+			ExtractParameters(pS, Tag, pcArgs, &pS->pMaterials[pS->u32MaterialsCount - 1].pfSpecular[3]);
 			break;
 
 		case TAGNAME_SHININESS:
@@ -922,7 +924,7 @@ static void ExtractParameters(SCENE *pScene, TAG_NAME Tag, const char *pcArgs, v
 		//--- Read material properties
 
 		sscanf(pcArgs, "%f %f %f", (float *)pData, (float *)pData+1, (float *)pData+2);
-		((float *)pData)[3] = 1;
+		//((float *)pData)[3] = 1;
 		break;
 
 	case TAGNAME_MATERIAL:

@@ -110,7 +110,7 @@ void InGameState::setup()
 	Light * light = new Light(Matrx44(Vect4(0.1, 0.1, 0.1, 1),
 		Vect4(0.5, 0.5, 0.5, 1),
 		Vect4(0.9, 0.9, 0.9, 1),
-		Vect4(0, 0, 0, 1)));
+		Vect4(0, 0, -100, 1)));
 
 	int lightId = renderer->addLight(light);
 

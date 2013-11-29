@@ -333,10 +333,13 @@
     <None Include="shaders\tp1v.gls">
       <Filter>Header Files\Renderer\shaders</Filter>
     </None>
-    <None Include="shaders\tp1f.gls">
+    <None Include="shaders\f1.gls">
       <Filter>Header Files\Renderer\shaders</Filter>
     </None>
-    <None Include="shaders\f1.gls">
+    <None Include="shaders\depthWritef.gls">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+    <None Include="shaders\tp1f.gls">
       <Filter>Header Files\Renderer\shaders</Filter>
     </None>
   </ItemGroup>

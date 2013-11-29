@@ -1,7 +1,7 @@
 #pragma once
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
-
+#include "stdafx.h"
 #include <stdio.h>
 #include <list>
 #include "PhysicalComponent.h"

@@ -6,12 +6,10 @@ out vec4 color;
  
 uniform sampler2D renderedTexture;
 
- 
 void main(){
-	// color = texture( renderedTexture, UV + 0.005*vec2( sin(time+1024.0*UV.x),cos(time+768.0*UV.y)) ).xyz;
-  
-	//gl_FragColor = vec4(texture(renderedTexture[0], UV).xyz,1);
-	//gl_FragColor = vec4(1,1,1,1);
-	//color = vec4(UV.x,UV.y,UV.x-UV.y,1);
-	color = vec4(texture(renderedTexture, UV)) ;//+ vec4(0.1,0.1,0.1,0.5);
+	color = vec4(texture(renderedTexture, UV));
+	/*if(color.a == 1.)
+	{
+		color = vec4(1.,1.,1.,1.);
+	}*/
 }

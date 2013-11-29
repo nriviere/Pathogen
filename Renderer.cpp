@@ -1,5 +1,3 @@
-#include "Renderer.h"
-#include <iostream>
 #include "VBO.h"
 #include "ShadersInc.h"
 #include "ShaderException.h"
@@ -9,6 +7,7 @@
 #include <gl\GLU.h>
 #include <gl\GLExt.h>
 #include "InGameState.h"
+#include "Renderer.h"
 
 
 
@@ -34,17 +33,16 @@ Renderer::Renderer(MyEngine *engine)
 }
 
 void Renderer::init(){
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT, GL_FILL);
 	glEnable(GL_DEPTH_TEST);
-
 	glDepthFunc(GL_LEQUAL);
-	glEnable(GL_CULL_FACE);
-
+	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
+
 }
 
 void Renderer::load(SCENE **objects, unsigned int count)
@@ -55,7 +53,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 	}
 	catch (exception *e)
 	{
-		//logs << e->what();
+		logs << e->what();
 		exit(-1);
 	}
 	scene = objects[0];
@@ -106,11 +104,12 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		//CREATION DES MATERIAUX
 		for (int i = 0; i < objects[s]->u32MaterialsCount; i++)
 		{
-			materials[material_pos++] = Material(
+			Material m(
 				Vect4(objects[s]->pMaterials[i].pfAmbient),
 				Vect4(objects[s]->pMaterials[i].pfDiffuse),
 				Vect4(objects[s]->pMaterials[i].pfSpecular),
 				objects[s]->pMaterials->fShininess);
+			materials[material_pos++] = m;
 		}
 
 		//RECUPERATION DES COORDONNEES DES VERTICES
@@ -240,91 +239,76 @@ void Renderer::load(SCENE **objects, unsigned int count)
 	glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-	
+
 
 	try{
 		initApi();
-
-		//TESTING FRAMEBUFFERS
 		
-		frameBufferId = 0;
-		glGenFramebuffers(1, &frameBufferId);
-		glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId);
+		//FRAMEBUFFERS
 
-		renderedTexture = 0;
-		glGenTextures(1, &renderedTexture);
-
-		glBindTexture(GL_TEXTURE_2D, renderedTexture);
-		
-		unsigned char * image = new unsigned char[width*height * 4];
-		for (int i = 0; i < width * height * 4; i++)
+		for (int i = 0; i < DEPTH_PEELING_PASS_COUNT; i++)
 		{
-			image[i] = (unsigned char)128;
+			framebufferIds[i] = 0;
+			glGenFramebuffers(1, &framebufferIds[i]);
+			glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[i]);
+
+			renderedTextures[i] = 0;
+			glGenTextures(1, &renderedTextures[i]);
+			glBindTexture(GL_TEXTURE_2D, renderedTextures[i]);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			depthTextures[i] = 0;
+			glGenTextures(1, &depthTextures[i]);
+			glBindTexture(GL_TEXTURE_2D, depthTextures[i]);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE);
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderedTextures[i], 0);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTextures[i], 0);
+			if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			{
+				exit(-250);
+			}
+			GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+			glDrawBuffers(1, DrawBuffers);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		}
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-		
-		delete[] image;
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		
-
-		depthrenderbuffer = 0;
-		glGenRenderbuffers(1, &depthrenderbuffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
-		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
 	
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderedTexture, 0);
-	
+		//SHADERS
 
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		{
-			exit(-250);
-		}
-		
-
-		// Set the list of draw buffers.
-		GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-		glDrawBuffers(1, DrawBuffers);
-
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		
-		Shader *s1 = new  Shader("shaders/tp1v.gls", GL_VERTEX_SHADER);
+		Shader *s1 = new Shader("shaders/tp1v.gls", GL_VERTEX_SHADER);
 		shaders.push_back(s1);
 		s1->init();
 		s1->loadSource();
 		s1->loadShader();
 
-		Shader *s2 = new  Shader("shaders/s1.gls", GL_VERTEX_SHADER);
-		shaders.push_back(s2);
-		s2->init();
-		s2->loadSource();
-		s2->loadShader();
-
-		Shader *f1 = new  Shader("shaders/tp1f.gls", GL_FRAGMENT_SHADER);
+		Shader *f1 = new Shader("shaders/tp1f.gls", GL_FRAGMENT_SHADER);
 		shaders.push_back(f1);
 		f1->init();
 		f1->loadSource();
 		f1->loadShader();
 
-	
-
-		Shader *f2 = new  Shader("shaders/f1.gls", GL_FRAGMENT_SHADER);
-		shaders.push_back(f2);
-		f2->init();
-		f2->loadSource();
-		f2->loadShader();
-
-
-
+		Shader *f3 = new  Shader("shaders/depthWritef.gls", GL_FRAGMENT_SHADER);
+		shaders.push_back(f3);
+		f3->init();
+		f3->loadSource();
+		f3->loadShader();
+		
+		depthShader = new Program();
+		depthShader->setShader(s1, 0);
+		depthShader->setShader(f3, 1);
+		glBindAttribLocation(depthShader->getID(), 0, "in_position");
+		glBindAttribLocation(depthShader->getID(), 1, "in_normal");
+		depthShader->linkProgram();
+		programs.push_back(depthShader);
+		
 		Program *p = new Program();
 		p->setShader(s1, 0);
 		p->setShader(f1, 1);
@@ -333,71 +317,6 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		p->linkProgram();
 		compute_illumination = p;
 		programs.push_back(p);
-		
-
-		
-		glGenVertexArrays(1, &quad_VertexArrayID);
-		glBindVertexArray(quad_VertexArrayID);
-
-		static const GLfloat g_quad_vertex_buffer_data[] = {
-			-1.0f, -1.0f, 0.0f,
-			1.0f, -1.0f, 0.0f,
-			-1.0f, 1.0f, 0.0f,
-			-1.0f, 1.0f, 0.0f,
-			1.0f, -1.0f, 0.0f,
-			1.0f, 1.0f, 0.0f,
-		};
-
-		static const GLfloat g_quad_uv_buffer_data[] = {
-			0.f, 0.0f,
-			1.0f, 0.0f,
-			0.0f, 1.0f,
-			0.0f, 1.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-		};
-
-		
-		glGenBuffers(1, &quad_vertexbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, quad_vertexbuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_quad_vertex_buffer_data), g_quad_vertex_buffer_data, GL_STATIC_DRAW);
-
-
-		glGenBuffers(1, &quad_uvbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, quad_uvbuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_quad_uv_buffer_data), g_quad_uv_buffer_data, GL_STATIC_DRAW);
-
-		
-		
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, quad_vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-			);
-		// 2nd attribute buffer : uvs
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, quad_uvbuffer);
-		glVertexAttribPointer(
-			1,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			2,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-			);
-		
-		renderTexture = new Program();
-		renderTexture->setShader(s2, 0);
-		renderTexture->setShader(f2, 1);
-		glBindAttribLocation(renderTexture->getID(), 0, "in_position");
-		glBindAttribLocation(renderTexture->getID(), 1, "in_texcoord");
-		renderTexture->linkProgram();
-		programs.push_back(renderTexture);
 	}
 
 	catch (ShaderException *e)
@@ -414,24 +333,18 @@ Renderer::~Renderer()
 {
 	delete[] models;
 	delete[] materials;
-	glDeleteTextures(1, &renderedTexture);
-	glDeleteRenderbuffers(1, &depthrenderbuffer);
-	glDeleteFramebuffers(1, &frameBufferId);
+	glDeleteFramebuffers(DEPTH_PEELING_PASS_COUNT, framebufferIds);
+	glDeleteTextures(DEPTH_PEELING_PASS_COUNT,renderedTextures);
+	glDeleteTextures(DEPTH_PEELING_PASS_COUNT, depthTextures);
 	logs.close();
 }
 
-float t = 0;
-
 void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int u32Width, unsigned u32Height, Level *level)
 {
-	glClearColor(0, 0, 0, 1);
-	glClearDepth(1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(70, 1.*u32Width / u32Height, 0.1, 10000);
-
+	gluPerspective(70, 1.*u32Width / u32Height, 1, 1000);
+	//glOrtho(-1.*width/2., 1.*width/2., -1.*height/2.,1.*height/2., -400, 400);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClearColor(0.5, 0.5, 0.5, 1);
@@ -439,40 +352,126 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 
 	//Placer la camera// faire un objet caméra
 	glTranslatef(0, 0, -200);
-	
 
-	
-	
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	
-	
 
+	glEnable(GL_DEPTH_TEST);
 	compute_illumination->start();
-	// Activation du FBO
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId);
-	//GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-	//glDrawBuffers(1, DrawBuffers);
-	//glBindTexture(GL_TEXTURE_2D, renderedTexture);
-	//glActiveTexture(GL_TEXTURE0);
-	glClearColor(0, 0, 0, 1);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[0]);
 	glClearDepth(1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//Envoi des uniforms au shader
-	GLuint lights_positions_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_position");
-	GLuint lights_ambient_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_ambient");
-	GLuint lights_diffuse_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_diffuse");
-	GLuint lights_specular_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_specular");
-	GLuint t_uniloc = glGetUniformLocation(compute_illumination->getID(), "t");
+	
+	render(compute_illumination);
+	compute_illumination->stop();
+	renderLevel(level);
+	for (int i = 1; i < DEPTH_PEELING_PASS_COUNT; i++)
+	{
+		depthShader->start();
+		glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[i]);
+		glClearDepth(1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLuint material_ambient_uniloc = glGetUniformLocation(compute_illumination->getID(), "material_ambient");
-	GLuint material_diffuse_uniloc = glGetUniformLocation(compute_illumination->getID(), "material_diffuse");
-	GLuint material_specular_uniloc = glGetUniformLocation(compute_illumination->getID(), "material_specular");
-	GLuint material_shininess_uniloc = glGetUniformLocation(compute_illumination->getID(), "material_shininess");
+		glBindTexture(GL_TEXTURE_2D, depthTextures[i-1]);
 
-	GLuint mvm_uniloc = glGetUniformLocation(compute_illumination->getID(), "MV");
-	GLuint p_uniloc = glGetUniformLocation(compute_illumination->getID(), "P");
+		GLuint depthTexID = glGetUniformLocation(depthShader->getID(), "depthTex");
+		GLuint width_uniloc = glGetUniformLocation(depthShader->getID(), "width");
+		GLuint height_uniloc = glGetUniformLocation(depthShader->getID(), "height");
+		glUniform1i(depthTexID, 0);
+		glUniform1f(width_uniloc, width);
+		glUniform1f(height_uniloc, height);
+		render(depthShader);
+		depthShader->stop();
+	}
 
-	GLuint lights_count_uniloc = glGetUniformLocation(compute_illumination->getID(), "lights_count");
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClearDepth(1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glViewport(0, 0, u32Width, u32Height);
+
+	glDisable(GL_DEPTH_TEST);
+	glActiveTexture(GL_TEXTURE0);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_LIGHTING);
+
+	for (int i = DEPTH_PEELING_PASS_COUNT - 1; i >= 0 ; i--)
+	{
+		glColor4f(1,1,1,1);
+		glBindTexture(GL_TEXTURE_2D, renderedTextures[i]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(0,0);
+		glVertex3f(-1,-1,0);
+		glTexCoord2f(1,0);
+		glVertex3f(1,-1,0);
+		glTexCoord2f(1,1);
+		glVertex3f(1,1,0);
+		glTexCoord2f(0,1);
+		glVertex3f(-1,1,0);
+		glEnd();
+	}
+	
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	
+	glDisable(GL_BLEND);
+	glEnable(GL_LIGHTING);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Renderer::renderLevel(Level *level)
+{
+	//Rendu du niveau temporaire
+	glDisable(GL_LIGHTING);
+	glColor3f(1., 0., 0.);
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[0], 0);
+	glVertex3f(level->getLimitsX()[1], level->getLimitsY()[0], 0);
+	glVertex3f(level->getLimitsX()[1], level->getLimitsY()[1], 0);
+	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[1], 0);
+	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[0], 0);
+	glEnd();
+
+	Vect4 cursorPosition = engine->getGameEngine()->getCursor()->getPhysicalComponent()->getPosition();
+	Vect4 heroPosition = engine->getGameEngine()->getHero()->getPhysicalComponent()->getPosition();
+	glBegin(GL_LINES);
+	glVertex3f(cursorPosition[0], cursorPosition[1], 0);
+	glVertex3f(heroPosition[0], heroPosition[1], 0);
+	glEnd();
+	glEnable(GL_LIGHTING);
+}
+
+void Renderer::render(Program *program)
+{
+	GameObject **gameobject = engine->getGameEngine()->getGameObjects();
+
+	GLuint lights_positions_uniloc = glGetUniformLocation(program->getID(), "lights_position");
+	GLuint lights_ambient_uniloc = glGetUniformLocation(program->getID(), "lights_ambient");
+	GLuint lights_diffuse_uniloc = glGetUniformLocation(program->getID(), "lights_diffuse");
+	GLuint lights_specular_uniloc = glGetUniformLocation(program->getID(), "lights_specular");
+	GLuint t_uniloc = glGetUniformLocation(program->getID(), "t");
+
+	GLuint material_ambient_uniloc = glGetUniformLocation(program->getID(), "material_ambient");
+	GLuint material_diffuse_uniloc = glGetUniformLocation(program->getID(), "material_diffuse");
+	GLuint material_specular_uniloc = glGetUniformLocation(program->getID(), "material_specular");
+	GLuint material_shininess_uniloc = glGetUniformLocation(program->getID(), "material_shininess");
+
+	GLuint mvm_uniloc = glGetUniformLocation(program->getID(), "MV");
+	GLuint p_uniloc = glGetUniformLocation(program->getID(), "P");
+
+	GLuint lights_count_uniloc = glGetUniformLocation(program->getID(), "lights_count");
+
 	//utiliser une list pour les lights sinon ca va planter...
 
 	float lights_position[MAX_LIGHT_COUNT][4];
@@ -481,13 +480,13 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	float lights_specular[MAX_LIGHT_COUNT][4];
 
 	int p = 0;
-	float mvf[16],pf[16];
+	float mvf[16], pf[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, mvf);
 	glGetFloatv(GL_PROJECTION_MATRIX, pf);
 	Matrx44 mvm(mvf);
 	Matrx44 pos;
 
-	glUniformMatrix4fv(p_uniloc,1,FALSE, pf);
+	glUniformMatrix4fv(p_uniloc, 1, FALSE, pf);
 
 	for (int i = 0; i < MAX_LIGHT_COUNT; i++)
 	{
@@ -513,7 +512,6 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glUniform4fv(lights_diffuse_uniloc, MAX_LIGHT_COUNT, lights_diffuse[0]);
 	glUniform4fv(lights_specular_uniloc, MAX_LIGHT_COUNT, lights_specular[0]);
 	glUniform1ui(lights_count_uniloc, lights_count);
-	glUniform1f(t_uniloc, (float)t);
 
 	//Draw
 	glBindVertexArray(vertice_array_object);
@@ -523,7 +521,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 
 
 
-	
+
 	for (int o = 0; o < GameEngine::MAX_GAME_OBJECT_COUNT; o++)
 	{
 		if (gameobject[o] != NULL)
@@ -562,6 +560,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 					{
 						//glBindTexture(GL_TEXTURE_2D, textureId);
 						//glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
+						//glBindTexture(GL_TEXTURE_2D, 0);
 					}
 
 					//glScalef(10,10,10);
@@ -573,85 +572,9 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 				glPopMatrix();
 			}
 		}
-
-
-		
 	}
-	
-
-	ofstream *log = engine->getErrLog();
-	(*log) << " pixels : " << endl;
-	unsigned char *data = new unsigned char[4];
-
-	glReadPixels(1920 / 2, 1080 / 2, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, data);
-	for (int j = 0; j < 4; j++)
-	{
-		(*log) << (int)data[j] << " ";
-	}
-
-	delete[] data;
-
-	(*log) << "\n pixels : FIN" << endl;
-
-	compute_illumination->stop();
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	//Rendu du niveau temporaire
-	glDisable(GL_LIGHTING);
-	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-	glBegin(GL_LINE_STRIP);
-	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[0], 0);
-	glVertex3f(level->getLimitsX()[1], level->getLimitsY()[0], 0);
-	glVertex3f(level->getLimitsX()[1], level->getLimitsY()[1], 0);
-	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[1], 0);
-	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[0], 0);
-	glEnd();
-
-	Vect4 cursorPosition = engine->getGameEngine()->getCursor()->getPhysicalComponent()->getPosition();
-	Vect4 heroPosition = engine->getGameEngine()->getHero()->getPhysicalComponent()->getPosition();
-	glBegin(GL_LINES);
-	glVertex3f(cursorPosition[0], cursorPosition[1], 0);
-	glVertex3f(heroPosition[0], heroPosition[1], 0);
-	glEnd();
-
-	glEnable(GL_LIGHTING);
-
-	renderTexture->start();
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glBindTexture(GL_TEXTURE_2D, renderedTexture);
-	//glActiveTexture(GL_TEXTURE0);
-
-	GLuint texID = glGetUniformLocation(renderTexture->getID(), "renderedTexture");
-	glUniform1i(texID, 0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glViewport(0, 0, width, height);
-	
-	mvm_uniloc = glGetUniformLocation(renderTexture->getID(), "MV");
-	p_uniloc = glGetUniformLocation(renderTexture->getID(), "P");
-	glGetFloatv(GL_MODELVIEW_MATRIX, mvf);
-	glGetFloatv(GL_PROJECTION_MATRIX, pf);
-	glUniformMatrix4fv(mvm_uniloc, 1, GL_FALSE, mvf);
-	glUniformMatrix4fv(p_uniloc, 1, GL_FALSE, pf);
-
-	
-	//glColor4f(1,1,1,1);
-
-	glBindVertexArray(quad_VertexArrayID);
-	glBindBuffer(GL_ARRAY_BUFFER, quad_vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, quad_uvbuffer);
-
-	// Draw the triangles !
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-
-	renderTexture->stop();
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	
 }
-
 
 int Renderer::addLight(Light *light)
 {
@@ -683,6 +606,17 @@ void Renderer::removeLight(unsigned int id)
 		next_light_indices.push_back(id);
 		lights_count--;
 	}
+}
+
+void Renderer::setWidht(unsigned int width)
+{
+	this->width = width;
+
+}
+
+void Renderer::setHeight(unsigned int height)
+{
+	this->height = height;
 }
 
 RenderableComponent *Renderer::getModels()

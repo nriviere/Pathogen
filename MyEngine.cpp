@@ -43,7 +43,11 @@ void MyEngine::Setup(HWND hWnd)
 	start = clock();
 	gameEngine->setup();
 	
-	
+	RECT R;
+	GetClientRect(hWnd, &R);
+
+	renderer->setWidht(R.right);
+	renderer->setHeight(R.bottom);
 	/*
 	for (int o = 0; o < scene->u32ObjectsCount; o++)
 	{
