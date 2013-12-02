@@ -68,6 +68,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	if (!InitInstance (hInstance, nCmdShow))
 		return(FALSE);
 
+	//!
+	C3DEngine::GetInstance()->setWidth(width);
+	C3DEngine::GetInstance()->setHeight(height);
+
 	//--- Load scene files
 
 	C3DEngine::GetInstance()->Setup(g_hAppWnd);

@@ -10,7 +10,6 @@ InGameState::InGameState(GameEngine *engine) : GameState(engine)
 	isZdown = isQdown = isSdown = isDdown = false;
 	prevMousePos.x = 0;
 	prevMousePos.y = 0;
-	ShowCursor(false);
 	parentEngine = engine->getParentEngine();
 }
 
@@ -28,6 +27,10 @@ void InGameState::mouseMove(POINT pos)
 void InGameState::lButtonDown(POINT Pt)
 {
 	engine->getHero()->shoot();
+}
+
+void InGameState::lButtonUp(POINT Pt)
+{
 }
 
 void InGameState::keyUp(int s32VirtualKey)
@@ -97,6 +100,8 @@ void InGameState::keyDown(int s32VirtualKey)
 
 void InGameState::setup()
 {
+	ShowCursor(false);
+
 	Renderer *renderer = parentEngine->getRenderer();
 	renderer->init();
 

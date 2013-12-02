@@ -11,8 +11,9 @@ unsigned int GameEngine::CURRENT_CELL_COUNT = 0;
 GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 {
 	gameObjectCount = 0;
-	gameStates = new GameState*[1];
-	gameStates[0] = new InGameState(this);
+	gameStates = new GameState*[2];
+	gameStates[0] = new MainMenuState(this);
+	gameStates[1] = new InGameState(this);
 	currentGameState = gameStates[0];
 	levelCount = 1;
 	levels = new Level*[levelCount];
@@ -101,6 +102,11 @@ void GameEngine::mouseMove(POINT Pos)
 void GameEngine::lButtonDown(POINT Pt)
 {
 	currentGameState->lButtonDown(Pt);
+}
+
+void GameEngine::lButtonUp(POINT Pt)
+{
+	currentGameState->lButtonUp(Pt);
 }
 
 void GameEngine::keyDown(int s32VirtualKey)
@@ -206,4 +212,10 @@ void GameEngine::remove()
 		remove(toRemove.front()->getGameEngineIndex());
 		toRemove.pop_front();
 	}
+}
+
+void GameEngine::nextState(int id)
+{
+	currentGameState = gameStates[id];
+	setup();
 }

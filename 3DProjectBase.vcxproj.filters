@@ -186,6 +186,9 @@
     <ClCompile Include="LightingGameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="LightingGameObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -59,7 +59,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>./shadersApi;./gl;.;gl;ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -111,6 +111,7 @@
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightingGameObject.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectilePhysicalComponent.cpp" />
     <ClCompile Include="RenderableComponent.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Indexer.h" />
     <ClInclude Include="LightingGameObject.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectilePhysicalComponent.h" />
     <ClInclude Include="Timer.h" />

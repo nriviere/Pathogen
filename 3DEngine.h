@@ -31,6 +31,10 @@ public:
 	virtual void KeyDown(int s32VirtualKey) {}
 	virtual void KeyUp(int s32VirtualKey) {}
 
+	//!
+	virtual void setWidth(int width) {}
+	virtual void setHeight(int height) {}
+
 protected:
 	//--- Constructor
 
