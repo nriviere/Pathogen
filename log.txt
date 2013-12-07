@@ -1,4 +1,1 @@
-Fragment shader failed to compile with the following errors:
-ERROR: error(#60) Unknown char: "﻿"
-ERROR: error(#273) 1 compilation errors.  No code generated
-
+62.471

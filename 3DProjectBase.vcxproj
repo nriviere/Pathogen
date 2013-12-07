@@ -87,7 +87,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies);pthreadVCE2.lib</AdditionalDependencies>
+      <AdditionalDependencies>glut32.lib;opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies);pthreadVCE2.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
