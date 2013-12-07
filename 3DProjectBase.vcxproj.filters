@@ -219,6 +219,9 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>Source Files\GameEngine\GameState</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="SpawnLine.h">
       <Filter>Header Files\GameEngine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuState.h">
       <Filter>Header Files\GameEngine\GameState</Filter>
