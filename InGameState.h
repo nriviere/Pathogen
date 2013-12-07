@@ -19,6 +19,7 @@ public:
 	void keyDown(int s32VirtualKey);
 	void mouseMove(POINT pos);
 	void lButtonDown(POINT pt);
+	void lButtonUp(POINT pt);
 	void setup();
 	void update(float fDT);
 	void display(unsigned int u32Width, unsigned int u32Height);

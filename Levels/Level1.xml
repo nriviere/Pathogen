@@ -1,0 +1,16 @@
+<Level>
+	<SpawnLine>
+			<SpawnPool>
+				<GameObject class="Bacteria" count="1" />
+			</SpawnPool>
+			<SpawnPool>
+				<GameObject class="Bacteria" count="5" />
+			</SpawnPool>
+	</SpawnLine>
+	<SpawnLine>
+			<SpawnPool>
+				<GameObject class="Cell" count="10" />
+			</SpawnPool>
+	</SpawnLine>
+	
+</Level>

@@ -1,5 +1,6 @@
 #pragma once
 #include "Level.h"
+#include "MainMenuState.h"
 #include "InGameState.h"
 #include "GameObject.h"
 #include "Hero.h"
@@ -42,6 +43,7 @@ public:
 	void keyDown(int s32VirtualKey);
 	void keyUp(int s32VirtualKey);
 	void lButtonDown(POINT Pt);
+	void lButtonUp(POINT Pt);
 	
 
 	GameObject **getGameObjects();
@@ -58,5 +60,7 @@ public:
 	void setToRemove(unsigned int gameObjectIndex);
 	void remove(unsigned int index);
 	void remove();
+
+	void nextState(int id);
 };
 

@@ -19,5 +19,7 @@ public:
 	~ReplicableGameObject();
 	virtual void replicate()=0;
 	virtual void update();
+	virtual void selfAdd();
+	virtual void selfRemove();
 };
 

@@ -41,12 +41,12 @@ void main(void)
 	{
 		vTol = (lights_position[i] - V).xyz;
 		vtollength = length(vTol);
-		range = lights_misc[0].x;
+		range = lights_misc[i].x;
 		if(range == 0. || vtollength < range)
 		{
 			attenuation = lights_misc[i].y;
 			attenuationFactor = 1.;
-			if(attenuation < 1. )
+			if(attenuation < 1. && range != 0.)
 			{
 				attenuationFactor = ((range - vtollength) / ((1-attenuation) * range));
 			}

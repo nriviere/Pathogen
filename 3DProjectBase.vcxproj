@@ -59,9 +59,9 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>./shadersApi;./gl;.;gl;ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./TinyXml;./shadersApi;./gl;.;gl;ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -82,7 +82,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..;.;./gl;./ShadersApi</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;.;./gl;./ShadersApi;./TinyXml</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
@@ -97,6 +97,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bacteria.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellPhysicalComponent.cpp" />
     <ClCompile Include="CellRenderableComponent.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightingGameObject.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectilePhysicalComponent.cpp" />
     <ClCompile Include="RenderableComponent.cpp" />
@@ -127,15 +129,22 @@
     <ClCompile Include="ShadersApi\Shader.cpp" />
     <ClCompile Include="ShadersApi\Program.cpp" />
     <ClCompile Include="ShadersApi\ShadersInc.cpp" />
+    <ClCompile Include="SpawnLine.cpp" />
+    <ClCompile Include="SpawnPool.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TGALoader.cpp" />
     <ClCompile Include="Thread.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TinyXml\tinystr.cpp" />
+    <ClCompile Include="TinyXml\tinyxml.cpp" />
+    <ClCompile Include="TinyXml\tinyxmlerror.cpp" />
+    <ClCompile Include="TinyXml\tinyxmlparser.cpp" />
     <ClCompile Include="UpdaterThread.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
+    <ClInclude Include="Bacteria.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellPhysicalComponent.h" />
     <ClInclude Include="CellRenderableComponent.h" />
@@ -150,8 +159,11 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Indexer.h" />
     <ClInclude Include="LightingGameObject.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectilePhysicalComponent.h" />
+    <ClInclude Include="SpawnLine.h" />
+    <ClInclude Include="SpawnPool.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroPhysicalComponent.h" />
@@ -177,6 +189,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TGALoader.h" />
     <ClInclude Include="Thread.h" />
+    <ClInclude Include="TinyXml\tinystr.h" />
+    <ClInclude Include="TinyXml\tinyxml.h" />
     <ClInclude Include="UpdaterThread.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="Vect4.h" />

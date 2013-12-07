@@ -27,6 +27,7 @@ public:
 	void KeyDown(int s32VirtualKey);
 	void KeyUp(int s32VirtualKey);
 	void LButtonDown(POINT Pt);
+	void LButtonUp(POINT Pt);
 
 	Renderer *getRenderer();
 	PhysicalEngine *getPhysicalEngine();
@@ -37,6 +38,11 @@ public:
 
 	void setMaxConcurrence(unsigned int maxConcurrence);
 
+	void setWidth(int width);
+	void setHeight(int height);
+	int getWidth();
+	int getHeight();
+
 private:
 
 	Renderer *renderer;
@@ -46,6 +52,8 @@ private:
 	unsigned int maxConcurrence;
 
 	std::ofstream errlog;
+	
+	int width, height;
 
 };
 

@@ -5,23 +5,24 @@
 
 Hero::Hero(GameEngine *engine) : GameObject(engine)
 {
-
+	objectType = heroType;
 }
 
 Hero::Hero(const Hero &hero) : GameObject(hero)
 {
-
+	objectType = heroType;
 }
 
 Hero &Hero::operator=(const Hero &hero)
 {
 	GameObject::operator=(hero);
+	objectType = heroType;
 	return (*this);
 }
 
 Hero::Hero(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent) : GameObject(engine,model, physicalComponent)
 {
-
+	objectType = heroType;
 }
 
 Hero::~Hero()
@@ -85,6 +86,7 @@ void Hero::selfAdd()
 }
 void Hero::selfRemove()
 {
+	GameObject::selfRemove();
 	if (engine->getHero() == this)
 	{
 		this->engine->setHero(NULL);

@@ -5,6 +5,7 @@
 LightingGameObject::LightingGameObject(GameEngine *engine) : GameObject(engine)
 {
 	light = new Light();
+	objectType = lightingGameObjectType;
 }
 
 
@@ -25,17 +26,17 @@ void LightingGameObject::setLight(Light *light)
 
 void LightingGameObject::update()
 {
-
 	light->setPosition(physicalComponent->getPosition());
-
 }
 
 void LightingGameObject::selfAdd()
 {
+	GameObject::selfAdd();
 	this->engine->getParentEngine()->getRenderer()->addLight(light);
 }
 
 void LightingGameObject::selfRemove()
 {
+	GameObject::selfRemove();
 	this->engine->getParentEngine()->getRenderer()->removeLight(light);
 }

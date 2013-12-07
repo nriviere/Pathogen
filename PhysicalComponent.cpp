@@ -113,6 +113,11 @@ unsigned int PhysicalComponent::getGridY()
 	return gridY;
 }
 
+GameObject *PhysicalComponent::getGameObject()
+{
+	return gameObject;
+}
+
 void PhysicalComponent::setTransform(Matrx44 transform)
 {
 	this->transform = transform;

@@ -5,6 +5,7 @@
 
 Projectile::Projectile(GameEngine *engine) : LightingGameObject(engine)
 {
+	type = 0;
 	physicalComponent = new ProjectilePhysicalComponent(this);
 	if (engine != NULL){
 		this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::PROJECTILE_MODEL_INDEX];
@@ -15,7 +16,8 @@ Projectile::Projectile(GameEngine *engine) : LightingGameObject(engine)
 	}
 	light->setPosition(physicalComponent->getPosition());
 	light->setRange(40.);
-	light->setAttenuation(0.1);
+	light->setAttenuation(0.8);
+	objectType = projectileType;
 }
 
 Projectile::~Projectile()
@@ -30,4 +32,9 @@ void Projectile::setHeading(Vect4 v)
 void Projectile::update()
 {
 	LightingGameObject::update();
+}
+
+void Projectile::hit(GameObject *gameObject)
+{
+	gameObject->hitBy(this);
 }

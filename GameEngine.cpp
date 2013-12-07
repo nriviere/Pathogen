@@ -3,20 +3,22 @@
 #include "HeroPhysicalComponent.h"
 #include "SelfMovingPhysicalComponent.h"
 #include "Cell.h"
+#include "Bacteria.h"
 #include "CellPhysicalComponent.h"
 
-unsigned int GameEngine::MAX_CELL_COUNT = 200;
+unsigned int GameEngine::MAX_CELL_COUNT = 50;
 unsigned int GameEngine::CURRENT_CELL_COUNT = 0;
 
 GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 {
 	gameObjectCount = 0;
-	gameStates = new GameState*[1];
-	gameStates[0] = new InGameState(this);
+	gameStates = new GameState*[2];
+	gameStates[0] = new MainMenuState(this);
+	gameStates[1] = new InGameState(this);
 	currentGameState = gameStates[0];
 	levelCount = 1;
 	levels = new Level*[levelCount];
-	levels[0] = currentLevel = new Level();
+	levels[0] = currentLevel = new Level("Levels/level1.xml",this);
 	cursor = new Cursor();
 	indexer = new Indexer(MAX_GAME_OBJECT_COUNT);
 	hero = NULL;
@@ -57,13 +59,13 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 		objects[i] = ReadOBJFile(fileNames[i], true);
 	}
 
-	unsigned int objectCount = 100;
+	//unsigned int objectCount = 0;
 
 	Renderer *renderer = engine->getRenderer();
 	PhysicalEngine *physicalEngine = engine->getPhysicalEngine();
 
 	renderer->load(objects, count);
-
+	
 	gameObjects = new GameObject*[MAX_GAME_OBJECT_COUNT];
 	for (int i = 0; i < MAX_GAME_OBJECT_COUNT; i++)
 	{
@@ -73,7 +75,12 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 	physicalComponent->setPosition(Vect4(0, 0, 0, 1));
 	hero = new Hero(this, &renderer->getModels()[0], physicalComponent);
 	addObject(hero);
-	for (int i = 1; i < objectCount; i++)
+
+	currentLevel->load();
+	currentLevel->init();
+
+	/*
+	for (int i = 1; i < objectCount/2; i++)
 	{
 		float x = currentLevel->getLimitsX()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsX()[1] - currentLevel->getLimitsX()[0]);
 		float y = currentLevel->getLimitsY()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsY()[1] - currentLevel->getLimitsY()[0]);
@@ -83,7 +90,16 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 		Cell *cell = new Cell(this, &renderer->getModels()[1], physicalComponent);
 		addObject(cell);
 	}
-
+	for (int i = objectCount / 2; i < objectCount; i++)
+	{
+		float x = currentLevel->getLimitsX()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsX()[1] - currentLevel->getLimitsX()[0]);
+		float y = currentLevel->getLimitsY()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsY()[1] - currentLevel->getLimitsY()[0]);
+		physicalComponent = new CellPhysicalComponent();
+		physicalComponent->setPosition(Vect4(x, y, 0, 1));
+		Bacteria *bacteria = new Bacteria(this,physicalComponent);
+		addObject(bacteria);
+	}
+	*/
 	physicalEngine->setGrid(currentLevel);
 }
 
@@ -101,6 +117,11 @@ void GameEngine::mouseMove(POINT Pos)
 void GameEngine::lButtonDown(POINT Pt)
 {
 	currentGameState->lButtonDown(Pt);
+}
+
+void GameEngine::lButtonUp(POINT Pt)
+{
+	currentGameState->lButtonUp(Pt);
 }
 
 void GameEngine::keyDown(int s32VirtualKey)
@@ -164,6 +185,7 @@ void GameEngine::addObject(GameObject * object)
 	if (index != UINT_MAX)
 	{
 		object->setGameEngineIndex(index);
+		object->setGameEngine(this);
 		gameObjects[index] = object;
 		gameObjectCount++;
 		engine->getPhysicalEngine()->addPhysicalComponent(object->getPhysicalComponent());
@@ -206,4 +228,10 @@ void GameEngine::remove()
 		remove(toRemove.front()->getGameEngineIndex());
 		toRemove.pop_front();
 	}
+}
+
+void GameEngine::nextState(int id)
+{
+	currentGameState = gameStates[id];
+	setup();
 }

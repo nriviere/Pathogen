@@ -8,10 +8,14 @@ class Enemy :
 	public ReplicableGameObject
 {
 public:
-	Enemy();
+	Enemy(GameEngine *engine = NULL);
+	Enemy(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent, float replicateTime = 3);
 	~Enemy();
 
 	void hit(Cell *cell);
 	void hit(Hero *hero);
-};
 
+	virtual void selfAdd();
+	virtual void selfRemove();
+	virtual void replicate() = 0;
+};

@@ -43,6 +43,7 @@ public:
 	unsigned int getGridY();
 	unsigned int getEngineIndex();
 	unsigned int getID();
+	GameObject *getGameObject();
 	
 	void setTransform(Matrx44 transform);
 	void setSpeed(Vect4 speed);

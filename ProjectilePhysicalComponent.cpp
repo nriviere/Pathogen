@@ -28,6 +28,6 @@ void ProjectilePhysicalComponent::collision(Vect4 axis)
 
 void ProjectilePhysicalComponent::collision(PhysicalComponent *component)
 {
-
+	component->getGameObject()->hitBy(gameObject);
 }
 

@@ -49,7 +49,7 @@ void main(){
 		{
 			attenuation = lights_misc[i].y;
 			attenuationFactor = 1.;
-			if(attenuation < 1.)
+			if(attenuation < 1. && range != 0.)
 			{
 				attenuationFactor = ((range - vtollength) / ((1-attenuation) * range));
 			}

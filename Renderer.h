@@ -29,6 +29,7 @@ public:
 	static const unsigned int HERO_MODEL_INDEX = 0;
 	static const unsigned int CELL_MODEL_INDEX = 1;
 	static const unsigned int PROJECTILE_MODEL_INDEX = 2;
+	static const unsigned int BACTERIA_MODEL_INDEX = 3;
 	static const unsigned int DEPTH_PEELING_PASS_COUNT = 4;
 
 	Renderer(MyEngine *engine = NULL);

@@ -10,7 +10,6 @@ InGameState::InGameState(GameEngine *engine) : GameState(engine)
 	isZdown = isQdown = isSdown = isDdown = false;
 	prevMousePos.x = 0;
 	prevMousePos.y = 0;
-	ShowCursor(false);
 	parentEngine = engine->getParentEngine();
 }
 
@@ -28,6 +27,10 @@ void InGameState::mouseMove(POINT pos)
 void InGameState::lButtonDown(POINT Pt)
 {
 	engine->getHero()->shoot();
+}
+
+void InGameState::lButtonUp(POINT Pt)
+{
 }
 
 void InGameState::keyUp(int s32VirtualKey)
@@ -97,22 +100,25 @@ void InGameState::keyDown(int s32VirtualKey)
 
 void InGameState::setup()
 {
+	ShowCursor(false);
+
 	Renderer *renderer = parentEngine->getRenderer();
 	renderer->init();
 
-	const char *test[3];
+	const char *test[4];
 	test[0] = "3DS/models/hero.obj";
 	test[1] = "3DS/models/cell.obj";
 	test[2] = "3DS/models/neutrophil.obj";
-	engine->load(test, 3);
+	test[3] = "3DS/models/bacteria.obj";
+	engine->load(test, 4);
 
-	/*Light * light = new Light(Matrx44(Vect4(0.1,0.1,0.1, 1.),
+	Light * light = new Light(Matrx44(Vect4(0.1,0.1,0.1, 1.),
 		Vect4(0.5, 0.5,0.5, 1.),
 		Vect4(1, 1, 1, 1),
 		Vect4(0, 0, -100, 1)),
 		0,0);
 
-	int lightId = renderer->addLight(light);*/
+	int lightId = renderer->addLight(light);
 
 	parentEngine->getErrLog()->open("log.txt", std::ios::trunc);
 }
@@ -132,6 +138,7 @@ void InGameState::update(float fDT)
 			gameObjects[i]->update();
 		}
 	}
+	engine->getCurrentLevel()->update();
 	
 }
 

@@ -128,6 +128,11 @@ void MyEngine::LButtonDown(POINT Pt)
 	gameEngine->lButtonDown(Pt);
 }
 
+void MyEngine::LButtonUp(POINT Pt)
+{
+	gameEngine->lButtonUp(Pt);
+}
+
 void MyEngine::KeyDown(int s32VirtualKey)
 {
 	if (s32VirtualKey == VK_ESCAPE)
@@ -175,4 +180,24 @@ std::ofstream *MyEngine::getErrLog()
 void MyEngine::setMaxConcurrence(unsigned int maxConcurrence)
 {
 	this->maxConcurrence = maxConcurrence;
+}
+
+void MyEngine::setWidth(int width)
+{
+	this->width = width;
+}
+
+void MyEngine::setHeight(int height)
+{
+	this->height = height;
+}
+
+int MyEngine::getWidth()
+{
+	return this->width;
+}
+
+int MyEngine::getHeight()
+{
+	return this->height;
 }

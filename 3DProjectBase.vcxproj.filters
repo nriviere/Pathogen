@@ -76,6 +76,15 @@
     <Filter Include="Source Files\GameEngine\GameState">
       <UniqueIdentifier>{f23ab17d-6afe-43d4-b7ff-db016764fa8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TinyXml">
+      <UniqueIdentifier>{efbb46f6-06ce-402e-9cf2-23d4e761fa37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\Level">
+      <UniqueIdentifier>{c167022d-1b0b-42ff-bd2a-8350d564069f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\Level">
+      <UniqueIdentifier>{629d0708-2a0e-4442-b9bc-64a63405677a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShadersApi\ShadersInc.cpp">
@@ -156,9 +165,6 @@
     <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Source Files\GameEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Cell.cpp">
       <Filter>Source Files\GameEngine\GameObjects</Filter>
     </ClCompile>
@@ -183,8 +189,35 @@
     <ClCompile Include="ProjectilePhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
+    <ClCompile Include="TinyXml\tinystr.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyXml\tinyxml.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyXml\tinyxmlerror.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyXml\tinyxmlparser.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\GameEngine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnPool.cpp">
+      <Filter>Source Files\GameEngine\Level</Filter>
+    </ClCompile>
     <ClCompile Include="LightingGameObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Bacteria.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnLine.cpp">
+      <Filter>Source Files\GameEngine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +323,6 @@
     <ClInclude Include="GameEngine.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Header Files\GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="Cell.h">
       <Filter>Header Files\GameEngine\GameObjects</Filter>
     </ClInclude>
@@ -320,8 +350,29 @@
     <ClInclude Include="ProjectilePhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
+    <ClInclude Include="TinyXml\tinystr.h">
+      <Filter>TinyXml</Filter>
+    </ClInclude>
+    <ClInclude Include="TinyXml\tinyxml.h">
+      <Filter>TinyXml</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\GameEngine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnPool.h">
+      <Filter>Header Files\GameEngine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Bacteria.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
     <ClInclude Include="LightingGameObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnLine.h">
+      <Filter>Header Files\GameEngine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
