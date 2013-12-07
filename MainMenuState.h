@@ -31,13 +31,6 @@ private:
 	float r, g, b;
 	int width, height;
 
-
-	void render_string(float x, float y, float z, void* font, const char* s);
-	void drawHub();
-	void setColorRtoG(float &c1, float &c2, float position);
-	void drawQuads(float x, float y, float width, float height);
-
-
 	IMAGE_DATA *data[2];
 };
 

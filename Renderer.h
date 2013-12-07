@@ -58,6 +58,11 @@ public:
 	unsigned int getIndice_buffer_object();
 	unsigned int getIndex_count();
 
+	void render_string(float x, float y, float z, void* font, const char* s);
+	void setColorRtoG(float &c1, float &c2, float position);
+	void drawQuads(float x, float y, float width, float height);
+	void drawHud(unsigned int width, unsigned int height);
+
 	void updateLightUniforms(Matrx44 modelView);
 
 private:

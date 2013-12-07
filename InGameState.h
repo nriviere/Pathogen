@@ -11,7 +11,6 @@ private :
 	bool isZdown, isQdown, isSdown, isDdown;
 	POINT prevMousePos;
 	MyEngine *parentEngine;
-
 public:
 	InGameState(GameEngine *engine = NULL);
 	~InGameState(void);

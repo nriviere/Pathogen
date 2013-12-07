@@ -20,6 +20,5 @@ public:
 	virtual void setup() = 0;
 	virtual void update(float fDT) = 0;
 	virtual void display(unsigned int u32Width, unsigned int u32Height) = 0;
-
 };
 

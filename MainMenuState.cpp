@@ -102,7 +102,7 @@ void MainMenuState::display(unsigned int u32Width, unsigned int u32Height)
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 
-	drawHub();
+	//drawHub();
 
 }
 
@@ -125,68 +125,8 @@ void MainMenuState::lButtonUp(POINT pos)
 	}
 }
 
-void MainMenuState::drawHub()
-{
-	string s1 = "SCORE : ";
-	string s2 = to_string(score);
-	string s = s1 + s2;
-	const char *c = s.c_str();
-	render_string(10, 20, 0, GLUT_BITMAP_9_BY_15, c);
 
-	string t1 = "TEMPS : ";
-	string t2 = to_string((int)tim);
-	string t = t1 + t2;
-	const char *ct = t.c_str();
-	render_string(width/2 - 80, 20, 0, GLUT_BITMAP_9_BY_15, ct);
 
-	setColorRtoG(c1, c2, mun);
-	glColor3f(c1, c2, 0);
-	drawQuads(1700, 20, 200 * mun, 10);
-
-	setColorRtoG(c1, c2, mun1);
-	glColor3f(c1, c2, 0);
-	drawQuads(1700, 40, 200 * mun1, 10);
-
-	setColorRtoG(c1, c2, mun2);
-	glColor3f(c1, c2, 0);
-	drawQuads(1700, 60, 200*mun2,10);
-}
-
-void MainMenuState::setColorRtoG(float &r, float &g, float position)
-{
-	if (position <= .5f)
-	{
-		r = 1;
-		g = 2 * position;
-	}
-	else{
-		r = 2 * (1 - position);
-		g = 1;
-	}
-}
-
-void MainMenuState::drawQuads(float x, float y, float width, float height)
-{
-	glBegin(GL_QUADS);
-	glVertex2f(x, y);
-	glVertex2f(x + width, y);
-	glVertex2f(x + width, y + height);
-	glVertex2f(x, y + height);
-	glEnd();
-}
-
-void MainMenuState::render_string(float x, float y, float z, void* font, const char* s)
-{
-	glColor3f(.0f, .0f, .0f);
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_DEPTH_TEST);
-	glRasterPos2f(x, y);
-	while (*s)
-	{
-		glutBitmapCharacter(font, *s);
-		s++;
-	}
-}
 
 void MainMenuState::update(float fDT)
 {

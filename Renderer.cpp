@@ -426,7 +426,20 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		glVertex3f(-1,1,0);
 		glEnd();
 	}
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0, width, 0, height);
+	glTranslatef(0, 1.* height, 0);
+	glScalef(1,-1,1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	drawHud(width, height);
+
 	glDisable(GL_BLEND);
+
+	
 	glEnable(GL_LIGHTING);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -450,6 +463,8 @@ void Renderer::renderLevel(Level *level)
 	glVertex3f(cursorPosition[0], cursorPosition[1], 0);
 	glVertex3f(heroPosition[0], heroPosition[1], 0);
 	glEnd();
+
+
 	glEnable(GL_LIGHTING);
 }
 
@@ -609,6 +624,84 @@ void Renderer::updateLightUniforms(Matrx44 modelView)
 		++l;
 	}
 }
+
+void Renderer::render_string(float x, float y, float z, void* font, const char* s)
+{
+	glColor3f(.5f, .5f, .5f);
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_DEPTH_TEST);
+	glRasterPos2f(x, y);
+	while (*s)
+	{
+		glutBitmapCharacter(font, *s);
+		s++;
+	}
+	
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
+}
+
+void Renderer::setColorRtoG(float &r, float &g, float position)
+{
+	if (position <= .5f)
+	{
+		r = 1;
+		g = 2 * position;
+	}
+	else{
+		r = 2 * (1 - position);
+		g = 1;
+	}
+}
+
+void Renderer::drawQuads(float x, float y, float width, float height)
+{
+	glBegin(GL_QUADS);
+	glVertex2f(x, y);
+	glVertex2f(x, y + height);
+	glVertex2f(x + width, y + height);
+	glVertex2f(x + width, y);
+	glEnd();
+}
+
+void Renderer::drawHud(unsigned int width, unsigned int height)
+{
+	int score = 0;
+	float tim = 0;
+	float c1, c2;
+	float mun = 1.f;
+	float mun1 = 1.f;
+	float mun2 = 1.f;
+	
+
+	string s1 = "SCORE : ";
+	string s2 = to_string(score);
+	string s = s1 + s2;
+	const char *c = s.c_str();
+	render_string(10, 20, 0, GLUT_BITMAP_9_BY_15, c);
+
+	string t1 = "TEMPS : ";
+	string t2 = to_string((int)tim);
+	string t = t1 + t2;
+	const char *ct = t.c_str();
+	render_string(width / 2 - 80, 20, 0, GLUT_BITMAP_9_BY_15, ct);
+
+	glDisable(GL_TEXTURE_2D);
+
+	setColorRtoG(c1, c2, mun);
+	glColor3f(c1, c2, 0);
+	drawQuads(1700, 20, 200 * mun, 10);
+
+	setColorRtoG(c1, c2, mun1);
+	glColor3f(c1, c2, 0);
+	drawQuads(1700, 40, 200 * mun1, 10);
+
+	setColorRtoG(c1, c2, mun2);
+	glColor3f(c1, c2, 0);
+	drawQuads(1700, 60, 200 * mun2, 10);
+	glEnable(GL_TEXTURE_2D);
+}
+
 
 void Renderer::setWidht(unsigned int width)
 {

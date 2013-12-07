@@ -146,3 +146,4 @@ void InGameState::display(unsigned int u32Width, unsigned int u32Height)
 {
 	parentEngine->getRenderer()->render(engine->getGameObjects(), engine->getGameObjectCount(), u32Width, u32Height, engine->getCurrentLevel());
 }
+

@@ -14,7 +14,8 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	gameObjectCount = 0;
 	gameStates = new GameState*[2];
 	gameStates[0] = new MainMenuState(this);
-	gameStates[1] = new InGameState(this);
+	inGameState = new InGameState(this);
+	gameStates[1] = inGameState;
 	currentGameState = gameStates[0];
 	levelCount = 1;
 	levels = new Level*[levelCount];
@@ -162,6 +163,11 @@ Level *GameEngine::getCurrentLevel()
 MyEngine *GameEngine::getParentEngine()
 {
 	return engine;
+}
+
+InGameState *GameEngine::getInGameState()
+{
+	return inGameState;
 }
 
 void GameEngine::setHero(Hero *hero)

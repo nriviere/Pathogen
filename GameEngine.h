@@ -22,6 +22,7 @@ private:
 	GameState **gameStates;
 	GameState *currentGameState;
 	GameObject **gameObjects;
+	InGameState *inGameState;
 	Cursor *cursor;
 	Hero *hero;
 	Indexer *indexer;
@@ -52,7 +53,7 @@ public:
 	Hero *getHero();
 	Cursor *getCursor();
 	MyEngine *getParentEngine();
-
+	InGameState *getInGameState();
 	void setHero(Hero *hero);
 
 	void addObject(GameObject *object);
