@@ -22,6 +22,7 @@ protected :
 	float acceleration,verticalAcceleration,horizontalAcceleration,maxSpeed;
 	float baseAcceleration, baseDeceleration;
 	float radius;
+	float currentAngle,rotationSpeed,rotationAcceleration;
 	GameObject *gameObject;
 	std::list<PhysicalComponent*>::iterator gridPosition;
 	unsigned int gridX, gridY;

@@ -99,7 +99,14 @@ public:
 		return Vect4(values[0] * f , values[1] * f , values[2] * f,values[3]);
 	}
 	
-	float norme(){
+	float dot(const Vect4 & v) const
+	{
+		float nu = norme();
+		float nv = v.norme();
+		return 0.5 * (pow(((*this) + v).norme(), 2) - pow(nu, 2) - pow(nv, 2));
+	}
+
+	float norme() const{
 		return sqrt(pow(values[0],2)+pow(values[1],2)+pow(values[2],2));
 	}
 

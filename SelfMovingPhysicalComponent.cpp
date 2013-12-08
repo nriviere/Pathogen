@@ -47,7 +47,14 @@ void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent
 	}
 	n.normalize();
 	innerForce = innerForce.reflect(n) ;
-	position = position + innerForce;// *(1. / innerForce.norme()) * (radius + physicalComponent->getRadius());
+	position = position + innerForce;
+
+	//rotation 
+	//Vect4 v3 = physicalComponent->getSpeed();
+	float dot = speed.dot(n);
+	float nn = speed.norme() * n.norme();
+	rotationSpeed = (dot - nn) * 0.05;
+	rotationAcceleration = 0.999;
 }
 
 void SelfMovingPhysicalComponent::collision(Vect4 axis)
@@ -98,11 +105,23 @@ void SelfMovingPhysicalComponent::update()
 	innerForce.update();
 	speed = speed + innerForce;
 	position = position + speed;
-	Matrx44 m(1, 0, 0, 0,
+
+	Matrx44 translation(1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
 		position[0], position[1], position[2], 1);
-	transform = m;
+
+
+	rotationSpeed *= rotationAcceleration;
+	currentAngle += rotationSpeed;
+	if (currentAngle >= 360) currentAngle = 0;
+	if (abs(rotationSpeed) < 0.01) rotationSpeed = 0;
+
+	Matrx44 rotation;
+	rotation.rotation(currentAngle, Vect4(0, 0, 1, 1));
+
+	transform = translation * rotation;
+	//speed = speed * acceleration;
 }
 
 SelfMovingPhysicalComponent *SelfMovingPhysicalComponent::clone()

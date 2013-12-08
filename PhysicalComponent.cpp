@@ -25,7 +25,7 @@ PhysicalComponent::PhysicalComponent(GameObject *gameObject)
 							Vect4(0,0,1,0),
 							Vect4(0,0,0,1));
 	speed = verticalSpeed = horizontalSpeed = Vect4(0, 0, 0, 0);
-	acceleration = verticalAcceleration = horizontalAcceleration = 0;
+	currentAngle = rotationSpeed =rotationAcceleration = acceleration = verticalAcceleration = horizontalAcceleration = 0;
 	baseAcceleration = 1.1;
 	baseDeceleration = 0.97;
 	maxSpeed = 3;
@@ -175,16 +175,30 @@ void PhysicalComponent::collision(PhysicalComponent *physicalComponent)
 	Vect4 v2 = speed;
 	v2.normalize();
 	position = physicalComponent->position + v2*(radius + physicalComponent->getRadius());
+
+	//rotation 
+	//Vect4 v3 = physicalComponent->getSpeed();
+	float dot = speed.dot(v);
+	float nn = speed.norme() * v.norme();
+	rotationSpeed = dot - nn;
+	rotationAcceleration = 0.8;
+	
+
 }
 
 void PhysicalComponent::update()
 {
+	rotationSpeed *= rotationAcceleration;
+	currentAngle += rotationSpeed;
+	if (currentAngle >= 360) currentAngle = 0;
+	if (abs(rotationSpeed) < 0.1) rotationSpeed = 0;
+	Matrx44 rotation,translation;
+	translation.setPos(position);
+	rotation.rotation(currentAngle, Vect4(0, 0, 1, 1));
+
 	position = position + speed;
-	Matrx44 m(	1, 0, 0, 0,
-				0, 1, 0, 0,
-				0, 0, 1, 0,
-				position[0], position[1], position[2], 1);
-	transform = m;
+	
+	transform = translation * rotation;
 	speed = speed * acceleration;
 }
 
