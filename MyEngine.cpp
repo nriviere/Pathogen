@@ -14,6 +14,7 @@
 #include "SelfMovingPhysicalComponent.h"
 #include <time.h>
 
+std::ofstream MyEngine::errlog;
 
 int start = 0;
 unsigned int frames = 0;
@@ -24,6 +25,7 @@ MyEngine::MyEngine(void)
 	gameEngine = new GameEngine(this);
 	renderer = new Renderer(this);
 	physicalEngine = new PhysicalEngine(this);
+	errlog.open("log.txt", std::ios::trunc);
 }
 
 

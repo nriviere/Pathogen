@@ -171,6 +171,12 @@ void Grid::set(PhysicalComponent* component)
 {
 	unsigned int uix, uiy;
 	float fx =component->getPosition()[0], fy = component->getPosition()[1];
+
+	if (fx - 50 > limitsX[1] || fx + 50 < limitsX[0] || fy -50 > limitsY[1] || fy + 50< limitsY[0])
+	{
+		//exit(-55);
+	}
+
 	uix = max(0, min(floor((fx - limitsX[0]) / stepX), nX - 1));
 	uiy = max(0, min(floor((fy - limitsY[0]) / stepY), nY - 1));
 	

@@ -44,6 +44,10 @@ q:\documents\workspace\pathogen\debug\bacteria.obj
 q:\documents\workspace\pathogen\debug\cell.obj
 q:\documents\workspace\pathogen\debug\cellphysicalcomponent.obj
 q:\documents\workspace\pathogen\debug\cellrenderablecomponent.obj
+q:\documents\workspace\pathogen\debug\explosion.obj
+q:\documents\workspace\pathogen\debug\explosionparticle.obj
+q:\documents\workspace\pathogen\debug\particle.obj
+q:\documents\workspace\pathogen\debug\particlesystem.obj
 q:\documents\workspace\pathogen\debug\pathogen.exe
 q:\documents\workspace\pathogen\debug\pathogen.pdb
 q:\documents\workspace\pathogen\debug\objreader.res

@@ -1,5 +1,6 @@
 #include "PhysicalComponent.h"
 #include <time.h>
+#include "PhysicalEngine.h"
 
 unsigned int PhysicalComponent::MAX_COMPONENTS_COUNT = 1000;
 unsigned int PhysicalComponent::currentID = 0;
@@ -17,9 +18,8 @@ unsigned int PhysicalComponent::getNewID()
 	}
 }
 
-PhysicalComponent::PhysicalComponent(GameObject *gameObject)
+PhysicalComponent::PhysicalComponent(GameObject *gameObject, PhysicalEngine *engine)
 {
-	ID = getNewID();
 	transform = Matrx44(	Vect4(1,0,0,0),
 							Vect4(0,1,0,0),
 							Vect4(0,0,1,0),
@@ -32,11 +32,12 @@ PhysicalComponent::PhysicalComponent(GameObject *gameObject)
 	radius = 3.2; //faire une classe pour chaque type
 	position = Vect4(0,0,0,1);
 	this->gameObject = gameObject;
+	this->engine = engine;
+	priority = 0;
 }
 
 PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
 {
-	ID = getNewID();
 	transform = physicalComponent.transform;
 	speed = physicalComponent.speed;
 	verticalSpeed = physicalComponent.verticalSpeed;
@@ -61,12 +62,6 @@ PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physica
 
 PhysicalComponent::~PhysicalComponent()
 {
-	unusedIDs.push_back(ID);
-}
-
-unsigned int PhysicalComponent::getID()
-{
-	return ID;
 }
 
 Matrx44 PhysicalComponent::getTransform()
@@ -118,6 +113,16 @@ GameObject *PhysicalComponent::getGameObject()
 	return gameObject;
 }
 
+PhysicalEngine *PhysicalComponent::getEngine()
+{
+	return engine;
+}
+
+int PhysicalComponent::getPriority()
+{
+	return priority;
+}
+
 void PhysicalComponent::setTransform(Matrx44 transform)
 {
 	this->transform = transform;
@@ -125,6 +130,11 @@ void PhysicalComponent::setTransform(Matrx44 transform)
 void PhysicalComponent::setSpeed(Vect4 speed)
 {
 	this->speed = speed;
+}
+
+void PhysicalComponent::setRadius(float radius)
+{
+	this->radius = radius;
 }
 
 void PhysicalComponent::setPosition(Vect4 position)
@@ -148,6 +158,16 @@ void PhysicalComponent::setGridPosition(std::list<PhysicalComponent*>::iterator 
 	this->gridPosition = gridPosition;
 	gridX = x;
 	gridY = y;
+}
+
+void PhysicalComponent::setEngine(PhysicalEngine *engine)
+{
+	this->engine = engine;
+}
+
+void PhysicalComponent::setPriority(int priority)
+{
+	this->priority = priority;
 }
 
 void PhysicalComponent::setHeading(Vect4 v)
@@ -246,6 +266,11 @@ void  PhysicalComponent::stopMoveLeft()
 void PhysicalComponent::setEngineIndex(unsigned int index)
 {
 	engineIndex = index;
+}
+
+void PhysicalComponent::destroy()
+{
+	engine->remove(engineIndex);
 }
 
 PhysicalComponent *PhysicalComponent::clone()

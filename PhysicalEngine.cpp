@@ -18,21 +18,22 @@ PhysicalEngine::PhysicalEngine(MyEngine *engine)
 	}
 
 	this->engine = engine;
-	physicalComponents = new PhysicalComponent*[GameEngine::MAX_GAME_OBJECT_COUNT];
-	collisions = new bool*[GameEngine::MAX_GAME_OBJECT_COUNT];
-	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT; i++)
+	physicalComponents = new PhysicalComponent*[MAX_PHYSICAL_COMPONENT_COUNT];
+	
+	collisions = new bool*[MAX_PHYSICAL_COMPONENT_COUNT];
+	for (int i = 0; i < MAX_PHYSICAL_COMPONENT_COUNT; i++)
 	{
-		collisions[i] = new bool[GameEngine::MAX_GAME_OBJECT_COUNT];
+		collisions[i] = new bool[MAX_PHYSICAL_COMPONENT_COUNT];
 		physicalComponents[i] = NULL;
 	}
+	indexer = new Indexer(MAX_PHYSICAL_COMPONENT_COUNT);
 	physicalComponentsCount = 0;
-	indexer = new Indexer(GameEngine::MAX_GAME_OBJECT_COUNT);
 }
 
 PhysicalEngine::~PhysicalEngine()
 {
 	delete[]physicalComponents;
-	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT; i++)
+	for (int i = 0; i < MAX_PHYSICAL_COMPONENT_COUNT; i++)
 	{
 		delete[] collisions[i];
 	}
@@ -70,12 +71,12 @@ void PhysicalEngine::update(float fDT)
 		{
 			if (physicalComponents[i] != NULL)
 			{
-				id1 = physicalComponents[i]->getID();
+				id1 = physicalComponents[i]->getEngineIndex();
 				for (int j = 0; j < physicalComponentsCount; j++)
 				{
 					if (physicalComponents[j] != NULL)
 					{
-						id2 = physicalComponents[j]->getID();
+						id2 = physicalComponents[j]->getEngineIndex();
 						collisions[id1][id2] = collisions[id2][id2] = false;
 					}
 				}
@@ -110,7 +111,7 @@ void PhysicalEngine::update(float fDT)
 					{
 
 						p1 = (*ite);
-						id1 = p1->getID();
+						id1 = p1->getEngineIndex();
 						Vect4 position = p1->getPosition();
 						radius = p1->getRadius();
 						radiussqr = radius * radius;
@@ -149,7 +150,7 @@ void PhysicalEngine::update(float fDT)
 									if (ite != ite2)
 									{
 										Vect4 aToB(p2->getPosition() - position);
-										id2 = p2->getID();
+										id2 = p2->getEngineIndex();
 										if (p2 != NULL && !collisions[id1][id2] && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + radiussqr))
 										{
 											p1->collision(p2);
@@ -269,7 +270,7 @@ void PhysicalEngine::update(float fDT)
 		}
 
 	}*/
-	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT; i++)
+	for (int i = 0; i < MAX_PHYSICAL_COMPONENT_COUNT; i++)
 	{
 		if (physicalComponents[i] != NULL)
 		{
@@ -286,12 +287,13 @@ void PhysicalEngine::addPhysicalComponent(PhysicalComponent *component)
 	{
 		physicalComponents[index] = component;
 		component->setEngineIndex(index);
+		component->setEngine(this);
 		grid->set(component);
 		physicalComponentsCount++;
 	}
 	else
 	{
-		exit(-30);
+		//exit(-30);
 	}
 }
 
@@ -305,7 +307,7 @@ MyEngine *PhysicalEngine::getEngine()
 
 void PhysicalEngine::remove(unsigned int index)
 {
-	if (index < GameEngine::MAX_GAME_OBJECT_COUNT && physicalComponents[index] != NULL)
+	if (index < MAX_PHYSICAL_COMPONENT_COUNT && physicalComponents[index] != NULL)
 	{
 		PhysicalComponent *comp = physicalComponents[index];
 		grid->get(comp->getGridX(), comp->getGridY())->erase(comp->getGridPosition());
@@ -315,5 +317,9 @@ void PhysicalEngine::remove(unsigned int index)
 		
 		indexer->releaseIndex(index);
 		physicalComponentsCount--;
+	}
+	else
+	{
+		cout << "lol" << endl;
 	}
 }

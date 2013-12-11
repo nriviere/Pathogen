@@ -1,7 +1,7 @@
 #include "CellPhysicalComponent.h"
 
 
-CellPhysicalComponent::CellPhysicalComponent()
+CellPhysicalComponent::CellPhysicalComponent(GameObject *gameObject, PhysicalEngine *engine) : SelfMovingPhysicalComponent(gameObject,engine)
 {
 	
 }

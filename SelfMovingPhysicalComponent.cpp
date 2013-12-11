@@ -4,7 +4,7 @@
 using namespace std;
 
 
-SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(GameObject *object) : PhysicalComponent(object)
+SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(GameObject *object, PhysicalEngine *engine) : PhysicalComponent(object,engine)
 {
 	baseSpeed = 1.5;
 	
@@ -14,6 +14,7 @@ SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(GameObject *object) : P
 	speed.normalize();
 	speed = speed*baseSpeed;
 	innerForce = Force(speed,1);
+	priority = 0;
 }
 
 SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(const SelfMovingPhysicalComponent& component) : PhysicalComponent(component)
@@ -39,22 +40,26 @@ void SelfMovingPhysicalComponent::setInnerForce(Force f)
 
 void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent)
 {
-	Vect4 n = position - physicalComponent->getPosition();
-	n[3] = 0;
-	if (n.norme() == 0){
-		float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
-		n = Vect4(x, y, z, 0);
-	}
-	n.normalize();
-	innerForce = innerForce.reflect(n) ;
-	position = position + innerForce;
+	if (priority <= physicalComponent->getPriority())
+	{
+		Vect4 n = position - physicalComponent->getPosition();
+		n[3] = 0;
+		if (n.norme() == 0){
+			float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
+			n = Vect4(x, y, z, 0);
+		}
+		n.normalize();
+		innerForce = innerForce.reflect(n);
+		position = position + innerForce;
 
-	//rotation 
-	//Vect4 v3 = physicalComponent->getSpeed();
-	float dot = speed.dot(n);
-	float nn = speed.norme() * n.norme();
-	rotationSpeed = (dot - nn) * 0.05;
-	rotationAcceleration = 0.999;
+		float dot = speed.dot(n);
+		float nn = speed.norme() * n.norme();
+		float orientation = 1;
+		float det = speed[0] * n[1] - speed[1] * n[0];
+		if (det < 0) orientation = -1;
+		rotationSpeed = (dot - nn) * 0.05 * orientation;
+		rotationAcceleration = 0.999;
+	}
 }
 
 void SelfMovingPhysicalComponent::collision(Vect4 axis)
@@ -88,7 +93,14 @@ void SelfMovingPhysicalComponent::collision(Vect4 axis)
 			position[1] = axis[1] + radius + 1;
 		}
 	}
-
+	//Vect4 v3 = physicalComponent->getSpeed();
+	float dot = speed.dot(n);
+	float nn = speed.norme() * n.norme();
+	float orientation = 1;
+	float det = speed[0] * n[1] - speed[1] * n[0];
+	if (det < 0) orientation = -1;
+	rotationSpeed = (dot - nn) * 0.05 * orientation;
+	rotationAcceleration = 0.999;
 	innerForce = innerForce.reflect(n);
 }
 

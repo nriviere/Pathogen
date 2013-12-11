@@ -14,7 +14,7 @@ protected:
 	std::list<Force> forces;
 	float baseSpeed;
 public:
-	SelfMovingPhysicalComponent(GameObject *object = NULL);
+	SelfMovingPhysicalComponent(GameObject *object = NULL, PhysicalEngine *engine = NULL);
 	SelfMovingPhysicalComponent(const SelfMovingPhysicalComponent& component);
 	~SelfMovingPhysicalComponent();
 

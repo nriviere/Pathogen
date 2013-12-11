@@ -24,11 +24,6 @@ public:
 			if (currentIndex < maxIndex)
 			{
 				unsigned int index = currentIndex;
-				if (index == 599)
-				{
-					currentIndex++;
-					return index;
-				}
 				currentIndex++;
 				return index;
 			}

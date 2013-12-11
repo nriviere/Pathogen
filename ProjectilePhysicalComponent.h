@@ -4,7 +4,7 @@ class ProjectilePhysicalComponent :
 	public SelfMovingPhysicalComponent
 {
 public:
-	ProjectilePhysicalComponent(GameObject *object = NULL);
+	ProjectilePhysicalComponent(GameObject *object = NULL, PhysicalEngine *engine = NULL);
 	~ProjectilePhysicalComponent();
 
 	void collision(Vect4 axis);

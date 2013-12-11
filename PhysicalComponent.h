@@ -6,7 +6,7 @@
 
 
 class GameObject;
-
+class PhysicalEngine;
 
 class PhysicalComponent
 {
@@ -15,7 +15,6 @@ private :
 	std::list<unsigned int> unusedIDs;
 	static unsigned int PhysicalComponent::currentID;
 protected :
-	int ID;
 	unsigned int engineIndex;
 	Matrx44 transform;
 	Vect4 speed,position,verticalSpeed,horizontalSpeed;
@@ -24,12 +23,14 @@ protected :
 	float radius;
 	float currentAngle,rotationSpeed,rotationAcceleration;
 	GameObject *gameObject;
+	PhysicalEngine *engine;
 	std::list<PhysicalComponent*>::iterator gridPosition;
 	unsigned int gridX, gridY;
+	int priority;
 
 public:
 	static unsigned int PhysicalComponent::MAX_COMPONENTS_COUNT;
-	PhysicalComponent(GameObject *gameObject = NULL);
+	PhysicalComponent(GameObject *gameObject = NULL,PhysicalEngine *engine = NULL);
 	PhysicalComponent(const PhysicalComponent &physicalComponent);
 	PhysicalComponent &operator=(const PhysicalComponent &physicalComponent);
 	~PhysicalComponent();
@@ -43,15 +44,19 @@ public:
 	unsigned int getGridX();
 	unsigned int getGridY();
 	unsigned int getEngineIndex();
-	unsigned int getID();
 	GameObject *getGameObject();
+	PhysicalEngine *getEngine();
+	int getPriority();
 	
 	void setTransform(Matrx44 transform);
 	void setSpeed(Vect4 speed);
+	void setRadius(float radius);
 	void setPosition(Vect4 position);
 	void setAcceleration(float acceleration);
 	void setGameObject(GameObject *object);
 	void setGridPosition(std::list<PhysicalComponent*>::iterator gridPosition, unsigned int x, unsigned int y);
+	void setEngine(PhysicalEngine *engine);
+	void setPriority(int priority);
 
 	virtual void setHeading(Vect4 v);
 
@@ -69,6 +74,7 @@ public:
 	void stopMoveLeft();
 
 	void setEngineIndex(unsigned int index);
+	void destroy();
 
 	virtual PhysicalComponent *clone();
 };

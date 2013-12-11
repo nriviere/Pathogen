@@ -103,10 +103,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 		while (fDT >= REFERENCE_TIME)
 		{
 			C3DEngine::GetInstance()->Update(REFERENCE_TIME);
-			fDT -= REFERENCE_TIME;
+			fDT -= REFERENCE_TIME;		
 		}
-
 		u32PrevTime = u32Time;
+		
 
 		//--- Buffers swapping
 

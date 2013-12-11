@@ -103,6 +103,8 @@
     <ClCompile Include="CellRenderableComponent.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="ExplosionParticle.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -113,6 +115,8 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightingGameObject.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectilePhysicalComponent.cpp" />
     <ClCompile Include="RenderableComponent.cpp" />
@@ -150,6 +154,8 @@
     <ClInclude Include="CellRenderableComponent.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Explosion.h" />
+    <ClInclude Include="ExplosionParticle.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
@@ -160,6 +166,8 @@
     <ClInclude Include="Indexer.h" />
     <ClInclude Include="LightingGameObject.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectilePhysicalComponent.h" />
     <ClInclude Include="SpawnLine.h" />
@@ -206,6 +214,9 @@
     <None Include="shaders\depthWritef.gls" />
     <None Include="shaders\tp1f.gls" />
     <None Include="shaders\tp1v.gls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Levels\Level1.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

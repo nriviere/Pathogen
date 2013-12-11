@@ -42,7 +42,7 @@ public:
 	void setHeight(int height);
 	int getWidth();
 	int getHeight();
-
+	static std::ofstream errlog;
 private:
 
 	Renderer *renderer;
@@ -51,7 +51,7 @@ private:
 
 	unsigned int maxConcurrence;
 
-	std::ofstream errlog;
+	
 	
 	int width, height;
 

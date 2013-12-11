@@ -31,7 +31,7 @@ public:
 	static const unsigned int PROJECTILE_MODEL_INDEX = 2;
 	static const unsigned int BACTERIA_MODEL_INDEX = 3;
 	static const unsigned int DEPTH_PEELING_PASS_COUNT = 4;
-
+	static unsigned int EXPLOSION_PARTICLE_TEXTURE_ID;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();
 
@@ -58,6 +58,7 @@ public:
 	unsigned int getIndice_buffer_object();
 	unsigned int getIndex_count();
 
+	void renderParticles();
 	void render_string(float x, float y, float z, void* font, const char* s);
 	void setColorRtoG(float &c1, float &c2, float position);
 	void drawQuads(float x, float y, float width, float height);

@@ -15,6 +15,8 @@ SCENE *scene = NULL;
 
 using namespace std;
 
+unsigned int Renderer::EXPLOSION_PARTICLE_TEXTURE_ID = 0;
+
 Renderer::Renderer(MyEngine *engine)
 {
 	models = NULL;
@@ -234,7 +236,19 @@ void Renderer::load(SCENE **objects, unsigned int count)
 	glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-
+	//PARTICLES TEXTURES
+	
+	IMAGE_DATA *particleTexture;
+	particleTexture = ReadTGA("Textures/ExplosionParticle2.tga");
+	glGenTextures(1, &EXPLOSION_PARTICLE_TEXTURE_ID);
+	glBindTexture(GL_TEXTURE_2D, EXPLOSION_PARTICLE_TEXTURE_ID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, particleTexture->u32Width, particleTexture->u32Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, particleTexture->pu8Pixels);
+	glTexEnvi(GL_TEXTURE, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	try{
 		initApi();
@@ -374,6 +388,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 
 	render(compute_illumination);
 	compute_illumination->stop();
+	renderParticles();
 	renderLevel(level);
 	for (int i = 1; i < DEPTH_PEELING_PASS_COUNT; i++)
 	{
@@ -605,7 +620,7 @@ void Renderer::updateLightUniforms(Matrx44 modelView)
 	list<Light*>::iterator l = lights.begin();
 	if (lights.size() != currentLightCount)
 	{
-		exit(-30);
+		//exit(-30);
 	}
 	for (int i = 0; i < currentLightCount; i++)
 	{
@@ -624,7 +639,67 @@ void Renderer::updateLightUniforms(Matrx44 modelView)
 		++l;
 	}
 }
+void Renderer::renderParticles()
+{
+	glDisable(GL_LIGHTING);
+	glEnable(GL_BLEND);
+	glDisable(GL_DEPTH_TEST);
+	glActiveTexture(GL_TEXTURE0);
+	
+	GameEngine *gameEngine = engine->getGameEngine();
+	ParticleSystem **particleSystems = gameEngine->getParticleSystems();
+	Particle **particles = NULL;
+	unsigned int particleSystemCount = gameEngine->getParticleSystemCount();
+	unsigned int particleCount;
+	Vect4 position;
+	PhysicalComponent *physicalComponent = NULL;
+	Particle *particle = NULL;
+	glColor4f(1., 1., 1., 1.);
+	
+	
+	for (int i = 0; i < GameEngine::MAX_PARTICLE_SYSTEM_COUNT; i++)
+	{
+		if (particleSystems[i] != NULL)
+		{
+			ParticleSystem * particleSystem = particleSystems[i];
+			particles = particleSystem->getParticles();
+			particleCount = particleSystem->getMaxParticleCount();
 
+
+			for (int j = 0; j < particleCount; j++)
+			{
+				particle = particles[j];
+				if (particle != NULL)
+				{
+					unsigned int id = particle->getTextureId();
+					glBindTexture(GL_TEXTURE_2D, id);
+					glBegin(GL_QUADS);
+					physicalComponent = particle->getPhysicalComponent();
+					position = physicalComponent->getPosition();
+					float size = particle->getSize() / 2;
+					glTexCoord2f(0,0);
+					glNormal3f(0,0,-1);
+					glVertex3f(position[0] - size, position[1] - size, 0);
+					glTexCoord2f(1, 0);
+					glNormal3f(0, 0, -1);
+					glVertex3f(position[0] + size, position[1] - size, 0);
+					glTexCoord2f(1, 1);
+					glNormal3f(0, 0, -1);
+					glVertex3f(position[0] + size, position[1] + size, 0);
+					glTexCoord2f(0, 1);
+					glNormal3f(0, 0, -1);
+					glVertex3f(position[0] - size, position[1] + size, 0);
+					glEnd();
+				}
+			}
+		}
+	}
+	
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+}
 void Renderer::render_string(float x, float y, float z, void* font, const char* s)
 {
 	glColor3f(.5f, .5f, .5f);

@@ -3,7 +3,7 @@
 #include "GameEngine.h"
 #include "Hero.h"
 
-ProjectilePhysicalComponent::ProjectilePhysicalComponent(GameObject *object) : SelfMovingPhysicalComponent(object)
+ProjectilePhysicalComponent::ProjectilePhysicalComponent(GameObject *object, PhysicalEngine *engine) : SelfMovingPhysicalComponent(object,engine)
 {
 	baseSpeed = 3;
 	if (object != NULL)
@@ -28,6 +28,10 @@ void ProjectilePhysicalComponent::collision(Vect4 axis)
 
 void ProjectilePhysicalComponent::collision(PhysicalComponent *component)
 {
-	component->getGameObject()->hitBy(gameObject);
+	GameObject *componentGameObject = component->getGameObject();
+	if (componentGameObject != NULL)
+	{
+		component->getGameObject()->hitBy(gameObject);
+	}
 }
 

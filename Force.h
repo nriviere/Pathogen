@@ -39,6 +39,16 @@ public:
 		this->acceleration = acceleration;
 	}
 
+	void setAcceleration(float acceleration)
+	{
+		this->acceleration = acceleration;
+	}
+
+	float getAcceleration()
+	{
+		return acceleration;
+	}
+
 	void update(){
 		values[0] *= acceleration;
 		values[1] *= acceleration;

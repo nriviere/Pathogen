@@ -120,17 +120,19 @@ void InGameState::setup()
 
 	int lightId = renderer->addLight(light);
 
-	parentEngine->getErrLog()->open("log.txt", std::ios::trunc);
+	
 }
 
 void InGameState::update(float fDT)
 {
+	
 	parentEngine->getPhysicalEngine()->update(fDT);
-	engine->remove();
 	unsigned int gameObjectCount = engine->getGameObjectCount();
+	unsigned int particleSystemCount = engine->getParticleSystemCount();
 	GameObject **gameObjects = engine->getGameObjects();
+	ParticleSystem **particleSystems = engine->getParticleSystems();
 	int count = 0;
-	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT || count < gameObjectCount; i++)
+	for (int i = 0; i < GameEngine::MAX_GAME_OBJECT_COUNT && count < gameObjectCount; i++)
 	{
 		if (gameObjects[i] != NULL)
 		{
@@ -138,8 +140,19 @@ void InGameState::update(float fDT)
 			gameObjects[i]->update();
 		}
 	}
+	count = 0;
+	for (int i = 0; i < GameEngine::MAX_PARTICLE_SYSTEM_COUNT && count < particleSystemCount; i++)
+	{
+		if (particleSystems[i] != NULL)
+		{
+			count++;
+			particleSystems[i]->update(fDT);
+		}
+	}
+
 	engine->getCurrentLevel()->update();
-	
+	engine->remove();
+	engine->addParticleSystems();
 }
 
 void InGameState::display(unsigned int u32Width, unsigned int u32Height)

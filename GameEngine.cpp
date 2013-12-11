@@ -12,6 +12,8 @@ unsigned int GameEngine::CURRENT_CELL_COUNT = 0;
 GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 {
 	gameObjectCount = 0;
+	particleSystemCount = 0;
+	particleCount = 0;
 	gameStates = new GameState*[2];
 	gameStates[0] = new MainMenuState(this);
 	inGameState = new InGameState(this);
@@ -22,6 +24,12 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	levels[0] = currentLevel = new Level("Levels/level1.xml",this);
 	cursor = new Cursor();
 	indexer = new Indexer(MAX_GAME_OBJECT_COUNT);
+	particleSystemIndexer = new Indexer(MAX_PARTICLE_SYSTEM_COUNT);
+	particleSystems = new ParticleSystem*[MAX_PARTICLE_SYSTEM_COUNT];
+	for (int i = 0; i < MAX_PARTICLE_SYSTEM_COUNT; i++)
+	{
+		particleSystems[i] = NULL;
+	}
 	hero = NULL;
 }
 
@@ -36,7 +44,23 @@ GameEngine::~GameEngine()
 	{
 		delete levels[i];
 	}
-	delete[] levels;
+	for (int i = 0; i < MAX_GAME_OBJECT_COUNT; i++)
+	{
+		if (gameObjects[i] != NULL)
+		{
+			remove(gameObjects[i]->getGameEngineIndex());
+		}
+	}
+
+	for (int i = 0; i < MAX_PARTICLE_SYSTEM_COUNT; i++)
+	{
+		if (particleSystems[i] != NULL)
+		{
+			removeParticleSystem(gameObjects[i]->getGameEngineIndex());
+		}
+	}
+	delete [] gameObjects;
+	delete [] levels;
 	delete cursor;
 	delete hero;
 }
@@ -140,9 +164,19 @@ GameObject **GameEngine::getGameObjects()
 	return gameObjects;
 }
 
+ParticleSystem **GameEngine::getParticleSystems()
+{
+	return particleSystems;
+}
+
 unsigned int GameEngine::getGameObjectCount()
 {
 	return gameObjectCount;
+}
+
+unsigned int GameEngine::getParticleSystemCount()
+{
+	return particleSystemCount;
 }
 
 Hero *GameEngine::getHero()
@@ -199,8 +233,62 @@ void GameEngine::addObject(GameObject * object)
 	}
 	else
 	{
-		exit(-30);
+		//exit(-30);
 	}
+
+}
+
+void GameEngine::addParticleSystems()
+{
+	/*ParticleSystem *particleSystem;
+	while (!particleSystemsToAdd.empty())
+	{
+		particleSystem = particleSystemsToAdd.front();
+
+		unsigned int index = particleSystemIndexer->getNextIndex();
+
+		if (index != UINT_MAX)
+		{
+			particleSystem->setGameEngineIndex(index);
+			particleSystem->setGameEngine(this);
+			particleSystems[index] = particleSystem;
+			particleSystemCount++;
+			Particle **particles = particleSystem->getParticles();
+			for (int i = 0; i < particleSystem->getMaxParticleCount(); i++)
+			{
+				if (particles[i] != NULL)
+				{
+					engine->getPhysicalEngine()->addPhysicalComponent(particles[i]->getPhysicalComponent());
+				}
+			}
+		}
+		else
+		{
+			exit(-30);
+		}
+		particleSystemsToAdd.pop_front();
+	}*/
+}
+
+void GameEngine::addParticleSystem(ParticleSystem *particleSystem)
+{
+	//particleSystemsToAdd.push_back(particleSystem);
+	unsigned int index = particleSystemIndexer->getNextIndex();
+
+	particleSystem->setGameEngineIndex(index);
+	particleSystem->setGameEngine(this);
+	particleSystems[index] = particleSystem;
+	
+	particleSystemCount++;
+	Particle **particles = particleSystem->getParticles();
+	for (int i = 0; i < particleSystem->getMaxParticleCount(); i++)
+	{
+		if (particles[i] != NULL)
+		{
+			engine->getPhysicalEngine()->addPhysicalComponent(particles[i]->getPhysicalComponent());
+		}
+	}
+	particleSystem->selfAdd();
 
 }
 
@@ -217,6 +305,18 @@ void GameEngine::remove(unsigned int index)
 	}
 }
 
+void GameEngine::removeParticleSystem(unsigned int index)
+{
+	if (index < MAX_PARTICLE_SYSTEM_COUNT && particleSystems[index] != NULL)
+	{
+		particleSystems[index]->selfRemove();
+		delete particleSystems[index];
+		particleSystems[index] = NULL;
+		particleSystemIndexer->releaseIndex(index);
+		particleSystemCount--;
+	}
+}
+
 void GameEngine::setToRemove(GameObject *gameObject)
 {
 	toRemove.push_back(gameObject);
@@ -227,12 +327,28 @@ void GameEngine::setToRemove(unsigned int gameObjectIndex)
 	setToRemove(gameObjects[gameObjectIndex]);
 }
 
+void GameEngine::setParticleSystemToRemove(ParticleSystem *particleSystem)
+{
+	if (particleSystem != NULL)
+	{
+		if (particleSystem->getEngineIndex() != UINT_MAX)
+		{
+			particleSystemsToRemove.push_back(particleSystem);
+		}
+	}
+}
+
 void GameEngine::remove()
 {
 	while (!toRemove.empty())
 	{
 		remove(toRemove.front()->getGameEngineIndex());
 		toRemove.pop_front();
+	}
+	while (!particleSystemsToRemove.empty())
+	{
+		removeParticleSystem(particleSystemsToRemove.front()->getEngineIndex());
+		particleSystemsToRemove.pop_front();
 	}
 }
 

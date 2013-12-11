@@ -1,11 +1,12 @@
 #include "HeroPhysicalComponent.h"
 
 
-HeroPhysicalComponent::HeroPhysicalComponent(Cursor *cursor)
+HeroPhysicalComponent::HeroPhysicalComponent(Cursor *cursor, GameObject *object, PhysicalEngine *engine) : PhysicalComponent(object,engine)
 {
 	angle = angleAim = 0;
 	this->cursor = cursor;
 	radius = 6;
+	priority = 10;
 }
 
 HeroPhysicalComponent::HeroPhysicalComponent(const HeroPhysicalComponent &heroPhysicalComponent) :PhysicalComponent(heroPhysicalComponent)

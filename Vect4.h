@@ -98,7 +98,7 @@ public:
 	{
 		return Vect4(values[0] * f , values[1] * f , values[2] * f,values[3]);
 	}
-	
+
 	float dot(const Vect4 & v) const
 	{
 		float nu = norme();
