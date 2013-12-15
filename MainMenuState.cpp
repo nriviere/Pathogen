@@ -70,8 +70,8 @@ void MainMenuState::display(unsigned int u32Width, unsigned int u32Height)
 {
 	
 	glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
-	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, (GLuint)data[0]->pUserData);
 	glColor3f(r, g, b);
@@ -102,8 +102,6 @@ void MainMenuState::display(unsigned int u32Width, unsigned int u32Height)
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 
-	//drawHub();
-
 }
 
 void MainMenuState::lButtonUp(POINT pos)
@@ -130,33 +128,4 @@ void MainMenuState::lButtonUp(POINT pos)
 
 void MainMenuState::update(float fDT)
 {
-	score++;
-	tim += fDT;
-
-	if (mun <= .0f){
-		coeff = .016f;
-	}
-	else if (mun >= 1.f)
-	{
-		coeff= -.016f;
-	}
-	mun += coeff;
-
-	if (mun1 <= .0f){
-		coeff1 = .016f;
-	}
-	else if (mun1 >= 1.f)
-	{
-		coeff1 = -.016f;
-	}
-	mun1 += coeff1;
-
-	if (mun2 <= .0f){
-		coeff2 = .016f;
-	}
-	else if (mun2 >= 1.f)
-	{
-		coeff2 = -.016f;
-	}
-	mun2 += coeff2;
 }

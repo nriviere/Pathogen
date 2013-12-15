@@ -117,7 +117,7 @@ void MyEngine::Render(unsigned int u32Width, unsigned int u32Height)
 
 void MyEngine::MouseWheel(float fIncrement)
 {
-
+	gameEngine->mouseWheel(fIncrement);
 }
 
 void MyEngine::MouseMove(POINT Pos)

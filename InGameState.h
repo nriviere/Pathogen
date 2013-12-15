@@ -16,6 +16,7 @@ public:
 	~InGameState(void);
 	void keyUp(int s32VirtualKey);
 	void keyDown(int s32VirtualKey);
+	void mouseWheel(float fIncrement);
 	void mouseMove(POINT pos);
 	void lButtonDown(POINT pt);
 	void lButtonUp(POINT pt);

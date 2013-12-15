@@ -14,10 +14,11 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	gameObjectCount = 0;
 	particleSystemCount = 0;
 	particleCount = 0;
-	gameStates = new GameState*[2];
+	gameStates = new GameState*[3];
 	gameStates[0] = new MainMenuState(this);
+	gameStates[1] = new BriefingState(this);
 	inGameState = new InGameState(this);
-	gameStates[1] = inGameState;
+	gameStates[2] = inGameState;
 	currentGameState = gameStates[0];
 	levelCount = 1;
 	levels = new Level*[levelCount];
@@ -132,6 +133,11 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 void GameEngine::display(unsigned int u32Width, unsigned int u32Height)
 {
 	currentGameState->display(u32Width, u32Height);
+}
+
+void GameEngine::mouseWheel(float fIncrement)
+{
+	currentGameState->mouseWheel(fIncrement);
 }
 
 void GameEngine::mouseMove(POINT Pos)

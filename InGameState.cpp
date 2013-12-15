@@ -17,6 +17,12 @@ InGameState::~InGameState(void)
 {
 }
 
+void InGameState::mouseWheel(float fIncrement)
+{
+	bool up = fIncrement > 0;
+	engine->getHero()->changeMunitionType(up);
+}
+
 void InGameState::mouseMove(POINT pos)
 {
 	Vect4 cursorMove(pos.x,-pos.y, 0, 1);
@@ -92,6 +98,15 @@ void InGameState::keyDown(int s32VirtualKey)
 			isDdown = true;
 		}
 		break;
+	case 49:
+		engine->getHero()->changeMunitionType(0);
+		break;
+	case 50:
+		engine->getHero()->changeMunitionType(1);
+		break;
+	case 51:
+		engine->getHero()->changeMunitionType(2);
+		break;
 	default:
 		break;
 
@@ -119,13 +134,14 @@ void InGameState::setup()
 		0,0);
 
 	int lightId = renderer->addLight(light);
-
+	
 	
 }
 
 void InGameState::update(float fDT)
 {
-	
+	engine->getHero()->regenerateMunition(fDT);
+
 	parentEngine->getPhysicalEngine()->update(fDT);
 	unsigned int gameObjectCount = engine->getGameObjectCount();
 	unsigned int particleSystemCount = engine->getParticleSystemCount();
