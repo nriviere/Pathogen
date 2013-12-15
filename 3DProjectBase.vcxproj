@@ -98,6 +98,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bacteria.cpp" />
+    <ClCompile Include="BriefingState.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellPhysicalComponent.cpp" />
     <ClCompile Include="CellRenderableComponent.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
     <ClInclude Include="Bacteria.h" />
+    <ClInclude Include="BriefingState.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellPhysicalComponent.h" />
     <ClInclude Include="CellRenderableComponent.h" />

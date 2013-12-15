@@ -234,6 +234,9 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>Source Files\GameEngine\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="BriefingState.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -403,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BriefingState.h">
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
