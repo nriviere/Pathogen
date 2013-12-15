@@ -30,7 +30,7 @@ public:
 	static const unsigned int CELL_MODEL_INDEX = 1;
 	static const unsigned int PROJECTILE_MODEL_INDEX = 2;
 	static const unsigned int BACTERIA_MODEL_INDEX = 3;
-	static const unsigned int DEPTH_PEELING_PASS_COUNT = 4;
+	static const unsigned int DEPTH_PEELING_PASS_COUNT = 5;
 	static unsigned int EXPLOSION_PARTICLE_TEXTURE_ID;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();

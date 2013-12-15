@@ -14,6 +14,7 @@ private:
 	unsigned int spawnLinesCount;
 	const char *filename;
 	GameEngine *engine;
+	unsigned int backgroundTextureId;
 
 public:
 	Level(const char *filename, GameEngine *engine);
@@ -24,6 +25,7 @@ public:
 	void init();
 	void update();
 	void setGameEngine(GameEngine *engine);
+	unsigned int getBackgroundTextureId();
 	GameEngine * getGameEngine();
 	GameObject **instantiateObjects(const char *className, unsigned int count);
 	GameObject *instantiateObject(ObjectType objectType);

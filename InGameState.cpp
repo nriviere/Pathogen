@@ -105,12 +105,15 @@ void InGameState::setup()
 	Renderer *renderer = parentEngine->getRenderer();
 	renderer->init();
 
-	const char *test[4];
-	test[0] = "3DS/models/hero.obj";
-	test[1] = "3DS/models/cell.obj";
-	test[2] = "3DS/models/neutrophil.obj";
-	test[3] = "3DS/models/bacteria.obj";
-	engine->load(test, 4);
+	const char *names[7];
+	names[0] = "3DS/models/hero.obj";
+	names[1] = "3DS/models/cell.obj";
+	names[2] = "3DS/models/neutrophil.obj";
+	names[3] = "3DS/models/bacteria.obj";
+	names[4] = "3DS/models/virus.obj";
+	names[5] = "3DS/models/cancer.obj";
+	names[6] = "3DS/models/monocyte.obj";
+	engine->load(names, 7);
 
 	Light * light = new Light(Matrx44(Vect4(0.1,0.1,0.1, 1.),
 		Vect4(0.5, 0.5,0.5, 1.),

@@ -68,6 +68,17 @@ void Level::load()
 		spawnLineNode = spawnLineNode->NextSiblingElement();
 	}
 	delete doc;
+	glGenTextures(1, &backgroundTextureId);
+	IMAGE_DATA *backGroundTexture;
+	backGroundTexture = ReadTGA("Textures/BackgroundLevel1.tga");
+	glGenTextures(1, &backgroundTextureId);
+	glBindTexture(GL_TEXTURE_2D, backgroundTextureId);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, backGroundTexture->u32Width, backGroundTexture->u32Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, backGroundTexture->pu8Pixels);
+	//glTexEnvi(GL_TEXTURE, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	delete backGroundTexture;
 }
 
 void Level::init()
@@ -91,6 +102,11 @@ void Level::update()
 void Level::setGameEngine(GameEngine *engine)
 {
 	this->engine = engine;
+}
+
+unsigned int Level::getBackgroundTextureId()
+{
+	return backgroundTextureId;
 }
 
 GameEngine *Level::getGameEngine()

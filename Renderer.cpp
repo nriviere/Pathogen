@@ -358,7 +358,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	//glOrtho(-1.*width/2., 1.*width/2., -1.*height/2.,1.*height/2., -400, 400);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glClearColor(0, 0, 0, 1);
+	glClearColor(0, 0, 0, 0);
 	glClearDepth(1);
 	glColor3f(1, 0, 0);
 
@@ -372,15 +372,16 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[0]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//light test
-	glColor4f(0.4, 0.4, 0.4, 1);
-	glBegin(GL_QUADS);
+	glColor4f(1, 1, 1, 1);
+	/*glBegin(GL_QUADS);
 	glVertex3f(-200, -200, -50);
 	glVertex3f(200, -200, -50);
 	glVertex3f(200, 200, -50);
 	glVertex3f(-200, 200, -50);
-	glEnd();
+	glEnd();*/
 	//
-
+	
+	
 	compute_illumination->start();
 
 	
@@ -420,12 +421,33 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glLoadIdentity();
 	glViewport(0, 0, u32Width, u32Height);
 
+	
+	
+
+
+
 	glDisable(GL_DEPTH_TEST);
 	glActiveTexture(GL_TEXTURE0);
+	
+	glDisable(GL_LIGHTING);
+	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_LIGHTING);
+	glBindTexture(GL_TEXTURE_2D, level->getBackgroundTextureId());
+	glBegin(GL_QUADS);
+	glColor4f(1, 1, 1, 1);
+	glTexCoord2f(0, 0);
+	glVertex3f(-1, -1, 0);
+	glTexCoord2f(1, 0);
+	glVertex3f(1, -1, 0);
+	glTexCoord2f(1, 1);
+	glVertex3f(1, 1, 0);
+	glTexCoord2f(0, 1);
+	glVertex3f(-1, 1, 0);
+	glEnd();
 
+	
 	for (int i = DEPTH_PEELING_PASS_COUNT - 1; i >= 0 ; i--)
 	{
 		glColor4f(1,1,1,1);
@@ -442,6 +464,8 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		glEnd();
 	}
 	
+
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0, width, 0, height);
