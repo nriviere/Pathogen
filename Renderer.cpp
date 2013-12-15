@@ -768,9 +768,9 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	int score = 0;
 	float tim = 0;
 	float c1, c2;
-	float mun = 1.f;
-	float mun1 = 1.f;
-	float mun2 = 1.f;
+	float munitionType1 = this->engine->getGameEngine()->getHero()->getMunitionType1();
+	float munitionType2 = this->engine->getGameEngine()->getHero()->getMunitionType2();
+	float munitionType3 = this->engine->getGameEngine()->getHero()->getMunitionType3();
 	
 
 	string s1 = "SCORE : ";
@@ -787,17 +787,17 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 
 	glDisable(GL_TEXTURE_2D);
 
-	setColorRtoG(c1, c2, mun);
+	setColorRtoG(c1, c2, munitionType1);
 	glColor3f(c1, c2, 0);
-	drawQuads(1700, 20, 200 * mun, 10);
+	drawQuads(1700, 20, 200 * munitionType1, 10);
 
-	setColorRtoG(c1, c2, mun1);
+	setColorRtoG(c1, c2, munitionType2);
 	glColor3f(c1, c2, 0);
-	drawQuads(1700, 40, 200 * mun1, 10);
+	drawQuads(1700, 40, 200 * munitionType2, 10);
 
-	setColorRtoG(c1, c2, mun2);
+	setColorRtoG(c1, c2, munitionType3);
 	glColor3f(c1, c2, 0);
-	drawQuads(1700, 60, 200 * mun2, 10);
+	drawQuads(1700, 60, 200 * munitionType3, 10);
 	glEnable(GL_TEXTURE_2D);
 }
 

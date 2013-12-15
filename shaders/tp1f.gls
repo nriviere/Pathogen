@@ -1,4 +1,4 @@
-﻿#version 330 core
+#version 330 core
 const unsigned int MAX_LIGHT_COUNT = 100u;
 
 varying vec3 N;

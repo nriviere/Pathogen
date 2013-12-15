@@ -23,6 +23,10 @@ Hero &Hero::operator=(const Hero &hero)
 Hero::Hero(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent) : GameObject(engine,model, physicalComponent)
 {
 	objectType = heroType;
+	munitions[0] = MUN_MAX;
+	munitions[1] = MUN_MAX;
+	munitions[2] = MUN_MAX;
+	currentMunition = 0;
 }
 
 Hero::~Hero()
@@ -52,9 +56,13 @@ void Hero::moveLeft()
 
 void Hero::shoot()
 {
-	Projectile *projectile = new Projectile(engine);
-	projectile->setHeading(getHeading());
-	engine->addObject(projectile);
+	if (munitions[currentMunition] > 0)
+	{
+		Projectile *projectile = new Projectile(engine);
+		projectile->setHeading(getHeading());
+		engine->addObject(projectile);
+		munitions[currentMunition]--;	
+	}
 }
 
 Vect4 Hero::getHeading()
@@ -92,4 +100,83 @@ void Hero::selfRemove()
 		this->engine->setHero(NULL);
 	}
 	
+}
+
+float Hero::getMunitionType1()
+{
+	return (munitions[0] / MUN_MAX);
+}
+
+float Hero::getMunitionType2()
+{
+	return (munitions[1] / MUN_MAX);
+}
+
+float Hero::getMunitionType3()
+{
+	return (munitions[2] / MUN_MAX);
+}
+
+void Hero::setGenerator(int generator)
+{
+	if (generator == 1)
+	{
+		regenerator[0] = 10;
+		regenerator[1] = 1;
+		regenerator[2] = 1;
+	}
+	else if (generator == 2)
+	{
+		regenerator[0] = 1;
+		regenerator[1] = 10;
+		regenerator[2] = 1;
+	}
+	else if (generator == 3)
+	{
+		regenerator[0] = 1;
+		regenerator[1] = 1;
+		regenerator[2] = 10;
+	}
+}
+
+void Hero::regenerateMunition(float deltaTime)
+{
+	regenerationTime += deltaTime;
+	if (regenerationTime >= 5)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			munitions[i] += regenerator[i];
+			if (munitions[i] > MUN_MAX)
+			{	
+				munitions[i] = MUN_MAX;
+			}
+			
+		}
+		regenerationTime = regenerationTime - 5;
+	}
+}
+
+void Hero::changeMunitionType(bool up)
+{
+	if (up)
+	{
+		currentMunition++;
+		if (currentMunition > 2)
+		{
+			currentMunition = 0;
+		}
+	}
+	else{
+		currentMunition--;
+		if (currentMunition < 0)
+		{
+			currentMunition = 2;
+		}
+	}
+}
+
+void Hero::changeMunitionType(int type)
+{
+	currentMunition = type;
 }

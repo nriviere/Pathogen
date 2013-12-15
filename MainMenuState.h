@@ -1,4 +1,5 @@
 #pragma once
+
 #include "stdafx.h"
 #include "gamestate.h"
 #include "MyEngine.h"
@@ -18,6 +19,7 @@ public:
 
 	void keyUp(int s32VirtualKey){};
 	void keyDown(int s32VirtualKey){};
+	void mouseWheel(float fIncrement){};
 	void mouseMove(POINT pos){};
 	void lButtonDown(POINT pos){};
 	void lButtonUp(POINT pos);

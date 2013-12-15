@@ -1,6 +1,7 @@
 #pragma once
 #include "Level.h"
 #include "MainMenuState.h"
+#include "BriefingState.h"
 #include "InGameState.h"
 #include "GameObject.h"
 #include "Hero.h"
@@ -49,6 +50,7 @@ public:
 	void update(float fDT);
 	void display(unsigned int u32Width, unsigned int u32Height);
 
+	void mouseWheel(float fIncrement);
 	void mouseMove(POINT Pos);
 	void keyDown(int s32VirtualKey);
 	void keyUp(int s32VirtualKey);

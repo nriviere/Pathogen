@@ -13,6 +13,8 @@ public:
 	Hero(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent);
 	~Hero();
 
+	const int MUN_MAX = 50;
+
 	void moveUp();
 	void moveDown();
 	void moveRight();
@@ -28,5 +30,22 @@ public:
 
 	void selfAdd();
 	void selfRemove();
+
+	float getMunitionType1();
+	float getMunitionType2();
+	float getMunitionType3();
+
+	void setGenerator(int generator);
+
+	void regenerateMunition(float deltaTime);
+	void changeMunitionType(bool up);
+	void changeMunitionType(int type);
+
+private:
+	float munitions[3];
+	int currentMunition;
+
+	int regenerator[3];
+	float regenerationTime = 0;
 };
 
