@@ -243,28 +243,11 @@
     <ClCompile Include="BriefingState.cpp">
       <Filter>Source Files\GameEngine\GameState</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Virus.cpp">
-      <Filter>Source Files\GameEngine\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Neutrophile.cpp">
-      <Filter>Source Files\GameEngine\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Monocyte.cpp">
-      <Filter>Source Files\GameEngine\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Lymphocyte.cpp">
-      <Filter>Source Files\GameEngine\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Cancer.cpp">
-      <Filter>Source Files\GameEngine\GameObjects</Filter>
-=======
     <ClCompile Include="SoundEngine.cpp">
       <Filter>Source Files\SoundEngine</Filter>
     </ClCompile>
     <ClCompile Include="SoundSource.cpp">
       <Filter>Source Files\SoundEngine</Filter>
->>>>>>> abdb18006fb2879d6dfa1d1ea35d1d9571fda590
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -439,28 +422,11 @@
     <ClInclude Include="BriefingState.h">
       <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Virus.h">
-      <Filter>Header Files\GameEngine\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Neutrophile.h">
-      <Filter>Header Files\GameEngine\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Monocyte.h">
-      <Filter>Header Files\GameEngine\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Lymphocyte.h">
-      <Filter>Header Files\GameEngine\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Cancer.h">
-      <Filter>Header Files\GameEngine\GameObjects</Filter>
-=======
     <ClInclude Include="SoundEngine.h">
       <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
     <ClInclude Include="SoundSource.h">
       <Filter>Header Files\SoundEngine</Filter>
->>>>>>> abdb18006fb2879d6dfa1d1ea35d1d9571fda590
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

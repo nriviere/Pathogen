@@ -19,9 +19,9 @@ q:\documents\workspace\pathogen\release\cellphysicalcomponent.obj
 q:\documents\workspace\pathogen\release\cell.obj
 q:\documents\workspace\pathogen\release\briefingstate.obj
 q:\documents\workspace\pathogen\release\bacteria.obj
-q:\documents\workspace\pathogen\release\stdafx.obj
-q:\documents\workspace\pathogen\release\spawnpool.obj
 q:\documents\workspace\pathogen\release\spawnline.obj
+q:\documents\workspace\pathogen\release\soundsource.obj
+q:\documents\workspace\pathogen\release\soundengine.obj
 q:\documents\workspace\pathogen\release\shadersinc.obj
 q:\documents\workspace\pathogen\release\program.obj
 q:\documents\workspace\pathogen\release\shader.obj
@@ -48,6 +48,8 @@ q:\documents\workspace\pathogen\release\tinystr.obj
 q:\documents\workspace\pathogen\release\timer.obj
 q:\documents\workspace\pathogen\release\thread.obj
 q:\documents\workspace\pathogen\release\tgaloader.obj
+q:\documents\workspace\pathogen\release\stdafx.obj
+q:\documents\workspace\pathogen\release\spawnpool.obj
 q:\documents\workspace\pathogen\release\pathogen.exe
 q:\documents\workspace\pathogen\release\pathogen.pdb
 q:\documents\workspace\pathogen\release\objreader.res
