@@ -32,6 +32,7 @@ void ProjectilePhysicalComponent::collision(PhysicalComponent *component)
 	if (componentGameObject != NULL)
 	{
 		component->getGameObject()->hitBy(gameObject);
+		gameObject->hitBy(component->getGameObject());
 	}
 }
 

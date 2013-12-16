@@ -1,6 +1,9 @@
 #include "Hero.h"
 #include "Projectile.h"
 #include "ProjectilePhysicalComponent.h"
+#include "Neutrophile.h"
+#include "Monocyte.h"
+#include "Lymphocyte.h"
 #include "GameEngine.h"
 
 Hero::Hero(GameEngine *engine) : GameObject(engine)
@@ -58,7 +61,10 @@ void Hero::shoot()
 {
 	if (munitions[currentMunition] > 0)
 	{
-		Projectile *projectile = new Projectile(engine);
+		Projectile *projectile = NULL;
+		if (currentMunition == 0)	projectile = new Neutrophile(engine);
+		if (currentMunition == 1)	projectile = new Monocyte(engine);
+		if (currentMunition == 2)	projectile = new Lymphocyte(engine, type);
 		projectile->setHeading(getHeading());
 		engine->addObject(projectile);
 		munitions[currentMunition]--;	
@@ -180,4 +186,9 @@ void Hero::changeMunitionType(bool up)
 void Hero::changeMunitionType(int type)
 {
 	currentMunition = type;
+}
+
+void Hero::setLymphocyteTag(ObjectType type)
+{
+	this->type = type;
 }

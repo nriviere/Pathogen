@@ -64,7 +64,7 @@ void Bacteria::hitBy(ObjectType objectType)
 {
 	switch (objectType){
 		
-	case projectileType: 
+	case neutrophileType: 
 		
 		destroy();
 		break;

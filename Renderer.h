@@ -29,8 +29,15 @@ public:
 	static const unsigned int HERO_MODEL_INDEX = 0;
 	static const unsigned int CELL_MODEL_INDEX = 1;
 	static const unsigned int PROJECTILE_MODEL_INDEX = 2;
+	/*-------------------------------------------------------*/
+	static const unsigned int LYMPHOCYTE_MODEL_INDEX = 2;
 	static const unsigned int BACTERIA_MODEL_INDEX = 3;
-	static const unsigned int DEPTH_PEELING_PASS_COUNT = 5;
+	static const unsigned int VIRUS_MODEL_INDEX = 4;
+	static const unsigned int CANCER_MODEL_INDEX = 5;
+	static const unsigned int MONOCYTE_MODEL_INDEX = 6;
+	static const unsigned int NEUTROPHILE_MODEL_INDEX = 7;
+	
+	static const unsigned int DEPTH_PEELING_PASS_COUNT = 3;
 	static unsigned int EXPLOSION_PARTICLE_TEXTURE_ID;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();

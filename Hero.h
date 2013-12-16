@@ -40,6 +40,8 @@ public:
 	void regenerateMunition(float deltaTime);
 	void changeMunitionType(bool up);
 	void changeMunitionType(int type);
+	
+	void setLymphocyteTag(ObjectType type);
 
 private:
 	float munitions[3];
@@ -47,5 +49,7 @@ private:
 
 	int regenerator[3];
 	float regenerationTime = 0;
+	
+	ObjectType type;
 };
 

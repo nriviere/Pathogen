@@ -99,6 +99,7 @@
   <ItemGroup>
     <ClCompile Include="Bacteria.cpp" />
     <ClCompile Include="BriefingState.cpp" />
+    <ClCompile Include="Cancer.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellPhysicalComponent.cpp" />
     <ClCompile Include="CellRenderableComponent.cpp" />
@@ -115,7 +116,10 @@
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightingGameObject.cpp" />
+    <ClCompile Include="Lymphocyte.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="Monocyte.cpp" />
+    <ClCompile Include="Neutrophile.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -148,11 +152,13 @@
     <ClCompile Include="TinyXml\tinyxmlparser.cpp" />
     <ClCompile Include="UpdaterThread.cpp" />
     <ClCompile Include="VBO.cpp" />
+    <ClCompile Include="Virus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
     <ClInclude Include="Bacteria.h" />
     <ClInclude Include="BriefingState.h" />
+    <ClInclude Include="Cancer.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellPhysicalComponent.h" />
     <ClInclude Include="CellRenderableComponent.h" />
@@ -169,7 +175,10 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Indexer.h" />
     <ClInclude Include="LightingGameObject.h" />
+    <ClInclude Include="Lymphocyte.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="Monocyte.h" />
+    <ClInclude Include="Neutrophile.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Projectile.h" />
@@ -208,6 +217,7 @@
     <ClInclude Include="UpdaterThread.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="Vect4.h" />
+    <ClInclude Include="Virus.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="OBJReader.ico" />
