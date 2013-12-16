@@ -9,6 +9,7 @@
 Hero::Hero(GameEngine *engine) : GameObject(engine)
 {
 	objectType = heroType;
+	regenerationTime = 0;
 }
 
 Hero::Hero(const Hero &hero) : GameObject(hero)

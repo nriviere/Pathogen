@@ -774,13 +774,13 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	
 
 	string s1 = "SCORE : ";
-	string s2 = to_string(score);
+	string s2 = to_string((long double)score);
 	string s = s1 + s2;
 	const char *c = s.c_str();
 	render_string(10, 20, 0, GLUT_BITMAP_9_BY_15, c);
 
 	string t1 = "TEMPS : ";
-	string t2 = to_string((int)tim);
+	string t2 = to_string((long double)tim);
 	string t = t1 + t2;
 	const char *ct = t.c_str();
 	render_string(width / 2 - 80, 20, 0, GLUT_BITMAP_9_BY_15, ct);

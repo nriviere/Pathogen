@@ -13,7 +13,7 @@ public:
 	Hero(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent);
 	~Hero();
 
-	const int MUN_MAX = 50;
+	static const int MUN_MAX = 50;
 
 	void moveUp();
 	void moveDown();
@@ -48,7 +48,7 @@ private:
 	int currentMunition;
 
 	int regenerator[3];
-	float regenerationTime = 0;
+	float regenerationTime;
 	
 	ObjectType type;
 };
