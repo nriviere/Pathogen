@@ -7,7 +7,7 @@ Monocyte::Monocyte(GameEngine *engine) : Projectile(engine)
 	this->engine = engine;
 
 	if (engine != NULL){
-		this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::PROJECTILE_MODEL_INDEX];
+		this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::MONOCYTE_MODEL_INDEX];
 	}
 	else
 	{

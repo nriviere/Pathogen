@@ -123,7 +123,7 @@ void InGameState::setup()
 	const char *names[8];
 	names[0] = "3DS/models/hero.obj";
 	names[1] = "3DS/models/cell.obj";
-	names[2] = "3DS/models/lymphocyte.obj";
+	names[2] = "3DS/models/neutrophil.obj";
 	names[3] = "3DS/models/bacteria.obj";
 	names[4] = "3DS/models/virus.obj";
 	names[5] = "3DS/models/cancer.obj";
@@ -138,8 +138,6 @@ void InGameState::setup()
 		0,0);
 
 	int lightId = renderer->addLight(light);
-	
-	
 }
 
 void InGameState::update(float fDT)

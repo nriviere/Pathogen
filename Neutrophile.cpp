@@ -5,7 +5,7 @@
 Neutrophile::Neutrophile(GameEngine *engine) : Projectile(engine)
 {
 	if (engine != NULL){
-		this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::PROJECTILE_MODEL_INDEX];
+		this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::NEUTROPHILE_MODEL_INDEX];
 	}
 	else
 	{
