@@ -50,7 +50,7 @@ void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent
 		}
 		n.normalize();
 		innerForce = innerForce.reflect(n);
-		position = position + innerForce;
+		position = physicalComponent->getPosition() + n*(physicalComponent->getRadius() + radius + 0.1);
 
 		float dot = speed.dot(n);
 		float nn = speed.norme() * n.norme();

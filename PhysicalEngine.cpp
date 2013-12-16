@@ -28,6 +28,16 @@ PhysicalEngine::PhysicalEngine(MyEngine *engine)
 	}
 	indexer = new Indexer(MAX_PHYSICAL_COMPONENT_COUNT);
 	physicalComponentsCount = 0;
+
+	for (int i = 0; i < MAX_PHYSICAL_COMPONENT_COUNT; i++)
+	{
+		for (int j = 0; j < MAX_PHYSICAL_COMPONENT_COUNT; j++)
+		{
+			collisions[i][j] =  false;
+		}
+	}
+
+	
 }
 
 PhysicalEngine::~PhysicalEngine()
@@ -67,7 +77,7 @@ void PhysicalEngine::update(float fDT)
 	if (grid != NULL)
 	{
 		unsigned int id1 = 0, id2 = 0;
-		for (int i = 0; i < physicalComponentsCount; i++)
+		/*for (int i = 0; i < physicalComponentsCount; i++)
 		{
 			if (physicalComponents[i] != NULL)
 			{
@@ -82,10 +92,16 @@ void PhysicalEngine::update(float fDT)
 				}
 			}
 
-		}
+		}*/
 
 		grid->update();
-	
+		for (int i = 0; i < MAX_PHYSICAL_COMPONENT_COUNT; i++)
+		{
+			if (physicalComponents[i] != NULL)
+			{
+				physicalComponents[i]->update();
+			}
+		}
 		PhysicalComponent *p1, *p2;
 
 
@@ -96,14 +112,31 @@ void PhysicalEngine::update(float fDT)
 		Level *level = engine->getGameEngine()->getCurrentLevel();;
 		float limits[4] = { level->getLimitsX()[0], level->getLimitsX()[1], level->getLimitsY()[0], level->getLimitsY()[1] };
 		float radius, radiussqr;
-		for (int y = 0; y < grid->getNy(); y++)
+		int maxX = grid->getNx();
+		int maxY = grid->getNy();
+		for (int y = 0; y < maxY; y++)
 		{
-			for (int x = 0; x < grid->getNx(); x++)
+			for (int x = 0; x < maxX; x++)
 			{
 				L = grid->get(x, y);
 				begin = L->begin();
 				end = L->end();
 				unsigned int gridcasesize = L->size();
+				list<list<PhysicalComponent *> *> neighbours;
+				int yii = 0, xii = 0;
+				for (int yi = -1; yi < 2; yi++)
+				{
+					for (int xi = -1; xi < 2; xi++)
+					{
+						xii = x + xi;
+						yii = y + yi;
+						if (xii >= 0 && xii < maxX && yii >= 0 && yii < maxY )
+						{
+							neighbours.push_back(grid->get(xii, yii));
+						}
+					}
+				}
+
 				for (ite = begin;
 					ite != end;)
 				{
@@ -136,37 +169,12 @@ void PhysicalEngine::update(float fDT)
 
 						//collision avec les membres de la meme case de la grille
 
-
-						for (list<PhysicalComponent*>::iterator ite2 = begin;
-							ite2 != end;)
+						for (list<list<PhysicalComponent *>*>::iterator neigh = neighbours.begin(); neigh != neighbours.end();)
 						{
-
-							p2 = (*ite2);
-							if (p2 != NULL)
-							{
-								if (p2 != NULL)
-								{
-
-									if (ite != ite2)
-									{
-										Vect4 aToB(p2->getPosition() - position);
-										id2 = p2->getEngineIndex();
-										if (p2 != NULL && !collisions[id1][id2] && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + radiussqr))
-										{
-											p1->collision(p2);
-											p2->collision(p1);
-											collisions[id1][id2] = collisions[id2][id1] = true;
-										}
-										else
-										{
-											collisions[id1][id2] = collisions[id2][id1] = false;
-										}
-									}
-								}
-							}
-							++ite2;
-
+							checkCollisions(*neigh,ite);
+							++neigh;
 						}
+					
 						++ite;
 					}
 				}
@@ -182,102 +190,50 @@ void PhysicalEngine::update(float fDT)
 	{
 		engine->getGameEngine()->getCursor()->getPhysicalComponent()->update();
 	}
-	/*
-	ctest = 0;
-	for (int n = 0; n < grid->getN(); n++)
-	{
-	for (std::list<PhysicalComponent *>::iterator ite = grid->get(n)->begin(); ite != grid->get(n)->end();)
-	{
-	ctest++;
-	(*ite)->update();
-	++ite;
-	}
-	}
-	*/
-	//pthread_mutex_unlock(&UpdaterThread::test);
-
-
+	
 	
 
-	/*
-	if (physicalComponents != NULL){
-		for (int i = 0; i < physicalComponentsCount; i++)
-		{
-			Vect4 position = physicalComponents[i]->getTransform().getPos();
-			float radius = physicalComponents[i]->getRadius();
-			Level *level = engine->getCurrentLevel();
+}
 
-			if (position[0] - radius <= level->getLimitsX()[0])
-			{
-				physicalComponents[i]->collision(Vect4(level->getLimitsX()[0], 0, 0, 1));
-			}
-			if (position[0] + radius >= level->getLimitsX()[1])
-			{
-				physicalComponents[i]->collision(Vect4(level->getLimitsX()[1], 0, 0, 1));
-			}
-			if (position[1] - radius <= level->getLimitsY()[0])
-			{
-				physicalComponents[i]->collision(Vect4(0, level->getLimitsY()[0], 0, 1));
-			}
-			if (position[1] + radius >= level->getLimitsY()[1])
-			{
-				physicalComponents[i]->collision(Vect4(0, level->getLimitsY()[1], 0, 1));
-			}
-
-			for (int j = 0; j < physicalComponentsCount; j++)
-			{
-
-				Vect4 aToB(physicalComponents[j]->getPosition() - physicalComponents[i]->getPosition());
-				if (i != j && aToB.norme() <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()))
-				{
-					physicalComponents[i]->collision(physicalComponents[j]);
-					//exit(0);
-
-				}
-				/*				Vect4 A = physicalComponents[j]->getPosition();
-				Vect4 B = physicalComponents[i]->getPosition();
-				Vect4 u = physicalComponents[i]->getSpeed();
-				Vect4 BA = A - B;
-				if (u.norme() != 0)
-				{
-					float d = ((B - A)^u).norme() / u.norme();
-					float uDotBA = u*BA;
-					if (i != j && d <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()) && uDotBA < u.norme())
-					{
-						physicalComponents[i]->collision(physicalComponents[j]);
-					}
-				}
-				A = physicalComponents[i]->getPosition();
-				B = physicalComponents[j]->getPosition();
-				u = physicalComponents[j]->getSpeed();
-				if (u.norme() != 0)
-				{
-					float d = ((B - A)^u).norme() / u.norme();
-					float uDotBA = u*BA;
-					if (i != j && d <= (physicalComponents[i]->getRadius() + physicalComponents[j]->getRadius()) && abs(uDotBA) < u.norme())
-					{
-						physicalComponents[i]->collision(physicalComponents[j]);
-					}
-				}
-
-				if (i != j && aToB.norme() <= (physicalComponents[j]->getRadius() + physicalComponents[i]->getRadius()))
-				{
-					physicalComponents[i]->collision(physicalComponents[j]);
-				}
-
-
-			}
-		}
-
-	}*/
-	for (int i = 0; i < MAX_PHYSICAL_COMPONENT_COUNT; i++)
+void PhysicalEngine::checkCollisions(list<PhysicalComponent *> *components, list<PhysicalComponent *>::iterator &componentIterator)
+{
+	PhysicalComponent *p2,*p1;
+	p1 = *componentIterator;
+	unsigned int id1, id2;
+	id1 = p1->getEngineIndex();
+	for (list<PhysicalComponent*>::iterator ite2 = components->begin();
+		ite2 != components->end();)
 	{
-		if (physicalComponents[i] != NULL)
+		p2 = (*ite2);
+		id2 = p2->getEngineIndex();
+		if (p2 != NULL)
 		{
-			physicalComponents[i]->update();
+			if (p2 != NULL)
+			{
+				if (id1 != id2)
+				{
+					Vect4 aToB(p2->getPosition() - p1->getPosition());
+					id2 = p2->getEngineIndex();
+					if (p2 != NULL && aToB.normesqr() <= (p2->getRadius()*p2->getRadius() + p1->getRadius()*p1->getRadius()))
+					{
+						if (!collisions[id1][id2])
+						{
+							p1->collision(p2);
+							p2->collision(p1);
+							collisions[id1][id2] = collisions[id2][id1] = true;
+						}
+						else
+						{
+							collisions[id1][id2] = collisions[id2][id1] = false;
+						}
+					}
+					
+				}
+			}
 		}
-	}
+		++ite2;
 
+	}
 }
 
 void PhysicalEngine::addPhysicalComponent(PhysicalComponent *component)

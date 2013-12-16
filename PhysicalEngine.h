@@ -35,6 +35,8 @@ public:
 	void update(float fDT);
 	void remove(unsigned int index);
 	void removeParticleComponent(unsigned int index);
+
+	void PhysicalEngine::checkCollisions(list<PhysicalComponent *> *components, list<PhysicalComponent *>::iterator &componentIterator);
 	
 	
 };
