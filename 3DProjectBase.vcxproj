@@ -64,7 +64,7 @@
       <AdditionalIncludeDirectories>./TinyXml;./shadersApi;./gl;.;gl;ShadersApi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;pthreadVCE2.lib;%(AdditionalDependencies);libsndfile-1.lib;libOpenAL32.dll.a</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -87,7 +87,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glut32.lib;opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies);pthreadVCE2.lib</AdditionalDependencies>
+      <AdditionalDependencies>glut32.lib;opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies);pthreadVCE2.lib;libsndfile-1.lib;libOpenAL32.dll.a</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -99,6 +99,7 @@
   <ItemGroup>
     <ClCompile Include="Bacteria.cpp" />
     <ClCompile Include="BriefingState.cpp" />
+    <ClCompile Include="Cancer.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellPhysicalComponent.cpp" />
     <ClCompile Include="CellRenderableComponent.cpp" />
@@ -115,7 +116,10 @@
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightingGameObject.cpp" />
+    <ClCompile Include="Lymphocyte.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="Monocyte.cpp" />
+    <ClCompile Include="Neutrophile.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -134,6 +138,8 @@
     <ClCompile Include="ShadersApi\Shader.cpp" />
     <ClCompile Include="ShadersApi\Program.cpp" />
     <ClCompile Include="ShadersApi\ShadersInc.cpp" />
+    <ClCompile Include="SoundEngine.cpp" />
+    <ClCompile Include="SoundSource.cpp" />
     <ClCompile Include="SpawnLine.cpp" />
     <ClCompile Include="SpawnPool.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -146,11 +152,13 @@
     <ClCompile Include="TinyXml\tinyxmlparser.cpp" />
     <ClCompile Include="UpdaterThread.cpp" />
     <ClCompile Include="VBO.cpp" />
+    <ClCompile Include="Virus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
     <ClInclude Include="Bacteria.h" />
     <ClInclude Include="BriefingState.h" />
+    <ClInclude Include="Cancer.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellPhysicalComponent.h" />
     <ClInclude Include="CellRenderableComponent.h" />
@@ -167,11 +175,16 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Indexer.h" />
     <ClInclude Include="LightingGameObject.h" />
+    <ClInclude Include="Lymphocyte.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="Monocyte.h" />
+    <ClInclude Include="Neutrophile.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectilePhysicalComponent.h" />
+    <ClInclude Include="SoundEngine.h" />
+    <ClInclude Include="SoundSource.h" />
     <ClInclude Include="SpawnLine.h" />
     <ClInclude Include="SpawnPool.h" />
     <ClInclude Include="Timer.h" />
@@ -204,6 +217,7 @@
     <ClInclude Include="UpdaterThread.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="Vect4.h" />
+    <ClInclude Include="Virus.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="OBJReader.ico" />

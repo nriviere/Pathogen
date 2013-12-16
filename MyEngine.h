@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "GameState.h"
 #include "GameEngine.h"
+#include "SoundEngine.h"
 
 class MyEngine :
 	public C3DEngine
@@ -32,6 +33,7 @@ public:
 	Renderer *getRenderer();
 	PhysicalEngine *getPhysicalEngine();
 	GameEngine *getGameEngine();
+	SoundEngine *getSoundEngine();
 	unsigned int getMaxConcurrence();
 	
 	std::ofstream *getErrLog();
@@ -48,7 +50,7 @@ private:
 	Renderer *renderer;
 	PhysicalEngine *physicalEngine;
 	GameEngine *gameEngine;
-
+	SoundEngine *soundEngine;
 	unsigned int maxConcurrence;
 
 	

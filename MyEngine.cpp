@@ -25,6 +25,7 @@ MyEngine::MyEngine(void)
 	gameEngine = new GameEngine(this);
 	renderer = new Renderer(this);
 	physicalEngine = new PhysicalEngine(this);
+	soundEngine = new SoundEngine(this);
 	errlog.open("log.txt", std::ios::trunc);
 }
 
@@ -34,6 +35,8 @@ MyEngine::~MyEngine(void)
 	delete renderer;
 	delete physicalEngine;
 	delete gameEngine;
+	soundEngine->shutdown();
+	delete soundEngine;
 	errlog.close();
 }
 
@@ -50,6 +53,7 @@ void MyEngine::Setup(HWND hWnd)
 
 	renderer->setWidht(R.right);
 	renderer->setHeight(R.bottom);
+	soundEngine->init();
 	/*
 	for (int o = 0; o < scene->u32ObjectsCount; o++)
 	{
@@ -107,6 +111,7 @@ void MyEngine::Setup(HWND hWnd)
 void MyEngine::Update(float fDT)
 {
 	gameEngine->update(fDT);
+	soundEngine->update();
 	frames++;
 }
 
@@ -168,6 +173,10 @@ GameEngine *MyEngine::getGameEngine()
 	return gameEngine;
 }
 
+SoundEngine *MyEngine::getSoundEngine()
+{
+	return soundEngine;
+}
 
 unsigned int MyEngine::getMaxConcurrence()
 {

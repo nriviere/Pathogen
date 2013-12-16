@@ -2,6 +2,8 @@
 #include "tinyxml.h"
 #include "Cell.h"
 #include "Bacteria.h"
+#include "Cancer.h"
+#include "Virus.h"
 #include "GameEngine.h"
 
 Level::Level(const char *filename, GameEngine *engine)
@@ -124,6 +126,14 @@ GameObject **Level::instantiateObjects(const char *className, unsigned int count
 	{
 		objectType = bacteriaType;
 	}
+	else if (strcmp(className, "Virus") == 0)
+	{
+		objectType = virusType;
+	}
+	else if (strcmp(className, "Cancer") == 0)
+	{
+		objectType = cancerType;
+	}
 	else if (strcmp(className, "Cell") == 0) {
 		objectType = cellType;
 	}else
@@ -147,9 +157,9 @@ GameObject *Level::instantiateObject(ObjectType objectType)
 		break;
 	case bacteriaType:gameObject = new Bacteria(engine);
 		break;
-	case virusType: return NULL;
+	case virusType:gameObject = new Virus(engine);
 		break;
-	case cancerType: return NULL;
+	case cancerType:gameObject = new Cancer(engine);
 		break;
 	default: return NULL;
 		break;
