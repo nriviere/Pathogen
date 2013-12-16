@@ -49,6 +49,7 @@ void Bacteria::replicate()
 void Bacteria::destroy()
 {
 	Explosion *explosion = new Explosion(physicalComponent->getPosition());
+	engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::EXPLOSION_SOUND_ID);
 	engine->addParticleSystem(explosion);
 	Enemy::destroy();
 }

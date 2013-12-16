@@ -62,6 +62,7 @@ void Hero::shoot()
 		projectile->setHeading(getHeading());
 		engine->addObject(projectile);
 		munitions[currentMunition]--;	
+		engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::TEST_SOUND_ID);
 	}
 }
 

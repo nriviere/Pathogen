@@ -85,6 +85,12 @@
     <Filter Include="Header Files\GameEngine\Level">
       <UniqueIdentifier>{629d0708-2a0e-4442-b9bc-64a63405677a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SoundEngine">
+      <UniqueIdentifier>{3e8edb8d-e56c-4721-8922-ffc683ef746f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SoundEngine">
+      <UniqueIdentifier>{f6bdbc48-2905-4f1c-bd79-83f391c7e075}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShadersApi\ShadersInc.cpp">
@@ -236,6 +242,12 @@
     </ClCompile>
     <ClCompile Include="BriefingState.cpp">
       <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEngine.cpp">
+      <Filter>Source Files\SoundEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSource.cpp">
+      <Filter>Source Files\SoundEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +421,12 @@
     </ClInclude>
     <ClInclude Include="BriefingState.h">
       <Filter>Header Files\GameEngine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEngine.h">
+      <Filter>Header Files\SoundEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSource.h">
+      <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
