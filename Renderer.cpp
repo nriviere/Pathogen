@@ -29,6 +29,7 @@ Renderer::Renderer(MyEngine *engine)
 	height = 1080;
 	lightsChanged = true;
 	currentLightCount = 0;
+	timePassed = 0;
 }
 
 void Renderer::init(){
@@ -763,10 +764,14 @@ void Renderer::drawQuads(float x, float y, float width, float height)
 	glEnd();
 }
 
+void Renderer::updateTime(float fDT)
+{
+	timePassed += fDT;
+}
+
 void Renderer::drawHud(unsigned int width, unsigned int height)
 {
 	int score = 0;
-	float tim = 0;
 	float c1, c2;
 	float munitionType1 = this->engine->getGameEngine()->getHero()->getMunitionType1();
 	float munitionType2 = this->engine->getGameEngine()->getHero()->getMunitionType2();
@@ -780,7 +785,7 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	render_string(10, 20, 0, GLUT_BITMAP_9_BY_15, c);
 
 	string t1 = "TEMPS : ";
-	string t2 = to_string((int)tim);
+	string t2 = to_string((int)timePassed);
 	string t = t1 + t2;
 	const char *ct = t.c_str();
 	render_string(width / 2 - 80, 20, 0, GLUT_BITMAP_9_BY_15, ct);
