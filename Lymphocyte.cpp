@@ -32,6 +32,9 @@ void Lymphocyte::hitBy(ObjectType objectType)
 		destroy();
 		break;
 
+	case bacteriaType:
+		destroy();
+
 	default: break;
 	}
 }

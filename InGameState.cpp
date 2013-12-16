@@ -143,6 +143,7 @@ void InGameState::setup()
 void InGameState::update(float fDT)
 {
 	engine->getHero()->regenerateMunition(fDT);
+	parentEngine->getRenderer()->updateTime(fDT);
 
 	parentEngine->getPhysicalEngine()->update(fDT);
 	unsigned int gameObjectCount = engine->getGameObjectCount();

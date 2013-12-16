@@ -27,6 +27,14 @@ void Neutrophile::hitBy(ObjectType objectType)
 		destroy();
 		break;
 
+	case virusType:
+		destroy();
+		break;
+
+	case cancerType:
+		destroy();
+		break;
+
 	default: break;
 	}
 }

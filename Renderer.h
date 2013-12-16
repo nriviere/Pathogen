@@ -69,6 +69,7 @@ public:
 	void render_string(float x, float y, float z, void* font, const char* s);
 	void setColorRtoG(float &c1, float &c2, float position);
 	void drawQuads(float x, float y, float width, float height);
+	void updateTime(float fDT);
 	void drawHud(unsigned int width, unsigned int height);
 
 	void updateLightUniforms(Matrx44 modelView);
@@ -104,6 +105,8 @@ private:
 		renderedTextures[DEPTH_PEELING_PASS_COUNT],
 		depthTextures[DEPTH_PEELING_PASS_COUNT],
 		framebufferIds[DEPTH_PEELING_PASS_COUNT];
+
+	float timePassed;
 
 	Program* compute_illumination, *depthShader;
 	std::list<Program*> programs;

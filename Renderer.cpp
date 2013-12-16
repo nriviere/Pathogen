@@ -29,6 +29,7 @@ Renderer::Renderer(MyEngine *engine)
 	height = 1080;
 	lightsChanged = true;
 	currentLightCount = 0;
+	timePassed = 0;
 }
 
 void Renderer::init(){
@@ -763,10 +764,14 @@ void Renderer::drawQuads(float x, float y, float width, float height)
 	glEnd();
 }
 
+void Renderer::updateTime(float fDT)
+{
+	timePassed += fDT;
+}
+
 void Renderer::drawHud(unsigned int width, unsigned int height)
 {
 	int score = 0;
-	float tim = 0;
 	float c1, c2;
 	float munitionType1 = this->engine->getGameEngine()->getHero()->getMunitionType1();
 	float munitionType2 = this->engine->getGameEngine()->getHero()->getMunitionType2();
@@ -777,27 +782,35 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	string s2 = to_string((long double)score);
 	string s = s1 + s2;
 	const char *c = s.c_str();
-	render_string(10, 20, 0, GLUT_BITMAP_9_BY_15, c);
+	render_string(width/100, 5*height/100, 0, GLUT_BITMAP_9_BY_15, c);
 
 	string t1 = "TEMPS : ";
+<<<<<<< HEAD
 	string t2 = to_string((long double)tim);
+=======
+	string t2 = to_string((int)timePassed);
+>>>>>>> 36ef974b6fee308fdb0c6224988930dfe714401b
 	string t = t1 + t2;
 	const char *ct = t.c_str();
-	render_string(width / 2 - 80, 20, 0, GLUT_BITMAP_9_BY_15, ct);
+	render_string(width / 2 - 80, 5*height/100, 0, GLUT_BITMAP_9_BY_15, ct);
 
 	glDisable(GL_TEXTURE_2D);
 
+	int w = width / 13;
+	int x = width - w - (width / 100);
+	int y = 5 * height / 100;
+
 	setColorRtoG(c1, c2, munitionType1);
 	glColor3f(c1, c2, 0);
-	drawQuads(1700, 20, 200 * munitionType1, 10);
+	drawQuads(x, y, w * munitionType1, 10);
 
 	setColorRtoG(c1, c2, munitionType2);
 	glColor3f(c1, c2, 0);
-	drawQuads(1700, 40, 200 * munitionType2, 10);
+	drawQuads(x, y + 15, w * munitionType2, 10);
 
 	setColorRtoG(c1, c2, munitionType3);
 	glColor3f(c1, c2, 0);
-	drawQuads(1700, 60, 200 * munitionType3, 10);
+	drawQuads(x, y + 30, w * munitionType3, 10);
 	glEnable(GL_TEXTURE_2D);
 }
 

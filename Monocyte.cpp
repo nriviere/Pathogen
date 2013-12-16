@@ -26,16 +26,16 @@ void Monocyte::hitBy(ObjectType objectType)
 	switch (objectType){
 
 	case bacteriaType:
-		//destroy();
+		destroy();
 		break;
 	//Faire en sorte qu'il retourne vers le hero  pour le virus et le cancer
 	case virusType:
 		this->engine->getHero()->setLymphocyteTag(lymphocyteTagVirus);
-		//destroy();
+		destroy();
 		break;
 	case cancerType:
 		this->engine->getHero()->setLymphocyteTag(lymphocyteTagCancer);
-		//destroy();
+		destroy();
 		break;
 	default: break;
 	}
