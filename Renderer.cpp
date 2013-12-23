@@ -785,11 +785,11 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	render_string(width/100, 5*height/100, 0, GLUT_BITMAP_9_BY_15, c);
 
 	string t1 = "TEMPS : ";
-<<<<<<< HEAD
-	string t2 = to_string((long double)tim);
-=======
-	string t2 = to_string((int)timePassed);
->>>>>>> 36ef974b6fee308fdb0c6224988930dfe714401b
+
+	string t2 = to_string((long double)timePassed);
+
+	//string t2 = to_string((int)timePassed);
+
 	string t = t1 + t2;
 	const char *ct = t.c_str();
 	render_string(width / 2 - 80, 5*height/100, 0, GLUT_BITMAP_9_BY_15, ct);
