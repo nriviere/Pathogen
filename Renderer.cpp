@@ -292,33 +292,45 @@ void Renderer::load(SCENE **objects, unsigned int count)
 
 	
 		//SHADERS
-
-		Shader *s1 = new Shader("shaders/tp1v.gls", GL_VERTEX_SHADER);
+		MyEngine::errlog << "Loading shaders ..." << endl;
+		Shader *s1 = new Shader("shaders/tp1v.glsl", GL_VERTEX_SHADER);
 		shaders.push_back(s1);
 		s1->init();
 		s1->loadSource();
+		MyEngine::errlog << "Source 1 Done..." << endl;
 		s1->loadShader();
 
-		Shader *f1 = new Shader("shaders/tp1f.gls", GL_FRAGMENT_SHADER);
+		Shader *f1 = new Shader("shaders/tp1f.glsl", GL_FRAGMENT_SHADER);
 		shaders.push_back(f1);
 		f1->init();
 		f1->loadSource();
+		MyEngine::errlog << "Source 2 Done..." << endl;
 		f1->loadShader();
 
-		Shader *f3 = new  Shader("shaders/depthWritef.gls", GL_FRAGMENT_SHADER);
+		//MyEngine::errlog << "Shader 3 ..." << endl;
+		Shader *f3 = new  Shader("shaders/depthWritef.glsl", GL_FRAGMENT_SHADER);
 		shaders.push_back(f3);
+		//MyEngine::errlog << "Creation Done ..." << endl;
 		f3->init();
+		//MyEngine::errlog << "Initialization Done ..." << endl;
 		f3->loadSource();
+		//MyEngine::errlog << "Source 3 Done..." << endl;
 		f3->loadShader();
-		
+		//MyEngine::errlog << "Done ..." << endl;
+
+
+		//MyEngine::errlog << "Creating Program 1 ..." << endl;
 		depthShader = new Program();
 		depthShader->setShader(s1, 0);
 		depthShader->setShader(f3, 1);
 		glBindAttribLocation(depthShader->getID(), 0, "in_position");
 		glBindAttribLocation(depthShader->getID(), 1, "in_normal");
+		//MyEngine::errlog << " ... done" << endl;
+		//MyEngine::errlog << "Linking ... " << endl;
 		depthShader->linkProgram();
+		//MyEngine::errlog << "...Done " << endl;
 		programs.push_back(depthShader);
-		
+		//MyEngine::errlog << "P1 ... done" << endl;
 		Program *p = new Program();
 		p->setShader(s1, 0);
 		p->setShader(f1, 1);
@@ -327,13 +339,16 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		p->linkProgram();
 		compute_illumination = p;
 		programs.push_back(p);
+		//MyEngine::errlog << "P2 ... done" << endl;
+		//MyEngine::errlog << "Done ..." << endl;
 	}
 
 	catch (ShaderException *e)
 	{
-		string s = e->what();
-		logs << s;
-		exit(-1);
+		/*string s = e->what();
+		MyEngine::errlog << s;
+		MyEngine::errlog.close();*/
+		//exit(-1);
 	}
 
 }

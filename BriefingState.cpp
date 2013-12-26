@@ -13,7 +13,7 @@ BriefingState::BriefingState(GameEngine *engine) : GameState(engine)
 	//data[0] = ReadTGA("./assets/briefing/munition1.tga");
 	data[1] = ReadTGA("./assets/briefing/munition1.tga");
 	data[2] = ReadTGA("./assets/briefing/munition2.tga");
-	data[3] = ReadTGA("./assets/briefing/munition1.tga");
+	data[3] = ReadTGA("./assets/briefing/munition3.tga");
 	
 }
 

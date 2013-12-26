@@ -1,6 +1,6 @@
 #include "SoundEngine.h"
 
-
+#include "MyEngine.h"
 
 SoundEngine::SoundEngine(MyEngine *engine)
 {
@@ -41,7 +41,16 @@ bool SoundEngine::init()
 		return false;
 
 	soundBuffers[TEST_SOUND_ID] = loadSound("assets/sounds/test1.wav");
+	if (soundBuffers[TEST_SOUND_ID] == NULL)
+	{
+		MyEngine::errlog << "Failed to load Test Sound" << endl;
+	}
+
 	soundBuffers[EXPLOSION_SOUND_ID] = loadSound("assets/sounds/explosion.wav");
+	if (soundBuffers[EXPLOSION_SOUND_ID] == NULL)
+	{
+		MyEngine::errlog << "Failed to load Explosion Sound" << endl;
+	}
 	return true;
 }
 

@@ -8,21 +8,21 @@
 #include <gl\wglext.h>
 #include "ShaderException.h"
 
-extern PFNGLSHADERSOURCEPROC glShaderSource;
-extern PFNGLCREATESHADERPROC glCreateShader;
+extern PFNGLSHADERSOURCEARBPROC glShaderSourceARB;
+extern PFNGLCREATESHADEROBJECTARBPROC glCreateShaderObjectARB;
 extern PFNGLDELETESHADERPROC glDeleteShader;
-extern PFNGLCOMPILESHADERPROC glCompileShader;
+extern PFNGLCOMPILESHADERARBPROC glCompileShaderARB;
 extern PFNGLGETSHADERIVPROC glGetShaderiv;
 extern PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 
-extern PFNGLCREATEPROGRAMPROC glCreateProgram;
-extern PFNGLDELETEPROGRAMPROC  glDeleteProgram;
+extern PFNGLCREATEPROGRAMOBJECTARBPROC glCreateProgramObjectARB;
+extern PFNGLDELETEPROGRAMSARBPROC  glDeleteProgramsARB;
 extern PFNGLATTACHSHADERPROC glAttachShader;
 extern PFNGLDETACHSHADERPROC glDetachShader;
-extern PFNGLLINKPROGRAMPROC glLinkProgram;
+extern PFNGLLINKPROGRAMARBPROC glLinkProgramARB;
 extern PFNGLGETPROGRAMIVPROC glGetProgramiv;
 extern PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
-extern PFNGLUSEPROGRAMPROC glUseProgram;
+extern PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 
 extern PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
 extern PFNGLUNIFORM1FVPROC  glUniform1fv;

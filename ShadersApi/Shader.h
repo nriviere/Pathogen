@@ -10,7 +10,7 @@ class Shader
 {
 private:
 	string filename;
-	char *shaderStr;
+	GLcharARB *shaderStr;
 	unsigned int ID;
 	GLenum type;
 public:

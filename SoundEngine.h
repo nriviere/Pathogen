@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include <iostream>
 #include "al.h"
 #include "alc.h"

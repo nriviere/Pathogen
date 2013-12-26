@@ -1,10 +1,10 @@
 #include "Program.h"
-
+#include "MyEngine.h"
 list<unsigned int> Program::current_program = list<unsigned int>();
 
 Program::Program()
 {
-	ID = glCreateProgram();
+	ID = glCreateProgramObjectARB();
 	shaders[0] = shaders[1] = NULL;
 	shader_count = 0;
 	in_use = false;
@@ -15,7 +15,7 @@ Program::~Program()
 {
 	if (ID != 0)
 	{
-		glDeleteProgram(ID);
+		glDeleteProgramsARB(1,&ID);
 	}
 }
 
@@ -48,7 +48,7 @@ void Program::removeShader(unsigned int position)
 
 void Program::linkProgram()
 {
-	glLinkProgram(ID);
+	glLinkProgramARB(ID);
 	GLint result;
 	glGetProgramiv(ID, GL_LINK_STATUS, &result);
 	if (result != GL_TRUE)
@@ -57,6 +57,7 @@ void Program::linkProgram()
 		glGetProgramiv(ID, GL_INFO_LOG_LENGTH, &logsize);
 		char * log = new char[logsize];
 		glGetProgramInfoLog(ID, logsize, &length, log);
+		//MyEngine::errlog << "Linking failed" << endl;
 		ShaderException *e = new ShaderException(log);
 		delete[] log;
 		throw e;
@@ -65,7 +66,7 @@ void Program::linkProgram()
 
 void Program::start()
 {
-	glUseProgram(ID);
+	glUseProgramObjectARB(ID);
 	Program::current_program.push_back(ID);
 	in_use = true;
 }
@@ -78,10 +79,10 @@ void Program::stop()
 	}
 	if (Program::current_program.empty())
 	{
-		glUseProgram(0);
+		glUseProgramObjectARB(0);
 	}
 	else
 	{
-		glUseProgram(Program::current_program.back());
+		glUseProgramObjectARB(Program::current_program.back());
 	}
 }

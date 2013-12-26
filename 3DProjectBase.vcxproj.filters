@@ -468,17 +468,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\tp1v.gls">
-      <Filter>Header Files\Renderer\shaders</Filter>
-    </None>
-    <None Include="shaders\depthWritef.gls">
-      <Filter>Header Files\Renderer\shaders</Filter>
-    </None>
-    <None Include="shaders\tp1f.gls">
-      <Filter>Header Files\Renderer\shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="OBJReader.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
@@ -487,5 +476,16 @@
     <Xml Include="Levels\Level1.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\depthWritef.glsl">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+    <None Include="shaders\tp1f.glsl">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
+    <None Include="shaders\tp1v.glsl">
+      <Filter>Header Files\Renderer\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

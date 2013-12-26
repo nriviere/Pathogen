@@ -2,21 +2,21 @@
 #include "ShaderException.h"
 #include <iostream>
 
-PFNGLSHADERSOURCEPROC glShaderSource = NULL;
-PFNGLCREATESHADERPROC glCreateShader = NULL;
+PFNGLSHADERSOURCEARBPROC glShaderSourceARB = NULL;
+PFNGLCREATESHADEROBJECTARBPROC glCreateShaderObjectARB = NULL;
 PFNGLDELETESHADERPROC glDeleteShader = NULL;
-PFNGLCOMPILESHADERPROC glCompileShader = NULL;
+PFNGLCOMPILESHADERARBPROC glCompileShaderARB = NULL;
 PFNGLGETSHADERIVPROC glGetShaderiv = NULL;
 PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog = NULL;
 
-PFNGLCREATEPROGRAMPROC glCreateProgram = NULL;
-PFNGLDELETEPROGRAMPROC  glDeleteProgram = NULL;
+PFNGLCREATEPROGRAMOBJECTARBPROC glCreateProgramObjectARB = NULL;
+PFNGLDELETEPROGRAMSARBPROC  glDeleteProgramsARB = NULL;
 PFNGLATTACHSHADERPROC glAttachShader = NULL;
 PFNGLDETACHSHADERPROC glDetachShader = NULL;
-PFNGLLINKPROGRAMPROC glLinkProgram = NULL;
+PFNGLLINKPROGRAMARBPROC glLinkProgramARB = NULL;
 PFNGLGETPROGRAMIVPROC glGetProgramiv = NULL;
 PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog = NULL;
-PFNGLUSEPROGRAMPROC glUseProgram = NULL;
+PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB = NULL;
 
 PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 PFNGLUNIFORM1FVPROC  glUniform1fv = NULL;
@@ -44,17 +44,17 @@ PFNGLDELETERENDERBUFFERSPROC glDeleteRenderbuffers = NULL;
 PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
 
 void initApi() throw (ShaderException){
-	glCreateShader = (PFNGLCREATESHADERPROC)wglGetProcAddress("glCreateShader");
-	if (glCreateShader == NULL)
+	glCreateShaderObjectARB = (PFNGLCREATESHADEROBJECTARBPROC)wglGetProcAddress("glCreateShaderObjectARB");
+	if (glCreateShaderObjectARB == NULL)
 	{
-		throw new ShaderException("failed to retrieve glCreateShader function pointer.");
+		throw new ShaderException("failed to retrieve glCreateShaderObjectARB function pointer.");
 		return;
 	}
 
-	glShaderSource = (PFNGLSHADERSOURCEPROC)wglGetProcAddress("glShaderSource");
-	if (glShaderSource == NULL)
+	glShaderSourceARB = (PFNGLSHADERSOURCEARBPROC)wglGetProcAddress("glShaderSourceARB");
+	if (glShaderSourceARB == NULL)
 	{
-		throw new ShaderException("failed to retrieve glShaderSource function pointer.");
+		throw new ShaderException("failed to retrieve glShaderSourceARB function pointer.");
 	}
 	
 	glDeleteShader = (PFNGLDELETESHADERPROC)wglGetProcAddress("glDeleteShader");
@@ -63,8 +63,8 @@ void initApi() throw (ShaderException){
 		throw new ShaderException("failed to retrieve glDeleteShader function pointer.");
 	}
 
-	glCompileShader = (PFNGLCOMPILESHADERPROC)wglGetProcAddress("glCompileShader");
-	if (glCompileShader == NULL)
+	glCompileShaderARB = (PFNGLCOMPILESHADERARBPROC)wglGetProcAddress("glCompileShaderARB");
+	if (glCompileShaderARB == NULL)
 	{
 		throw new ShaderException("failed to retrieve glCompileShader function pointer.");
 	}
@@ -82,16 +82,16 @@ void initApi() throw (ShaderException){
 	}
 
 
-	glCreateProgram = (PFNGLCREATEPROGRAMPROC)wglGetProcAddress("glCreateProgram");
-	if (glCreateProgram == NULL)
+	glCreateProgramObjectARB = (PFNGLCREATEPROGRAMOBJECTARBPROC)wglGetProcAddress("glCreateProgramObjectARB");
+	if (glCreateProgramObjectARB == NULL)
 	{
-		throw new ShaderException("failed to retrieve glCreateProgram function pointer.");
+		throw new ShaderException("failed to retrieve glCreateProgramObjectARB function pointer.");
 	}
 
-	glDeleteProgram = (PFNGLDELETEPROGRAMPROC)wglGetProcAddress("glDeleteProgram");
-	if (glDeleteProgram == NULL)
+	glDeleteProgramsARB = (PFNGLDELETEPROGRAMSARBPROC)wglGetProcAddress("glDeleteProgramsARB");
+	if (glDeleteProgramsARB == NULL)
 	{
-		throw new ShaderException("failed to retrieve glDeleteProgram function pointer.");
+		throw new ShaderException("failed to retrieve glDeleteProgramsARB function pointer.");
 	}
 
 	glAttachShader = (PFNGLATTACHSHADERPROC)wglGetProcAddress("glAttachShader");
@@ -106,10 +106,10 @@ void initApi() throw (ShaderException){
 		throw new ShaderException("failed to retrieve glDetachShader function pointer.");
 	}
 
-	glLinkProgram = (PFNGLLINKPROGRAMPROC)wglGetProcAddress("glLinkProgram");
-	if (glLinkProgram == NULL)
+	glLinkProgramARB = (PFNGLLINKPROGRAMARBPROC)wglGetProcAddress("glLinkProgramARB");
+	if (glLinkProgramARB == NULL)
 	{
-		throw new ShaderException("failed to retrieve glLinkProgram function pointer.");
+		throw new ShaderException("failed to retrieve glLinkProgramARB function pointer.");
 	}
 
 	glGetProgramiv = (PFNGLGETPROGRAMIVPROC)wglGetProcAddress("glGetProgramiv");
@@ -124,10 +124,10 @@ void initApi() throw (ShaderException){
 		throw new ShaderException("failed to retrieve glGetProgramInfoLog function pointer.");
 	}
 
-	glUseProgram = (PFNGLUSEPROGRAMPROC)wglGetProcAddress("glUseProgram");
-	if (glUseProgram == NULL)
+	glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC)wglGetProcAddress("glUseProgramObjectARB");
+	if (glUseProgramObjectARB == NULL)
 	{
-		throw new ShaderException("failed to retrieve glUseProgram function pointer.");
+		throw new ShaderException("failed to retrieve glUseProgramObjectARB function pointer.");
 	}
 
 	glGetUniformLocation = (PFNGLGETUNIFORMLOCATIONPROC)wglGetProcAddress("glGetUniformLocation");

@@ -83,7 +83,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..;.;./gl;./ShadersApi;./TinyXml</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
@@ -227,12 +227,12 @@
     <ResourceCompile Include="OBJReader.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\depthWritef.gls" />
-    <None Include="shaders\tp1f.gls" />
-    <None Include="shaders\tp1v.gls" />
+    <Xml Include="Levels\Level1.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Levels\Level1.xml" />
+    <None Include="shaders\depthWritef.glsl" />
+    <None Include="shaders\tp1f.glsl" />
+    <None Include="shaders\tp1v.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
