@@ -63,16 +63,77 @@ void Hero::shoot()
 	if (munitions[currentMunition] > 0)
 	{
 		Projectile *projectile = NULL;
-		if (currentMunition == 0)	projectile = new Neutrophile(engine);
-		if (currentMunition == 1)	projectile = new Monocyte(engine);
-		if (currentMunition == 2)	projectile = new Lymphocyte(engine, type);
-		projectile->setHeading(getHeading());
-		engine->addObject(projectile);
-		munitions[currentMunition]--;	
-		engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::TEST_SOUND_ID);
+		switch (currentMunition){
+		case 0: projectile = new Neutrophile(engine);
+			projectile->setHeading(getHeading());
+			break;
+		case 1: projectile = shootMonocyte();
+			
+			break;
+		case 2: projectile = new Lymphocyte(engine, lymphocyteTag);
+			projectile->setHeading(getHeading());
+			break;
+		default: return;
+			break;
+		}
+		if (projectile != NULL)
+		{
+			engine->addObject(projectile);
+			munitions[currentMunition]--;
+			engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::TEST_SOUND_ID);
+		}
 	}
 }
 
+Monocyte *Hero::shootMonocyte()
+{
+	Cursor *cursor;
+	Vect4 cursorPosition;
+	list<list<PhysicalComponent *>*> neighborhood;
+	
+	cursor = engine->getCursor();
+	cursorPosition = cursor->getPhysicalComponent()->getPosition();
+	neighborhood = engine->getParentEngine()->getPhysicalEngine()->getGrid()->getNeighborhood(cursorPosition[0], cursorPosition[1], 30);
+	PhysicalComponent *nearest = NULL;
+	PhysicalComponent *physicalComponent = NULL;
+	GameObject *gameObject = NULL;
+	float minDist = 999999999, currentDist = 0;
+	ObjectType currentType;
+	for (list<list<PhysicalComponent *>*>::iterator j = neighborhood.begin(); j != neighborhood.end();)
+	{
+		for (list<PhysicalComponent *>::iterator i = (*j)->begin(); i != (*j)->end();)
+		{
+			gameObject = (*i)->getGameObject();
+			physicalComponent = (*i);
+			if (gameObject != NULL)
+			{
+				currentType = gameObject->getObjectType();
+				switch (currentType)
+				{
+				case cancerType:;
+				case virusType:;
+				case bacteriaType:
+					currentDist = Vect4(physicalComponent->getPosition() - cursorPosition).norme();
+					if (currentDist < minDist)
+					{
+						nearest = physicalComponent;
+						minDist = currentDist;
+					}
+					break;				 
+				default:break;
+				}
+			}
+			++i;
+		}
+		++j;
+	}
+	if (nearest != NULL)
+	{
+		Monocyte *monocyte = new Monocyte(engine,nearest->getGameObject());
+		return monocyte;
+	}
+	return NULL;
+}
 Vect4 Hero::getHeading()
 {
 	Vect4 heading = engine->getCursor()->getPhysicalComponent()->getPosition() - physicalComponent->getPosition();
@@ -107,7 +168,6 @@ void Hero::selfRemove()
 	{
 		this->engine->setHero(NULL);
 	}
-	
 }
 
 float Hero::getMunitionType1()
@@ -191,5 +251,10 @@ void Hero::changeMunitionType(int type)
 
 void Hero::setLymphocyteTag(ObjectType type)
 {
-	this->type = type;
+	this->lymphocyteTag = type;
+}
+
+ObjectType Hero::getLymphocyteTag()
+{
+	return lymphocyteTag;
 }

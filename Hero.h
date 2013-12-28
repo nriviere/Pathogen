@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Monocyte.h"
 
 class GameEngine;
 
@@ -21,6 +22,7 @@ public:
 	void moveLeft();
 
 	void shoot();
+	Monocyte *shootMonocyte();
 	Vect4 getHeading();
 
 	void stopMoveUp();
@@ -42,6 +44,7 @@ public:
 	void changeMunitionType(int type);
 	
 	void setLymphocyteTag(ObjectType type);
+	ObjectType getLymphocyteTag();
 
 private:
 	float munitions[3];
@@ -50,6 +53,6 @@ private:
 	int regenerator[3];
 	float regenerationTime;
 	
-	ObjectType type;
+	ObjectType lymphocyteTag;
 };
 

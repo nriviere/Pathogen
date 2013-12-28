@@ -25,7 +25,23 @@ void InGameState::mouseWheel(float fIncrement)
 
 void InGameState::mouseMove(POINT pos)
 {
-	Vect4 cursorMove(pos.x,-pos.y, 0, 1);
+	float cursorMoveX = pos.x;
+	float cursorMoveY = -pos.y;
+	Vect4 cursorMove(0,0,0,1);
+	Cursor *cursor = engine->getCursor();
+	float *limitsX = engine->getCurrentLevel()->getLimitsX();
+	float *limitsY = engine->getCurrentLevel()->getLimitsY();
+	Vect4 cursorPostion = cursor->getPhysicalComponent()->getPosition();
+	if (limitsX[0] <= cursorMoveX + cursorPostion[0] && limitsX[1] >= cursorMoveX + cursorPostion[0])
+	{
+	
+		cursorMove[0] = cursorMoveX;
+	}
+
+	if (limitsY[0] <= cursorMoveY + cursorPostion[1] && limitsY[1] >= cursorMoveY + cursorPostion[1])
+	{
+		cursorMove[1] = cursorMoveY;
+	}
 	engine->getCursor()->translate(cursorMove*1.5);
 	prevMousePos = pos;
 }
@@ -129,6 +145,7 @@ void InGameState::setup()
 	names[5] = "3DS/models/cancer.obj";
 	names[6] = "3DS/models/monocyte.obj";
 	names[7] = "3DS/models/lymphocyte.obj";
+
 	engine->load(names, 8);
 
 	Light * light = new Light(Matrx44(Vect4(0.1,0.1,0.1, 1.),

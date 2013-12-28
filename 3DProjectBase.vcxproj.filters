@@ -264,6 +264,9 @@
     <ClCompile Include="Virus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HomingPhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -457,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="Virus.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingPhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

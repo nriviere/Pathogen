@@ -12,8 +12,10 @@ class Projectile :
 {
 protected:
 	unsigned int type;
+	
 public:
-	Projectile(GameEngine *engine = NULL);
+	Projectile();
+	Projectile(GameEngine *engine);
 	~Projectile();
 	void hit(GameObject *gameObject);
 	void setHeading(Vect4 v);

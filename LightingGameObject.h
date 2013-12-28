@@ -7,7 +7,7 @@ class LightingGameObject :
 protected:
 	Light *light;
 public:
-	LightingGameObject(GameEngine *engine);
+	LightingGameObject(GameEngine *engine = NULL);
 	~LightingGameObject();
 	Light *getLight();
 	void setLight(Light *light);

@@ -16,6 +16,8 @@ SCENE *scene = NULL;
 using namespace std;
 
 unsigned int Renderer::EXPLOSION_PARTICLE_TEXTURE_ID = 0;
+unsigned int Renderer::TAGGED_VIRUS_TEXTURE_ID = 0;
+unsigned int Renderer::TAGGED_CANCER_TEXTURE_ID = 0;
 
 Renderer::Renderer(MyEngine *engine)
 {
@@ -114,21 +116,17 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		glBindBuffer(GL_ARRAY_BUFFER, coord_buffer_object);
 		glBufferSubData(GL_ARRAY_BUFFER, vertex_pos * 3 * sizeof(GL_FLOAT), objects[s]->u32VerticesCount * 3 * sizeof(GL_FLOAT), objects[s]->pVertices);
 
-
 		//RECUPERATION DES COORDONNES DE NORMALES
 		glBindBuffer(GL_ARRAY_BUFFER, normals_buffer_object);
 		glBufferSubData(GL_ARRAY_BUFFER, normals_pos * 3 * sizeof(GL_FLOAT), objects[s]->u32NormalsCount * 3 * sizeof(GL_FLOAT), objects[s]->pNormals);
-
 
 		//RECUPERATION DES COORDONNES DE TEXTURES
 		glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
 		glBufferSubData(GL_ARRAY_BUFFER, textcoord_pos * 2 * sizeof(GL_FLOAT), objects[s]->u32UVCount * 2 * sizeof(GL_FLOAT), objects[s]->pUV);
 
-
 		vbo_index **model_indices = new vbo_index*[objects[s]->u32ObjectsCount];
 		Material **model_materials = new Material*[objects[s]->u32ObjectsCount];
 		unsigned int *textures = new unsigned int[objects[s]->u32ObjectsCount];
-
 
 		unsigned int material_counter = 0, index_counter = 0, index_offset = 0;
 		for (int o = 0; o < objects[s]->u32ObjectsCount; o++)
@@ -217,8 +215,7 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		vertex_pos += objects[s]->u32VerticesCount;
 		normals_pos += objects[s]->u32NormalsCount;
 		textcoord_pos += objects[s]->u32UVCount;
-
-
+		
 		models[model_pos].setTextures(textures, objects[s]->u32MaterialsCount);
 		models[model_pos].setIndices(model_indices, objects[s]->u32ObjectsCount);
 		models[model_pos].setMaterials(model_materials, objects[s]->u32MaterialsCount);
@@ -237,8 +234,8 @@ void Renderer::load(SCENE **objects, unsigned int count)
 	glBindBuffer(GL_ARRAY_BUFFER, texcoord_buffer_object);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+	/*
 	//PARTICLES TEXTURES
-	
 	IMAGE_DATA *particleTexture;
 	particleTexture = ReadTGA("Textures/ExplosionParticle2.tga");
 	glGenTextures(1, &EXPLOSION_PARTICLE_TEXTURE_ID);
@@ -247,15 +244,16 @@ void Renderer::load(SCENE **objects, unsigned int count)
 	glTexEnvi(GL_TEXTURE, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);*/
+
+	EXPLOSION_PARTICLE_TEXTURE_ID = loadTexture("Textures/ExplosionParticle2.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_NEAREST, GL_NEAREST);
+	TAGGED_VIRUS_TEXTURE_ID = loadTexture("Textures/TaggedVirus.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_NEAREST, GL_NEAREST);
+	TAGGED_CANCER_TEXTURE_ID = loadTexture("Textures/TaggedCancer.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_NEAREST, GL_NEAREST);
 
 	try{
 		initApi();
 		
 		//FRAMEBUFFERS
-
 		for (int i = 0; i < DEPTH_PEELING_PASS_COUNT; i++)
 		{
 			framebufferIds[i] = 0;
@@ -292,45 +290,34 @@ void Renderer::load(SCENE **objects, unsigned int count)
 
 	
 		//SHADERS
-		MyEngine::errlog << "Loading shaders ..." << endl;
 		Shader *s1 = new Shader("shaders/tp1v.glsl", GL_VERTEX_SHADER);
 		shaders.push_back(s1);
 		s1->init();
 		s1->loadSource();
-		MyEngine::errlog << "Source 1 Done..." << endl;
 		s1->loadShader();
 
 		Shader *f1 = new Shader("shaders/tp1f.glsl", GL_FRAGMENT_SHADER);
 		shaders.push_back(f1);
 		f1->init();
 		f1->loadSource();
-		MyEngine::errlog << "Source 2 Done..." << endl;
 		f1->loadShader();
 
-		//MyEngine::errlog << "Shader 3 ..." << endl;
 		Shader *f3 = new  Shader("shaders/depthWritef.glsl", GL_FRAGMENT_SHADER);
 		shaders.push_back(f3);
-		//MyEngine::errlog << "Creation Done ..." << endl;
+
 		f3->init();
-		//MyEngine::errlog << "Initialization Done ..." << endl;
+
 		f3->loadSource();
-		//MyEngine::errlog << "Source 3 Done..." << endl;
+
 		f3->loadShader();
-		//MyEngine::errlog << "Done ..." << endl;
 
-
-		//MyEngine::errlog << "Creating Program 1 ..." << endl;
 		depthShader = new Program();
 		depthShader->setShader(s1, 0);
 		depthShader->setShader(f3, 1);
 		glBindAttribLocation(depthShader->getID(), 0, "in_position");
 		glBindAttribLocation(depthShader->getID(), 1, "in_normal");
-		//MyEngine::errlog << " ... done" << endl;
-		//MyEngine::errlog << "Linking ... " << endl;
 		depthShader->linkProgram();
-		//MyEngine::errlog << "...Done " << endl;
 		programs.push_back(depthShader);
-		//MyEngine::errlog << "P1 ... done" << endl;
 		Program *p = new Program();
 		p->setShader(s1, 0);
 		p->setShader(f1, 1);
@@ -339,18 +326,14 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		p->linkProgram();
 		compute_illumination = p;
 		programs.push_back(p);
-		//MyEngine::errlog << "P2 ... done" << endl;
-		//MyEngine::errlog << "Done ..." << endl;
 	}
-
 	catch (ShaderException *e)
 	{
-		/*string s = e->what();
+		string s = e->what();
 		MyEngine::errlog << s;
-		MyEngine::errlog.close();*/
-		//exit(-1);
+		MyEngine::errlog.close();
+		exit(-1);
 	}
-
 }
 
 
@@ -387,26 +370,15 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glEnable(GL_DEPTH_TEST);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebufferIds[0]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//light test
+
 	glColor4f(1, 1, 1, 1);
-	/*glBegin(GL_QUADS);
-	glVertex3f(-200, -200, -50);
-	glVertex3f(200, -200, -50);
-	glVertex3f(200, 200, -50);
-	glVertex3f(-200, 200, -50);
-	glEnd();*/
-	//
-	
 	
 	compute_illumination->start();
-
-	
-	
-
 	render(compute_illumination);
 	compute_illumination->stop();
 	renderParticles();
 	renderLevel(level);
+
 	for (int i = 1; i < DEPTH_PEELING_PASS_COUNT; i++)
 	{
 		depthShader->start();
@@ -437,17 +409,11 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glLoadIdentity();
 	glViewport(0, 0, u32Width, u32Height);
 
-	
-	
-
-
-
 	glDisable(GL_DEPTH_TEST);
 	glActiveTexture(GL_TEXTURE0);
 	
 	glDisable(GL_LIGHTING);
 	
-
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBindTexture(GL_TEXTURE_2D, level->getBackgroundTextureId());
@@ -494,7 +460,6 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 
 	glDisable(GL_BLEND);
 
-	
 	glEnable(GL_LIGHTING);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -518,8 +483,6 @@ void Renderer::renderLevel(Level *level)
 	glVertex3f(cursorPosition[0], cursorPosition[1], 0);
 	glVertex3f(heroPosition[0], heroPosition[1], 0);
 	glEnd();
-
-
 	glEnable(GL_LIGHTING);
 }
 
@@ -769,12 +732,26 @@ void Renderer::setColorRtoG(float &r, float &g, float position)
 	}
 }
 
-void Renderer::drawQuads(float x, float y, float width, float height)
+void Renderer::drawQuad(float x, float y, float width, float height)
 {
 	glBegin(GL_QUADS);
 	glVertex2f(x, y);
 	glVertex2f(x, y + height);
 	glVertex2f(x + width, y + height);
+	glVertex2f(x + width, y);
+	glEnd();
+}
+
+void Renderer::drawTexQuad(float x, float y, float width, float height)
+{
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,0);
+	glVertex2f(x, y);
+	glTexCoord2f(0, 1);
+	glVertex2f(x, y + height);
+	glTexCoord2f(1, 1);
+	glVertex2f(x + width, y + height);
+	glTexCoord2f(1, 0);
 	glVertex2f(x + width, y);
 	glEnd();
 }
@@ -788,10 +765,10 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 {
 	int score = 0;
 	float c1, c2;
-	float munitionType1 = this->engine->getGameEngine()->getHero()->getMunitionType1();
-	float munitionType2 = this->engine->getGameEngine()->getHero()->getMunitionType2();
-	float munitionType3 = this->engine->getGameEngine()->getHero()->getMunitionType3();
-	
+	Hero *hero = engine->getGameEngine()->getHero();
+	float munitionType1 = hero->getMunitionType1();
+	float munitionType2 = hero->getMunitionType2();
+	float munitionType3 = hero->getMunitionType3();
 
 	string s1 = "SCORE : ";
 	string s2 = to_string((long double)score);
@@ -817,16 +794,38 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 
 	setColorRtoG(c1, c2, munitionType1);
 	glColor3f(c1, c2, 0);
-	drawQuads(x, y, w * munitionType1, 10);
+	drawQuad(x, y, w * munitionType1, 10);
 
 	setColorRtoG(c1, c2, munitionType2);
 	glColor3f(c1, c2, 0);
-	drawQuads(x, y + 15, w * munitionType2, 10);
+	drawQuad(x, y + 15, w * munitionType2, 10);
 
 	setColorRtoG(c1, c2, munitionType3);
 	glColor3f(c1, c2, 0);
-	drawQuads(x, y + 30, w * munitionType3, 10);
+	drawQuad(x, y + 30, w * munitionType3, 10);
+	
 	glEnable(GL_TEXTURE_2D);
+	unsigned int h = w = width / 7;
+	y = 9 * height / 100;
+	x = width - 1.5 * width / 7;
+
+	unsigned int lymphocyteTagTexture = 0;
+
+	switch (hero->getLymphocyteTag())
+	{
+	case lymphocyteTagVirus: lymphocyteTagTexture = TAGGED_VIRUS_TEXTURE_ID;
+		break;
+	case lymphocyteTagCancer: lymphocyteTagTexture = TAGGED_CANCER_TEXTURE_ID;
+		break;
+	default:
+		return;
+		break;
+	}
+
+	glBindTexture(GL_TEXTURE_2D, lymphocyteTagTexture);
+	glColor3f(1., 1. , 1.);
+	drawTexQuad(x, y, w,h);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 
@@ -888,4 +887,21 @@ unsigned int Renderer::getIndice_buffer_object()
 unsigned int Renderer::getIndex_count()
 {
 	return index_count;
+}
+
+unsigned int Renderer::loadTexture(const char *filename,GLenum type, GLenum envMode, GLenum magFilter, GLenum minFilter)
+{
+	IMAGE_DATA *imageData;
+	imageData = ReadTGA(filename);
+	unsigned int id = 0;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	GLenum format = GL_RGBA;
+	if (imageData->PixelFormat == 0) format = GL_RGB;
+	glTexImage2D(GL_TEXTURE_2D, 0, format, imageData->u32Width, imageData->u32Height, 0, format, type, imageData->pu8Pixels);
+	glTexEnvi(GL_TEXTURE, GL_TEXTURE_ENV_MODE, envMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	return id;
 }

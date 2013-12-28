@@ -3,10 +3,15 @@
 #include "MyEngine.h"
 #include "ProjectilePhysicalComponent.h"
 
+
+Projectile::Projectile() : LightingGameObject(NULL)
+{
+
+}
+
 Projectile::Projectile(GameEngine *engine) : LightingGameObject(engine)
 {
 	type = 0;
-	physicalComponent = new ProjectilePhysicalComponent(this);
 	if (engine != NULL){
 		this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::PROJECTILE_MODEL_INDEX];
 	}
@@ -14,9 +19,20 @@ Projectile::Projectile(GameEngine *engine) : LightingGameObject(engine)
 	{
 		model = NULL;
 	}
-	light->setPosition(physicalComponent->getPosition());
-	light->setRange(40.);
-	light->setAttenuation(0.8);
+
+	PhysicalEngine *physicalEngine = NULL;
+	if (engine != NULL)
+	{
+		physicalEngine = engine->getParentEngine()->getPhysicalEngine();
+	}
+	this->physicalComponent = new ProjectilePhysicalComponent(this, physicalEngine);
+
+	if (this->physicalComponent != NULL)
+	{
+		light->setPosition(this->physicalComponent->getPosition());
+		light->setRange(40.);
+		light->setAttenuation(0.8);
+	}
 	objectType = projectileType;
 }
 

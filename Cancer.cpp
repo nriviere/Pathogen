@@ -64,7 +64,6 @@ void Cancer::hitBy(ObjectType objectType)
 	switch (objectType){
 
 	case lymphocyteTagCancer:
-
 		destroy();
 		break;
 

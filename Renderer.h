@@ -39,6 +39,8 @@ public:
 	
 	static const unsigned int DEPTH_PEELING_PASS_COUNT = 3;
 	static unsigned int EXPLOSION_PARTICLE_TEXTURE_ID;
+	static unsigned int TAGGED_VIRUS_TEXTURE_ID;
+	static unsigned int TAGGED_CANCER_TEXTURE_ID;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();
 
@@ -64,11 +66,12 @@ public:
 	unsigned int getNormals_buffer_object();
 	unsigned int getIndice_buffer_object();
 	unsigned int getIndex_count();
-
+	unsigned int loadTexture(const char *filename, GLenum type, GLenum envMode, GLenum magFilter, GLenum minFilter);
 	void renderParticles();
 	void render_string(float x, float y, float z, void* font, const char* s);
 	void setColorRtoG(float &c1, float &c2, float position);
-	void drawQuads(float x, float y, float width, float height);
+	void drawQuad(float x, float y, float width, float height);
+	void drawTexQuad(float x, float y, float width, float height);
 	void updateTime(float fDT);
 	void drawHud(unsigned int width, unsigned int height);
 

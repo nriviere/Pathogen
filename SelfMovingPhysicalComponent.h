@@ -24,7 +24,7 @@ public:
 	virtual void collision(PhysicalComponent *physicalComponent);
 	virtual void collision(Vect4 axis);
 
-	void update();
+	virtual void update();
 
 	SelfMovingPhysicalComponent *clone();
 

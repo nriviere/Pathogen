@@ -157,6 +157,28 @@ unsigned int Grid::getNy()
 	return nY;
 }
 
+std::list<std::list<PhysicalComponent*>*> Grid::getNeighborhood(float x, float y, float radius)
+{
+	std::list<std::list<PhysicalComponent*>*> neighborhood;
+	float dy = 2*radius;
+	float dx = 0;
+	float offset = radius;
+	float fx, fy;
+	while (dy >= 0)
+	{
+		dx = 2*radius;
+		while (dx >= 0)
+		{
+			fx = x + dx - offset;
+			fy = y + dy - offset;
+			neighborhood.push_back(get(fx,fy));
+			dx -= stepX;
+		}
+		dy -= stepY;
+	}
+	return neighborhood;
+}
+
 std::list<PhysicalComponent*> *Grid::get(unsigned int n)
 {
 	return components[n];
@@ -165,6 +187,14 @@ std::list<PhysicalComponent*> *Grid::get(unsigned int n)
 std::list<PhysicalComponent*> *Grid::get(unsigned int x, unsigned int y)
 {
 	return components[y*nX + x];
+}
+
+std::list<PhysicalComponent*> *Grid::get(float x, float y)
+{
+	unsigned int uix, uiy;
+	uix = max(0, min(floor((x - limitsX[0]) / stepX), nX - 1));
+	uiy = max(0, min(floor((y - limitsY[0]) / stepY), nY - 1));
+	return get(uix, uiy);
 }
 
 void Grid::set(PhysicalComponent* component)
@@ -179,9 +209,6 @@ void Grid::set(PhysicalComponent* component)
 
 	uix = max(0, min(floor((fx - limitsX[0]) / stepX), nX - 1));
 	uiy = max(0, min(floor((fy - limitsY[0]) / stepY), nY - 1));
-	
-
-	
 	
 	components[uiy * nX + uix]->push_back(component);
 	std::list<PhysicalComponent*>::iterator gridPosition = get(uix, uiy)->end();

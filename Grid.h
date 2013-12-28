@@ -28,6 +28,7 @@ public:
 	unsigned int getN();
 	unsigned int getNx();
 	unsigned int getNy();
+	
 /*	unsigned int getDy();
 	unsigned int getComponentsCount();
 	unsigned int getUpdaterThreadCount();
@@ -39,6 +40,8 @@ public:
 	void update();
 	std::list<PhysicalComponent*> *get(unsigned int n);
 	std::list<PhysicalComponent*> *get(unsigned int x, unsigned int y);
+	std::list<PhysicalComponent*> *get(float x, float y);
+	std::list<std::list<PhysicalComponent*>*> getNeighborhood(float x, float y, float radius);
 	void set(PhysicalComponent* component);
 	void setLimits(Level *level);	
 };
