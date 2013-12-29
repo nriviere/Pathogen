@@ -10,7 +10,7 @@ PhysicalEngine::PhysicalEngine(MyEngine *engine)
 {
 	if (engine != NULL)
 	{
-		grid = new Grid(16,16, engine->getGameEngine()->getCurrentLevel());
+		grid = new Grid(8,8, engine->getGameEngine()->getCurrentLevel());
 	}
 	else
 	{

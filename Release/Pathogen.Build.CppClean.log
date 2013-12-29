@@ -1,8 +1,8 @@
 q:\documents\workspace\pathogen\release\vc120.pdb
-q:\documents\workspace\pathogen\release\lymphocyte.obj
 q:\documents\workspace\pathogen\release\lightinggameobject.obj
 q:\documents\workspace\pathogen\release\level.obj
 q:\documents\workspace\pathogen\release\ingamestate.obj
+q:\documents\workspace\pathogen\release\homingphysicalcomponent.obj
 q:\documents\workspace\pathogen\release\herophysicalcomponent.obj
 q:\documents\workspace\pathogen\release\hero.obj
 q:\documents\workspace\pathogen\release\grid.obj
@@ -19,7 +19,6 @@ q:\documents\workspace\pathogen\release\cell.obj
 q:\documents\workspace\pathogen\release\cancer.obj
 q:\documents\workspace\pathogen\release\briefingstate.obj
 q:\documents\workspace\pathogen\release\bacteria.obj
-q:\documents\workspace\pathogen\release\program.obj
 q:\documents\workspace\pathogen\release\shader.obj
 q:\documents\workspace\pathogen\release\selfmovingphysicalcomponent.obj
 q:\documents\workspace\pathogen\release\replicablegameobject.obj
@@ -39,6 +38,7 @@ q:\documents\workspace\pathogen\release\particle.obj
 q:\documents\workspace\pathogen\release\neutrophile.obj
 q:\documents\workspace\pathogen\release\monocyte.obj
 q:\documents\workspace\pathogen\release\mainmenustate.obj
+q:\documents\workspace\pathogen\release\lymphocyte.obj
 q:\documents\workspace\pathogen\release\virus.obj
 q:\documents\workspace\pathogen\release\vbo.obj
 q:\documents\workspace\pathogen\release\updaterthread.obj
@@ -55,7 +55,7 @@ q:\documents\workspace\pathogen\release\spawnline.obj
 q:\documents\workspace\pathogen\release\soundsource.obj
 q:\documents\workspace\pathogen\release\soundengine.obj
 q:\documents\workspace\pathogen\release\shadersinc.obj
-q:\documents\workspace\pathogen\release\homingphysicalcomponent.obj
+q:\documents\workspace\pathogen\release\program.obj
 q:\documents\workspace\pathogen\release\pathogen.exe
 q:\documents\workspace\pathogen\release\pathogen.pdb
 q:\documents\workspace\pathogen\release\objreader.res
