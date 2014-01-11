@@ -36,7 +36,7 @@ Cell::~Cell()
 
 void Cell::replicate()
 {
-	if (GameEngine::CURRENT_CELL_COUNT < GameEngine::MAX_CELL_COUNT && GameEngine::CURRENT_CELL_COUNT < GameEngine::MAX_GAME_OBJECT_COUNT)
+	if (false &&GameEngine::CURRENT_CELL_COUNT < GameEngine::MAX_CELL_COUNT && GameEngine::CURRENT_CELL_COUNT < GameEngine::MAX_GAME_OBJECT_COUNT)
 	{
 		Cell *cell = new Cell(*this);
 		engine->addObject(cell);

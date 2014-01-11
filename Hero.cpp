@@ -10,17 +10,20 @@ Hero::Hero(GameEngine *engine) : GameObject(engine)
 {
 	objectType = heroType;
 	regenerationTime = 0;
+	lymphocyteTag = gameObjectType;
 }
 
 Hero::Hero(const Hero &hero) : GameObject(hero)
 {
 	objectType = heroType;
+	lymphocyteTag = gameObjectType;
 }
 
 Hero &Hero::operator=(const Hero &hero)
 {
 	GameObject::operator=(hero);
 	objectType = heroType;
+	lymphocyteTag = gameObjectType;
 	return (*this);
 }
 
@@ -31,6 +34,7 @@ Hero::Hero(GameEngine *engine, RenderableComponent *model, PhysicalComponent *ph
 	munitions[1] = MUN_MAX;
 	munitions[2] = MUN_MAX;
 	currentMunition = 0;
+	lymphocyteTag = gameObjectType;
 }
 
 Hero::~Hero()

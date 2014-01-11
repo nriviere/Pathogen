@@ -14,6 +14,8 @@ Level::Level(const char *filename, GameEngine *engine)
 	limitsY[0] = -150;
 	limitsX[1] = 200;
 	limitsY[1] = 150;
+	finished = false;
+	cellCount = 0;
 }
 
 
@@ -35,15 +37,17 @@ void Level::load()
 	TiXmlDocument *doc = new TiXmlDocument(filename);
 	bool loadOkay = doc->LoadFile();
 	if (!loadOkay) {
-		//cout << "Couldn't load " << filename << " " << doc->ErrorDesc() << endl;
+		MyEngine::errlog << "Couldn't load " << filename << " " << doc->ErrorDesc() << endl;
 		exit(-8);
 	}
 	TiXmlNode* node = 0;
 
 	node = doc->FirstChildElement("Level");
 	//Parsing des params du niveau si besoin
+	TiXmlElement* cellNode = node->FirstChildElement("Cells");
+	cellCount = atoi(cellNode->Attribute("count"));
 
-	TiXmlNode* spawnLineNode;
+	TiXmlElement* spawnLineNode;
 	spawnLineNode = node->FirstChildElement("SpawnLine");
 	while (spawnLineNode){
 		SpawnLine *spawnLine = new SpawnLine(this);
@@ -90,15 +94,30 @@ void Level::init()
 		(*s)->loadToEngine();
 		++s;
 	}
+
+	for (int i = 0; i < cellCount; i++)
+	{
+		engine->addObject(new Cell(engine));
+	}
 }
 
 void Level::update()
 {
+	finished = true;
 	for (list<SpawnLine *>::iterator s = spawnLines.begin(); s != spawnLines.end();)
 	{
 		(*s)->update();
+		if (!(*s)->isEmpty())
+		{
+			finished = false;
+		}
 		++s;
 	}
+}
+
+bool Level::isFinished()
+{
+	return finished;
 }
 
 void Level::setGameEngine(GameEngine *engine)

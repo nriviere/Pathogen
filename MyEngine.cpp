@@ -54,57 +54,10 @@ void MyEngine::Setup(HWND hWnd)
 	renderer->setWidht(R.right);
 	renderer->setHeight(R.bottom);
 	soundEngine->init();
-	/*
-	for (int o = 0; o < scene->u32ObjectsCount; o++)
-	{
-		if (scene->pObjects[o].u32Material != UINT_MAX){
+	renderer->init();
 
-			IMAGE_DATA *image = NULL;
-			image = scene->pMaterials[scene->pObjects[o].u32Material].pDiffuse;
-			if (image != NULL)
-			{
-				image->pUserData = new GLuint();
-				glGenTextures(1, (GLuint *)image->pUserData);
-				glBindTexture(GL_TEXTURE_2D, *(GLuint *)(image->pUserData));
-				logs << "ID créés : " << std::endl;
-				logs << *(GLuint *)image->pUserData << std::endl;
-				unsigned int b = 24;
-				GLenum format = GL_RGB;
-
-				if (scene->pMaterials[scene->pObjects[o].u32Material].pDiffuse->PixelFormat != 0)
-				{
-					b = 32;
-					format = GL_RGBA;
-				}
-				glTexImage2D(
-					GL_TEXTURE_2D,
-					0,
-					format,
-					image->u32Width,
-					image->u32Height,
-					0,
-					format,
-					GL_UNSIGNED_BYTE,
-					image->pu8Pixels
-					);
-				glTexEnvi(GL_TEXTURE, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			}
-		}
-	}
-	*/
-	
 	
 	errlog << "***********************************************************************************************************************************" << std::endl;
-	/*
-	delete[]vertice_coord;
-	delete[]faces;
-	delete[]normals;*/
-
-	//Shaders init 
-	
-
 }
 
 

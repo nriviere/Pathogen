@@ -27,6 +27,11 @@ MainMenuState::~MainMenuState(void)
 
 void MainMenuState::setup()
 {	
+	bool cursorVisible;
+	do{
+		cursorVisible = ShowCursor(true) < 0;
+	} while (cursorVisible);
+
 	width = engine->getParentEngine()->getWidth();
 	height = engine->getParentEngine()->getHeight();
 
@@ -68,10 +73,12 @@ void MainMenuState::setup()
 
 void MainMenuState::display(unsigned int u32Width, unsigned int u32Height)
 {
-	
+	glDisable(GL_BLEND);
+	glDisable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, (GLuint)data[0]->pUserData);
 	glColor3f(r, g, b);

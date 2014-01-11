@@ -24,6 +24,10 @@ BriefingState::~BriefingState()
 
 void BriefingState::setup()
 {
+	bool cursorVisible;
+	do{
+		cursorVisible = ShowCursor(true) < 0;
+	} while (cursorVisible);
 	width = engine->getParentEngine()->getWidth();
 	height = engine->getParentEngine()->getHeight();
 
@@ -73,6 +77,7 @@ void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBindTexture(GL_TEXTURE_2D, (GLuint)data[0]->pUserData);
 	r = 1; g = 1; b = 1;

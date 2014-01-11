@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Light.h"
 #include <WinUser.h>
+#include "HeroPhysicalComponent.h"
 
 InGameState::InGameState(GameEngine *engine) : GameState(engine)
 {
@@ -131,28 +132,26 @@ void InGameState::keyDown(int s32VirtualKey)
 
 void InGameState::setup()
 {
-	ShowCursor(false);
+	bool cursorVisible;
+	do{
+		cursorVisible = ShowCursor(false) >= 0;
+	} while (cursorVisible);
+	engine->getCurrentLevel()->load();
+	engine->getCurrentLevel()->init();
 
-	Renderer *renderer = parentEngine->getRenderer();
-	renderer->init();
+	PhysicalEngine *physicalEngine = engine->getParentEngine()->getPhysicalEngine();
+	Renderer *renderer = engine->getParentEngine()->getRenderer();
 
-	const char *names[8];
-	names[0] = "3DS/models/hero.obj";
-	names[1] = "3DS/models/cell.obj";
-	names[2] = "3DS/models/neutrophil.obj";
-	names[3] = "3DS/models/bacteria.obj";
-	names[4] = "3DS/models/virus.obj";
-	names[5] = "3DS/models/cancer.obj";
-	names[6] = "3DS/models/monocyte.obj";
-	names[7] = "3DS/models/lymphocyte.obj";
-
-	engine->load(names, 8);
-
-	Light * light = new Light(Matrx44(Vect4(0.1,0.1,0.1, 1.),
-		Vect4(0.5, 0.5,0.5, 1.),
+	PhysicalComponent *physicalComponent = new HeroPhysicalComponent(engine->getCursor());
+	physicalComponent->setPosition(Vect4(0, 0, 0, 1));
+	Hero *hero = new Hero(engine, &renderer->getModels()[0], physicalComponent);
+	engine->setHero(hero);
+	engine->addObject(hero);
+	Light * light = new Light(Matrx44(Vect4(0.1, 0.1, 0.1, 1.),
+		Vect4(0.5, 0.5, 0.5, 1.),
 		Vect4(1, 1, 1, 1),
 		Vect4(0, 0, -100, 1)),
-		0,0);
+		0, 0);
 
 	int lightId = renderer->addLight(light);
 }
@@ -186,9 +185,28 @@ void InGameState::update(float fDT)
 		}
 	}
 
-	engine->getCurrentLevel()->update();
+	
 	engine->remove();
 	engine->addParticleSystems();
+
+	engine->getCurrentLevel()->update();
+	if (engine->getCurrentLevel()->isFinished())
+	{
+		engine->clear();
+		engine->getParentEngine()->getRenderer()->clear();
+		engine->setNextLevel();
+
+		if (engine->isGameFinished())
+		{
+			//END GAME STATE;
+			engine->nextState(0);
+			engine->setFinished(false);
+		}
+		else{
+			engine->nextState(1);
+		}
+		
+	}
 }
 
 void InGameState::display(unsigned int u32Width, unsigned int u32Height)

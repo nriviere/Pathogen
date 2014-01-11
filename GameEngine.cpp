@@ -14,15 +14,22 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	gameObjectCount = 0;
 	particleSystemCount = 0;
 	particleCount = 0;
+	
 	gameStates = new GameState*[3];
 	gameStates[0] = new MainMenuState(this);
 	gameStates[1] = new BriefingState(this);
 	inGameState = new InGameState(this);
 	gameStates[2] = inGameState;
 	currentGameState = gameStates[0];
-	levelCount = 1;
+	levelCount = 5;
 	levels = new Level*[levelCount];
-	levels[0] = currentLevel = new Level("Levels/level1.xml",this);
+	levels[0] = currentLevel = new Level("Levels/level1.xml", this);
+	levels[1] = new Level("Levels/level2.xml", this);
+	levels[2] = new Level("Levels/level3.xml", this);
+	levels[3] = new Level("Levels/level4.xml", this);
+	levels[4] = new Level("Levels/level5.xml", this);
+	currentLevelId = 0;
+
 	cursor = new Cursor();
 	indexer = new Indexer(MAX_GAME_OBJECT_COUNT);
 	particleSystemIndexer = new Indexer(MAX_PARTICLE_SYSTEM_COUNT);
@@ -32,6 +39,14 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 		particleSystems[i] = NULL;
 	}
 	hero = NULL;
+
+	gameObjects = new GameObject*[MAX_GAME_OBJECT_COUNT];
+	for (int i = 0; i < MAX_GAME_OBJECT_COUNT; i++)
+	{
+		gameObjects[i] = NULL;
+	}
+
+	finished = false;
 }
 
 GameEngine::~GameEngine()
@@ -76,27 +91,16 @@ void GameEngine::update(float fDT)
 	currentGameState->update(fDT);
 }
 
-void GameEngine::load(const char** fileNames, unsigned int count) //charger a partir d'un fichier level
+/*
+void GameEngine::init()
 {
-	SCENE **objects = new SCENE*[count];
-
-	for (int i = 0; i < count; i++)
-	{
-		objects[i] = ReadOBJFile(fileNames[i], true);
-	}
-
 	//unsigned int objectCount = 0;
 
 	Renderer *renderer = engine->getRenderer();
 	PhysicalEngine *physicalEngine = engine->getPhysicalEngine();
 
-	renderer->load(objects, count);
 	
-	gameObjects = new GameObject*[MAX_GAME_OBJECT_COUNT];
-	for (int i = 0; i < MAX_GAME_OBJECT_COUNT; i++)
-	{
-		gameObjects[i] = NULL;
-	}
+	//bouger le hero
 	PhysicalComponent *physicalComponent = new HeroPhysicalComponent(cursor);
 	physicalComponent->setPosition(Vect4(0, 0, 0, 1));
 	hero = new Hero(this, &renderer->getModels()[0], physicalComponent);
@@ -105,29 +109,8 @@ void GameEngine::load(const char** fileNames, unsigned int count) //charger a pa
 	currentLevel->load();
 	currentLevel->init();
 
-	/*
-	for (int i = 1; i < objectCount/2; i++)
-	{
-		float x = currentLevel->getLimitsX()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsX()[1] - currentLevel->getLimitsX()[0]);
-		float y = currentLevel->getLimitsY()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsY()[1] - currentLevel->getLimitsY()[0]);
-		physicalComponent = new CellPhysicalComponent();
-		physicalComponent->setPosition(Vect4(x, y, 0, 1));
-		RenderableComponent *component = &renderer->getModels()[1];
-		Cell *cell = new Cell(this, &renderer->getModels()[1], physicalComponent);
-		addObject(cell);
-	}
-	for (int i = objectCount / 2; i < objectCount; i++)
-	{
-		float x = currentLevel->getLimitsX()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsX()[1] - currentLevel->getLimitsX()[0]);
-		float y = currentLevel->getLimitsY()[0] + (1.*rand() / RAND_MAX) * (currentLevel->getLimitsY()[1] - currentLevel->getLimitsY()[0]);
-		physicalComponent = new CellPhysicalComponent();
-		physicalComponent->setPosition(Vect4(x, y, 0, 1));
-		Bacteria *bacteria = new Bacteria(this,physicalComponent);
-		addObject(bacteria);
-	}
-	*/
 	physicalEngine->setGrid(currentLevel);
-}
+}*/
 
 
 void GameEngine::display(unsigned int u32Width, unsigned int u32Height)
@@ -153,6 +136,16 @@ void GameEngine::lButtonDown(POINT Pt)
 void GameEngine::lButtonUp(POINT Pt)
 {
 	currentGameState->lButtonUp(Pt);
+}
+
+bool GameEngine::isGameFinished()
+{
+	return finished;
+}
+
+void GameEngine::setFinished(bool finished)
+{
+	this->finished = finished;
 }
 
 void GameEngine::keyDown(int s32VirtualKey)
@@ -200,6 +193,16 @@ Level *GameEngine::getCurrentLevel()
 	return currentLevel;
 }
 
+void GameEngine::setNextLevel()
+{
+	currentLevelId++;
+	if (currentLevelId >= levelCount){
+		finished = true;
+		currentLevelId = 0;
+	}
+	currentLevel = levels[currentLevelId];
+}
+
 MyEngine *GameEngine::getParentEngine()
 {
 	return engine;
@@ -212,7 +215,7 @@ InGameState *GameEngine::getInGameState()
 
 void GameEngine::setHero(Hero *hero)
 {
-	if (this->hero != NULL && hero->getGameEngineIndex() != this->hero->getGameEngineIndex())
+	if (this->hero != NULL && hero != NULL && hero->getGameEngineIndex() != this->hero->getGameEngineIndex())
 	{
 		unsigned int heroIndex = this->hero->getGameEngineIndex();
 		engine->getPhysicalEngine()->remove(heroIndex);
@@ -355,6 +358,25 @@ void GameEngine::remove()
 	{
 		removeParticleSystem(particleSystemsToRemove.front()->getEngineIndex());
 		particleSystemsToRemove.pop_front();
+	}
+}
+
+void GameEngine::clear(){
+	for (unsigned int i = 0; i < MAX_GAME_OBJECT_COUNT; i++)
+	{
+		if (gameObjects[i] != NULL)
+		{
+			remove(i);
+			gameObjects[i] = NULL;
+		}
+	}
+	for (unsigned int i = 0; i < MAX_PARTICLE_SYSTEM_COUNT; i++)
+	{
+		if (particleSystems[i] != NULL)
+		{
+			removeParticleSystem(i);
+			particleSystems[i] = NULL;
+		}
 	}
 }
 

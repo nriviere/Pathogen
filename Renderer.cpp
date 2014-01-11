@@ -35,18 +35,21 @@ Renderer::Renderer(MyEngine *engine)
 }
 
 void Renderer::init(){
+	load();
+	/*
 	glPolygonMode(GL_FRONT, GL_FILL);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
+	*/
 }
 
-void Renderer::load(SCENE **objects, unsigned int count)
+void Renderer::load()
 {
 	try{
 		init_vbo();
@@ -56,6 +59,24 @@ void Renderer::load(SCENE **objects, unsigned int count)
 		logs << e->what();
 		exit(-1);
 	}
+	unsigned int count = 8;
+	const char *names[8];
+	names[0] = "3DS/models/hero.obj";
+	names[1] = "3DS/models/cell.obj";
+	names[2] = "3DS/models/neutrophil.obj";
+	names[3] = "3DS/models/bacteria.obj";
+	names[4] = "3DS/models/virus.obj";
+	names[5] = "3DS/models/cancer.obj";
+	names[6] = "3DS/models/monocyte.obj";
+	names[7] = "3DS/models/lymphocyte.obj";
+
+	SCENE **objects = new SCENE*[count];
+
+	for (int i = 0; i < 8; i++)
+	{
+		objects[i] = ReadOBJFile(names[i], true);
+	}
+
 	scene = objects[0];
 	unsigned int vertex_count = 0, face_count = 0, normal_count = 0, material_count = 0, submodel_count = 0, texcoord_count = 0;
 	for (int i = 0; i < count; i++)
@@ -349,8 +370,6 @@ Renderer::~Renderer()
 
 void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int u32Width, unsigned u32Height, Level *level)
 {
-	
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(70, 1.*u32Width / u32Height, 1, 1000);
@@ -641,6 +660,17 @@ void Renderer::updateLightUniforms(Matrx44 modelView)
 		lightUniformMisc[i][2] = lightUniformMisc[i][3] = 0;
 		++l;
 	}
+}
+
+void Renderer::clear()
+{
+	while (lights.size() > 0)
+	{
+		delete lights.front();
+		lights.pop_front();
+	}
+	toRemove.clear();
+	currentLightCount = 0;
 }
 void Renderer::renderParticles()
 {

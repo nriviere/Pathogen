@@ -45,7 +45,7 @@ public:
 	~Renderer();
 
 	void init();
-	void load(SCENE **objects, unsigned int count);
+	void load();
 	void render(GameObject **gameobject, unsigned int count, unsigned int u32Width, unsigned u32Height, Level *level=NULL);
 	void render(Program *program);
 	void renderLevel(Level *level);
@@ -76,6 +76,8 @@ public:
 	void drawHud(unsigned int width, unsigned int height);
 
 	void updateLightUniforms(Matrx44 modelView);
+
+	void clear();
 
 private:
 	

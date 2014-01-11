@@ -35,8 +35,10 @@ private:
 	std::list<ParticleSystem *> particleSystemsToRemove;
 	std::list<ParticleSystem *> particleSystemsToAdd;
 	std::list<Particle *> particlesToRemove;
+
+	bool finished;
 	
-	unsigned int levelCount, gameObjectCount, particleCount,particleSystemCount,gameStateCount;
+	unsigned int levelCount, currentLevelId, gameObjectCount, particleCount,particleSystemCount,gameStateCount;
 public:
 	static const unsigned int MAX_GAME_OBJECT_COUNT = 1000;
 	static const unsigned int MAX_PARTICLE_SYSTEM_COUNT = 1000;
@@ -57,12 +59,15 @@ public:
 	void lButtonDown(POINT Pt);
 	void lButtonUp(POINT Pt);
 	
+	bool isGameFinished();
+	void setFinished(bool finished);
 
 	GameObject **getGameObjects();
 	ParticleSystem **getParticleSystems();
 	unsigned int getGameObjectCount();
 	unsigned int getParticleSystemCount();
 	Level *getCurrentLevel();
+	void setNextLevel();
 	Hero *getHero();
 	Cursor *getCursor();
 	MyEngine *getParentEngine();
@@ -78,6 +83,7 @@ public:
 	void remove(unsigned int index);
 	void removeParticleSystem(unsigned int index);
 	void remove();
+	void clear();
 
 	void nextState(int id);
 };

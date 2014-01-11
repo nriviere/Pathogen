@@ -15,6 +15,8 @@ private:
 	const char *filename;
 	GameEngine *engine;
 	unsigned int backgroundTextureId;
+	bool finished;
+	unsigned int cellCount;
 
 public:
 	Level(const char *filename, GameEngine *engine);
@@ -24,6 +26,7 @@ public:
 	void load();
 	void init();
 	void update();
+	bool isFinished();
 	void setGameEngine(GameEngine *engine);
 	unsigned int getBackgroundTextureId();
 	GameEngine * getGameEngine();
