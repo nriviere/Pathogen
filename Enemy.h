@@ -8,7 +8,7 @@ class Enemy :
 	public ReplicableGameObject
 {
 public:
-	Enemy(GameEngine *engine = NULL);
+	Enemy(GameEngine *engine = NULL, float replicateTime = 3);
 	Enemy(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent, float replicateTime = 3);
 	~Enemy();
 

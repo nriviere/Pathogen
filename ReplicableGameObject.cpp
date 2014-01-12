@@ -13,6 +13,7 @@ ReplicableGameObject::ReplicableGameObject(GameEngine *engine, float replicateTi
 {
 	objectType = replicableGameObjectType;
 	replicateTimer = new Timer(replicateTime);
+	this->replicateTime = replicateTime;
 }
 
 ReplicableGameObject::ReplicableGameObject(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent, float replicateTime) : GameObject(engine,model, physicalComponent)
@@ -45,7 +46,7 @@ ReplicableGameObject::~ReplicableGameObject()
 
 void ReplicableGameObject::update()
 {
-	replicateTimer->update();
+	replicateTimer->update(engine->getDeltaTime());
 	if (replicateTimer->hasTicked())
 	{
 		replicate();

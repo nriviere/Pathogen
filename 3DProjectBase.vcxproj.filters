@@ -267,6 +267,15 @@
     <ClCompile Include="HomingPhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
+    <ClCompile Include="AttachablePhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachableEnemy.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="VirusPhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -462,6 +471,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HomingPhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachablePhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachableEnemy.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="VirusPhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
   </ItemGroup>

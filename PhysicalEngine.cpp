@@ -104,7 +104,6 @@ void PhysicalEngine::update(float fDT)
 		}
 		PhysicalComponent *p1, *p2;
 
-
 		list<PhysicalComponent*> *L = NULL;
 		list<PhysicalComponent*>::iterator end, begin;
 		list<PhysicalComponent*>::iterator ite;

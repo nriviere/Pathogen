@@ -42,23 +42,26 @@ void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent
 {
 	if (priority <= physicalComponent->getPriority())
 	{
-		Vect4 n = position - physicalComponent->getPosition();
-		n[3] = 0;
-		if (n.norme() == 0){
-			float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
-			n = Vect4(x, y, z, 0);
-		}
-		n.normalize();
-		innerForce = innerForce.reflect(n);
-		position = physicalComponent->getPosition() + n*(physicalComponent->getRadius() + radius + 0.1);
+		if (attachment == NULL || attachment->getEngineIndex() != physicalComponent->getEngineIndex() )
+		{
+			Vect4 n = position - physicalComponent->getPosition();
+			n[3] = 0;
+			if (n.norme() == 0){
+				float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
+				n = Vect4(x, y, z, 0);
+			}
+			n.normalize();
+			innerForce = innerForce.reflect(n);
+			position = physicalComponent->getPosition() + n*(physicalComponent->getRadius() + radius + 0.1);
 
-		float dot = speed.dot(n);
-		float nn = speed.norme() * n.norme();
-		float orientation = 1;
-		float det = speed[0] * n[1] - speed[1] * n[0];
-		if (det < 0) orientation = -1;
-		rotationSpeed = (dot - nn) * 0.05 * orientation;
-		rotationAcceleration = 0.999;
+			float dot = speed.dot(n);
+			float nn = speed.norme() * n.norme();
+			float orientation = 1;
+			float det = speed[0] * n[1] - speed[1] * n[0];
+			if (det < 0) orientation = -1;
+			rotationSpeed = (dot - nn) * 0.05 * orientation;
+			rotationAcceleration = 0.999;
+		}
 	}
 }
 

@@ -14,10 +14,12 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	gameObjectCount = 0;
 	particleSystemCount = 0;
 	particleCount = 0;
-	
+	enemyCount = 0;
+	fDT = 0;
 	gameStates = new GameState*[3];
 	gameStates[0] = new MainMenuState(this);
-	gameStates[1] = new BriefingState(this);
+
+	gameStates[1] = briefingState = new BriefingState(this);
 	inGameState = new InGameState(this);
 	gameStates[2] = inGameState;
 	currentGameState = gameStates[0];
@@ -29,6 +31,8 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	levels[3] = new Level("Levels/level4.xml", this);
 	levels[4] = new Level("Levels/level5.xml", this);
 	currentLevelId = 0;
+
+
 
 	cursor = new Cursor();
 	indexer = new Indexer(MAX_GAME_OBJECT_COUNT);
@@ -86,8 +90,20 @@ void GameEngine::setup()
 	currentGameState->setup();
 }
 
+void GameEngine::init(){
+	char **names = new char*[levelCount];
+	names[0] = "assets/briefing/brief_lvl1.tga";
+	names[1] = "assets/briefing/brief_lvl2.tga";
+	names[2] = "assets/briefing/brief_lvl3.tga";
+	names[3] = "assets/briefing/brief_lvl4.tga";
+	names[4] = "assets/briefing/brief_lvl5.tga";
+
+	briefingState->setBriefingScreens(names, 5);
+	delete[] names;
+}
 void GameEngine::update(float fDT)
 {
+	this->fDT = fDT;
 	currentGameState->update(fDT);
 }
 
@@ -193,6 +209,16 @@ Level *GameEngine::getCurrentLevel()
 	return currentLevel;
 }
 
+unsigned int GameEngine::getCurrentLevelIndex()
+{
+	return currentLevelId;
+}
+
+unsigned int GameEngine::getEnemyCount()
+{
+	return enemyCount;
+}
+
 void GameEngine::setNextLevel()
 {
 	currentLevelId++;
@@ -213,6 +239,11 @@ InGameState *GameEngine::getInGameState()
 	return inGameState;
 }
 
+float GameEngine::getDeltaTime()
+{
+	return fDT;
+}
+
 void GameEngine::setHero(Hero *hero)
 {
 	if (this->hero != NULL && hero != NULL && hero->getGameEngineIndex() != this->hero->getGameEngineIndex())
@@ -231,7 +262,7 @@ void GameEngine::addObject(GameObject * object)
 {
 	unsigned int index = indexer->getNextIndex();
 
-	if (index != UINT_MAX)
+	if (object != NULL && index != UINT_MAX)
 	{
 		object->setGameEngineIndex(index);
 		object->setGameEngine(this);
@@ -239,6 +270,14 @@ void GameEngine::addObject(GameObject * object)
 		gameObjectCount++;
 		engine->getPhysicalEngine()->addPhysicalComponent(object->getPhysicalComponent());
 		object->selfAdd();
+		switch (object->getObjectType())
+		{
+		case bacteriaType:;
+		case virusType:;
+		case cancerType:enemyCount++;
+			break;
+		default:break;
+		}
 	}
 	else
 	{
@@ -305,12 +344,21 @@ void GameEngine::remove(unsigned int index)
 {
 	if (index < MAX_GAME_OBJECT_COUNT && gameObjects[index] != NULL)
 	{
+		switch (gameObjects[index]->getObjectType())
+		{
+		case bacteriaType:;
+		case virusType:;
+		case cancerType:enemyCount--;
+			break;
+		default:break;
+		}
 		engine->getPhysicalEngine()->remove(gameObjects[index]->getPhysicalComponent()->getEngineIndex());
 		gameObjects[index]->selfRemove();
 		delete gameObjects[index];
 		gameObjects[index] = NULL;
 		indexer->releaseIndex(index);
 		gameObjectCount--;
+		
 	}
 }
 
@@ -378,6 +426,7 @@ void GameEngine::clear(){
 			particleSystems[i] = NULL;
 		}
 	}
+	gameObjectCount = enemyCount = particleSystemCount = 0;
 }
 
 void GameEngine::nextState(int id)

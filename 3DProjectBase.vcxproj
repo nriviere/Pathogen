@@ -77,7 +77,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
@@ -85,18 +85,22 @@
       <AdditionalIncludeDirectories>..;.;./gl;./ShadersApi;./TinyXml</AdditionalIncludeDirectories>
       <Optimization>MaxSpeed</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glut32.lib;opengl32.lib;glu32.lib;winmm.lib;%(AdditionalDependencies);pthreadVCE2.lib;libsndfile-1.lib;libOpenAL32.dll.a</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <Profile>true</Profile>
+      <Profile>false</Profile>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttachableEnemy.cpp" />
+    <ClCompile Include="AttachablePhysicalComponent.cpp" />
     <ClCompile Include="Bacteria.cpp" />
     <ClCompile Include="BriefingState.cpp" />
     <ClCompile Include="Cancer.cpp" />
@@ -154,9 +158,12 @@
     <ClCompile Include="UpdaterThread.cpp" />
     <ClCompile Include="VBO.cpp" />
     <ClCompile Include="Virus.cpp" />
+    <ClCompile Include="VirusPhysicalComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h" />
+    <ClInclude Include="AttachableEnemy.h" />
+    <ClInclude Include="AttachablePhysicalComponent.h" />
     <ClInclude Include="Bacteria.h" />
     <ClInclude Include="BriefingState.h" />
     <ClInclude Include="Cancer.h" />
@@ -220,6 +227,7 @@
     <ClInclude Include="VBO.h" />
     <ClInclude Include="Vect4.h" />
     <ClInclude Include="Virus.h" />
+    <ClInclude Include="VirusPhysicalComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="OBJReader.ico" />

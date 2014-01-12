@@ -1,19 +1,28 @@
 #pragma once
-#include "Enemy.h"
 
+#include "AttachableEnemy.h"
+#include "VirusPhysicalComponent.h"
 
 class Virus :
-	public Enemy
+	public AttachableEnemy
 {
+protected:
+	float attachmentProbability;
 public:
 	Virus(GameEngine *engine = NULL);
-	Virus(GameEngine *engine, PhysicalComponent *physicalComponent);
+	Virus(GameEngine *engine, VirusPhysicalComponent *physicalComponent);
 	Virus(const Virus &cell);
 	Virus &operator=(const Virus &cell);
-	void replicate();
+
 	virtual void destroy();
-	virtual void selfRemove();
-	virtual void hitBy(ObjectType opjectType);
+
+	virtual void attachedReplicate();
+	virtual void attachedHitBy(GameObject *object);
+	virtual void unattachedReplicate();
+	virtual void unattachedHitBy(GameObject *object);
+
+	virtual void attachedSelfRemove();
+	virtual void unattachedSelfRemove();
 	~Virus();
 };
 

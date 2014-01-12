@@ -34,6 +34,7 @@ PhysicalComponent::PhysicalComponent(GameObject *gameObject, PhysicalEngine *eng
 	this->gameObject = gameObject;
 	this->engine = engine;
 	priority = 0;
+	attachment = NULL;
 }
 
 PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
@@ -52,6 +53,7 @@ PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
 	baseDeceleration = physicalComponent.baseDeceleration;
 	maxSpeed = physicalComponent.maxSpeed;
 	gameObject = physicalComponent.gameObject;
+	attachment = NULL;
 }
 
 PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physicalComponent)
@@ -123,6 +125,11 @@ int PhysicalComponent::getPriority()
 	return priority;
 }
 
+PhysicalComponent *PhysicalComponent::getAttachment()
+{
+	return attachment;
+}
+
 void PhysicalComponent::setTransform(Matrx44 transform)
 {
 	this->transform = transform;
@@ -168,6 +175,11 @@ void PhysicalComponent::setEngine(PhysicalEngine *engine)
 void PhysicalComponent::setPriority(int priority)
 {
 	this->priority = priority;
+}
+
+void PhysicalComponent::setAttachment(PhysicalComponent *component)
+{
+	this->attachment = component;
 }
 
 void PhysicalComponent::setHeading(Vect4 v)

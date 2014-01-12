@@ -27,6 +27,7 @@ protected :
 	std::list<PhysicalComponent*>::iterator gridPosition;
 	unsigned int gridX, gridY;
 	int priority;
+	PhysicalComponent *attachment;
 
 public:
 	static unsigned int PhysicalComponent::MAX_COMPONENTS_COUNT;
@@ -47,6 +48,7 @@ public:
 	GameObject *getGameObject();
 	PhysicalEngine *getEngine();
 	int getPriority();
+	PhysicalComponent *getAttachment();
 	
 	void setTransform(Matrx44 transform);
 	void setSpeed(Vect4 speed);
@@ -57,6 +59,7 @@ public:
 	void setGridPosition(std::list<PhysicalComponent*>::iterator gridPosition, unsigned int x, unsigned int y);
 	void setEngine(PhysicalEngine *engine);
 	void setPriority(int priority);
+	void setAttachment(PhysicalComponent *component);
 
 	virtual void setHeading(Vect4 v);
 

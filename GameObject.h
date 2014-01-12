@@ -48,7 +48,7 @@ public:
 
 	GameObject(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent);
 	RenderableComponent *getModel();
-	PhysicalComponent *getPhysicalComponent();
+	PhysicalComponent *getPhysicalComponent()const;
 	ObjectType getObjectType();
 	void setModel(RenderableComponent *model);
 	void setPhysicalComponent(PhysicalComponent *physicalComponent);

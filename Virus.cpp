@@ -8,27 +8,37 @@
 #include "Explosion.h"
 #include <stdlib.h>
 #include <time.h>
+#include "AttachablePhysicalComponent.h"
+#include "VirusPhysicalComponent.h"
 
-Virus::Virus(GameEngine *engine) : Enemy(engine)
+Virus::Virus(GameEngine *engine) : AttachableEnemy(engine, NULL, new VirusPhysicalComponent(NULL,this,engine->getParentEngine()->getPhysicalEngine()) ,8)
 {
 	objectType = virusType;
 	this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::VIRUS_MODEL_INDEX];
-	physicalComponent = new CellPhysicalComponent();
+	//physicalComponent = new AttachablePhysicalComponent();
 	physicalComponent->setGameObject(this);
 	physicalComponent->setPriority(1);
 	physicalComponent->setRadius(7);
+	attachmentProbability = 0.25;
 }
 
-Virus::Virus(GameEngine *engine, PhysicalComponent *physicalComponent) : Enemy(engine, NULL, physicalComponent, 3)
+Virus::Virus(GameEngine *engine, VirusPhysicalComponent *physicalComponent) : AttachableEnemy(engine, NULL, physicalComponent, 8)
 {
 	this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::VIRUS_MODEL_INDEX];
 	objectType = virusType;
 	physicalComponent->setPriority(1);
+	attachmentProbability = 0.25;
 }
 
-Virus::Virus(const Virus &virus) : Enemy(virus)
+Virus::Virus(const Virus &virus) : AttachableEnemy(virus.engine, NULL, new VirusPhysicalComponent(NULL, this, virus.engine->getParentEngine()->getPhysicalEngine()), 8)
 {
 	objectType = virusType;
+	this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::VIRUS_MODEL_INDEX];
+	//physicalComponent = new AttachablePhysicalComponent();
+	physicalComponent->setGameObject(this);
+	physicalComponent->setPriority(1);
+	physicalComponent->setRadius(7);
+	attachmentProbability = 0.25;
 }
 
 Virus &Virus::operator=(const Virus &virus)
@@ -42,14 +52,6 @@ Virus::~Virus()
 {
 }
 
-void Virus::replicate()
-{
-	srand(time(NULL));
-	if ((rand() % 100 + 1) > 5)
-	{
-	}
-}
-
 void Virus::destroy()
 {
 	Explosion *explosion = new Explosion(physicalComponent->getPosition());
@@ -57,19 +59,22 @@ void Virus::destroy()
 	Enemy::destroy();
 }
 
-void Virus::selfRemove()
+void Virus::attachedReplicate()
 {
-	Enemy::selfRemove();
-
+	Virus *virus = new Virus(*this);
+	virus->getPhysicalComponent()->setPosition(physicalComponent->getPosition());
+	engine->addObject(virus);
 }
 
-void Virus::hitBy(ObjectType objectType)
+void Virus::attachedHitBy(GameObject *object)
 {
+	ObjectType objectType = object->getObjectType();
 	switch (objectType){
 
 	case lymphocyteTagVirus:
-
+		attachablePhysicalComponent->getAttachedPhysicalComponent()->getGameObject()->destroy();
 		destroy();
+
 		break;
 
 	case cellType:
@@ -78,4 +83,43 @@ void Virus::hitBy(ObjectType objectType)
 
 	default: break;
 	}
+}
+
+void Virus::unattachedReplicate()
+{
+
+}
+
+void Virus::unattachedHitBy(GameObject *object)
+{
+	ObjectType objectType = object->getObjectType();
+	switch (objectType){
+
+	case lymphocyteTagVirus:
+		destroy();
+		
+		break;
+
+	case cellType:
+		if (object->getPhysicalComponent()->getAttachment() == NULL && 1.* rand() / RAND_MAX < attachmentProbability)
+		{
+			attachablePhysicalComponent->attach(object->getPhysicalComponent());
+			currentState = attachedState;
+		}
+		break;
+
+	default: break;
+	}
+}
+
+void Virus::attachedSelfRemove()
+{
+	Enemy::selfRemove();
+	//attachablePhysicalComponent->getAttachment()->setAttachment(NULL);
+	//engine->setToRemove(attachablePhysicalComponent->getAttachment()->getGameObject());
+}
+
+void Virus::unattachedSelfRemove()
+{
+	Enemy::selfRemove();
 }

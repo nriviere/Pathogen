@@ -74,7 +74,7 @@ void Level::load()
 		spawnLineNode = spawnLineNode->NextSiblingElement();
 	}
 	delete doc;
-	glGenTextures(1, &backgroundTextureId);
+
 	IMAGE_DATA *backGroundTexture;
 	backGroundTexture = ReadTGA("Textures/BackgroundLevel1.tga");
 	glGenTextures(1, &backgroundTextureId);
@@ -85,6 +85,9 @@ void Level::load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	delete backGroundTexture;
+
+
+
 }
 
 void Level::init()
@@ -123,6 +126,16 @@ bool Level::isFinished()
 void Level::setGameEngine(GameEngine *engine)
 {
 	this->engine = engine;
+}
+
+char *Level::getBriefingScreenFileName()
+{
+	return briefingScreenFileName;
+}
+
+unsigned int Level::getBriefingScreenTextureId()
+{
+	return briefingScreenTextureId;
 }
 
 unsigned int Level::getBackgroundTextureId()

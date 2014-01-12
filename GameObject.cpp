@@ -77,7 +77,7 @@ RenderableComponent *GameObject::getModel()
 	return model;
 }
 
-PhysicalComponent *GameObject::getPhysicalComponent()
+PhysicalComponent *GameObject::getPhysicalComponent() const
 {
 	return physicalComponent;
 }

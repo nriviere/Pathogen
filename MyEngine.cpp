@@ -55,6 +55,7 @@ void MyEngine::Setup(HWND hWnd)
 	renderer->setHeight(R.bottom);
 	soundEngine->init();
 	renderer->init();
+	gameEngine->init();
 
 	
 	errlog << "***********************************************************************************************************************************" << std::endl;

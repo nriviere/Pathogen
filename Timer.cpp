@@ -10,6 +10,7 @@ Timer::Timer(float tickLength)
 	deltaTime = 0;
 	this->tickLength = tickLength;
 	tick = false;
+	timePassed = 0;
 }
 
 Timer::Timer(const Timer &timer)
@@ -29,20 +30,28 @@ Timer &Timer::operator=(const Timer & timer)
 
 void Timer::update()
 {
+	tick = false;
 	currentTime = timeGetTime();
 	time(&timer);
 
 	deltaTime += currentTime - previousTime;
-	if (timer - prevTimer >= tickLength)
+	if (deltaTime / 1000 >= tickLength)
 	{
 		tick = true;
 		previousTime = currentTime;
 		prevTimer = timer;
 		deltaTime = 0;
 	}
-	else
+}
+
+void Timer::update(float fDt)
+{
+	timePassed += fDt;
+	tick = false;
+	if (timePassed  >= tickLength)
 	{
-		tick = false;
+		tick = true;
+		timePassed = 0;
 	}
 }
 

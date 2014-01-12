@@ -126,7 +126,6 @@ void InGameState::keyDown(int s32VirtualKey)
 		break;
 	default:
 		break;
-
 	}
 }
 
@@ -190,7 +189,7 @@ void InGameState::update(float fDT)
 	engine->addParticleSystems();
 
 	engine->getCurrentLevel()->update();
-	if (engine->getCurrentLevel()->isFinished())
+	if (engine->getCurrentLevel()->isFinished()&&engine->getEnemyCount() == 0)
 	{
 		engine->clear();
 		engine->getParentEngine()->getRenderer()->clear();
@@ -205,7 +204,6 @@ void InGameState::update(float fDT)
 		else{
 			engine->nextState(1);
 		}
-		
 	}
 }
 

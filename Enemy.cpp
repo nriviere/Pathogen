@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(GameEngine *engine) : ReplicableGameObject(engine)
+Enemy::Enemy(GameEngine *engine, float replicateTime) : ReplicableGameObject(engine, replicateTime)
 {
 	objectType = enemyType;
 }

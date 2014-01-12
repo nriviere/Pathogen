@@ -24,6 +24,7 @@ private:
 	Level *currentLevel;
 	GameState **gameStates;
 	GameState *currentGameState;
+	BriefingState *briefingState;
 	GameObject **gameObjects;
 	ParticleSystem **particleSystems;
 	Particle **particles;
@@ -36,9 +37,10 @@ private:
 	std::list<ParticleSystem *> particleSystemsToAdd;
 	std::list<Particle *> particlesToRemove;
 
+	float fDT;
 	bool finished;
 	
-	unsigned int levelCount, currentLevelId, gameObjectCount, particleCount,particleSystemCount,gameStateCount;
+	unsigned int levelCount, currentLevelId, enemyCount, gameObjectCount, particleCount,particleSystemCount,gameStateCount;
 public:
 	static const unsigned int MAX_GAME_OBJECT_COUNT = 1000;
 	static const unsigned int MAX_PARTICLE_SYSTEM_COUNT = 1000;
@@ -49,6 +51,7 @@ public:
 
 	void load(const char** fileNames, unsigned int count);
 	void setup();
+	void init();
 	void update(float fDT);
 	void display(unsigned int u32Width, unsigned int u32Height);
 
@@ -67,13 +70,16 @@ public:
 	unsigned int getGameObjectCount();
 	unsigned int getParticleSystemCount();
 	Level *getCurrentLevel();
+	unsigned int getCurrentLevelIndex();
+	unsigned int getEnemyCount();
 	void setNextLevel();
 	Hero *getHero();
 	Cursor *getCursor();
 	MyEngine *getParentEngine();
 	InGameState *getInGameState();
+	float getDeltaTime();
 	void setHero(Hero *hero);
-
+	
 	void addObject(GameObject *object);
 	void addParticleSystem(ParticleSystem *particleSystem);
 	void addParticleSystems();

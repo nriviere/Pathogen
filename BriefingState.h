@@ -2,9 +2,11 @@
 
 #include "stdafx.h"
 #include "gamestate.h"
-#include "MyEngine.h"
+
 #include "TGALoader.h"
+#include "gl/gl.h"
 #include "gl\glut.h"
+
 
 class MyEngine;
 
@@ -24,6 +26,7 @@ public:
 	void setup();
 	void display(unsigned int u32Width, unsigned int u32Height);
 	void update(float fDT);
+	void setBriefingScreens(char **fileNames, unsigned int count);
 
 private:
 	float b1xMin, b1xMax, b1yMin, b1yMax;
@@ -32,7 +35,8 @@ private:
 
 	float r, g, b;
 	int width, height;
-
+	unsigned int briefingScreensCount;
+	unsigned int *briefingScreens;
 	IMAGE_DATA *data[4];
 };
 

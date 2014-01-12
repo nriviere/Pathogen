@@ -14,9 +14,10 @@ private:
 	unsigned int spawnLinesCount;
 	const char *filename;
 	GameEngine *engine;
-	unsigned int backgroundTextureId;
+	unsigned int backgroundTextureId,briefingScreenTextureId;
 	bool finished;
 	unsigned int cellCount;
+	char *briefingScreenFileName;
 
 public:
 	Level(const char *filename, GameEngine *engine);
@@ -28,6 +29,8 @@ public:
 	void update();
 	bool isFinished();
 	void setGameEngine(GameEngine *engine);
+	char *getBriefingScreenFileName();
+	unsigned int getBriefingScreenTextureId();
 	unsigned int getBackgroundTextureId();
 	GameEngine * getGameEngine();
 	GameObject **instantiateObjects(const char *className, unsigned int count);

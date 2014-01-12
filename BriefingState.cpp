@@ -1,5 +1,5 @@
 #include "BriefingState.h"
-
+#include "MyEngine.h";
 
 BriefingState::BriefingState(GameEngine *engine) : GameState(engine)
 {
@@ -9,12 +9,11 @@ BriefingState::BriefingState(GameEngine *engine) : GameState(engine)
 	r = .6f; g = .6f; b = .6f;
 
 	//   --- load textures ---
-	data[0] = ReadTGA("./assets/briefing/brief_lvl1.tga");
-	//data[0] = ReadTGA("./assets/briefing/munition1.tga");
-	data[1] = ReadTGA("./assets/briefing/munition1.tga");
-	data[2] = ReadTGA("./assets/briefing/munition2.tga");
-	data[3] = ReadTGA("./assets/briefing/munition3.tga");
-	
+	data[0] = ReadTGA("./assets/briefing/munition1.tga");
+	data[1] = ReadTGA("./assets/briefing/munition2.tga");
+	data[2] = ReadTGA("./assets/briefing/munition3.tga");
+	briefingScreens = NULL;
+	briefingScreensCount = 0;
 }
 
 
@@ -40,7 +39,7 @@ void BriefingState::setup()
 
 	glClearColor(r, g, b, 1);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		if (data[i]){
 			data[i]->pUserData = new GLuint();
@@ -79,7 +78,7 @@ void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBindTexture(GL_TEXTURE_2D, (GLuint)data[0]->pUserData);
+	glBindTexture(GL_TEXTURE_2D, (GLuint)briefingScreens[engine->getCurrentLevelIndex()]);
 	r = 1; g = 1; b = 1;
 	glColor4f(r, g, b,1);
 
@@ -94,7 +93,7 @@ void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	glVertex2f(width, 0);
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, (GLuint)data[1]->pUserData);
+	glBindTexture(GL_TEXTURE_2D, (GLuint)data[0]->pUserData);
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);
 	glVertex2f(b1xMin, b1yMin);
@@ -108,7 +107,7 @@ void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	glDisable(GL_TEXTURE_2D);
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, (GLuint)data[2]->pUserData);
+	glBindTexture(GL_TEXTURE_2D, (GLuint)data[1]->pUserData);
 
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);
@@ -123,7 +122,7 @@ void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	glDisable(GL_TEXTURE_2D);
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, (GLuint)data[1]->pUserData);
+	glBindTexture(GL_TEXTURE_2D, (GLuint)data[2]->pUserData);
 	glColor3f(r, g, b);
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);
@@ -169,6 +168,7 @@ void BriefingState::lButtonUp(POINT pos)
 			engine->getHero()->setGenerator(3);
 		}
 	}
+
 }
 
 
@@ -176,4 +176,30 @@ void BriefingState::lButtonUp(POINT pos)
 
 void BriefingState::update(float fDT)
 {
+}
+
+
+void BriefingState::setBriefingScreens(char **fileNames, unsigned int count)
+{
+	if (briefingScreens != NULL)
+	{
+		delete[] briefingScreens;
+	}
+	briefingScreens = new unsigned int[count];
+	briefingScreensCount = count;
+	for (int i = 0; i < briefingScreensCount; i++)
+	{
+		IMAGE_DATA *briefingTexture;
+		unsigned int textureId = 0;
+		briefingTexture = ReadTGA(fileNames[i]);
+		glGenTextures(1, &textureId);
+		briefingScreens[i] = textureId;
+		glBindTexture(GL_TEXTURE_2D, briefingScreens[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, briefingTexture->u32Width, briefingTexture->u32Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, briefingTexture->pu8Pixels);
+		//glTexEnvi(GL_TEXTURE, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		delete briefingTexture;
+	}
 }
