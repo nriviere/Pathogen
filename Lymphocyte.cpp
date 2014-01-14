@@ -23,12 +23,11 @@ Lymphocyte::~Lymphocyte()
 void Lymphocyte::hitBy(ObjectType objectType)
 {
 	switch (objectType){
-
 	case virusType:
 		destroy();
 		break;
 
-	case cancerType:
+	case cancerTypeDeclared:
 		destroy();
 		break;
 

@@ -28,13 +28,15 @@ PhysicalComponent::PhysicalComponent(GameObject *gameObject, PhysicalEngine *eng
 	currentAngle = rotationSpeed =rotationAcceleration = acceleration = verticalAcceleration = horizontalAcceleration = 0;
 	baseAcceleration = 1.1;
 	baseDeceleration = 0.97;
-	maxSpeed = 3;
+	baseMaxSpeed = maxSpeed = 3;
 	radius = 3.2; //faire une classe pour chaque type
 	position = Vect4(0,0,0,1);
 	this->gameObject = gameObject;
 	this->engine = engine;
 	priority = 0;
 	attachment = NULL;
+	slowed = false;
+	slowingComponent = NULL;
 }
 
 PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
@@ -54,6 +56,8 @@ PhysicalComponent::PhysicalComponent(const PhysicalComponent &physicalComponent)
 	maxSpeed = physicalComponent.maxSpeed;
 	gameObject = physicalComponent.gameObject;
 	attachment = NULL;
+	slowed = false;
+	slowingComponent = NULL;
 }
 
 PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physicalComponent)
@@ -64,6 +68,7 @@ PhysicalComponent &PhysicalComponent::operator=(const PhysicalComponent &physica
 
 PhysicalComponent::~PhysicalComponent()
 {
+	cout << "poil" << endl;
 }
 
 Matrx44 PhysicalComponent::getTransform()
@@ -182,6 +187,11 @@ void PhysicalComponent::setAttachment(PhysicalComponent *component)
 	this->attachment = component;
 }
 
+bool PhysicalComponent::isSlowed()
+{
+	return slowed;
+}
+
 void PhysicalComponent::setHeading(Vect4 v)
 {
 	this->speed = v;
@@ -214,8 +224,6 @@ void PhysicalComponent::collision(PhysicalComponent *physicalComponent)
 	float nn = speed.norme() * v.norme();
 	rotationSpeed = dot - nn;
 	rotationAcceleration = 0.8;
-	
-
 }
 
 void PhysicalComponent::update()
@@ -236,22 +244,22 @@ void PhysicalComponent::update()
 
 void PhysicalComponent::moveUp()
 {
-	verticalSpeed = Vect4(0, 1, 0, 1);
+	verticalSpeed = Vect4(0, maxSpeed, 0, 1);
 	verticalAcceleration = baseAcceleration;
 }
 void PhysicalComponent::moveDown()
 {
-	verticalSpeed = Vect4(0, -1, 0, 1);
+	verticalSpeed = Vect4(0, -maxSpeed, 0, 1);
 	verticalAcceleration = baseAcceleration;
 }
 void PhysicalComponent::moveLeft()
 {
-	horizontalSpeed = Vect4(-1, 0, 0, 1);
+	horizontalSpeed = Vect4(-maxSpeed, 0, 0, 1);
 	horizontalAcceleration = baseAcceleration;
 }
 void PhysicalComponent::moveRight()
 {
-	horizontalSpeed = Vect4(1, 0, 0, 1);
+	horizontalSpeed = Vect4(maxSpeed, 0, 0, 1);
 	horizontalAcceleration = baseAcceleration;
 }
 
@@ -275,6 +283,21 @@ void  PhysicalComponent::stopMoveLeft()
 	horizontalAcceleration = baseDeceleration;
 }
 
+
+void  PhysicalComponent::slow(float slowFactor, PhysicalComponent *component)
+{
+	maxSpeed = baseMaxSpeed * slowFactor;
+	slowingComponent = component;
+	slowed = true;
+}
+
+void PhysicalComponent::unslow()
+{
+	maxSpeed = baseMaxSpeed;
+	slowed = false;
+	slowingComponent = NULL;
+}
+
 void PhysicalComponent::setEngineIndex(unsigned int index)
 {
 	engineIndex = index;
@@ -282,7 +305,16 @@ void PhysicalComponent::setEngineIndex(unsigned int index)
 
 void PhysicalComponent::destroy()
 {
-	engine->remove(engineIndex);
+	if (slowingComponent != NULL)
+	{
+		slowingComponent->sendDestroyed(this);
+	}
+	//engine->remove(engineIndex);
+}
+
+void PhysicalComponent::sendDestroyed(PhysicalComponent *component)
+{
+
 }
 
 PhysicalComponent *PhysicalComponent::clone()

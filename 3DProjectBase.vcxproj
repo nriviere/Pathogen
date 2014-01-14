@@ -68,7 +68,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <Profile>true</Profile>
+      <Profile>false</Profile>
       <AdditionalLibraryDirectories>.;..;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <RegisterOutput>false</RegisterOutput>
@@ -102,8 +102,11 @@
     <ClCompile Include="AttachableEnemy.cpp" />
     <ClCompile Include="AttachablePhysicalComponent.cpp" />
     <ClCompile Include="Bacteria.cpp" />
+    <ClCompile Include="BacteriaWaste.cpp" />
+    <ClCompile Include="BacteriaWastePhysicalComponent.cpp" />
     <ClCompile Include="BriefingState.cpp" />
     <ClCompile Include="Cancer.cpp" />
+    <ClCompile Include="CancerPhysicalComponent.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellPhysicalComponent.cpp" />
     <ClCompile Include="CellRenderableComponent.cpp" />
@@ -165,8 +168,11 @@
     <ClInclude Include="AttachableEnemy.h" />
     <ClInclude Include="AttachablePhysicalComponent.h" />
     <ClInclude Include="Bacteria.h" />
+    <ClInclude Include="BacteriaWaste.h" />
+    <ClInclude Include="BacteriaWastePhysicalComponent.h" />
     <ClInclude Include="BriefingState.h" />
     <ClInclude Include="Cancer.h" />
+    <ClInclude Include="CancerPhysicalComponent.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellPhysicalComponent.h" />
     <ClInclude Include="CellRenderableComponent.h" />

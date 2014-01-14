@@ -35,7 +35,7 @@ void Timer::update()
 	time(&timer);
 
 	deltaTime += currentTime - previousTime;
-	if (deltaTime / 1000 >= tickLength)
+	if (timer - prevTimer >= tickLength)
 	{
 		tick = true;
 		previousTime = currentTime;

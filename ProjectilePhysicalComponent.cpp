@@ -5,7 +5,7 @@
 
 ProjectilePhysicalComponent::ProjectilePhysicalComponent(GameObject *object, PhysicalEngine *engine) : SelfMovingPhysicalComponent(object,engine)
 {
-	baseSpeed = 3;
+	baseMaxSpeed = maxSpeed = baseSpeed = 3;
 	if (object != NULL)
 	{
 		PhysicalComponent *component = object->getGameEngine()->getHero()->getPhysicalComponent();

@@ -11,16 +11,19 @@ Cell::Cell(GameEngine *engine) : ReplicableGameObject(engine)
 	this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::CELL_MODEL_INDEX];
 	physicalComponent = new CellPhysicalComponent();
 	physicalComponent->setGameObject(this);
+	physicalComponent->setPriority(0);
 }
 
 Cell::Cell(GameEngine *engine, RenderableComponent *model, PhysicalComponent *physicalComponent) : ReplicableGameObject(engine, model, physicalComponent, 3)
 {
 	objectType = cellType;
+	physicalComponent->setPriority(0);
 }
 
 Cell::Cell(const Cell &cell) : ReplicableGameObject(cell)
 {
 	objectType = cellType;
+	physicalComponent->setPriority(0);
 }
 
 Cell &Cell::operator=(const Cell &cell)

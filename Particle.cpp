@@ -38,7 +38,8 @@ void Particle::destroy()
 
 void Particle::remove()
 {
-	physicalComponent->destroy();
+	//physicalComponent->destroy();
+	physicalComponent->getEngine()->remove(physicalComponent->getEngineIndex());
 }
 
 bool Particle::isDead()

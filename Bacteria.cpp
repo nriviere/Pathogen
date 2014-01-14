@@ -6,9 +6,9 @@
 #include "GameEngine.h"
 #include "CellPhysicalComponent.h"
 #include "Explosion.h"
+#include "BacteriaWaste.h"
 
-
-Bacteria::Bacteria(GameEngine *engine) : Enemy(engine)
+Bacteria::Bacteria(GameEngine *engine) : Enemy(engine,10)
 {
 	objectType = bacteriaType;
 	this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::BACTERIA_MODEL_INDEX];
@@ -16,9 +16,10 @@ Bacteria::Bacteria(GameEngine *engine) : Enemy(engine)
 	physicalComponent->setGameObject(this);
 	physicalComponent->setPriority(1);
 	physicalComponent->setRadius(7);
+	//replicateTime = 10;
 }
 
-Bacteria::Bacteria(GameEngine *engine, PhysicalComponent *physicalComponent) : Enemy(engine,NULL, physicalComponent, 3)
+Bacteria::Bacteria(GameEngine *engine, SelfMovingPhysicalComponent *physicalComponent) : Enemy(engine,NULL, physicalComponent, 10)
 {
 	this->model = &engine->getParentEngine()->getRenderer()->getModels()[Renderer::BACTERIA_MODEL_INDEX];
 	objectType = bacteriaType;
@@ -43,7 +44,9 @@ Bacteria::~Bacteria()
 
 void Bacteria::replicate()
 {
-
+	Bacteria *bacteria = new Bacteria(engine);
+	bacteria->getPhysicalComponent()->setPosition(physicalComponent->getPosition());
+	engine->addObject(bacteria);
 }
 
 void Bacteria::destroy()
@@ -51,6 +54,9 @@ void Bacteria::destroy()
 	Explosion *explosion = new Explosion(physicalComponent->getPosition());
 	engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::EXPLOSION_SOUND_ID);
 	engine->addParticleSystem(explosion);
+	BacteriaWaste *waste = new BacteriaWaste(engine);
+	waste->getPhysicalComponent()->setPosition(physicalComponent->getPosition());
+	engine->addObject(waste);
 	Enemy::destroy();
 }
 

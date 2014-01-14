@@ -249,21 +249,6 @@
     <ClCompile Include="SoundSource.cpp">
       <Filter>Source Files\SoundEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Cancer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Lymphocyte.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Monocyte.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Neutrophile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Virus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HomingPhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
@@ -274,6 +259,30 @@
       <Filter>Source Files\GameEngine\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="VirusPhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="CancerPhysicalComponent.cpp">
+      <Filter>Source Files\PhysicalEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Virus.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Neutrophile.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Monocyte.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Lymphocyte.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BacteriaWaste.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Cancer.cpp">
+      <Filter>Source Files\GameEngine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BacteriaWastePhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -455,21 +464,6 @@
     <ClInclude Include="SoundSource.h">
       <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Cancer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lymphocyte.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Monocyte.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Neutrophile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Virus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HomingPhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
@@ -480,6 +474,30 @@
       <Filter>Header Files\GameEngine\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="VirusPhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BacteriaWaste.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Cancer.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Lymphocyte.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Monocyte.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Neutrophile.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Virus.h">
+      <Filter>Header Files\GameEngine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CancerPhysicalComponent.h">
+      <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BacteriaWastePhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
   </ItemGroup>

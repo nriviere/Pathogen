@@ -20,7 +20,8 @@ public:
 
 	Force getInnerForce();
 	void setInnerForce(Force f);
-
+	void setBaseSpeed(float speed);
+	virtual void setAcceleration(float acceleration);
 	virtual void collision(PhysicalComponent *physicalComponent);
 	virtual void collision(Vect4 axis);
 

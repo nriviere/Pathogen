@@ -66,6 +66,9 @@ GameObject *Monocyte::getTarget()
 void SeekNStrike::hitBy(ObjectType objectType)
 {
 	switch (objectType){
+	case bacteriaWasteType:
+		monocyte->destroy();
+		break;
 	case bacteriaType:
 		monocyte->comeback(bacteriaType);
 		break;
@@ -73,7 +76,7 @@ void SeekNStrike::hitBy(ObjectType objectType)
 	case virusType:
 		monocyte->comeback(lymphocyteTagVirus);
 		break;
-	case cancerType:
+	case cancerTypeDeclared:
 		monocyte->comeback(lymphocyteTagCancer);
 		break;
 	default: break;

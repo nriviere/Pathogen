@@ -260,6 +260,7 @@ void PhysicalEngine::remove(unsigned int index)
 	if (index < MAX_PHYSICAL_COMPONENT_COUNT && physicalComponents[index] != NULL)
 	{
 		PhysicalComponent *comp = physicalComponents[index];
+		comp->destroy();
 		grid->get(comp->getGridX(), comp->getGridY())->erase(comp->getGridPosition());
 		//(*comp->getGridPosition()) = NULL;
 		delete physicalComponents[index];

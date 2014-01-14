@@ -274,7 +274,8 @@ void GameEngine::addObject(GameObject * object)
 		{
 		case bacteriaType:;
 		case virusType:;
-		case cancerType:enemyCount++;
+		case cancerTypeDeclared:;
+		case cancerTypeUndeclared:enemyCount++;
 			break;
 		default:break;
 		}
@@ -348,10 +349,12 @@ void GameEngine::remove(unsigned int index)
 		{
 		case bacteriaType:;
 		case virusType:;
-		case cancerType:enemyCount--;
+		case cancerTypeDeclared:;
+		case cancerTypeUndeclared:enemyCount--;
 			break;
 		default:break;
 		}
+		//gameObjects[index]->getPhysicalComponent()->destroy();
 		engine->getPhysicalEngine()->remove(gameObjects[index]->getPhysicalComponent()->getEngineIndex());
 		gameObjects[index]->selfRemove();
 		delete gameObjects[index];

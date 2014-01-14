@@ -7,7 +7,7 @@ class Bacteria :
 {
 public:
 	Bacteria(GameEngine *engine = NULL);
-	Bacteria(GameEngine *engine, PhysicalComponent *physicalComponent);
+	Bacteria(GameEngine *engine, SelfMovingPhysicalComponent *physicalComponent);
 	Bacteria(const Bacteria &cell);
 	Bacteria &operator=(const Bacteria &cell);
 	void replicate();

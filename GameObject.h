@@ -22,12 +22,14 @@ enum ObjectType{
 	replicableGameObjectType,
 	bacteriaType,
 	virusType,
-	cancerType,
+	cancerTypeDeclared,
+	cancerTypeUndeclared,
 	neutrophileType,
 	monocyteType,
 	lymphocyteType,
 	lymphocyteTagCancer,
-	lymphocyteTagVirus
+	lymphocyteTagVirus,
+	bacteriaWasteType
 };
 
 class GameObject

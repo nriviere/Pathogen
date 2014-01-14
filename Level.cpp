@@ -164,7 +164,7 @@ GameObject **Level::instantiateObjects(const char *className, unsigned int count
 	}
 	else if (strcmp(className, "Cancer") == 0)
 	{
-		objectType = cancerType;
+		objectType = cancerTypeUndeclared;
 	}
 	else if (strcmp(className, "Cell") == 0) {
 		objectType = cellType;
@@ -191,7 +191,7 @@ GameObject *Level::instantiateObject(ObjectType objectType)
 		break;
 	case virusType:gameObject = new Virus(engine);
 		break;
-	case cancerType:gameObject = new Cancer(engine);
+	case cancerTypeUndeclared:gameObject = new Cancer(engine);
 		break;
 	default: return NULL;
 		break;

@@ -38,7 +38,8 @@ void Neutrophile::hitBy(ObjectType objectType)
 		destroy();
 		break;
 
-	case cancerType:
+	case cancerTypeUndeclared:
+	case cancerTypeDeclared:
 		destroy();
 		break;
 

@@ -114,9 +114,10 @@ Monocyte *Hero::shootMonocyte()
 				currentType = gameObject->getObjectType();
 				switch (currentType)
 				{
-				case cancerType:;
+				case cancerTypeDeclared:;
 				case virusType:;
 				case bacteriaType:
+				case bacteriaWasteType:
 					currentDist = Vect4(physicalComponent->getPosition() - cursorPosition).norme();
 					if (currentDist < minDist)
 					{

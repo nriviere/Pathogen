@@ -18,6 +18,7 @@ using namespace std;
 unsigned int Renderer::EXPLOSION_PARTICLE_TEXTURE_ID = 0;
 unsigned int Renderer::TAGGED_VIRUS_TEXTURE_ID = 0;
 unsigned int Renderer::TAGGED_CANCER_TEXTURE_ID = 0;
+unsigned int Renderer::CURSOR_TEXTURE_ID = 0;
 
 Renderer::Renderer(MyEngine *engine)
 {
@@ -59,8 +60,8 @@ void Renderer::load()
 		logs << e->what();
 		exit(-1);
 	}
-	unsigned int count = 8;
-	const char *names[8];
+	unsigned int count = 9;
+	const char *names[9];
 	names[0] = "3DS/models/hero.obj";
 	names[1] = "3DS/models/cell.obj";
 	names[2] = "3DS/models/neutrophil.obj";
@@ -69,10 +70,10 @@ void Renderer::load()
 	names[5] = "3DS/models/cancer.obj";
 	names[6] = "3DS/models/monocyte.obj";
 	names[7] = "3DS/models/lymphocyte.obj";
-
+	names[8] = "3DS/models/bacteriaWaste.obj";
 	SCENE **objects = new SCENE*[count];
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < count; i++)
 	{
 		objects[i] = ReadOBJFile(names[i], true);
 	}
@@ -267,9 +268,10 @@ void Renderer::load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);*/
 
-	EXPLOSION_PARTICLE_TEXTURE_ID = loadTexture("Textures/ExplosionParticle2.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_NEAREST, GL_NEAREST);
-	TAGGED_VIRUS_TEXTURE_ID = loadTexture("Textures/TaggedVirus.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_NEAREST, GL_NEAREST);
-	TAGGED_CANCER_TEXTURE_ID = loadTexture("Textures/TaggedCancer.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_NEAREST, GL_NEAREST);
+	EXPLOSION_PARTICLE_TEXTURE_ID = loadTexture("Textures/ExplosionParticle2.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
+	TAGGED_VIRUS_TEXTURE_ID = loadTexture("assets/hud/TaggedVirus.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
+	TAGGED_CANCER_TEXTURE_ID = loadTexture("assets/hud/TaggedCancer.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
+	CURSOR_TEXTURE_ID = loadTexture("assets/hud/cursor.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
 
 	try{
 		initApi();
@@ -395,8 +397,15 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	compute_illumination->start();
 	render(compute_illumination);
 	compute_illumination->stop();
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
 	renderParticles();
 	renderLevel(level);
+	drawCursor();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 
 	for (int i = 1; i < DEPTH_PEELING_PASS_COUNT; i++)
 	{
@@ -416,6 +425,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		depthShader->stop();
 	}
 
+	
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -448,10 +458,9 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 	glVertex3f(-1, 1, 0);
 	glEnd();
 
-	
+	//glColor4f(1, 1, 1, 1);
 	for (int i = DEPTH_PEELING_PASS_COUNT - 1; i >= 0 ; i--)
 	{
-		glColor4f(1,1,1,1);
 		glBindTexture(GL_TEXTURE_2D, renderedTextures[i]);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0,0);
@@ -465,7 +474,7 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 		glEnd();
 	}
 	
-
+	
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -486,7 +495,6 @@ void Renderer::render(GameObject **gameobject, unsigned int count, unsigned int 
 void Renderer::renderLevel(Level *level)
 {
 	//Rendu du niveau temporaire
-	glDisable(GL_LIGHTING);
 	glColor3f(1., 0., 0.);
 	glBegin(GL_LINE_STRIP);
 	glVertex3f(level->getLimitsX()[0], level->getLimitsY()[0], 0);
@@ -502,7 +510,6 @@ void Renderer::renderLevel(Level *level)
 	glVertex3f(cursorPosition[0], cursorPosition[1], 0);
 	glVertex3f(heroPosition[0], heroPosition[1], 0);
 	glEnd();
-	glEnable(GL_LIGHTING);
 }
 
 void Renderer::render(Program *program)
@@ -674,9 +681,6 @@ void Renderer::clear()
 }
 void Renderer::renderParticles()
 {
-	glDisable(GL_LIGHTING);
-	glEnable(GL_BLEND);
-	glDisable(GL_DEPTH_TEST);
 	glActiveTexture(GL_TEXTURE0);
 	
 	GameEngine *gameEngine = engine->getGameEngine();
@@ -729,9 +733,6 @@ void Renderer::renderParticles()
 	}
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_BLEND);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
 }
 void Renderer::render_string(float x, float y, float z, void* font, const char* s)
 {
@@ -855,6 +856,16 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	glBindTexture(GL_TEXTURE_2D, lymphocyteTagTexture);
 	glColor3f(1., 1. , 1.);
 	drawTexQuad(x, y, w,h);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Renderer::drawCursor()
+{
+	Cursor *cursor = engine->getGameEngine()->getCursor();
+	Vect4 cursorPosition = cursor->getPhysicalComponent()->getPosition();
+	glBindTexture(GL_TEXTURE_2D, CURSOR_TEXTURE_ID);
+	float cursorSize = 15, midCursorSize = cursorSize / 2;
+	drawTexQuad(cursorPosition[0] - midCursorSize, cursorPosition[1] - midCursorSize, cursorSize, cursorSize);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

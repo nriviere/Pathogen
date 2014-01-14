@@ -8,14 +8,20 @@ VirusPhysicalComponent::VirusPhysicalComponent(PhysicalComponent *attachedPhysic
 : AttachablePhysicalComponent(attachedPhysicalComponent, object, engine)
 {
 	maxSeekDistance = 150;
+	setBaseSpeed(1.2);
+	baseMaxSpeed = maxSpeed = 1.2;
 }
 VirusPhysicalComponent::VirusPhysicalComponent(const AttachablePhysicalComponent& component) 
 : AttachablePhysicalComponent(component)
 {
 	maxSeekDistance = 150;
+	setBaseSpeed(1.2);
+	baseMaxSpeed = maxSpeed = 1.2;
 }
 VirusPhysicalComponent::~VirusPhysicalComponent()
 {
+	setBaseSpeed(1.2);
+	baseMaxSpeed = maxSpeed = 1.2;
 }
 
 void VirusPhysicalComponent::unattachedUpdate()
@@ -25,7 +31,7 @@ void VirusPhysicalComponent::unattachedUpdate()
 	float toHeroN = toHero.norme();
 	if (toHeroN < maxSeekDistance)
 	{
-		position = position - toHero * ((maxSeekDistance - toHeroN) / maxSeekDistance)*0.05;
+		innerForce = innerForce - toHero * ((maxSeekDistance - toHeroN) / maxSeekDistance)*0.05;
 	}
 	speed = Vect4(0, 0, 0, 1);
 	for (list<Force>::iterator ite = forces.begin(); ite != forces.end();)
@@ -36,6 +42,10 @@ void VirusPhysicalComponent::unattachedUpdate()
 	}
 	//exit(0);
 	innerForce.update();
+	float norme = innerForce.norme();
+	if (norme > maxSpeed){
+		innerForce = innerForce * (1. / (norme/maxSpeed));
+	}
 	speed = speed + innerForce;
 	position = position + speed;
 

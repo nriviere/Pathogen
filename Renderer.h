@@ -26,21 +26,23 @@ class Renderer
 
 public:
 	static const unsigned int MAX_LIGHT_COUNT = 100;
+	static const unsigned int DEPTH_PEELING_PASS_COUNT = 3;
+	/*-------------------------------------------------------*/
 	static const unsigned int HERO_MODEL_INDEX = 0;
 	static const unsigned int CELL_MODEL_INDEX = 1;
 	static const unsigned int PROJECTILE_MODEL_INDEX = 2;
-	/*-------------------------------------------------------*/
-	static const unsigned int LYMPHOCYTE_MODEL_INDEX = 7;
+	static const unsigned int NEUTROPHILE_MODEL_INDEX = 2;
 	static const unsigned int BACTERIA_MODEL_INDEX = 3;
 	static const unsigned int VIRUS_MODEL_INDEX = 4;
 	static const unsigned int CANCER_MODEL_INDEX = 5;
 	static const unsigned int MONOCYTE_MODEL_INDEX = 6;
-	static const unsigned int NEUTROPHILE_MODEL_INDEX = 2;
-	
-	static const unsigned int DEPTH_PEELING_PASS_COUNT = 3;
+	static const unsigned int LYMPHOCYTE_MODEL_INDEX = 7;
+	static const unsigned int BACTERIA_WASTE_MODEL_INDEX = 8;
+	/*-------------------------------------------------------*/
 	static unsigned int EXPLOSION_PARTICLE_TEXTURE_ID;
 	static unsigned int TAGGED_VIRUS_TEXTURE_ID;
 	static unsigned int TAGGED_CANCER_TEXTURE_ID;
+	static unsigned int CURSOR_TEXTURE_ID;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();
 
@@ -74,6 +76,7 @@ public:
 	void drawTexQuad(float x, float y, float width, float height);
 	void updateTime(float fDT);
 	void drawHud(unsigned int width, unsigned int height);
+	void drawCursor();
 
 	void updateLightUniforms(Matrx44 modelView);
 

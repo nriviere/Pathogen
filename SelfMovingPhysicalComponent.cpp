@@ -6,7 +6,7 @@ using namespace std;
 
 SelfMovingPhysicalComponent::SelfMovingPhysicalComponent(GameObject *object, PhysicalEngine *engine) : PhysicalComponent(object,engine)
 {
-	baseSpeed = 1.5;
+	baseMaxSpeed = maxSpeed = baseSpeed = 1.5;
 	
 	float x = rand();
 	float y = rand(), z = 0;
@@ -38,6 +38,19 @@ void SelfMovingPhysicalComponent::setInnerForce(Force f)
 	innerForce = f;
 }
 
+void SelfMovingPhysicalComponent::setBaseSpeed(float speed)
+{
+	float norme = innerForce.norme();
+	innerForce = innerForce * (baseSpeed/speed);
+	baseSpeed = speed;
+	
+}
+
+void SelfMovingPhysicalComponent::setAcceleration(float acceleration)
+{
+	innerForce.setAcceleration(acceleration);
+}
+
 void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent)
 {
 	if (priority <= physicalComponent->getPriority())
@@ -47,7 +60,7 @@ void SelfMovingPhysicalComponent::collision(PhysicalComponent *physicalComponent
 			Vect4 n = position - physicalComponent->getPosition();
 			n[3] = 0;
 			if (n.norme() == 0){
-				float x = (1.*rand() / RAND_MAX), y = (1.*rand() / RAND_MAX), z = 0;
+				float x = (2.*rand() / RAND_MAX) - 1, y = (2.*rand() / RAND_MAX) - 1, z = 0;
 				n = Vect4(x, y, z, 0);
 			}
 			n.normalize();
@@ -118,6 +131,8 @@ void SelfMovingPhysicalComponent::update()
 		++ite;
 	}
 	innerForce.update();
+	innerForce.normalize();
+	innerForce = innerForce * maxSpeed;
 	speed = speed + innerForce;
 	position = position + speed;
 

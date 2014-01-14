@@ -7,11 +7,16 @@ HeroPhysicalComponent::HeroPhysicalComponent(Cursor *cursor, GameObject *object,
 	this->cursor = cursor;
 	radius = 6;
 	priority = 10;
+	horizontalSpeed[0] = verticalSpeed[1] = baseMaxSpeed = maxSpeed = 3;
+	baseDeceleration = 0.5;
+	baseAcceleration = 1;
 }
 
 HeroPhysicalComponent::HeroPhysicalComponent(const HeroPhysicalComponent &heroPhysicalComponent) :PhysicalComponent(heroPhysicalComponent)
 {
-
+	horizontalSpeed[0] = verticalSpeed[1] = baseMaxSpeed = maxSpeed = 3;
+	baseDeceleration = 0.8;
+	baseAcceleration = 1;
 }
 
 HeroPhysicalComponent &HeroPhysicalComponent::operator=(const HeroPhysicalComponent &heroPhysicalComponent)
@@ -77,7 +82,13 @@ void HeroPhysicalComponent::update()
 {
 	angle += 0.1;
 	if (angle >= 360) angle = 0;
+	
 	speed = verticalSpeed + horizontalSpeed;
+
+	if (speed.norme() != 0){
+		speed.normalize();
+	}
+	speed = speed * maxSpeed;
 	position = position + speed;
 	Matrx44 translation,rotation,rotationAim;
 	translation.setPos(position);
@@ -90,12 +101,12 @@ void HeroPhysicalComponent::update()
 	rotationAim.rotation(angleAim, Vect4(0,0,1,1));
 	transform = translation *rotationAim * rotation ;
 
-	if (horizontalSpeed.norme() < maxSpeed || horizontalAcceleration < 1)
+	if (horizontalSpeed.norme() <= maxSpeed || horizontalAcceleration < 1)
 	{
 		horizontalSpeed = horizontalSpeed * horizontalAcceleration;
 	}
 
-	if (verticalSpeed.norme() < maxSpeed || verticalAcceleration < 1)
+	if (verticalSpeed.norme() <= maxSpeed || verticalAcceleration < 1)
 	{
 		verticalSpeed = verticalSpeed * verticalAcceleration;
 	}
