@@ -199,21 +199,21 @@ void Hero::setGenerator(int generator)
 {
 	if (generator == 1)
 	{
-		regenerator[0] = 10;
-		regenerator[1] = 1;
-		regenerator[2] = 1;
+		regenerator[0] = 15;
+		regenerator[1] = 5;
+		regenerator[2] = 5;
 	}
 	else if (generator == 2)
 	{
-		regenerator[0] = 1;
-		regenerator[1] = 10;
-		regenerator[2] = 1;
+		regenerator[0] = 5;
+		regenerator[1] = 15;
+		regenerator[2] = 5;
 	}
 	else if (generator == 3)
 	{
-		regenerator[0] = 1;
-		regenerator[1] = 1;
-		regenerator[2] = 10;
+		regenerator[0] = 5;
+		regenerator[1] = 5;
+		regenerator[2] = 15;
 	}
 }
 

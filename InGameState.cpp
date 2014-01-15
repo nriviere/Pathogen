@@ -135,8 +135,7 @@ void InGameState::setup()
 	do{
 		cursorVisible = ShowCursor(false) >= 0;
 	} while (cursorVisible);
-	engine->getCurrentLevel()->load();
-	engine->getCurrentLevel()->init();
+
 
 	PhysicalEngine *physicalEngine = engine->getParentEngine()->getPhysicalEngine();
 	Renderer *renderer = engine->getParentEngine()->getRenderer();
@@ -153,6 +152,8 @@ void InGameState::setup()
 		0, 0);
 
 	int lightId = renderer->addLight(light);
+	engine->getCurrentLevel()->load();
+	engine->getCurrentLevel()->init();
 }
 
 void InGameState::update(float fDT)
