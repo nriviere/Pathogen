@@ -218,7 +218,7 @@ void InGameState::update(float fDT)
 			engine->setFinished(false);
 		}
 		else{
-			engine->nextState(3);
+			engine->nextState(4);
 		}
 	}
 }
