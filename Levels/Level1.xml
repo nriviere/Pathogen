@@ -2,7 +2,7 @@
 	<Cells count="20" />
 	<SpawnLine>
 	<SpawnPool>
-				<GameObject class="Bacteria" count="30" />
+				<GameObject class="Bacteria" count="6" />
 	</SpawnPool>
 	<!--
 			<SpawnPool>

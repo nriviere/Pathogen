@@ -273,6 +273,8 @@ void Hero::hitBy(ObjectType objectType)
 {
 	if(objectType == virusType || objectType == cancerTypeDeclared || objectType == cancerTypeUndeclared || objectType == bacteriaType)
 	{
+		engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::EXPLOSION_SOUND_ID);
+		engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::LOSE_SOUND_ID);
 		engine->getInGameState()->decreaseLife();
 	}
 }

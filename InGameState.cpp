@@ -219,6 +219,7 @@ void InGameState::update(float fDT)
 			engine->setFinished(false);
 		}
 		else{
+			engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::WIN_SOUND_ID);
 			engine->nextState(4);
 		}
 	}

@@ -51,6 +51,17 @@ bool SoundEngine::init()
 	{
 		MyEngine::errlog << "Failed to load Explosion Sound" << endl;
 	}
+	soundBuffers[WIN_SOUND_ID] = loadSound("assets/sounds/win.wav");
+	if (soundBuffers[WIN_SOUND_ID] == NULL)
+	{
+		MyEngine::errlog << "Failed to load Explosion Sound" << endl;
+	}
+
+	soundBuffers[LOSE_SOUND_ID] = loadSound("assets/sounds/lose.wav");
+	if (soundBuffers[LOSE_SOUND_ID] == NULL)
+	{
+		MyEngine::errlog << "Failed to load lose Sound" << endl;
+	}
 	return true;
 }
 

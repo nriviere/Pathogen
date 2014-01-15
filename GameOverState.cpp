@@ -5,8 +5,8 @@ GameOverState::GameOverState(GameEngine *engine) : GameState(engine)
 {
 	b1xMin = b1xMax = b1yMin = b1yMax = 0;
 
-	data[0] = ReadTGA("./assets/menu/retour.tga");
-	data[1] = ReadTGA("./assets/menu/helpBackground.tga");
+	data[0] = ReadTGA("./assets/menu/retourAuMenu.tga");
+	data[1] = ReadTGA("./assets/menu/gameover.tga");
 }
 
 

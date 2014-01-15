@@ -9,7 +9,7 @@ CancerPhysicalComponent::CancerPhysicalComponent(Cancer *object, PhysicalEngine 
 	if (object != NULL){
 		object->setCancerPhysicalComponent(this);
 	}
-	movementProbability = 1. / (60 * 5);
+	movementProbability = 1. / (60 * 10);
 	baseMaxSpeed = maxSpeed = 1.5;
 }
 

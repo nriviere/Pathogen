@@ -455,6 +455,7 @@ DebriefingState* GameEngine::getDebriefingState()
 void GameEngine::gameOver()
 {
 	currentGameState = gameStates[5];
+	currentLevel = levels[0];
 	setup();
 }
 

@@ -11,10 +11,12 @@ class MyEngine;
 class SoundEngine
 {
 public:
-	static const unsigned int SOUND_BUFFERS_COUNT = 2;
+	static const unsigned int SOUND_BUFFERS_COUNT = 4;
 	static const unsigned int MAX_SOUND_SOURCE_COUNT = 1000;
 	static const unsigned int TEST_SOUND_ID = 0;
 	static const unsigned int EXPLOSION_SOUND_ID = 1;
+	static const unsigned int WIN_SOUND_ID = 2;
+	static const unsigned int LOSE_SOUND_ID = 3;
 	SoundEngine(MyEngine *engine = NULL);
 	~SoundEngine();
 
