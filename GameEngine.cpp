@@ -267,6 +267,11 @@ void GameEngine::setHero(Hero *hero)
 	this->hero = hero;
 }
 
+void GameEngine::setCurrentLevelIndex(unsigned int levelId)
+{
+	currentLevelId = levelId;
+}
+
 void GameEngine::addObject(GameObject * object)
 {
 	unsigned int index = indexer->getNextIndex();

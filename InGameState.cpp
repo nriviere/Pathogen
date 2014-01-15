@@ -199,16 +199,15 @@ void InGameState::update(float fDT)
 		engine->clear();
 		engine->getParentEngine()->getRenderer()->clear();
 		engine->nextState(2);
+		if (remainingLife == 0)
+		{
+			engine->clear();
+			engine->getParentEngine()->getRenderer()->clear();
+			engine->gameOver();
+			engine->setCurrentLevelIndex(0);
+		}
 	}
-
-	if (remainingLife == 0)
-	{
-		engine->clear();
-		engine->getParentEngine()->getRenderer()->clear();
-		engine->gameOver();
-	}
-		
-	if (engine->getCurrentLevel()->isFinished()&&engine->getEnemyCount() == 0)
+	else if (engine->getCurrentLevel()->isFinished()&&engine->getEnemyCount() == 0)
 	{
 		engine->clear();
 		engine->getParentEngine()->getRenderer()->clear();

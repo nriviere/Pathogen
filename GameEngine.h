@@ -86,6 +86,7 @@ public:
 	InGameState *getInGameState();
 	float getDeltaTime();
 	void setHero(Hero *hero);
+	void setCurrentLevelIndex(unsigned int levelId);
 	
 	void addObject(GameObject *object);
 	void addParticleSystem(ParticleSystem *particleSystem);
