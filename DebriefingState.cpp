@@ -5,6 +5,7 @@
 DebriefingState::DebriefingState(GameEngine *engine) : GameState(engine)
 {
 	b1xMin = b1xMax = b1yMin = b1yMax = 0;
+	newLifeThreshold = 100;
 	clearStatistics();
 }
 
@@ -30,6 +31,11 @@ void DebriefingState::setup()
 	b1xMax = width*.9f;
 	b1yMin = height*.8f;
 	b1yMax = height*.9f;
+
+	if (engine->getInGameState()->getScore() >= newLifeThreshold)
+	{
+		engine->getInGameState()->setRemainingLife(engine->getInGameState()->getRemainingLife() + 1);
+	}
 
 }
 
@@ -65,7 +71,13 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	render_string((b1xMin + b1xMax) / 2, (b1yMin + b1yMax) / 2, GLUT_BITMAP_9_BY_15, "Next level");
 
 	//SCORE:
-	//engine->
+	unsigned int score = engine->getInGameState()->getScore();
+	string scr = "Votre score : ";
+	ostringstream oscr;
+	oscr << score;
+	scr += oscr.str();
+
+	render_string(width * .3f, height * .35f, GLUT_BITMAP_9_BY_15, scr.c_str());
 
 
 	if (cancerAccuracy + cancerInaccuracy != 0)
@@ -151,8 +163,8 @@ void DebriefingState::lButtonUp(POINT pos)
 	{
 		if (pos.y > b1yMin && pos.y < b1yMax)
 		{
-			engine->nextState(1);
 			clearStatistics();
+			engine->nextState(1);
 		}
 	}
 }

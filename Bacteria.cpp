@@ -74,7 +74,7 @@ void Bacteria::hitBy(ObjectType objectType)
 	switch (objectType){
 		
 	case neutrophileType: 
-		
+		engine->getInGameState()->setScore(engine->getInGameState()->getScore() + 10);
 		destroy();
 		break;
 

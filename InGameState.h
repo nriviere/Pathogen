@@ -12,7 +12,7 @@ private :
 	POINT prevMousePos;
 	MyEngine *parentEngine;
 
-	unsigned int remainingLife;
+	unsigned int remainingLife, score;
 
 public:
 	InGameState(GameEngine *engine = NULL);
@@ -30,5 +30,8 @@ public:
 	unsigned int getRemainingLife();
 	void setRemainingLife(unsigned int life);
 	void decreaseLife();
+
+	unsigned int getScore();
+	void setScore(unsigned int scr);
 };
 

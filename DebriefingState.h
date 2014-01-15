@@ -32,6 +32,7 @@ private:
 	float b1xMin, b1xMax, b1yMin, b1yMax;
 	float r, g, b;
 	int width, height;
+	unsigned int newLifeThreshold;
 
 	float virusAccuracy, virusInaccuracy;
 	float cancerAccuracy, cancerInaccuracy;

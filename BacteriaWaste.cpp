@@ -31,6 +31,7 @@ void BacteriaWaste::hitBy(GameObject *gameObject)
 	switch (objectType)
 	{
 	case monocyteType :
+		engine->getInGameState()->setScore(engine->getInGameState()->getScore() + 10);
 		destroy();
 		break;
 	default:
