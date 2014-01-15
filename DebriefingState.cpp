@@ -77,7 +77,7 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	oscr << score;
 	scr += oscr.str();
 
-	render_string(width * .3f, height * .35f, GLUT_BITMAP_9_BY_15, scr.c_str());
+	render_string(width * .2f, height * .35f, GLUT_BITMAP_9_BY_15, scr.c_str());
 
 
 	if (cancerAccuracy + cancerInaccuracy != 0)
@@ -91,7 +91,7 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 		//debrief1 += oInaccCancer.str();
 		//debrief1 += "% de monocyte et neutrophile";
 
-		render_string(width *.3f, height *.40f, GLUT_BITMAP_9_BY_15, debrief1.c_str());
+		render_string(width *.2f, height *.40f, GLUT_BITMAP_9_BY_15, debrief1.c_str());
 	}
 	if (bacteriaAccuracy + bacteriaInaccuracy != 0)
 	{
@@ -104,7 +104,7 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 		//debrief2 += oInaccBacteria.str();
 		//debrief2 += "% de monocyte et lymphocyte";
 
-		render_string(width *.3f, height *.42f, GLUT_BITMAP_9_BY_15, debrief2.c_str());
+		render_string(width *.2f, height *.42f, GLUT_BITMAP_9_BY_15, debrief2.c_str());
 	}
 
 	if (bacteriaWasteAccuracy + bacteriaWasteInaccuracy != 0)
@@ -118,7 +118,7 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 		//debrief3 += oInaccBacteriaWaste.str();
 		//debrief3 += "% de monocyte et lymphocyte";
 
-		render_string(width *.3f, height *.44f, GLUT_BITMAP_9_BY_15, debrief3.c_str());
+		render_string(width *.2f, height *.44f, GLUT_BITMAP_9_BY_15, debrief3.c_str());
 	}
 	
 	if (virusAccuracy + virusInaccuracy != 0)
@@ -132,7 +132,13 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 		//debrief4 += oInaccVirus.str();
 		//debrief4 += "% de monocyte et neutrophile";
 
-		render_string(width *.3f, height *.46f, GLUT_BITMAP_9_BY_15, debrief4.c_str());
+		render_string(width *.2f, height *.46f, GLUT_BITMAP_9_BY_15, debrief4.c_str());
+	}
+
+	if (engine->getInGameState()->getScore() >= newLifeThreshold)
+	{
+		string nl = "Felicitation ! Vous venez de gagner une nouvelle vie !";
+		render_string(width *.2f, height *.5f, GLUT_BITMAP_9_BY_15, nl.c_str());
 	}
 
 }

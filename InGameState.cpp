@@ -196,6 +196,9 @@ void InGameState::update(float fDT)
 
 	if (nb_life > remainingLife)
 	{
+		if (nb_life - remainingLife > 1)
+			remainingLife = nb_life - 1;
+
 		engine->clear();
 		engine->getParentEngine()->getRenderer()->clear();
 		engine->nextState(2);
