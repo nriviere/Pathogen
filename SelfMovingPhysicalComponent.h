@@ -26,7 +26,7 @@ public:
 	virtual void collision(Vect4 axis);
 
 	virtual void update();
-
+	virtual void destroy();
 	SelfMovingPhysicalComponent *clone();
 
 	void setHeading(Vect4 v);

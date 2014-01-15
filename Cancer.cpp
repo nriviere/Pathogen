@@ -76,6 +76,7 @@ void Cancer::destroy()
 {
 	Explosion *explosion = new Explosion(physicalComponent->getPosition());
 	engine->addParticleSystem(explosion);
+	engine->getParentEngine()->getSoundEngine()->playSound(SoundEngine::EXPLOSION_SOUND_ID);
 	Enemy::destroy();
 }
 

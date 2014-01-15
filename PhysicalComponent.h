@@ -27,7 +27,8 @@ protected :
 	std::list<PhysicalComponent*>::iterator gridPosition;
 	unsigned int gridX, gridY;
 	int priority;
-	PhysicalComponent *attachment,*slowingComponent;
+	PhysicalComponent *attachment, *slowingComponent;
+	std::list<PhysicalComponent*> targetingComponents;
 	bool slowed;
 public:
 	static unsigned int PhysicalComponent::MAX_COMPONENTS_COUNT;
@@ -60,6 +61,8 @@ public:
 	void setEngine(PhysicalEngine *engine);
 	void setPriority(int priority);
 	void setAttachment(PhysicalComponent *component);
+	void setTargetingComponent(PhysicalComponent *component);
+	void setUntargetingComponent(PhysicalComponent *component);
 	bool isSlowed();
 
 	virtual void setHeading(Vect4 v);
@@ -82,6 +85,7 @@ public:
 	void setEngineIndex(unsigned int index);
 	virtual void destroy();
 	virtual void sendDestroyed(PhysicalComponent *component);
+	virtual void sendDestroyedTarget(PhysicalComponent *component);
 
 	virtual PhysicalComponent *clone();
 };

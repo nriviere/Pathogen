@@ -187,6 +187,26 @@ void PhysicalComponent::setAttachment(PhysicalComponent *component)
 	this->attachment = component;
 }
 
+void PhysicalComponent::setTargetingComponent(PhysicalComponent *component)
+{
+	targetingComponents.push_back(component);
+}
+
+void PhysicalComponent::setUntargetingComponent(PhysicalComponent *component)
+{
+	for (list<PhysicalComponent *>::iterator c = targetingComponents.begin(); c != targetingComponents.end();)
+	{
+		if ((*c)->getEngineIndex() == component->getEngineIndex())
+		{
+			c = targetingComponents.erase(c);
+		}
+		else
+		{
+			++c;
+		}
+	}
+}
+
 bool PhysicalComponent::isSlowed()
 {
 	return slowed;
@@ -309,10 +329,21 @@ void PhysicalComponent::destroy()
 	{
 		slowingComponent->sendDestroyed(this);
 	}
+
+	while (targetingComponents.size() > 0)
+	{
+		targetingComponents.front()->sendDestroyedTarget(this);
+		targetingComponents.pop_front();
+	}
 	//engine->remove(engineIndex);
 }
 
 void PhysicalComponent::sendDestroyed(PhysicalComponent *component)
+{
+
+}
+
+void PhysicalComponent::sendDestroyedTarget(PhysicalComponent *component)
 {
 
 }

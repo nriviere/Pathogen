@@ -190,6 +190,11 @@ float Hero::getMunitionType3()
 	return (munitions[2] / MUN_MAX);
 }
 
+int Hero::getCurrentMunition()
+{
+	return currentMunition;
+}
+
 void Hero::setGenerator(int generator)
 {
 	if (generator == 1)

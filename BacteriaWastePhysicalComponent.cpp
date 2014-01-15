@@ -6,12 +6,24 @@ BacteriaWastePhysicalComponent::BacteriaWastePhysicalComponent(GameObject *gameO
 {
 	radius = 15;
 	priority = -1;
+	float x = 2.*rand() / RAND_MAX - 1;
+	float y = 2.*rand() / RAND_MAX - 1;
+	float z = 2.*rand() / RAND_MAX - 1;
+	rotationAxis = Vect4(x,y,z,0);
+	rotationAxis.normalize();
+	angle = 0;
 }
 BacteriaWastePhysicalComponent::BacteriaWastePhysicalComponent(const BacteriaWastePhysicalComponent &physicalComponent)
 : PhysicalComponent(physicalComponent)
 {
 	radius = 15;
 	priority = -1;
+	float x = 2.*rand() / RAND_MAX - 1;
+	float y = 2.*rand() / RAND_MAX - 1;
+	float z = 2.*rand() / RAND_MAX - 1;
+	rotationAxis = Vect4(x, y, z, 0);
+	rotationAxis.normalize();
+	angle = 0;
 }
 
 
@@ -31,6 +43,13 @@ void BacteriaWastePhysicalComponent::update()
 			++c;
 		}
 	}
+
+	Matrx44 rotation,translation;
+	angle += 0.02;
+	if (angle >= 360) angle = 0;
+	rotation.rotation(angle, rotationAxis);
+	translation.setPos(position);
+	transform = translation * rotation;
 }
 
 void BacteriaWastePhysicalComponent::collision(Vect4 axis)

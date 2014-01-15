@@ -70,7 +70,6 @@ void BriefingState::setup()
 
 void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 {
-
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -81,7 +80,7 @@ void BriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBindTexture(GL_TEXTURE_2D, (GLuint)briefingScreens[engine->getCurrentLevelIndex()]);
 	r = 1; g = 1; b = 1;
-	glColor4f(r, g, b,1);
+	glColor4f(r, g, b, 1);
 
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);

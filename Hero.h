@@ -36,6 +36,7 @@ public:
 	float getMunitionType1();
 	float getMunitionType2();
 	float getMunitionType3();
+	int getCurrentMunition();
 
 	void setGenerator(int generator);
 
