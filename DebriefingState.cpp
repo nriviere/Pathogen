@@ -65,7 +65,7 @@ void DebriefingState::display(unsigned int u32Width, unsigned int u32Height)
 	render_string((b1xMin + b1xMax) / 2, (b1yMin + b1yMax) / 2, GLUT_BITMAP_9_BY_15, "Next level");
 
 	//SCORE:
-
+	//engine->
 
 
 	if (cancerAccuracy + cancerInaccuracy != 0)
