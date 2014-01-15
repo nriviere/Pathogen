@@ -69,6 +69,9 @@ void Virus::attachedReplicate()
 void Virus::attachedHitBy(GameObject *object)
 {
 	ObjectType objectType = object->getObjectType();
+
+	engine->getDebriefingState()->updateStatistics(this->objectType, objectType);
+
 	switch (objectType){
 
 	case lymphocyteTagVirus:
@@ -93,6 +96,9 @@ void Virus::unattachedReplicate()
 void Virus::unattachedHitBy(GameObject *object)
 {
 	ObjectType objectType = object->getObjectType();
+
+	engine->getDebriefingState()->updateStatistics(this->objectType, objectType);
+
 	switch (objectType){
 
 	case lymphocyteTagVirus:

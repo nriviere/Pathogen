@@ -157,6 +157,7 @@ void InGameState::setup()
 
 void InGameState::update(float fDT)
 {
+	unsigned int nb_life = remainingLife;
 	engine->getHero()->regenerateMunition(fDT);
 	parentEngine->getRenderer()->updateTime(fDT);
 
@@ -189,6 +190,21 @@ void InGameState::update(float fDT)
 	engine->addParticleSystems();
 
 	engine->getCurrentLevel()->update();
+
+	if (nb_life > remainingLife)
+	{
+		engine->clear();
+		engine->getParentEngine()->getRenderer()->clear();
+		engine->nextState(2);
+	}
+
+	if (remainingLife == 0)
+	{
+		engine->clear();
+		engine->getParentEngine()->getRenderer()->clear();
+		engine->gameOver();
+	}
+		
 	if (engine->getCurrentLevel()->isFinished()&&engine->getEnemyCount() == 0)
 	{
 		engine->clear();
@@ -202,7 +218,7 @@ void InGameState::update(float fDT)
 			engine->setFinished(false);
 		}
 		else{
-			engine->nextState(1);
+			engine->nextState(3);
 		}
 	}
 }
@@ -212,3 +228,20 @@ void InGameState::display(unsigned int u32Width, unsigned int u32Height)
 	parentEngine->getRenderer()->render(engine->getGameObjects(), engine->getGameObjectCount(), u32Width, u32Height, engine->getCurrentLevel());
 }
 
+void InGameState::decreaseLife()
+{
+	if (remainingLife > 0)
+	{
+		remainingLife--;
+	}
+}
+
+unsigned int InGameState::getRemainingLife()
+{
+	return remainingLife;
+}
+
+void InGameState::setRemainingLife(unsigned int life)
+{
+	remainingLife = life;
+}

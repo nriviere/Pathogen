@@ -3,6 +3,7 @@
 #include "MainMenuState.h"
 #include "BriefingState.h"
 #include "InGameState.h"
+#include "DebriefingState.h"
 #include "GameObject.h"
 #include "Hero.h"
 #include "Cursor.h"
@@ -14,6 +15,7 @@
 
 
 class MyEngine;
+class GameOverState;
 
 
 class GameEngine
@@ -25,6 +27,8 @@ private:
 	GameState **gameStates;
 	GameState *currentGameState;
 	BriefingState *briefingState;
+	DebriefingState *debriefingState;
+	GameOverState *gameOverState;
 	GameObject **gameObjects;
 	ParticleSystem **particleSystems;
 	Particle **particles;
@@ -73,6 +77,7 @@ public:
 	unsigned int getCurrentLevelIndex();
 	unsigned int getEnemyCount();
 	void setNextLevel();
+	void reinitLevel();
 	Hero *getHero();
 	Cursor *getCursor();
 	MyEngine *getParentEngine();
@@ -92,5 +97,9 @@ public:
 	void clear();
 
 	void nextState(int id);
+
+	DebriefingState *getDebriefingState();
+	void setRemainingLife(unsigned int life);
+	void gameOver();
 };
 

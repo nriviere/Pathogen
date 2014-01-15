@@ -263,3 +263,11 @@ ObjectType Hero::getLymphocyteTag()
 {
 	return lymphocyteTag;
 }
+
+void Hero::hitBy(ObjectType objectType)
+{
+	if(objectType == virusType || objectType == cancerTypeDeclared || objectType == cancerTypeUndeclared || objectType == bacteriaType)
+	{
+		engine->getInGameState()->decreaseLife();
+	}
+}

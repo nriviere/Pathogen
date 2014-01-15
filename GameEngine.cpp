@@ -5,6 +5,7 @@
 #include "Cell.h"
 #include "Bacteria.h"
 #include "CellPhysicalComponent.h"
+#include "GameOverState.h"
 
 unsigned int GameEngine::MAX_CELL_COUNT = 50;
 unsigned int GameEngine::CURRENT_CELL_COUNT = 0;
@@ -16,12 +17,18 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	particleCount = 0;
 	enemyCount = 0;
 	fDT = 0;
-	gameStates = new GameState*[3];
+
+	gameStates = new GameState*[5];
 	gameStates[0] = new MainMenuState(this);
 
 	gameStates[1] = briefingState = new BriefingState(this);
 	inGameState = new InGameState(this);
 	gameStates[2] = inGameState;
+	debriefingState = new DebriefingState(this);
+	gameStates[3] = debriefingState;
+	gameOverState = new GameOverState(this);
+	gameStates[4] = gameOverState;
+
 	currentGameState = gameStates[0];
 	levelCount = 5;
 	levels = new Level*[levelCount];
@@ -227,6 +234,12 @@ void GameEngine::setNextLevel()
 		currentLevelId = 0;
 	}
 	currentLevel = levels[currentLevelId];
+}
+
+void GameEngine::reinitLevel()
+{
+	currentLevelId = 0;
+	currentLevel = levels[currentLevelId];;
 }
 
 MyEngine *GameEngine::getParentEngine()
@@ -435,5 +448,21 @@ void GameEngine::clear(){
 void GameEngine::nextState(int id)
 {
 	currentGameState = gameStates[id];
+	setup();
+}
+
+DebriefingState* GameEngine::getDebriefingState()
+{
+	return debriefingState;
+}
+
+void GameEngine::setRemainingLife(unsigned int life)
+{
+	inGameState->setRemainingLife(life);
+}
+
+void GameEngine::gameOver()
+{
+	currentGameState = gameStates[4];
 	setup();
 }

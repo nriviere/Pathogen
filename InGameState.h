@@ -11,6 +11,9 @@ private :
 	bool isZdown, isQdown, isSdown, isDdown;
 	POINT prevMousePos;
 	MyEngine *parentEngine;
+
+	unsigned int remainingLife;
+
 public:
 	InGameState(GameEngine *engine = NULL);
 	~InGameState(void);
@@ -23,5 +26,9 @@ public:
 	void setup();
 	void update(float fDT);
 	void display(unsigned int u32Width, unsigned int u32Height);
+
+	unsigned int getRemainingLife();
+	void setRemainingLife(unsigned int life);
+	void decreaseLife();
 };
 

@@ -27,6 +27,7 @@ void BriefingState::setup()
 	do{
 		cursorVisible = ShowCursor(true) < 0;
 	} while (cursorVisible);
+	engine->setRemainingLife(3);
 	width = engine->getParentEngine()->getWidth();
 	height = engine->getParentEngine()->getHeight();
 
