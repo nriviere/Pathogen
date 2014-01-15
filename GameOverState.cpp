@@ -114,6 +114,7 @@ void GameOverState::lButtonUp(POINT pos)
 	{
 		if (pos.y > b1yMin && pos.y < b1yMax)
 		{
+			engine->getInGameState()->setRemainingLife(3);
 			engine->nextState(0);
 		}
 	}
