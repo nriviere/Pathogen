@@ -102,6 +102,7 @@ void Cancer::declaredHitBy(ObjectType objectType)
 	switch (objectType){
 
 	case lymphocyteTagCancer:
+		engine->getInGameState()->setScore(engine->getInGameState()->getScore() + 10);
 		destroy();
 		break;
 

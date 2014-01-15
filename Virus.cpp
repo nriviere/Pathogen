@@ -76,6 +76,7 @@ void Virus::attachedHitBy(GameObject *object)
 	switch (objectType){
 
 	case lymphocyteTagVirus:
+		engine->getInGameState()->setScore(engine->getInGameState()->getScore() + 10);
 		attachablePhysicalComponent->getAttachedPhysicalComponent()->getGameObject()->destroy();
 		destroy();
 
@@ -103,6 +104,7 @@ void Virus::unattachedHitBy(GameObject *object)
 	switch (objectType){
 
 	case lymphocyteTagVirus:
+		engine->getInGameState()->setScore(engine->getInGameState()->getScore() + 10);
 		destroy();
 		
 		break;

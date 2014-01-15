@@ -11,6 +11,7 @@ InGameState::InGameState(GameEngine *engine) : GameState(engine)
 	isZdown = isQdown = isSdown = isDdown = false;
 	prevMousePos.x = 0;
 	prevMousePos.y = 0;
+	remainingLife = 3;
 	parentEngine = engine->getParentEngine();
 }
 
@@ -136,6 +137,7 @@ void InGameState::setup()
 		cursorVisible = ShowCursor(false) >= 0;
 	} while (cursorVisible);
 
+	score = 0;
 
 	PhysicalEngine *physicalEngine = engine->getParentEngine()->getPhysicalEngine();
 	Renderer *renderer = engine->getParentEngine()->getRenderer();
@@ -245,4 +247,14 @@ unsigned int InGameState::getRemainingLife()
 void InGameState::setRemainingLife(unsigned int life)
 {
 	remainingLife = life;
+}
+
+unsigned int InGameState::getScore()
+{
+	return score;
+}
+
+void InGameState::setScore(unsigned int scr)
+{
+	score = scr;
 }

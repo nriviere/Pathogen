@@ -800,7 +800,6 @@ void Renderer::updateTime(float fDT)
 
 void Renderer::drawHud(unsigned int width, unsigned int height)
 {
-	int score = 0;
 	float c1, c2;
 	Hero *hero = engine->getGameEngine()->getHero();
 	float munitionType1 = hero->getMunitionType1();
@@ -808,7 +807,7 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	float munitionType3 = hero->getMunitionType3();
 
 	string s1 = "SCORE : ";
-	string s2 = to_string((long double)score);
+	string s2 = to_string(engine->getGameEngine()->getInGameState()->getScore());
 	string s = s1 + s2;
 	const char *c = s.c_str();
 	render_string(width/100, 5*height/100, 0, GLUT_BITMAP_9_BY_15, c);
