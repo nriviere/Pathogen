@@ -73,7 +73,11 @@ void HeroPhysicalComponent::collision(Vect4 axis)
 }
 void HeroPhysicalComponent::collision(PhysicalComponent *physicalComponent)
 {
-
+	GameObject *componentGameObject = physicalComponent->getGameObject();
+	if (componentGameObject != NULL)
+	{
+		gameObject->hitBy(physicalComponent->getGameObject());
+	}
 }
 
 

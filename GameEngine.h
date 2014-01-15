@@ -3,6 +3,7 @@
 #include "MainMenuState.h"
 #include "BriefingState.h"
 #include "InGameState.h"
+#include "DebriefingState.h"
 
 #include "GameObject.h"
 #include "Hero.h"
@@ -16,6 +17,7 @@
 
 class MyEngine;
 class HelpState;
+class GameOverState;
 
 
 class GameEngine
@@ -27,6 +29,8 @@ private:
 	GameState **gameStates;
 	GameState *currentGameState;
 	BriefingState *briefingState;
+	DebriefingState *debriefingState;
+	GameOverState *gameOverState;
 	GameObject **gameObjects;
 	ParticleSystem **particleSystems;
 	Particle **particles;
@@ -95,5 +99,9 @@ public:
 	void clear();
 
 	void nextState(int id);
+
+	DebriefingState* getDebriefingState();
+	void gameOver();
+	void setRemainingLife(unsigned int life);
 };
 

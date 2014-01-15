@@ -25,6 +25,9 @@ void BacteriaWaste::hitBy(GameObject *gameObject)
 {
 	ObjectType objectType = gameObject->getObjectType();
 	//bacteriaWastePhysicalComponent->slow(gameObject->getPhysicalComponent());
+
+	engine->getDebriefingState()->updateStatistics(this->objectType, objectType);
+
 	switch (objectType)
 	{
 	case monocyteType :

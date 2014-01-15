@@ -285,8 +285,14 @@
     <ClCompile Include="BacteriaWastePhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
+    <ClCompile Include="DebriefingState.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
     <ClCompile Include="HelpState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameEngine\GameState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -503,8 +509,14 @@
     <ClInclude Include="BacteriaWastePhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
     </ClInclude>
+    <ClInclude Include="DebriefingState.h">
+      <Filter>Header Files\GameEngine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\GameEngine\GameState</Filter>
+    </ClInclude>
     <ClInclude Include="HelpState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameEngine\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

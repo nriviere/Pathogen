@@ -199,21 +199,21 @@ void Hero::setGenerator(int generator)
 {
 	if (generator == 1)
 	{
-		regenerator[0] = 10;
-		regenerator[1] = 1;
-		regenerator[2] = 1;
+		regenerator[0] = 15;
+		regenerator[1] = 5;
+		regenerator[2] = 5;
 	}
 	else if (generator == 2)
 	{
-		regenerator[0] = 1;
-		regenerator[1] = 10;
-		regenerator[2] = 1;
+		regenerator[0] = 5;
+		regenerator[1] = 15;
+		regenerator[2] = 5;
 	}
 	else if (generator == 3)
 	{
-		regenerator[0] = 1;
-		regenerator[1] = 1;
-		regenerator[2] = 10;
+		regenerator[0] = 5;
+		regenerator[1] = 5;
+		regenerator[2] = 15;
 	}
 }
 
@@ -267,4 +267,12 @@ void Hero::setLymphocyteTag(ObjectType type)
 ObjectType Hero::getLymphocyteTag()
 {
 	return lymphocyteTag;
+}
+
+void Hero::hitBy(ObjectType objectType)
+{
+	if(objectType == virusType || objectType == cancerTypeDeclared || objectType == cancerTypeUndeclared || objectType == bacteriaType)
+	{
+		engine->getInGameState()->decreaseLife();
+	}
 }

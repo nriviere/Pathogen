@@ -80,7 +80,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..;.;./gl;./ShadersApi;./TinyXml</AdditionalIncludeDirectories>
       <Optimization>MaxSpeed</Optimization>
@@ -111,11 +111,13 @@
     <ClCompile Include="CellPhysicalComponent.cpp" />
     <ClCompile Include="CellRenderableComponent.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="DebriefingState.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="ExplosionParticle.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HelpState.cpp" />
@@ -178,11 +180,13 @@
     <ClInclude Include="CellPhysicalComponent.h" />
     <ClInclude Include="CellRenderableComponent.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="DebriefingState.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="ExplosionParticle.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="gl\GLExt.h" />
     <ClInclude Include="gl\wglext.h" />

@@ -68,6 +68,9 @@ void Bacteria::selfRemove()
 
 void Bacteria::hitBy(ObjectType objectType)
 {
+
+	engine->getDebriefingState()->updateStatistics(this->objectType, objectType);
+
 	switch (objectType){
 		
 	case neutrophileType: 

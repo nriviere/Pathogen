@@ -1,8 +1,8 @@
 <Level>
-	<Cells count="1" />
+	<Cells count="20" />
 	<SpawnLine>
 	<SpawnPool>
-				<GameObject class="Bacteria" count="6" />
+				<GameObject class="Bacteria" count="30" />
 	</SpawnPool>
 	<!--
 			<SpawnPool>

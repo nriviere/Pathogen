@@ -88,6 +88,8 @@ void Cancer::selfRemove()
 
 void Cancer::hitBy(ObjectType objectType)
 {
+	engine->getDebriefingState()->updateStatistics(this->objectType, objectType);
+
 	currentCancerState->hitBy(objectType);
 }
 

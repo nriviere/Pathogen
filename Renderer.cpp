@@ -823,7 +823,19 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	const char *ct = t.c_str();
 	render_string(width / 2 - 80, 5*height/100, 0, GLUT_BITMAP_9_BY_15, ct);
 
+	string life = "Life :";
+	render_string(width / 100, 8 * height / 100, 0, GLUT_BITMAP_9_BY_15, life.c_str());
+
 	glDisable(GL_TEXTURE_2D);
+
+	float l_width = 10;
+	float l_height = 10;
+	int lifePerLine = 5;
+	glColor3f(0.f, 1.f, 0.f);
+	for (int i = 0; i < engine->getGameEngine()->getInGameState()->getRemainingLife(); i++)
+	{
+		drawQuad(width / 100 + (i%lifePerLine)*1.5*l_width, (9 + 1.5*((int)i / lifePerLine)) * height / 100, l_width, l_height);
+	}
 
 	int w = width / 13;
 	int x = width - w - (width / 100);

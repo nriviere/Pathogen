@@ -47,6 +47,8 @@ public:
 	void setLymphocyteTag(ObjectType type);
 	ObjectType getLymphocyteTag();
 
+	virtual void hitBy(ObjectType opjectType);
+
 private:
 	float munitions[3];
 	int currentMunition;

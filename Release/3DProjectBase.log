@@ -1,5 +1,102 @@
-﻿La génération a démarré 15/01/2014 18:29:16.
+﻿La génération a démarré 15/01/2014 21:22:07.
+     1>Projet "Q:\DOCUMENTS\Workspace\Pathogen\3DProjectBase.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>ClCompile:
+         I:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I.. /I. /I./gl /I./ShadersApi /I./TinyXml /Zi /nologo /W0 /WX- /O2 /Ot /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /D _MBCS /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AttachableEnemy.cpp AttachablePhysicalComponent.cpp Bacteria.cpp BacteriaWaste.cpp BacteriaWastePhysicalComponent.cpp BriefingState.cpp Cancer.cpp CancerPhysicalComponent.cpp Cell.cpp CellPhysicalComponent.cpp CellRenderableComponent.cpp Cursor.cpp DebriefingState.cpp Enemy.cpp Explosion.cpp ExplosionParticle.cpp GameEngine.cpp GameObject.cpp GameOverState.cpp GameState.cpp Grid.cpp HelpState.cpp Hero.cpp HeroPhysicalComponent.cpp HomingPhysicalComponent.cpp InGameState.cpp Level.cpp LightingGameObject.cpp Lymphocyte.cpp MainMenuState.cpp Monocyte.cpp Neutrophile.cpp Particle.cpp ParticleSystem.cpp Projectile.cpp ProjectilePhysicalComponent.cpp RenderableComponent.cpp MyEngine.cpp Light.cpp Material.cpp OBJLoader.cpp Main.cpp PhysicalComponent.cpp PhysicalEngine.cpp Renderer.cpp ReplicableGameObject.cpp SelfMovingPhysicalComponent.cpp ShadersApi\Shader.cpp ShadersApi\Program.cpp ShadersApi\ShadersInc.cpp SoundEngine.cpp SoundSource.cpp SpawnLine.cpp SpawnPool.cpp stdafx.cpp TGALoader.cpp Thread.cpp Timer.cpp TinyXml\tinystr.cpp TinyXml\tinyxml.cpp TinyXml\tinyxmlerror.cpp TinyXml\tinyxmlparser.cpp UpdaterThread.cpp VBO.cpp Virus.cpp VirusPhysicalComponent.cpp
+         AttachableEnemy.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         AttachablePhysicalComponent.cpp
+         Bacteria.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         BacteriaWaste.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         BacteriaWastePhysicalComponent.cpp
+         BriefingState.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Cancer.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         CancerPhysicalComponent.cpp
+         Cell.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         CellPhysicalComponent.cpp
+         CellRenderableComponent.cpp
+         Cursor.cpp
+         DebriefingState.cpp
+     1>c1xx : fatal error C1083: Impossible d'ouvrir le fichier source : 'DebriefingState.cpp' : No such file or directory
+         Enemy.cpp
+         Explosion.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         ExplosionParticle.cpp
+         GameEngine.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         GameObject.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         GameOverState.cpp
+     1>c1xx : fatal error C1083: Impossible d'ouvrir le fichier source : 'GameOverState.cpp' : No such file or directory
+         GameState.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Génération de code en cours...
+         Compilation en cours...
+         Grid.cpp
+         HelpState.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Hero.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         HeroPhysicalComponent.cpp
+         HomingPhysicalComponent.cpp
+         InGameState.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Level.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         LightingGameObject.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Lymphocyte.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         MainMenuState.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Monocyte.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Neutrophile.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Particle.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         ParticleSystem.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Projectile.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         ProjectilePhysicalComponent.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         RenderableComponent.cpp
+         MyEngine.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Light.cpp
+         Material.cpp
+         Génération de code en cours...
+         Compilation en cours...
+         OBJLoader.cpp
+         Main.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         PhysicalComponent.cpp
+         PhysicalEngine.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Renderer.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         ReplicableGameObject.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         SelfMovingPhysicalComponent.cpp
+         Shader.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         Program.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         ShadersInc.cpp
+         SoundEngine.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         SoundSource.cpp
+         SpawnLine.cpp
+         SpawnPool.cpp
+     1>q:\documents\workspace\pathogen\GameEngine.h(6): fatal error C1083: Impossible d'ouvrir le fichier include : 'DebriefingState.h' : No such file or directory
+         stdafx.cpp
+     1>Génération du projet "Q:\DOCUMENTS\Workspace\Pathogen\3DProjectBase.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
 
-La génération a réussi.
+ÉCHEC de la build.
 
-Temps écoulé 00:00:00.15
+Temps écoulé 00:00:42.74
