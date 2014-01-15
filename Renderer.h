@@ -43,6 +43,9 @@ public:
 	static unsigned int TAGGED_VIRUS_TEXTURE_ID;
 	static unsigned int TAGGED_CANCER_TEXTURE_ID;
 	static unsigned int CURSOR_TEXTURE_ID;
+	static unsigned int MONOCYTE_HUD_TEXTURE_ID;
+	static unsigned int LYMPHOCYTE_HUD_TEXTURE_ID;
+	static unsigned int NEUTROPHILE_HUD_TEXTURE_ID;
 	Renderer(MyEngine *engine = NULL);
 	~Renderer();
 

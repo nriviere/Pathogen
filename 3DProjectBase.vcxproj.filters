@@ -285,6 +285,9 @@
     <ClCompile Include="BacteriaWastePhysicalComponent.cpp">
       <Filter>Source Files\PhysicalEngine</Filter>
     </ClCompile>
+    <ClCompile Include="HelpState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DEngine.h">
@@ -499,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="BacteriaWastePhysicalComponent.h">
       <Filter>Header Files\PhysicalEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,8 @@ class BacteriaWastePhysicalComponent :
 {
 protected:
 	std::list<PhysicalComponent*> slowedList;
+	Vect4 rotationAxis;
+	float angle;
 public:
 	BacteriaWastePhysicalComponent(GameObject *gameObject = NULL, PhysicalEngine *engine = NULL);
 	BacteriaWastePhysicalComponent(const BacteriaWastePhysicalComponent &physicalComponent);

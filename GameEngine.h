@@ -3,6 +3,7 @@
 #include "MainMenuState.h"
 #include "BriefingState.h"
 #include "InGameState.h"
+
 #include "GameObject.h"
 #include "Hero.h"
 #include "Cursor.h"
@@ -14,6 +15,7 @@
 
 
 class MyEngine;
+class HelpState;
 
 
 class GameEngine
@@ -29,6 +31,7 @@ private:
 	ParticleSystem **particleSystems;
 	Particle **particles;
 	InGameState *inGameState;
+	HelpState *helpState;
 	Cursor *cursor;
 	Hero *hero;
 	Indexer *indexer,*particleSystemIndexer,*particleIndexer;

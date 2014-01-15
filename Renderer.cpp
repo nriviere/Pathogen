@@ -19,6 +19,9 @@ unsigned int Renderer::EXPLOSION_PARTICLE_TEXTURE_ID = 0;
 unsigned int Renderer::TAGGED_VIRUS_TEXTURE_ID = 0;
 unsigned int Renderer::TAGGED_CANCER_TEXTURE_ID = 0;
 unsigned int Renderer::CURSOR_TEXTURE_ID = 0;
+unsigned int Renderer::MONOCYTE_HUD_TEXTURE_ID = 0;
+unsigned int Renderer::LYMPHOCYTE_HUD_TEXTURE_ID = 0;
+unsigned int Renderer::NEUTROPHILE_HUD_TEXTURE_ID = 0;
 
 Renderer::Renderer(MyEngine *engine)
 {
@@ -272,6 +275,9 @@ void Renderer::load()
 	TAGGED_VIRUS_TEXTURE_ID = loadTexture("assets/hud/TaggedVirus.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
 	TAGGED_CANCER_TEXTURE_ID = loadTexture("assets/hud/TaggedCancer.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
 	CURSOR_TEXTURE_ID = loadTexture("assets/hud/cursor.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
+	MONOCYTE_HUD_TEXTURE_ID = loadTexture("assets/hud/monocyteHud.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
+	LYMPHOCYTE_HUD_TEXTURE_ID = loadTexture("assets/hud/lymphocyteHud.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
+	NEUTROPHILE_HUD_TEXTURE_ID = loadTexture("assets/hud/neutrophileHud.tga", GL_UNSIGNED_BYTE, GL_MODULATE, GL_LINEAR, GL_LINEAR);
 
 	try{
 		initApi();
@@ -834,9 +840,41 @@ void Renderer::drawHud(unsigned int width, unsigned int height)
 	setColorRtoG(c1, c2, munitionType3);
 	glColor3f(c1, c2, 0);
 	drawQuad(x, y + 30, w * munitionType3, 10);
-	
+
+	//Affichage de la munition courante
 	glEnable(GL_TEXTURE_2D);
-	unsigned int h = w = width / 7;
+	int currentMunition = hero->getCurrentMunition();
+	float offset = 0;
+	unsigned int munitionTextureId = 0;
+	switch (currentMunition)
+	{
+	case 0 : 
+		munitionTextureId = NEUTROPHILE_HUD_TEXTURE_ID;
+		setColorRtoG(c1, c2, munitionType1);
+		break;
+	case 1 :
+		munitionTextureId = MONOCYTE_HUD_TEXTURE_ID;
+		offset = 15;
+		setColorRtoG(c1, c2, munitionType2);
+		break;
+	case 2 :
+		munitionTextureId = LYMPHOCYTE_HUD_TEXTURE_ID;
+		setColorRtoG(c1, c2, munitionType3);
+		offset = 30;
+		break;
+	}
+	
+	w = 1. * width / 7.5;
+	unsigned int h = 1. * height / 16.5;
+	y = 5 * height / 100 - 0.5 * h + offset + 5;
+	x -= w;
+	glColor3f(c1, c2, c2);
+	glBindTexture(GL_TEXTURE_2D, munitionTextureId);
+	drawTexQuad(x, y, w, h);
+	
+	
+	
+	h = w = width / 7;
 	y = 9 * height / 100;
 	x = width - 1.5 * width / 7;
 

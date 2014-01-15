@@ -154,6 +154,11 @@ void SelfMovingPhysicalComponent::update()
 	//speed = speed * acceleration;
 }
 
+void SelfMovingPhysicalComponent::destroy()
+{
+	PhysicalComponent::destroy();
+}
+
 SelfMovingPhysicalComponent *SelfMovingPhysicalComponent::clone()
 {
 	return new SelfMovingPhysicalComponent(*this);

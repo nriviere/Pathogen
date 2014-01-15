@@ -5,6 +5,8 @@
 #include "Cell.h"
 #include "Bacteria.h"
 #include "CellPhysicalComponent.h"
+#include "HelpState.h"
+
 
 unsigned int GameEngine::MAX_CELL_COUNT = 50;
 unsigned int GameEngine::CURRENT_CELL_COUNT = 0;
@@ -16,12 +18,13 @@ GameEngine::GameEngine(MyEngine *engine) : engine(engine)
 	particleCount = 0;
 	enemyCount = 0;
 	fDT = 0;
-	gameStates = new GameState*[3];
+	gameStates = new GameState*[4];
 	gameStates[0] = new MainMenuState(this);
-
 	gameStates[1] = briefingState = new BriefingState(this);
 	inGameState = new InGameState(this);
 	gameStates[2] = inGameState;
+	gameStates[3] = new HelpState(this);
+	gameStateCount = 4;
 	currentGameState = gameStates[0];
 	levelCount = 5;
 	levels = new Level*[levelCount];

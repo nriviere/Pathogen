@@ -30,9 +30,10 @@ public:
 private:
 	float b1xMin, b1xMax, b1yMin, b1yMax;
 	float b2xMin, b2xMax, b2yMin, b2yMax;
+	float b3xMin, b3xMax, b3yMin, b3yMax;
 	float r, g, b;
 	int width, height;
 
-	IMAGE_DATA *data[2];
+	IMAGE_DATA *data[4];
 };
 
